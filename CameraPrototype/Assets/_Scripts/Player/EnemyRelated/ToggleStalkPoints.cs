@@ -10,6 +10,7 @@ public class ToggleStalkPoints : MonoBehaviour
         {
             Debug.Log("Localizao");
             stalkPoint.TogglePosition(true);
+            StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, true);
         }
     }
 
@@ -19,6 +20,7 @@ public class ToggleStalkPoints : MonoBehaviour
         {
             Debug.Log("Perdido");
             stalkPoint.TogglePosition(false);
+            StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, false);
         }
     }
 }
