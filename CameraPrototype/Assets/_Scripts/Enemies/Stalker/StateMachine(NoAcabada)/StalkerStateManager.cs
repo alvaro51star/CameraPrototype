@@ -17,7 +17,7 @@ public class StalkerStateManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        currentState = ChaseState;
+        currentState = StalkState;
         
 
         currentState.EnterState(this);
@@ -35,5 +35,6 @@ public class StalkerStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
+    
 
 }
