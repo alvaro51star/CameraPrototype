@@ -60,6 +60,7 @@ public class PhotoCapture : MonoBehaviour
     {
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
+        //guardar photoSprite para el inventario
 
         photoFrame.SetActive(true);
         StartCoroutine(CameraFlashEffect());
