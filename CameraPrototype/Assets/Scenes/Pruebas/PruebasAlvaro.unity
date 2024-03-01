@@ -498,7 +498,7 @@ Transform:
   m_GameObject: {fileID: 356478201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 1.62, z: -8}
+  m_LocalPosition: {x: 7, y: 1.62, z: -11.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1697,6 +1697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 356478201}
+  state: 0
   isStunned: 0
   navMesh: {fileID: 0}
   timeBeforeChangingPoint: 5
@@ -1785,8 +1786,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 3.883261, z: 20}
-  m_Center: {x: 0, y: 0.8735784, z: 0}
+  m_Size: {x: 25.337784, y: 3.883261, z: 28.625992}
+  m_Center: {x: -3.693451, y: 0.8735784, z: 4.312996}
 --- !u!114 &1984629452
 MonoBehaviour:
   m_ObjectHideFlags: 0

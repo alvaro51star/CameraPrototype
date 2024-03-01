@@ -9,7 +9,7 @@ public class StalkerBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private bool isPlayerNear = false;
-    private States state;
+    [SerializeField] private States state;
 
     public bool isStunned = false;
 
@@ -36,7 +36,7 @@ public class StalkerBehaviour : MonoBehaviour
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
-        state = States.Chase;
+        state = States.Stalk;
         transform.LookAt(player.transform);
     }
 
