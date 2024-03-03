@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -13,6 +14,11 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private GameObject cameraUI;
     [SerializeField] private RenderTexture anomaliesCamRT;
 
+    [Header("Carrete UI")]
+    [SerializeField] private int maxPhotos;
+    [SerializeField] private TMP_Text availablePhotosTMP;
+    [SerializeField] private TMP_Text maxPhotosTMP;
+
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
     [SerializeField] private float flashTime;
@@ -22,16 +28,23 @@ public class PhotoCapture : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource cameraAudio;
+    [SerializeField] private AudioClip cameraClickClip;
+    [SerializeField] private AudioClip noPhotosClip;
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
+    private bool canTakePhoto = true;
+    private int availablePhotos;
 
     private void Start()
     {
-        //screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
                               UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
         //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla
+        availablePhotos = maxPhotos;
+
+        availablePhotosTMP.text = availablePhotos.ToString();
+        maxPhotosTMP.text = maxPhotos.ToString();
     }
 
     private void Update()
@@ -40,19 +53,36 @@ public class PhotoCapture : MonoBehaviour
         {
             if(!viewingPhoto)
             {
-                EventManager.TakingPhoto?.Invoke();
+                if(canTakePhoto)
+                {
+                    EventManager.TakingPhoto?.Invoke();
+                    availablePhotos--;
+                    availablePhotosTMP.text = availablePhotos.ToString();
 
-                StartCoroutine(CapturePhoto());
-                //TestCapturePhoto();
+                    if (availablePhotos <= 0)
+                    {
+                        canTakePhoto = false;
+                        availablePhotosTMP.color = Color.red;
+                    }
+                    StartCoroutine(CapturePhoto());
+                    //TestCapturePhoto();
+                }
+                else
+                {
+                    cameraAudio.clip = noPhotosClip;
+                    cameraAudio.Play();
+                }
+
             }
             else
             {
                 RemovePhoto();
             }
         }
-    }    
+    } 
+    
 
-    private IEnumerator CapturePhoto()//reads screen into texture
+    private IEnumerator CapturePhoto()//reads renderTexture and copies it to local variable
     {
         cameraUI.SetActive(false);//quitar UI tipo REC
         viewingPhoto = true;
@@ -62,10 +92,7 @@ public class PhotoCapture : MonoBehaviour
 
 
         Graphics.CopyTexture(anomaliesCamRT, screenCapture);
-        //Rect regionToRead = new Rect(0,0, Screen.width, Screen.height);
 
-        //screenCapture.ReadPixels(regionToRead, 0, 0, false);//take capture of the screen and save that into texture
-        //screenCapture.Apply();
         ShowPhoto();
     }
 
@@ -100,6 +127,7 @@ public class PhotoCapture : MonoBehaviour
 
     private IEnumerator CameraFlashEffect()
     {
+        cameraAudio.clip = cameraClickClip;
         cameraAudio.Play();
         cameraFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
@@ -113,4 +141,5 @@ public class PhotoCapture : MonoBehaviour
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
     }
+
 }
