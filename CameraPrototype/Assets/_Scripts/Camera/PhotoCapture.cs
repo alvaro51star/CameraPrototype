@@ -40,6 +40,8 @@ public class PhotoCapture : MonoBehaviour
         {
             if(!viewingPhoto)
             {
+                EventManager.TakingPhoto?.Invoke();
+
                 StartCoroutine(CapturePhoto());
                 //TestCapturePhoto();
             }
