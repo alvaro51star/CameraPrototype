@@ -9,19 +9,22 @@ public class RevealAnomalyManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.TakingPhoto += OnTakingPhoto;
+        EventManager.RemovePhoto += OnRemovePhoto;
     }
     private void OnDisable()
     {
         EventManager.TakingPhoto -= OnTakingPhoto;
+        EventManager.RemovePhoto -= OnRemovePhoto;
     }
     private void OnTriggerStay(Collider other)
     {        
         if(canReveal)
         {
             //necesario que las anomalias tengan Rigid Body, Collider y layer "Anomalies"
-            if (other.gameObject.layer == LayerMask.NameToLayer("Anomalies")) 
+            if (other.gameObject.GetComponent<AnomaliesData>())
             {
-                RevealAnomalies(other.gameObject);
+                other.gameObject.GetComponent<AnomaliesData>().AnomalyRevealed();
+                other.gameObject.GetComponent<AnomaliesData>().enabled = false;
             }
         }
     }    
@@ -31,9 +34,9 @@ public class RevealAnomalyManager : MonoBehaviour
         canReveal = true;
     }
 
-    private void RevealAnomalies(GameObject otherGO)
+    private void OnRemovePhoto()
     {
-        otherGO.layer = LayerMask.NameToLayer("Default");
         canReveal = false;
     }
+    
 }

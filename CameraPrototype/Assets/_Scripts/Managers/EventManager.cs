@@ -6,4 +6,5 @@ using UnityEngine;
 public static class EventManager
 {
     public static Action TakingPhoto;
+    public static Action RemovePhoto;
 }

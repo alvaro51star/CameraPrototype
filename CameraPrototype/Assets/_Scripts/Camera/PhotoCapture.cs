@@ -77,6 +77,7 @@ public class PhotoCapture : MonoBehaviour
             else
             {
                 RemovePhoto();
+                EventManager.RemovePhoto?.Invoke();
             }
         }
     } 
