@@ -62,8 +62,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void CameraRotation()
     {
-        float cameraRotation = -m_playerRotateInputValue.y *m_rotationSpeedY * Time.deltaTime;
-        m_camera.transform.Rotate(cameraRotation, 0, 0);
-        //m_camera.transform.rotation = Quaternion.Euler(Mathf.Clamp(m_camera.transform.rotation.x, -m_upDownRange, m_upDownRange), m_camera.transform.rotation.y, 0);
+        Vector3 cameraRotation = new Vector3(-m_playerRotateInputValue.y , 0, 0) * (m_rotationSpeedY * Time.deltaTime);
+        m_camera.Rotate(cameraRotation);
+
+        float angleTransfomation = (m_camera.localEulerAngles.x > 180)
+            ? m_camera.localEulerAngles.x - 360
+            : m_camera.localEulerAngles.x;
+
+        cameraRotation = new Vector3(Mathf.Clamp(angleTransfomation, -m_upDownRange, m_upDownRange), 0, 0);
+
+        m_camera.localEulerAngles = cameraRotation;
     }
 }
