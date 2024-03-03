@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
 
         if (mouseLimited)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
     }
