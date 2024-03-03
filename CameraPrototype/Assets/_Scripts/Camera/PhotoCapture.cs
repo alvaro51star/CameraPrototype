@@ -56,6 +56,8 @@ public class PhotoCapture : MonoBehaviour
     {
         cameraUI.SetActive(false);//quitar UI tipo REC
         viewingPhoto = true;
+        StartCoroutine(CameraFlashEffect());
+
         yield return new WaitForEndOfFrame(); //asi lo hara despues de renderizar todo        
 
 
@@ -69,8 +71,9 @@ public class PhotoCapture : MonoBehaviour
 
     private void TestCapturePhoto()
     {
-        cameraUI.SetActive(false);//QUITAR TODA UI, SINO SALE EN LA FOTO
+        cameraUI.SetActive(false);
         viewingPhoto = true;
+        StartCoroutine(CameraFlashEffect());
 
         //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
         AsyncGPUReadback.Request(anomaliesCamRT, 0, (AsyncGPUReadbackRequest action) => 
@@ -91,8 +94,7 @@ public class PhotoCapture : MonoBehaviour
         photoDisplayArea.sprite = photoSprite;
         //guardar photoSprite para el inventario
 
-        photoFrame.SetActive(true);
-        StartCoroutine(CameraFlashEffect());
+        photoFrame.SetActive(true);        
         fadingAnimation.Play("PhotoFade");
     }
 
