@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "042807cb-1fea-4928-a882-895c99e83d60",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -243,28 +234,6 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "RotatePlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d59b2726-fb6e-4723-bbe4-829889e7044b",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "54b84a98-95e8-4fe2-8dbe-c00581a2c342",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
