@@ -18,12 +18,6 @@ public class InputController : MonoBehaviour
         m_playerMovement.SetMovementInputValue(context.ReadValue<Vector2>());
     }
 
-    public void OnCameraMovement(InputAction.CallbackContext context)
-    {
-        
-        m_playerMovement.SetCameraRotateInputValue(context.ReadValue<float>());
-    }
-
     public void OnPlayerRotation(InputAction.CallbackContext context)
     {
         Debug.Log("valorInput: " + context.ReadValue<Vector2>());
