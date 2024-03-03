@@ -40,12 +40,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        Vector3 movement = new Vector3(m_movementInputValue.x, 0, m_movementInputValue.y);
+        //Vector3 movement = new Vector3(m_movementInputValue.x, 0, m_movementInputValue.y);
+        Vector3 movement = transform.right * m_movementInputValue.x + transform.forward * m_movementInputValue.y;
 
         movement.Normalize();
-        movement *= m_speed * Time.deltaTime;
 
-        m_charController.Move(movement);
+        m_charController.Move(movement *(m_speed * Time.deltaTime));
     }
     
     private void Rotation()

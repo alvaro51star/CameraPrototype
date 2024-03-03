@@ -42423,25 +42423,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1121478310474210229, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_upDownRange
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1121478310474210229, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_rotationSpeedX
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1121478310474210229, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_rotationSpeedY
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 5044894124721260897, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553918729671026205, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553918729671026205, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 38225da0-0ea7-49ec-b87f-6ebb363d6a2c
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553918729671026205, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: CameraPlayer/PauseMenu[/Keyboard/escape]
       objectReference: {fileID: 0}
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
