@@ -22,4 +22,9 @@ public class InputController : MonoBehaviour
     {
         m_playerMovement.SetPlayerRotateInputValue(context.ReadValue<Vector2>());
     }
+
+    public void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        //poner función para el menú de pausa
+    }
 }
