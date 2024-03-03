@@ -7091,7 +7091,7 @@ GameObject:
   - component: {fileID: 382391612}
   - component: {fileID: 382391616}
   - component: {fileID: 382391617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Anomalia_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13968,7 +13968,7 @@ GameObject:
   - component: {fileID: 899518054}
   - component: {fileID: 899518058}
   - component: {fileID: 899518059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Anomalia_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22686,7 +22686,7 @@ GameObject:
   - component: {fileID: 1598401400}
   - component: {fileID: 1598401404}
   - component: {fileID: 1598401405}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Anomalia_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42191,7 +42191,7 @@ GameObject:
   - component: {fileID: 2115477918}
   - component: {fileID: 2115477922}
   - component: {fileID: 2115477923}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Anomalia_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43076,6 +43076,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 149062277}
     m_Modifications:
+    - target: {fileID: 1080576186868286945, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080576186868286945, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: cameraUI

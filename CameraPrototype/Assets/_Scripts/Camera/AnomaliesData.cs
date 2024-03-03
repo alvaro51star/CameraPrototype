@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnomaliesData : MonoBehaviour
 {
     public bool revealType;//hay 2 tipos de anomalia, las que revelas objetos y las que quitas objetos
-    void Start()
+    void Start() //innecesario (esta ya puesto en editor), solo por si acaso
     {
         if(revealType)
         {
@@ -14,7 +14,7 @@ public class AnomaliesData : MonoBehaviour
 
         else
         {
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("Anomalies2");
         }
     }
 

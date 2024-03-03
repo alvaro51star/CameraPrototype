@@ -73,7 +73,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -784,6 +784,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6a264b34-ac9a-4d59-bb42-19f6edc929dc
     m_ActionName: CameraPlayer/RotatePlayer[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 38225da0-0ea7-49ec-b87f-6ebb363d6a2c
+    m_ActionName: CameraPlayer/PauseMenu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CameraPlayer
