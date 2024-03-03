@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+<<<<<<< Updated upstream
   m_rotationSpeedX: 5
   m_rotationSpeedY: 2
   m_upDownRange: 0
@@ -1047,3 +1048,9 @@ Transform:
   - {fileID: 9034569523739895275}
   m_Father: {fileID: 9088011822157485522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_rotationSpeedX: 10
+  m_rotationSpeedY: 7
+  m_upDownRange: 60
+  m_camera: {fileID: 1243341954518896875}
+>>>>>>> Stashed changes

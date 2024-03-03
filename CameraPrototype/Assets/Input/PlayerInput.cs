@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""042807cb-1fea-4928-a882-895c99e83d60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""RotatePlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d59b2726-fb6e-4723-bbe4-829889e7044b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54b84a98-95e8-4fe2-8dbe-c00581a2c342"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +331,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CameraPlayer_Interact = m_CameraPlayer.FindAction("Interact", throwIfNotFound: true);
         m_CameraPlayer_Inventory = m_CameraPlayer.FindAction("Inventory", throwIfNotFound: true);
         m_CameraPlayer_RotatePlayer = m_CameraPlayer.FindAction("RotatePlayer", throwIfNotFound: true);
+        m_CameraPlayer_Pause = m_CameraPlayer.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -367,6 +399,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraPlayer_Interact;
     private readonly InputAction m_CameraPlayer_Inventory;
     private readonly InputAction m_CameraPlayer_RotatePlayer;
+    private readonly InputAction m_CameraPlayer_Pause;
     public struct CameraPlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -377,6 +410,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_CameraPlayer_Interact;
         public InputAction @Inventory => m_Wrapper.m_CameraPlayer_Inventory;
         public InputAction @RotatePlayer => m_Wrapper.m_CameraPlayer_RotatePlayer;
+        public InputAction @Pause => m_Wrapper.m_CameraPlayer_Pause;
         public InputActionMap Get() { return m_Wrapper.m_CameraPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,6 +438,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RotatePlayer.started += instance.OnRotatePlayer;
             @RotatePlayer.performed += instance.OnRotatePlayer;
             @RotatePlayer.canceled += instance.OnRotatePlayer;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(ICameraPlayerActions instance)
@@ -426,6 +463,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RotatePlayer.started -= instance.OnRotatePlayer;
             @RotatePlayer.performed -= instance.OnRotatePlayer;
             @RotatePlayer.canceled -= instance.OnRotatePlayer;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(ICameraPlayerActions instance)
@@ -469,5 +509,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnRotatePlayer(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
