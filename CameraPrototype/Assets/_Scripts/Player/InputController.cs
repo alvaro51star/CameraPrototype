@@ -20,7 +20,6 @@ public class InputController : MonoBehaviour
 
     public void OnPlayerRotation(InputAction.CallbackContext context)
     {
-        Debug.Log("valorInput: " + context.ReadValue<Vector2>());
         m_playerMovement.SetPlayerRotateInputValue(context.ReadValue<Vector2>());
     }
 }

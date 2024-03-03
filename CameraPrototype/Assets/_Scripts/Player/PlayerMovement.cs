@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CameraRotation()
     {
-        float cameraRotation = m_playerRotateInputValue.y *m_rotationSpeedY * Time.deltaTime;
+        float cameraRotation = -m_playerRotateInputValue.y *m_rotationSpeedY * Time.deltaTime;
         m_camera.transform.Rotate(cameraRotation, 0, 0);
         //m_camera.transform.rotation = Quaternion.Euler(Mathf.Clamp(m_camera.transform.rotation.x, -m_upDownRange, m_upDownRange), m_camera.transform.rotation.y, 0);
     }
