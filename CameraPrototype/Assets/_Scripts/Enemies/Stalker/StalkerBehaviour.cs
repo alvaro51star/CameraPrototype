@@ -45,6 +45,8 @@ public class StalkerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(player.transform);
+
         if (isStunned == true)
         {
             state = States.Stunned;
@@ -56,12 +58,14 @@ public class StalkerBehaviour : MonoBehaviour
         }
         else
         {
-            if (isVisible && state == States.Stalk)
-            {
-                TPToNextPosition();
-            }
+            // if (isVisible && state == States.Stalk)
+            // {
+            //     TPToNextPosition();
+            // }
             isVisible = false;
         }
+
+
 
         switch (state)
         {
@@ -94,7 +98,7 @@ public class StalkerBehaviour : MonoBehaviour
         {
             Debug.Log("Player detectado");
             isPlayerNear = true;
-            state = States.Chase;
+            //state = States.Chase;
         }
     }
 
@@ -135,15 +139,23 @@ public class StalkerBehaviour : MonoBehaviour
         gameObject.transform.position = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform.position;
         transform.LookAt(player.transform);
     }
+
+    public void AddVision(float deltaTime)
+    {
+        Debug.Log($"Time looked = {currentTimeLooked}");
+        currentTimeLooked += deltaTime;
+
+        if (currentTimeLooked >= maxTimeLooked)
+        {
+            state = States.Chase;
+        }
+    }
     #endregion
 
     #region ChaseBehaviour
     private void Chase()
     {
-        if (isPlayerNear)
-        {
-            navMesh.SetDestination(player.transform.position);
-        }
+        navMesh.SetDestination(player.transform.position);
     }
     #endregion
 
