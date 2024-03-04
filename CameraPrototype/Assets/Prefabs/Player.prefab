@@ -797,7 +797,19 @@ MonoBehaviour:
     m_ActionId: 6a264b34-ac9a-4d59-bb42-19f6edc929dc
     m_ActionName: CameraPlayer/RotatePlayer[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7021817640465769526}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnPauseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 38225da0-0ea7-49ec-b87f-6ebb363d6a2c
     m_ActionName: CameraPlayer/PauseMenu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
