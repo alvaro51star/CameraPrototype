@@ -7,7 +7,8 @@ public class InputController : MonoBehaviour
 {
     //Variables
     private PlayerMovement m_playerMovement;
-    private UIManager m_uiManager;
+    [SerializeField] private UIManager m_uiManager;
+    [SerializeField] private PhotoCapture m_photoCapture;
 
     private void Start()
     {
@@ -27,5 +28,10 @@ public class InputController : MonoBehaviour
     public void OnPauseMenu(InputAction.CallbackContext context)
     {
         m_uiManager.PauseMenu();
+    }
+
+    public void OnTakePhoto(InputAction.CallbackContext context)
+    {
+        m_photoCapture.TakePhoto();
     }
 }

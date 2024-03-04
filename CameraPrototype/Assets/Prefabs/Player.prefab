@@ -757,7 +757,19 @@ MonoBehaviour:
     m_ActionId: f4436446-0a72-4f94-ac2e-37288116d347
     m_ActionName: CameraPlayer/Run[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7021817640465769526}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnTakePhoto
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c15d0c0a-09ef-48c3-b77c-413ef9403ab4
     m_ActionName: CameraPlayer/TakePhoto[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -805,6 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6268c737ecb11a4faa8489bfc049ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_uiManager: {fileID: 0}
+  m_photoCapture: {fileID: 2592600347508512828}
 --- !u!114 &1121478310474210229
 MonoBehaviour:
   m_ObjectHideFlags: 0

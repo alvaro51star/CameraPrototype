@@ -45,42 +45,39 @@ public class PhotoCapture : MonoBehaviour
 
         availablePhotosTMP.text = availablePhotos.ToString();
         maxPhotosTMP.text = maxPhotos.ToString();
-    }
+    } 
 
-    private void Update()
+    public void TakePhoto()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (!viewingPhoto)
         {
-            if(!viewingPhoto)
+            if (canTakePhoto)
             {
-                if(canTakePhoto)
-                {
-                    EventManager.TakingPhoto?.Invoke();
-                    availablePhotos--;
-                    availablePhotosTMP.text = availablePhotos.ToString();
+                EventManager.TakingPhoto?.Invoke();
+                availablePhotos--;
+                availablePhotosTMP.text = availablePhotos.ToString();
 
-                    if (availablePhotos <= 0)
-                    {
-                        canTakePhoto = false;
-                        availablePhotosTMP.color = Color.red;
-                    }
-                    StartCoroutine(CapturePhoto());
-                    //TestCapturePhoto();
-                }
-                else
+                if (availablePhotos <= 0)
                 {
-                    cameraAudio.clip = noPhotosClip;
-                    cameraAudio.Play();
+                    canTakePhoto = false;
+                    availablePhotosTMP.color = Color.red;
                 }
-
+                StartCoroutine(CapturePhoto());
+                //TestCapturePhoto();
             }
             else
             {
-                RemovePhoto();
-                EventManager.RemovePhoto?.Invoke();
+                cameraAudio.clip = noPhotosClip;
+                cameraAudio.Play();
             }
+
         }
-    } 
+        else
+        {
+            RemovePhoto();
+            EventManager.RemovePhoto?.Invoke();
+        }
+    }
     
 
     private IEnumerator CapturePhoto()//reads renderTexture and copies it to local variable
