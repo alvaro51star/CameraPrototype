@@ -28,5 +28,6 @@ public class AnomaliesData : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        Debug.Log("Anomaly revealed");
     }
 }
