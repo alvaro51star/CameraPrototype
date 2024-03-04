@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
         if (m_canWalk)
         {
             Movement();
+            Rotation();
         }
-        Rotation();
     }
 
     public void CanWalkFalse()
