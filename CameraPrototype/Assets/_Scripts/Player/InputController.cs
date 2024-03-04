@@ -27,7 +27,6 @@ public class InputController : MonoBehaviour
 
     public void OnPauseMenu(InputAction.CallbackContext context)
     {
-        Debug.Log("Pause");
         m_uiManager.PauseMenu();
     }
 
