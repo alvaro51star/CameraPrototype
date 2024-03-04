@@ -11,16 +11,32 @@ public class PlayerMovement : MonoBehaviour
     private float m_cameraRotateInputVaue;
     [SerializeField] private float m_upDownRange;
     [SerializeField] private Transform m_camera;
+    private bool m_canWalk = true;
 
     private void Start()
     {
         m_charController = GetComponent<CharacterController>();
+        EventManager.TakingPhoto += CanWalkFalse;
+        EventManager.RemovePhoto += CanWalkTrue;
     }
 
     private void Update()
     {
-        Movement();
+        if (m_canWalk)
+        {
+            Movement();
+        }
         Rotation();
+    }
+
+    public void CanWalkFalse()
+    {
+        m_canWalk = false;
+    }
+
+    public void CanWalkTrue()
+    {
+        m_canWalk = true;
     }
 
     public void SetMovementInputValue(Vector2 inputValue)
