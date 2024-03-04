@@ -187,7 +187,7 @@ MonoBehaviour:
   photoFrame: {fileID: 0}
   cameraUI: {fileID: 0}
   anomaliesCamRT: {fileID: 8400000, guid: ed764a1833741eb4e992c1d2ff564c70, type: 2}
-  maxPhotos: 3
+  maxPhotos: 200
   availablePhotosTMP: {fileID: 0}
   maxPhotosTMP: {fileID: 0}
   cameraFlash: {fileID: 3966516001980533802}
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 5801539952395094264}
   - component: {fileID: 1080576186868286945}
   - component: {fileID: 5936613635591711961}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RevealingAnomaliesManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1002,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 20}
+  m_Size: {x: 5, y: 3, z: 20}
   m_Center: {x: 0, y: 0, z: 10}
 --- !u!114 &5936613635591711961
 MonoBehaviour:
