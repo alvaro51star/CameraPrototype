@@ -35,6 +35,7 @@ public class PhotoCapture : MonoBehaviour
     private bool viewingPhoto;
     private bool canTakePhoto = true;
     private int availablePhotos;
+    private bool m_tookFirstPhoto;
 
     private void Start()
     {
@@ -49,8 +50,11 @@ public class PhotoCapture : MonoBehaviour
 
     public void TakePhoto()
     {
+        m_tookFirstPhoto = true;
         if (!viewingPhoto)
         {
+            Debug.Log("foto");
+            
             if (canTakePhoto)
             {
                 EventManager.TakingPhoto?.Invoke();
@@ -67,21 +71,31 @@ public class PhotoCapture : MonoBehaviour
             }
             else
             {
+
+                m_tookFirstPhoto = false;
                 cameraAudio.clip = noPhotosClip;
                 cameraAudio.Play();
             }
 
         }
+
         else
         {
             RemovePhoto();
             EventManager.RemovePhoto?.Invoke();
+            m_tookFirstPhoto = false;
         }
+    }
+
+    public bool GetFirstPhotoTaken()
+    {
+        return m_tookFirstPhoto;
     }
     
 
     private IEnumerator CapturePhoto()//reads renderTexture and copies it to local variable
     {
+        m_tookFirstPhoto = false;
         cameraUI.SetActive(false);//quitar UI tipo REC
         viewingPhoto = true;
         StartCoroutine(CameraFlashEffect());

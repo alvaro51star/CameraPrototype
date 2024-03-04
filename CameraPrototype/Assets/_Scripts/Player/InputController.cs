@@ -32,6 +32,9 @@ public class InputController : MonoBehaviour
 
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
-        m_photoCapture.TakePhoto();
+        if (!m_photoCapture.GetFirstPhotoTaken())
+        {
+            m_photoCapture.TakePhoto();
+        }
     }
 }

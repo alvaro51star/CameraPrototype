@@ -184,7 +184,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""34656689-a3ba-465f-8516-782790c8d74e"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""SlowTap"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""TakePhoto"",
