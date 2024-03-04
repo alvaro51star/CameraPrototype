@@ -10,6 +10,11 @@ public class AnomaliesData : MonoBehaviour
         if(revealType)
         {
             gameObject.layer = LayerMask.NameToLayer("Anomalies");
+
+            if (GetComponent<StalkerBehaviour>())
+            {
+                GetComponent<StalkerBehaviour>().enabled = false;
+            }
         }
 
         else
@@ -23,11 +28,14 @@ public class AnomaliesData : MonoBehaviour
         if(revealType)
         {
             gameObject.layer = LayerMask.NameToLayer("Default");
+            if(GetComponent<StalkerBehaviour>())
+            {
+                GetComponent<StalkerBehaviour>().enabled = true;
+            }
         }
         else
         {
             gameObject.SetActive(false);
         }
-        Debug.Log("Anomaly revealed");
     }
 }
