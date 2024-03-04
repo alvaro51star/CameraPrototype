@@ -7,11 +7,13 @@ using UnityEngine.AI;
 
 public class StalkerBehaviour : MonoBehaviour
 {
+    [SerializeField] private Renderer objectMesh;
     [SerializeField] private GameObject player;
     private bool isPlayerNear = false;
     [SerializeField] private States state;
 
     public bool isStunned = false;
+    public bool isVisible = false;
 
     [SerializeField] private NavMeshAgent navMesh;
 
@@ -46,6 +48,19 @@ public class StalkerBehaviour : MonoBehaviour
         if (isStunned == true)
         {
             state = States.Stunned;
+        }
+
+        if (objectMesh.isVisible)
+        {
+            isVisible = true;
+        }
+        else
+        {
+            if (isVisible && state == States.Stalk)
+            {
+                TPToNextPosition();
+            }
+            isVisible = false;
         }
 
         switch (state)
@@ -104,7 +119,7 @@ public class StalkerBehaviour : MonoBehaviour
     {
         currentTime += Time.deltaTime;
 
-        if (currentTime >= timeBeforeChangingPoint)
+        if (currentTime >= timeBeforeChangingPoint && !objectMesh.isVisible)
         {
             TPToNextPosition();
             ResetTimer();
