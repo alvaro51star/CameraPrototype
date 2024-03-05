@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,8 @@ public class StalkerBehaviour : MonoBehaviour
     public bool isVisible = false;
 
     [SerializeField] private NavMeshAgent navMesh;
+    [SerializeField] private Collider collision;
+    [SerializeField] private Collider triggerCollision;
 
     #region Time Variables
     [Space]
@@ -45,7 +48,7 @@ public class StalkerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.transform);
+        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 
         if (isStunned == true)
         {
@@ -81,6 +84,8 @@ public class StalkerBehaviour : MonoBehaviour
             case States.Searching:
                 Search();
                 break;
+            case States.PlayerCatched:
+                break;
             default:
                 Debug.Log("Error no state detected");
                 break;
@@ -94,12 +99,23 @@ public class StalkerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && currentTimeLooked >= maxTimeLooked)
         {
             Debug.Log("Player detectado");
             isPlayerNear = true;
+            state = States.PlayerCatched;
+            StartCoroutine(CatchPlayer(other.gameObject));
             //state = States.Chase;
         }
+    }
+
+    private IEnumerator CatchPlayer(GameObject player)
+    {
+        navMesh.isStopped = true;
+        navMesh.velocity = Vector3.zero;
+        transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        yield return null;
+        //EndGame
     }
 
     private void OnTriggerExit(Collider other)
@@ -196,7 +212,15 @@ public class StalkerBehaviour : MonoBehaviour
     {
 
     }
+
     #endregion
+
+    public void ActivateCollision()
+    {
+        collision.isTrigger = false;
+        triggerCollision.enabled = true;
+    }
+
 }
 
 public enum States
@@ -204,5 +228,6 @@ public enum States
     Stalk,
     Chase,
     Stunned,
-    Searching
+    Searching,
+    PlayerCatched
 }

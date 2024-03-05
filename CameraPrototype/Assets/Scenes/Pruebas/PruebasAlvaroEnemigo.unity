@@ -2659,35 +2659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 730734384988295076, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 730734384988295076, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1659365039449232602, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_Name
       value: Stalker
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6554146641333162930, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
@@ -2744,28 +2719,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1072835853}
-    - target: {fileID: 6983790418231038236, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: objectMesh
-      value: 
-      objectReference: {fileID: 1671121875}
-    - target: {fileID: 7728619579183819350, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1671121882}
-    - targetCorrespondingSourceObject: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1671121883}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7, type: 3}
 --- !u!43 &116633112
 Mesh:
@@ -17547,21 +17504,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 56422562683489378}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1072835858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072835853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f58494dd0c6d27418bf2d841b5ce998, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 223925222}
-  maxDistance: 10
-  maxAngleVision: 15
 --- !u!43 &1084105071
 Mesh:
   m_ObjectHideFlags: 0
@@ -32908,52 +32850,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!23 &1671121875 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7728619579183819350, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
-    type: 3}
-  m_PrefabInstance: {fileID: 109431376}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1671121882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223925222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d61abdabda17524bbba73d4387d096e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  revealType: 1
---- !u!54 &1671121883
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223925222}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1695898441
 GameObject:
   m_ObjectHideFlags: 0
@@ -44075,11 +43971,6 @@ PrefabInstance:
       objectReference: {fileID: 1020153823}
     - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
-      propertyPath: maxPhotos
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
       propertyPath: photoFrame
       value: 
       objectReference: {fileID: 2040710198}
@@ -44103,25 +43994,15 @@ PrefabInstance:
       propertyPath: availablePhotosTMP
       value: 
       objectReference: {fileID: 1314986303}
+    - target: {fileID: 4666557413774929715, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 223925222}
     - target: {fileID: 5044894124721260897, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5044894124721260897, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5044894124721260897, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5936613635591711961, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: sphereCastRadius
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
@@ -44176,11 +44057,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5044894124721260897, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1072835858}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5393f11780f6f364aafd39ee8d8d3942, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

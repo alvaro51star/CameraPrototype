@@ -8,6 +8,8 @@ public class WatchEnemy : MonoBehaviour
     [SerializeField] private float maxDistance = 5f;
     [SerializeField] private float maxAngleVision = 15f;
 
+    public Transform enemyCatchTp;
+
     private void Start()
     {
 
@@ -25,7 +27,7 @@ public class WatchEnemy : MonoBehaviour
             return;
         }
 
-        Vector3 rayDirection = enemy.transform.position - transform.position ;
+        Vector3 rayDirection = enemy.transform.position - transform.position;
         Debug.DrawRay(transform.position, rayDirection.normalized * maxDistance, Color.red);
         if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance))
         {

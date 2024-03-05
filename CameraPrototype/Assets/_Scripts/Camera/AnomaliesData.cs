@@ -6,10 +6,10 @@ using UnityEngine;
 public class AnomaliesData : MonoBehaviour
 {
     public bool revealType;//hay 2 tipos de anomalia, las que revelas objetos y las que quitas objetos
-    
+
     private void Start() //innecesario (esta ya puesto en editor), solo por si acaso
     {
-        if(revealType)
+        if (revealType)
         {
             gameObject.layer = LayerMask.NameToLayer("Anomalies");
             //Para hacer todos los hijos
@@ -35,14 +35,19 @@ public class AnomaliesData : MonoBehaviour
 
     public void AnomalyRevealed()
     {
-        if(revealType)
+        if (revealType)
         {
+            if (transform.CompareTag("Enemy"))
+            {
+                gameObject.GetComponent<StalkerBehaviour>().ActivateCollision();
+            }
+
             gameObject.layer = LayerMask.NameToLayer("Default");
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
             }
-            if(GetComponent<StalkerBehaviour>())
+            if (GetComponent<StalkerBehaviour>())
             {
                 GetComponent<StalkerBehaviour>().enabled = true;
             }
