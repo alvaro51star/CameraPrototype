@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 5553918729671026205}
   - component: {fileID: 7021817640465769526}
   - component: {fileID: 1121478310474210229}
+  - component: {fileID: 4666557413774929715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -848,6 +849,21 @@ MonoBehaviour:
   m_rotationSpeedY: 2
   m_upDownRange: 60
   m_camera: {fileID: 1932318058781030498}
+--- !u!114 &4666557413774929715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044894124721260897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f58494dd0c6d27418bf2d841b5ce998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  maxDistance: 10
+  maxAngleVision: 15
 --- !u!1 &7592565844524331916
 GameObject:
   m_ObjectHideFlags: 0

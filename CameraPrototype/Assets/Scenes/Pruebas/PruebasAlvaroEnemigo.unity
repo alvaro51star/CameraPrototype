@@ -21424,6 +21424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseLimited: 1
   pauseMenu: {fileID: 0}
+  endMenu: {fileID: 0}
 --- !u!43 &1412537309
 Mesh:
   m_ObjectHideFlags: 0
@@ -21661,46 +21662,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 12.723156
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 247
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104429781385786678, guid: 37241cc878be1e24e9bb21001809767f,
-        type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

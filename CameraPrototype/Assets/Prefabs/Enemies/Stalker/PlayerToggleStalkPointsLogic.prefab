@@ -43,17 +43,17 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 247
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 25.337784, y: 3.883261, z: 28.625992}
-  m_Center: {x: -3.693451, y: 0.8735784, z: 4.312996}
+  m_Size: {x: 15, y: 3.883261, z: 12.723156}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1243820351967995917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,3 +66,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ef3e9cee7d0d34b996c46519359bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
