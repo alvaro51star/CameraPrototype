@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3525570999430364782}
   - component: {fileID: 7104429781385786678}
   - component: {fileID: 1243820351967995917}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerToggleStalkPointsLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

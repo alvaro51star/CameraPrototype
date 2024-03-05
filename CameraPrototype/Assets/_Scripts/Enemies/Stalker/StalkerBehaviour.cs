@@ -114,6 +114,7 @@ public class StalkerBehaviour : MonoBehaviour
         navMesh.isStopped = true;
         navMesh.velocity = Vector3.zero;
         transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return null;
         //EndGame
     }

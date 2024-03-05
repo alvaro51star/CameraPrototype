@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float m_cameraRotateInputVaue;
     [SerializeField] private float m_upDownRange;
     [SerializeField] private Transform m_camera;
-    private bool m_canWalk = true;
+    public bool m_canWalk = true;
 
     private void Start()
     {
