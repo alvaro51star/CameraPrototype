@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject endMenu;
 
     private void Start()
     {
@@ -46,5 +48,17 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
+    }
+
+    //end menu
+
+    public void ActivateEndMenu()
+    {
+        endMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void LoadSceneMainMenu()
+    {
+        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
     }
 }
