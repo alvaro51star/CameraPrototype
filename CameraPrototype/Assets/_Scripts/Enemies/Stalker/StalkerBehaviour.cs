@@ -8,6 +8,8 @@ using UnityEngine.AI;
 
 public class StalkerBehaviour : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
+
     [SerializeField] private Renderer objectMesh;
     [SerializeField] private GameObject player;
     private bool isPlayerNear = false;
@@ -117,6 +119,7 @@ public class StalkerBehaviour : MonoBehaviour
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return null;
         //EndGame
+        uiManager.ActivateEndMenu();
     }
 
     private void OnTriggerExit(Collider other)
