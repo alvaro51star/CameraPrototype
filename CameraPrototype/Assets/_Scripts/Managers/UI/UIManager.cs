@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
+    private bool m_isPauseMenuActive = false;
     [SerializeField] private GameObject endMenu;
 
     private void Start()
@@ -24,7 +25,8 @@ public class UIManager : MonoBehaviour
 
     //pause menu
     public void Resume()
-    {       
+    {
+        m_isPauseMenuActive = false;
         pauseMenu.SetActive(false);
         playerPhotoCapture.enabled = true;
 
@@ -43,6 +45,7 @@ public class UIManager : MonoBehaviour
     public void PauseMenu()
     {
         pauseMenu.SetActive(true);
+        m_isPauseMenuActive = true;
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
 
@@ -53,10 +56,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public bool GetIsPauseMenuActive()
+    {
+        return m_isPauseMenuActive;
+    }
+
     //end menu
 
     public void ActivateEndMenu()
     {
+        m_isPauseMenuActive = true;
         endMenu.SetActive(true);
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
