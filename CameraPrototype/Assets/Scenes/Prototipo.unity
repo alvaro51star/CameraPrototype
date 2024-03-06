@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0008525523, g: 0.0036115542, b: 0.006444635, a: 1}
+  m_IndirectSpecularColor: {r: 0.00085241604, g: 0.003611387, b: 0.0064444034, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15006,6 +15006,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 880958707}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &880958709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6868914737284953283, guid: 8ae2dc09f02668d46823b9e4350e5f93,
+    type: 3}
+  m_PrefabInstance: {fileID: 880958707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540facb362e6cfd4f8c3460cc5ef090e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &881844185
 GameObject:
   m_ObjectHideFlags: 0
@@ -17305,6 +17317,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 152173181}
+    - target: {fileID: 6983790418231038236, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 880958709}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
