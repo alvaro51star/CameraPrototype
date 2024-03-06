@@ -17,7 +17,7 @@ public class Puerta_Llave : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (llave.unlockDoor == true)
+            if ((llave.unlockDoor == true) && (llave.isDoor == true)) 
             {
                 Debug.Log("Funciona LLAVE Y PUERTA");
                 openDoor = true;
