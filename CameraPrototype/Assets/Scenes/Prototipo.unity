@@ -5191,6 +5191,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 180335893}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &180335895 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4838232260108709856, guid: 5393f11780f6f364aafd39ee8d8d3942,
+    type: 3}
+  m_PrefabInstance: {fileID: 180335893}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &210634153
 Mesh:
   m_ObjectHideFlags: 0
@@ -14925,6 +14931,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 746325366}
     m_Modifications:
+    - target: {fileID: 1784375146246354055, guid: 8ae2dc09f02668d46823b9e4350e5f93,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 180335895}
+    - target: {fileID: 2110951741907010571, guid: 8ae2dc09f02668d46823b9e4350e5f93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2948517033371660061, guid: 8ae2dc09f02668d46823b9e4350e5f93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14979,16 +14995,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375351928160966953, guid: 8ae2dc09f02668d46823b9e4350e5f93,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6868914737284953283, guid: 8ae2dc09f02668d46823b9e4350e5f93,
-        type: 3}
-      propertyPath: mouseLimited
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7641473580033363112, guid: 8ae2dc09f02668d46823b9e4350e5f93,
         type: 3}
