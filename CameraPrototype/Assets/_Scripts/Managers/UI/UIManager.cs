@@ -12,7 +12,9 @@ public class UIManager : MonoBehaviour
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
     private bool m_isPauseMenuActive = false;
+    private bool m_canPause = true;
     [SerializeField] private GameObject endMenu;
+    [SerializeField] private GameObject m_cameraUI;
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
     public void Resume()
     {
         m_isPauseMenuActive = false;
+        m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
         playerPhotoCapture.enabled = true;
 
@@ -44,15 +47,19 @@ public class UIManager : MonoBehaviour
     }
     public void PauseMenu()
     {
-        pauseMenu.SetActive(true);
-        m_isPauseMenuActive = true;
-        playerPhotoCapture.enabled = false;
-        Time.timeScale = 0f;
-
-        if (mouseLimited)
+        if (m_canPause)
         {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            pauseMenu.SetActive(true);
+            m_cameraUI.SetActive(false);
+            m_isPauseMenuActive = true;
+            playerPhotoCapture.enabled = false;
+            Time.timeScale = 0f;
+
+            if (mouseLimited)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
         }
     }
 
@@ -65,7 +72,14 @@ public class UIManager : MonoBehaviour
 
     public void ActivateEndMenu()
     {
+        if (mouseLimited)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        m_canPause = false;
         m_isPauseMenuActive = true;
+        m_cameraUI.SetActive(false);
         endMenu.SetActive(true);
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
