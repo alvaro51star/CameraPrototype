@@ -994,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseLimited: 1
   pauseMenu: {fileID: 2110951741907010571}
-  endMenu: {fileID: 0}
+  endMenu: {fileID: 7641473580033363112}
 --- !u!1 &6343676708678239583
 GameObject:
   m_ObjectHideFlags: 0
