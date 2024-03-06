@@ -24,6 +24,10 @@ public class AnomaliesData : MonoBehaviour
             {
                 GetComponent<StalkerBehaviour>().enabled = false;
             }
+            else if(GetComponent<Llave>())
+            {
+                GetComponent<Llave>().enabled = false;
+            }
         }
         else
         {
@@ -54,6 +58,10 @@ public class AnomaliesData : MonoBehaviour
             if (GetComponent<StalkerBehaviour>())
             {
                 GetComponent<StalkerBehaviour>().enabled = true;
+            }
+            else if (GetComponent<Llave>())
+            {
+                GetComponent<Llave>().enabled = true;
             }
         }
         else
