@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private PhotoCapture playerPhotoCapture;
     [Header("Testing:")]
     [SerializeField] private bool mouseLimited;
 
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     public void Resume()
     {       
         pauseMenu.SetActive(false);
+        playerPhotoCapture.enabled = true;
 
         if (mouseLimited)
         {
@@ -41,6 +43,7 @@ public class UIManager : MonoBehaviour
     public void PauseMenu()
     {
         pauseMenu.SetActive(true);
+        playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
 
         if (mouseLimited)
@@ -55,6 +58,7 @@ public class UIManager : MonoBehaviour
     public void ActivateEndMenu()
     {
         endMenu.SetActive(true);
+        playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
     }
     public void LoadSceneMainMenu()
