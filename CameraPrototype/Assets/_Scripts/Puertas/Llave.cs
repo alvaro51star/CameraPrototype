@@ -6,12 +6,14 @@ public class Llave : Puerta_Llave
 {
     public bool unlockDoor = false;
     public bool isDoor = true;
+    public MeshRenderer keyV;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             unlockDoor = true;
             isDoor = false;
+            keyV.enabled = false;
         }
     }
 

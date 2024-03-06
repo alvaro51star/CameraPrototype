@@ -38150,6 +38150,7 @@ MonoBehaviour:
   llave: {fileID: 1712529283}
   unlockDoor: 0
   isDoor: 1
+  keyV: {fileID: 1712529279}
 --- !u!114 &1712529284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44125,6 +44126,7 @@ MonoBehaviour:
   llave: {fileID: 1957433330}
   unlockDoor: 0
   isDoor: 1
+  keyV: {fileID: 1957433327}
 --- !u!65 &1957433331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44144,8 +44146,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6131096, y: 2.1722748, z: 4.3216414}
-  m_Center: {x: -0.9290618, y: 2.2101882, z: 1.3182929}
+  m_Size: {x: 4.2696066, y: 2.1722744, z: 4.3216414}
+  m_Center: {x: -0.7573103, y: 2.2101882, z: 1.3182929}
 --- !u!114 &1957433332
 MonoBehaviour:
   m_ObjectHideFlags: 0
