@@ -16,7 +16,6 @@ public class Puerta : MonoBehaviour
         {
             openDoor = true;
             ANIM.SetBool("Open", openDoor);
-            Debug.Log("funciona");
         }
     }
 

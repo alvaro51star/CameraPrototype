@@ -38081,6 +38081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   llave: {fileID: 1712529283}
   unlockDoor: 0
+  isDoor: 1
 --- !u!114 &1712529284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44055,6 +44056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   llave: {fileID: 1957433330}
   unlockDoor: 0
+  isDoor: 1
 --- !u!65 &1957433331
 BoxCollider:
   m_ObjectHideFlags: 0
