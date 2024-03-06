@@ -5097,6 +5097,11 @@ PrefabInstance:
       objectReference: {fileID: 1005787309}
     - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
+      propertyPath: maxPhotos
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
       propertyPath: photoFrame
       value: 
       objectReference: {fileID: 596760414}
