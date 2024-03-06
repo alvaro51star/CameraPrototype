@@ -9,11 +9,7 @@ public class Llave : Puerta_Llave
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                unlockDoor = true;
-                Debug.Log("funciona LLAVE");
-            }
+            unlockDoor = true;
         }
     }
 }
