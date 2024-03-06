@@ -10,6 +10,6 @@ public class EndTrigger : MonoBehaviour
         if(other.GetComponent<PlayerMovement>())
         {            
             uIManager.ActivateEndMenu();
-        }
+        }//
     }
 }
