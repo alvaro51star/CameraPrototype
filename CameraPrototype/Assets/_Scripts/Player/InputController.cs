@@ -32,11 +32,14 @@ public class InputController : MonoBehaviour
 
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
-        if (!m_uiManager.GetIsPauseMenuActive())
+        if (context.performed)
         {
-            if (m_photoCapture.GetFirstPhotoTaken() == false)
+            if (!m_uiManager.GetIsPauseMenuActive())
             {
-                m_photoCapture.TakePhoto();
+                if (m_photoCapture.GetFirstPhotoTaken() == false)
+                {
+                    m_photoCapture.TakePhoto();
+                }
             }
         }
     }
