@@ -660,6 +660,8 @@ GameObject:
   - component: {fileID: 1121478310474210229}
   - component: {fileID: 4666557413774929715}
   - component: {fileID: 973116271337381815}
+  - component: {fileID: 7761437460544118505}
+  - component: {fileID: 8477173990252478856}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -776,7 +778,19 @@ MonoBehaviour:
     m_ActionId: c15d0c0a-09ef-48c3-b77c-413ef9403ab4
     m_ActionName: CameraPlayer/TakePhoto[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7021817640465769526}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c7335fd6-c28d-4e85-8fff-d5f596a584f6
     m_ActionName: CameraPlayer/Interact[/Keyboard/e]
   - m_PersistentCalls:
@@ -882,6 +896,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraManagerGO: {fileID: 2304275377204725996}
   CameraUI: {fileID: 0}
+--- !u!65 &7761437460544118505
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044894124721260897}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8477173990252478856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044894124721260897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518b25756d43f754d8595120336210c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7592565844524331916
 GameObject:
   m_ObjectHideFlags: 0
