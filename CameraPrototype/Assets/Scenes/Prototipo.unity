@@ -21987,6 +21987,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5456733558270072058, guid: 6ebfd26958455a5449f07e38fd875f75,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951873451470955019, guid: 6ebfd26958455a5449f07e38fd875f75,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811086140298975362, guid: 6ebfd26958455a5449f07e38fd875f75,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7419858687221528391, guid: 6ebfd26958455a5449f07e38fd875f75,
         type: 3}
       propertyPath: m_Name
@@ -21995,7 +22010,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7419858687221528391, guid: 6ebfd26958455a5449f07e38fd875f75,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1932178099}
   m_SourcePrefab: {fileID: 100100000, guid: 6ebfd26958455a5449f07e38fd875f75, type: 3}
 --- !u!1001 &1260353085
 PrefabInstance:
@@ -41866,6 +41885,33 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1932178090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7419858687221528391, guid: 6ebfd26958455a5449f07e38fd875f75,
+    type: 3}
+  m_PrefabInstance: {fileID: 1241955476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1932178099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932178090}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.91, y: 1.15, z: 1.91}
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!1 &1945648109
 GameObject:
   m_ObjectHideFlags: 0
