@@ -33,7 +33,7 @@ public class InputController : MonoBehaviour
 
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && m_playerBehaviour.GetCanTakePicture())
         {
             if (!UIManager.instance.GetIsPauseMenuActive())
             {

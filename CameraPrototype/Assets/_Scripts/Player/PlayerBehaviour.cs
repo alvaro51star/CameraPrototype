@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,35 @@ public class PlayerBehaviour : MonoBehaviour
     //Variables
     private bool m_canInteract = false;
     private InteractiveObject m_interactingObject;
+    private bool m_canTakePicture = false;
+
+    private void OnEnable()
+    {
+        EventManager.OnUsingCamera += OnUsingCamera;
+        EventManager.OnNotUsingCamera += OnNotUsingCamera;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnUsingCamera -= OnUsingCamera;
+        EventManager.OnNotUsingCamera -= OnNotUsingCamera;
+    }
+    
+    private void OnNotUsingCamera()
+    {
+        m_canTakePicture = false;
+    }
+
+    private void OnUsingCamera()
+    {
+        m_canTakePicture = true;
+    
+    }
+
+    public bool GetCanTakePicture()
+    {
+        return m_canTakePicture;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
