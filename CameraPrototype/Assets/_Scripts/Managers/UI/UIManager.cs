@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     //Input
     [SerializeField] private GameObject m_interactInputImage;
 
+    public GameObject dialoguePanel;
+
     private void Awake()
     {
         if (instance == null)
