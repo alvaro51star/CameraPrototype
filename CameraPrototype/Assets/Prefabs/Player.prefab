@@ -194,6 +194,7 @@ MonoBehaviour:
   cameraAudio: {fileID: 1060018834660487488}
   cameraClickClip: {fileID: 8300000, guid: 3d4705b85564a6047b1db0676cf182f8, type: 3}
   noPhotosClip: {fileID: 8300000, guid: 999bd9f014d5f4e4ab17d0a8bf21ed9b, type: 3}
+  canTakePhoto: 1
 --- !u!82 &1060018834660487488
 AudioSource:
   m_ObjectHideFlags: 0
@@ -302,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photoCapture: {fileID: 2592600347508512828}
   availablePhotos: 0
   maxPhotos: 20
   availablePhotosTMP: {fileID: 0}

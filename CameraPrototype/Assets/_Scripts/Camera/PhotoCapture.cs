@@ -28,29 +28,19 @@ public class PhotoCapture : MonoBehaviour
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    private bool canTakePhoto = true;
-    //private int availablePhotos;
     private bool m_tookFirstPhoto;
+    public bool canTakePhoto = true;
 
-    private void OnEnable()
-    {
-        EventManager.NoPhotosLeft += OnNoPhotosLeft;
-        EventManager.NoPhotosLeft += OnCanTakePhotosAgain;
-
-    }
-
-    private void OnDisable()
-    {
-        EventManager.NoPhotosLeft -= OnNoPhotosLeft;
-        EventManager.NoPhotosLeft -= OnCanTakePhotosAgain;
-    }
     private void Start()
     {
         screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
                               UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla
-    } 
-
+        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla        
+    }
+    private void Update()
+    {
+        Debug.Log(canTakePhoto);
+    }
     public void TakePhoto()
     {
         m_tookFirstPhoto = true;
@@ -83,15 +73,6 @@ public class PhotoCapture : MonoBehaviour
         }
     }
 
-    private void OnNoPhotosLeft()
-    {
-        canTakePhoto = false;
-    }
-
-    private void OnCanTakePhotosAgain()
-    {
-        canTakePhoto = true;
-    }
 
     public bool GetFirstPhotoTaken()
     {

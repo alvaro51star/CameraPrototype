@@ -10,8 +10,7 @@ public static class EventManager
     public static Action NotUsingCamera;
     public static Action TakingPhoto;
     public static Action RemovePhoto;
-    public static Action NoPhotosLeft;
-    public static Action CanTakePhotosAgain;//para cuando te quedas sin fotos pero coges carrete
+
     //Gato
     public static Action CatPetted;
     //

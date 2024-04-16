@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraRollController : MonoBehaviour
 {
+    [SerializeField] private PhotoCapture photoCapture;
     [Header("Carrete UI")]
     public int availablePhotos;
     [SerializeField] private int maxPhotos;
@@ -37,16 +38,15 @@ public class CameraRollController : MonoBehaviour
         if(availablePhotos <= 0)
         {
             availablePhotosTMP.color = Color.red;
-            EventManager.NoPhotosLeft?.Invoke();
+            photoCapture.canTakePhoto = false;
         }
-
     }
 
     public void AddRoll(int cameraRoll)
     {
         if(availablePhotos <= 0)
         {
-            EventManager.CanTakePhotosAgain?.Invoke();
+            photoCapture.canTakePhoto = true;
         }
         availablePhotos += cameraRoll;
         availablePhotos = Mathf.Clamp(availablePhotos, 0, maxPhotos);
