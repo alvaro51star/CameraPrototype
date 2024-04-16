@@ -27,11 +27,9 @@ public class CatMovementController : MonoBehaviour
     {
        if(!agent.hasPath)
         {
-            timesPetted++;
-            Debug.Log(timesPetted);
+            timesPetted++;           
             if (timesPetted <= maxTimesPetted)
-            {
-                Debug.Log(destination[timesPetted - 1].name);
+            {              
                 agent.SetDestination(destination[timesPetted - 1].position);
             }
             else
