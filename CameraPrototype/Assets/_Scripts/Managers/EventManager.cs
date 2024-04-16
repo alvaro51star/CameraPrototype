@@ -17,5 +17,5 @@ public static class EventManager
     public static Action<int> OnAddRoll;
 
     //Enemies
-    public static Action<float> OnTimeAdded;
+    public static Action<float, float> OnTimeAdded;
 }
