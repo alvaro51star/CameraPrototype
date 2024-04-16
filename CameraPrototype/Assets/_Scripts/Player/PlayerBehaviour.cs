@@ -10,34 +10,6 @@ public class PlayerBehaviour : MonoBehaviour
     private InteractiveObject m_interactingObject;
     private bool m_canTakePicture = false;
 
-    private void OnEnable()
-    {
-        EventManager.OnUsingCamera += OnUsingCamera;
-        EventManager.OnNotUsingCamera += OnNotUsingCamera;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnUsingCamera -= OnUsingCamera;
-        EventManager.OnNotUsingCamera -= OnNotUsingCamera;
-    }
-    
-    private void OnNotUsingCamera()
-    {
-        m_canTakePicture = false;
-    }
-
-    private void OnUsingCamera()
-    {
-        m_canTakePicture = true;
-    
-    }
-
-    public bool GetCanTakePicture()
-    {
-        return m_canTakePicture;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         m_interactingObject = other.GetComponent<InteractiveObject>();

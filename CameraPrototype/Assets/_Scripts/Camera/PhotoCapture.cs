@@ -30,6 +30,7 @@ public class PhotoCapture : MonoBehaviour
     private bool viewingPhoto;
     private bool m_tookFirstPhoto;
     public bool canTakePhoto = true;
+    public bool hasCameraEquiped;
 
     private void Start()
     {
@@ -44,7 +45,7 @@ public class PhotoCapture : MonoBehaviour
     public void TakePhoto()
     {
         m_tookFirstPhoto = true;
-        if (!viewingPhoto)
+        if (!viewingPhoto && hasCameraEquiped)
         {
             Debug.Log("foto");
             
@@ -77,6 +78,11 @@ public class PhotoCapture : MonoBehaviour
     public bool GetFirstPhotoTaken()
     {
         return m_tookFirstPhoto;
+    }
+
+    public void SetHasCameraEquiped(bool mode)
+    {
+        hasCameraEquiped = mode;
     }
     
 

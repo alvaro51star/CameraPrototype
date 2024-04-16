@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject CameraManagerGO;
+    [SerializeField] private PhotoCapture m_photoCapture;
     [SerializeField] private GameObject CameraUI;
     private void OnEnable()
     {
@@ -20,13 +20,13 @@ public class CameraManager : MonoBehaviour
 
     private void OnUsingCamera()
     {
-        CameraManagerGO.SetActive(true);
+        m_photoCapture.SetHasCameraEquiped(true);
         CameraUI.SetActive(true);
     }
 
     private void OnNotUsingCamera()
     {
-        CameraManagerGO.SetActive(false);
+        m_photoCapture.SetHasCameraEquiped(false);
         CameraUI.SetActive(false);
     }
 }
