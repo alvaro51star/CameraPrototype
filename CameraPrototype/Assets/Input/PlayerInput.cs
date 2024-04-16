@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FocusCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6f88360-9dfb-4d42-9f77-649ffe320869"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2898c6ac-9774-4708-8405-a8837106763b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""FocusCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +352,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CameraPlayer_Inventory = m_CameraPlayer.FindAction("Inventory", throwIfNotFound: true);
         m_CameraPlayer_RotatePlayer = m_CameraPlayer.FindAction("RotatePlayer", throwIfNotFound: true);
         m_CameraPlayer_PauseMenu = m_CameraPlayer.FindAction("PauseMenu", throwIfNotFound: true);
+        m_CameraPlayer_FocusCamera = m_CameraPlayer.FindAction("FocusCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,6 +421,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraPlayer_Inventory;
     private readonly InputAction m_CameraPlayer_RotatePlayer;
     private readonly InputAction m_CameraPlayer_PauseMenu;
+    private readonly InputAction m_CameraPlayer_FocusCamera;
     public struct CameraPlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -411,6 +433,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_CameraPlayer_Inventory;
         public InputAction @RotatePlayer => m_Wrapper.m_CameraPlayer_RotatePlayer;
         public InputAction @PauseMenu => m_Wrapper.m_CameraPlayer_PauseMenu;
+        public InputAction @FocusCamera => m_Wrapper.m_CameraPlayer_FocusCamera;
         public InputActionMap Get() { return m_Wrapper.m_CameraPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -441,6 +464,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @FocusCamera.started += instance.OnFocusCamera;
+            @FocusCamera.performed += instance.OnFocusCamera;
+            @FocusCamera.canceled += instance.OnFocusCamera;
         }
 
         private void UnregisterCallbacks(ICameraPlayerActions instance)
@@ -466,6 +492,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @FocusCamera.started -= instance.OnFocusCamera;
+            @FocusCamera.performed -= instance.OnFocusCamera;
+            @FocusCamera.canceled -= instance.OnFocusCamera;
         }
 
         public void RemoveCallbacks(ICameraPlayerActions instance)
@@ -510,5 +539,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnRotatePlayer(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnFocusCamera(InputAction.CallbackContext context);
     }
 }

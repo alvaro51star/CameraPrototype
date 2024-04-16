@@ -53,4 +53,16 @@ public class InputController : MonoBehaviour
             m_playerBehaviour.Interaction();
         }
     }
+
+    public void OnFocusCamera(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EventManager.UsingCamera?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            EventManager.NotUsingCamera?.Invoke();
+        }
+    }
 }
