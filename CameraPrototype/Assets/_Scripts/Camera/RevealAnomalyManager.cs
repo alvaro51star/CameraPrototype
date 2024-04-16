@@ -40,6 +40,11 @@ public class RevealAnomalyManager : MonoBehaviour
                 }                
             }
         }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            //other.GetComponent<StalkerBehaviour>().StunEnemy();
+        }
     }    
 
     private void OnTakingPhoto()

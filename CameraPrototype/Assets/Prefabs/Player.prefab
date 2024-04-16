@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 8100681784569480217}
   - component: {fileID: 2592600347508512828}
   - component: {fileID: 1060018834660487488}
+  - component: {fileID: 8894318954006076969}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -187,9 +188,6 @@ MonoBehaviour:
   photoFrame: {fileID: 0}
   cameraUI: {fileID: 0}
   anomaliesCamRT: {fileID: 8400000, guid: ed764a1833741eb4e992c1d2ff564c70, type: 2}
-  maxPhotos: 200
-  availablePhotosTMP: {fileID: 0}
-  maxPhotosTMP: {fileID: 0}
   cameraFlash: {fileID: 3966516001980533802}
   flashTime: 0.2
   fadingAnimation: {fileID: 0}
@@ -292,6 +290,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8894318954006076969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availablePhotos: 0
+  maxPhotos: 20
+  availablePhotosTMP: {fileID: 0}
+  maxPhotosTMP: {fileID: 0}
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0

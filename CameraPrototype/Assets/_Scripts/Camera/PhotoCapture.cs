@@ -14,11 +14,6 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private GameObject cameraUI;
     [SerializeField] private RenderTexture anomaliesCamRT;
 
-    [Header("Carrete UI")]
-    [SerializeField] private int maxPhotos;
-    [SerializeField] private TMP_Text availablePhotosTMP;
-    [SerializeField] private TMP_Text maxPhotosTMP;
-
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
     [SerializeField] private float flashTime;
@@ -34,18 +29,26 @@ public class PhotoCapture : MonoBehaviour
     private Texture2D screenCapture;
     private bool viewingPhoto;
     private bool canTakePhoto = true;
-    private int availablePhotos;
+    //private int availablePhotos;
     private bool m_tookFirstPhoto;
 
+    private void OnEnable()
+    {
+        EventManager.NoPhotosLeft += OnNoPhotosLeft;
+        EventManager.NoPhotosLeft += OnCanTakePhotosAgain;
+
+    }
+
+    private void OnDisable()
+    {
+        EventManager.NoPhotosLeft -= OnNoPhotosLeft;
+        EventManager.NoPhotosLeft -= OnCanTakePhotosAgain;
+    }
     private void Start()
     {
         screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
                               UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
         //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla
-        availablePhotos = maxPhotos;
-
-        availablePhotosTMP.text = availablePhotos.ToString();
-        maxPhotosTMP.text = maxPhotos.ToString();
     } 
 
     public void TakePhoto()
@@ -58,14 +61,7 @@ public class PhotoCapture : MonoBehaviour
             if (canTakePhoto)
             {
                 EventManager.TakingPhoto?.Invoke();
-                availablePhotos--;
-                availablePhotosTMP.text = availablePhotos.ToString();
 
-                if (availablePhotos <= 0)
-                {
-                    canTakePhoto = false;
-                    availablePhotosTMP.color = Color.red;
-                }
                 StartCoroutine(CapturePhoto());
                 //TestCapturePhoto();
             }
@@ -85,6 +81,16 @@ public class PhotoCapture : MonoBehaviour
             EventManager.RemovePhoto?.Invoke();
             m_tookFirstPhoto = false;
         }
+    }
+
+    private void OnNoPhotosLeft()
+    {
+        canTakePhoto = false;
+    }
+
+    private void OnCanTakePhotosAgain()
+    {
+        canTakePhoto = true;
     }
 
     public bool GetFirstPhotoTaken()
