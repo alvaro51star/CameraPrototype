@@ -12,8 +12,8 @@ public class DialogueController : MonoBehaviour
     public GameObject dialogueGameObject;
     public bool didDialogueStart;
 
-    private AudioSource audioSource;
-    private UIManager uiManager;
+    //private AudioSource audioSource;
+    //private UIManager uiManager;
     private int lineIndex;
     private string[] dialogueLines;
     private bool isInteractive;
@@ -31,8 +31,8 @@ public class DialogueController : MonoBehaviour
     }
     private void Start()
     {
-        uiManager = GetComponent<UIManager>();
-        audioSource = GetComponent<AudioSource>();
+        //uiManager = GetComponent<UIManager>();
+        //audioSource = GetComponent<AudioSource>();
     }
     public void StartDialogue(string[] textLines, bool _isInteractive, GameObject trigger)
     {
@@ -43,8 +43,8 @@ public class DialogueController : MonoBehaviour
         uiManager.DesactivateAllUIGameObjects();
         SoundManager.instance.ReproduceSound(AudioClipsNames.Pop, audioSource);
         uiManager.ActivateUIGameObjects(uiManager.dialoguePanel, true);
-        */
-        uiManager.dialoguePanel.SetActive(true);
+        
+        uiManager.dialoguePanel.SetActive(true);*/
         didDialogueStart = true;
         dialogueLines = textLines;
         lineIndex = 0;
