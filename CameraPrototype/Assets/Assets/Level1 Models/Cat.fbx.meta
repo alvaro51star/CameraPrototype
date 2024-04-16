@@ -3,7 +3,37 @@ guid: 6f0d8979b8943df4a80a307ac5a0eec9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_rig_combined_v24_def_blinn1
+    second: {fileID: 2100000, guid: 8df3f184b5dee904e9bc5b53af3ac6da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_rig_combined_v24_def_phong1
+    second: {fileID: 2100000, guid: 8da71b2db5114464590d986d87392bdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_rig_combined_v24_def_phong2
+    second: {fileID: 2100000, guid: 05ce62c99522e0047b42ca404ea7e501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_rig_combined_v24_def_phong5
+    second: {fileID: 2100000, guid: 4aa0ac30521f8324397df8b69a0e5f1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_rig_combined_v24_def_phong7
+    second: {fileID: 2100000, guid: 70c4c5be4bde1824bbc9f89b27c0aad8, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cat-body-texture
+    second: {fileID: 2800000, guid: 9dd76a03c8004e04388e3e7ce355bd77, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
