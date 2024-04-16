@@ -5,13 +5,29 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     //Variables
+    private bool m_canInteract = false;
+    private InteractiveObject m_interactingObject;
     private void OnTriggerEnter(Collider other)
     {
-        InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject != null)
+        m_interactingObject = other.GetComponent<InteractiveObject>();
+        m_canInteract = true;
+        if (!m_interactingObject.GetNeedsButton())
+        {
+            Interaction();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        m_canInteract = false;
+        m_interactingObject = null;
+    }
+
+    public void Interaction()
+    {
+        if (m_canInteract && m_interactingObject != null)
         {
             Debug.Log("HI");
-            interactiveObject.Interact();
+            m_interactingObject.Interact();
         }
     }
 }

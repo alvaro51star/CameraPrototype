@@ -7,12 +7,14 @@ public class InputController : MonoBehaviour
 {
     //Variables
     private PlayerMovement m_playerMovement;
+    private PlayerBehaviour m_playerBehaviour;
     [SerializeField] private UIManager m_uiManager;
     [SerializeField] private PhotoCapture m_photoCapture;
 
     private void Start()
     {
         m_playerMovement = GetComponent<PlayerMovement>();
+        m_playerBehaviour = GetComponent<PlayerBehaviour>();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -41,6 +43,14 @@ public class InputController : MonoBehaviour
                     m_photoCapture.TakePhoto();
                 }
             }
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            m_playerBehaviour.Interaction();
         }
     }
 }

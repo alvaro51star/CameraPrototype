@@ -5,12 +5,26 @@ using UnityEngine;
 public class InteractiveObject : MonoBehaviour, IInteractiveObject
 {
     //Variables
-    [SerializeField] Interactions interactionType;
+    [SerializeField] private bool m_needsButton;
+    [SerializeField] Interactions m_interactionType;
+    [SerializeField] private InteractionScript m_interactionScript;
+
+    private void Start()
+    {
+        m_interactionScript = GetComponent<InteractionScript>();
+        if (m_interactionScript != null)
+        {
+            print("Igotit)");
+        }
+    }
+
+    public bool GetNeedsButton()
+    {
+        return m_needsButton;
+    }
+
     public void Interact()
     {
-        if (interactionType == Interactions.Print)
-        {
-            print("Hola");
-        }
+        m_interactionScript.Action();
     }
 }
