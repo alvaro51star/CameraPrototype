@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -34,10 +35,6 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private float currentTimeLooked = 0;
 
     #endregion
-
-    
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -120,7 +117,7 @@ public class StalkerBehaviour : MonoBehaviour
             states.Enter();
         }
 
-
+        EventManager.OnTimeAdded?.Invoke(currentTimeLooked, maxTimeLooked);
     }
     #endregion
 

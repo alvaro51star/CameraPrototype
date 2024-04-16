@@ -284,7 +284,7 @@ MonoBehaviour:
   navMesh: {fileID: 0}
   collision: {fileID: 3691916542636007125}
   triggerCollision: {fileID: 1659365039449232602}
-  maxTimeLooked: 2
+  maxTimeLooked: 3
   currentTimeLooked: 0
 --- !u!195 &1631538004331319585
 NavMeshAgent:
@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 7493033308154301942}
   - component: {fileID: 5377671997062482945}
   - component: {fileID: 7806699325591559533}
+  - component: {fileID: 7990854237865562750}
   m_Layer: 6
   m_Name: TimeBar
   m_TagString: Untagged
@@ -617,6 +618,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7990854237865562750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391612708222366937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f754c0918f0d62408a0d0e78bbf9eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  fill: {fileID: 2697096913380047595}
 --- !u!1 &8137234524347746105
 GameObject:
   m_ObjectHideFlags: 0
