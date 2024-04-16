@@ -5,18 +5,26 @@ using UnityEngine.AI;
 
 public class ChaseState : State
 {
-    
+
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private GameObject player;
 
+    public bool enteredAnimation = false;
+
     public override void Enter()
     {
-        //animator.Play("ChaseAnimation");
+        isComplete = false;
+
+        if (enteredAnimation == false)
+        {
+            //animator.Play("ChaseAnimation");
+        }
+        enteredAnimation = true;
     }
 
     public override void Exit()
     {
-        
+        enteredAnimation = false;
     }
 
     public override void Do()
@@ -24,10 +32,15 @@ public class ChaseState : State
         Chase();
     }
 
+    public void SetUp(NavMeshAgent navMeshAgent, GameObject player)
+    {
+        navMesh = navMeshAgent;
+        this.player = player;
+    }
+
     private void Chase()
     {
         navMesh.SetDestination(player.transform.position);
     }
 
-    
 }

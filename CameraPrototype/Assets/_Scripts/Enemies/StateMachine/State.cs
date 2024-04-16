@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class State : MonoBehaviour
 {
-    public bool isComplete { get; protected set; }
+    public bool isComplete  { get; protected set; } = false;
 
     protected float startTime;
 
