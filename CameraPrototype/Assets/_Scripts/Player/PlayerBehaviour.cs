@@ -70,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
         StopInteracting();
         m_interactingObject = null;
     }
+
     private void StopInteracting()
     {
         m_canInteract = false;

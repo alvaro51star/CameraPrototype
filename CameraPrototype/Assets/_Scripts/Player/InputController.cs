@@ -55,7 +55,7 @@ public class InputController : MonoBehaviour
 
     public void OnFocusCamera(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !UIManager.instance.GetIsPauseMenuActive())
         {
             EventManager.OnUsingCamera?.Invoke();
         }
