@@ -50,6 +50,7 @@ public class CameraRollController : MonoBehaviour
         if(availablePhotos <= 0)
         {
             photoCapture.canTakePhoto = true;
+            availablePhotosTMP.color = Color.black;
         }
         availablePhotos += cameraRoll;
         availablePhotos = Mathf.Clamp(availablePhotos, 0, maxPhotos);
