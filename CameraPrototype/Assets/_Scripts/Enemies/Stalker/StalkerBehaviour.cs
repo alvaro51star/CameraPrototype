@@ -35,6 +35,8 @@ public class StalkerBehaviour : MonoBehaviour
 
     #endregion
 
+    
+
 
 
     // Start is called before the first frame update
@@ -117,6 +119,8 @@ public class StalkerBehaviour : MonoBehaviour
             states = chaseState;
             states.Enter();
         }
+
+
     }
     #endregion
 
