@@ -11,6 +11,7 @@ public class ToggleStalkPoints : MonoBehaviour
         if (other.TryGetComponent<StalkPointBehaviour>(out StalkPointBehaviour stalkPoint))
         {
             Debug.Log("Localizao");
+            //TODO comprobar que esté en visión
             stalkPoint.TogglePosition(true);
             StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, true);
         }
