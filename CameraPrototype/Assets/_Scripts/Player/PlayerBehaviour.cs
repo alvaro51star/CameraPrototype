@@ -10,23 +10,30 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         m_interactingObject = other.GetComponent<InteractiveObject>();
-        m_canInteract = true;
-        if (!m_interactingObject.GetNeedsButton())
+        if (m_interactingObject != null)
         {
-            Interaction();
+            m_canInteract = true;
+            if (!m_interactingObject.GetNeedsButton())
+            {
+                Interaction();
+            }
+            else
+            {
+                UIManager.instance.ShowInput(true);
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
         m_canInteract = false;
         m_interactingObject = null;
+        UIManager.instance.ShowInput(false);
     }
 
     public void Interaction()
     {
         if (m_canInteract && m_interactingObject != null)
         {
-            Debug.Log("HI");
             m_interactingObject.Interact();
         }
     }

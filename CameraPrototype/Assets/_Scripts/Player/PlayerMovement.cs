@@ -13,11 +13,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform m_camera;
     public bool m_canWalk = true;
 
+    private void OnEnable()
+    {
+        EventManager.TakingPhoto += CanWalkFalse;
+        EventManager.RemovePhoto += CanWalkTrue;
+        EventManager.IsReading += IsReading;
+        EventManager.StopReading += StopReading;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.TakingPhoto -= CanWalkFalse;
+        EventManager.RemovePhoto -= CanWalkTrue;
+        EventManager.IsReading   -= IsReading;
+        EventManager.StopReading -= StopReading;
+    }
+
     private void Start()
     {
         m_charController = GetComponent<CharacterController>();
-        EventManager.TakingPhoto += CanWalkFalse;
-        EventManager.RemovePhoto += CanWalkTrue;
     }
 
     private void Update()
@@ -27,6 +41,20 @@ public class PlayerMovement : MonoBehaviour
             Movement();
             Rotation();
         }
+    }
+
+    public void IsReading()
+    {
+        CanWalkFalse();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    public void StopReading()
+    {
+        CanWalkTrue();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void CanWalkFalse()

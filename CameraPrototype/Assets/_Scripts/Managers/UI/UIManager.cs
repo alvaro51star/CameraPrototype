@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    //Variables
+    public static UIManager instance;
+
     [SerializeField] private PhotoCapture playerPhotoCapture;
     [Header("Testing:")]
     [SerializeField] private bool mouseLimited;
@@ -15,6 +20,23 @@ public class UIManager : MonoBehaviour
     private bool m_canPause = true;
     [SerializeField] private GameObject endMenu;
     [SerializeField] private GameObject m_cameraUI;
+        //Notes
+    [SerializeField] private GameObject m_notePanel;
+    [SerializeField] private TextMeshProUGUI m_noteText;
+    //Input
+    [SerializeField] private GameObject m_interactInputImage;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -84,8 +106,30 @@ public class UIManager : MonoBehaviour
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
     }
+
     public void LoadSceneMainMenu()
     {
         SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+    }
+
+    //notes
+    public void ActivateNote(string noteText)
+    {
+        m_noteText.text = noteText;
+        m_notePanel.SetActive(true);
+        ShowInput(false);
+    }
+    public void DeactivateNote()
+    {
+        m_noteText.text = " ";
+        m_notePanel.SetActive(false);
+        EventManager.StopReading?.Invoke();
+        ShowInput(true);
+    }
+
+    //Input
+    public void ShowInput(bool mode)
+    {
+        m_interactInputImage.SetActive(mode);
     }
 }

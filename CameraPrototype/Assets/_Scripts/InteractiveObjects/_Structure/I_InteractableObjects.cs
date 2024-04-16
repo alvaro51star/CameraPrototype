@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Interactions
+public interface I_InteractableObjects
 {
-    Print
-}
-public interface IInteractiveObject{
     void Interact();
 }
