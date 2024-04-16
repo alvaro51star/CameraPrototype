@@ -12,8 +12,18 @@ public class ToggleStalkPoints : MonoBehaviour
         {
             Debug.Log("Localizao");
             //TODO comprobar que esté en visión
-            stalkPoint.TogglePosition(true);
-            StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, true);
+
+            Vector3 direction = transform.position - stalkPoint.transform.position;
+            float distance = direction.magnitude;
+            if (Physics.Raycast(transform.position, direction, out RaycastHit ray, distance))
+            {
+                if (ray.transform.TryGetComponent<StalkPointBehaviour>(out StalkPointBehaviour stalkPointBehaviour))
+                {
+                    stalkPoint.TogglePosition(true);
+                    StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, true);
+                }
+            }
+
         }
     }
 
