@@ -5,15 +5,16 @@ using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
+    //[SerializeField] private AudioSource audioSource;
+    [Header("Text variables")]
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
     public bool didDialogueStart;
-
-    //private AudioSource audioSource;
-    //private UIManager uiManager;
+   
     private int lineIndex;
     private string[] dialogueLines;
     private bool isInteractive;
