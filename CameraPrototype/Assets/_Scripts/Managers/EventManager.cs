@@ -1,19 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public static class EventManager
 {
     //Camara
-    public static Action UsingCamera;
-    public static Action NotUsingCamera;
-    public static Action TakingPhoto;
-    public static Action RemovePhoto;
+    public static Action OnUsingCamera;
+    public static Action OnNotUsingCamera;
+    public static Action OnTakingPhoto;
+    public static Action OnRemovePhoto;
 
     //Gato
-    public static Action CatPetted;
-    //
-    public static Action IsReading;
-    public static Action StopReading;
+    public static Action OnCatPetted;
+
+    //Interactions
+    public static Action OnIsReading;
+    public static Action OnStopReading;
+    public static Action<int> OnAddRoll;
+
+    //Enemies
+    public static Action<float> OnTimeAdded;
 }

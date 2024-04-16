@@ -6,10 +6,10 @@ public class Interaction_Key : InteractivePickUp
 {
     //Variables
     [SerializeField] Interaction_Door m_door;
-    public override void Action()
+    public override void Action(GameObject player)
     {
         m_door.UnlockDoor();
         print("abro puerta");
-        base.Action();
+        base.Action(player);
     }
 }

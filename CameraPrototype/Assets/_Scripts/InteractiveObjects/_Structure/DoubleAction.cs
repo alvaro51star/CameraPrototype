@@ -6,7 +6,7 @@ public class DoubleAction : InteractionScript
 {
     //Variables
     protected bool m_firstAction = true;
-    public override void Action()
+    public override void Action(GameObject player)
     {
         if (m_firstAction)
         {

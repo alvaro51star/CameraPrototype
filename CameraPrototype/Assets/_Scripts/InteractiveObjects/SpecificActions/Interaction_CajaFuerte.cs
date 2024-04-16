@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Interaction_CajaFuerte : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Variables
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

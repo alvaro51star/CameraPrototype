@@ -14,12 +14,14 @@ public class CameraRollController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.TakingPhoto += OnTakingPhoto;
+        EventManager.OnTakingPhoto += OnTakingPhoto;
+        EventManager.OnAddRoll += AddRoll;
     }
 
     private void OnDisable()
     {
-        EventManager.TakingPhoto -= OnTakingPhoto;
+        EventManager.OnTakingPhoto -= OnTakingPhoto;
+        EventManager.OnAddRoll -= AddRoll;
     }
     private void Start()
     {
@@ -44,6 +46,7 @@ public class CameraRollController : MonoBehaviour
 
     public void AddRoll(int cameraRoll)
     {
+        print("roll + " + cameraRoll);
         if(availablePhotos <= 0)
         {
             photoCapture.canTakePhoto = true;

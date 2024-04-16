@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     //Variables
     private bool m_canInteract = false;
     private InteractiveObject m_interactingObject;
+
     private void OnTriggerEnter(Collider other)
     {
         m_interactingObject = other.GetComponent<InteractiveObject>();
@@ -34,7 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (m_canInteract && m_interactingObject != null)
         {
-            m_interactingObject.Interact();
+            m_interactingObject.Interact(this.gameObject);
         }
     }
 }

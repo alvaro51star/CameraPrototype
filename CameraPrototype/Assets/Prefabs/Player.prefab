@@ -148,8 +148,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8100681784569480217}
   - component: {fileID: 2592600347508512828}
-  - component: {fileID: 1060018834660487488}
   - component: {fileID: 8894318954006076969}
+  - component: {fileID: 1060018834660487488}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -195,6 +195,23 @@ MonoBehaviour:
   cameraClickClip: {fileID: 8300000, guid: 3d4705b85564a6047b1db0676cf182f8, type: 3}
   noPhotosClip: {fileID: 8300000, guid: 999bd9f014d5f4e4ab17d0a8bf21ed9b, type: 3}
   canTakePhoto: 1
+--- !u!114 &8894318954006076969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photoCapture: {fileID: 2592600347508512828}
+  availablePhotos: 0
+  maxPhotos: 20
+  availablePhotosTMP: {fileID: 0}
+  maxPhotosTMP: {fileID: 0}
 --- !u!82 &1060018834660487488
 AudioSource:
   m_ObjectHideFlags: 0
@@ -291,23 +308,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8894318954006076969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304275377204725996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photoCapture: {fileID: 2592600347508512828}
-  availablePhotos: 0
-  maxPhotos: 20
-  availablePhotosTMP: {fileID: 0}
-  maxPhotosTMP: {fileID: 0}
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,11 +58,11 @@ public class InputController : MonoBehaviour
     {
         if (context.started)
         {
-            EventManager.UsingCamera?.Invoke();
+            EventManager.OnUsingCamera?.Invoke();
         }
         else if (context.canceled)
         {
-            EventManager.NotUsingCamera?.Invoke();
+            EventManager.OnNotUsingCamera?.Invoke();
         }
     }
 }

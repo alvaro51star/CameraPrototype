@@ -8,12 +8,12 @@ public class CatSounds : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.CatPetted += OnCatPetted;
+        EventManager.OnCatPetted += OnCatPetted;
     }
 
     private void OnDisable()
     {
-        EventManager.CatPetted -= OnCatPetted;
+        EventManager.OnCatPetted -= OnCatPetted;
     }
 
     private void OnCatPetted()

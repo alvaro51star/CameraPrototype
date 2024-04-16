@@ -8,14 +8,14 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject CameraUI;
     private void OnEnable()
     {
-        EventManager.UsingCamera += OnUsingCamera;
-        EventManager.NotUsingCamera += OnNotUsingCamera;
+        EventManager.OnUsingCamera += OnUsingCamera;
+        EventManager.OnNotUsingCamera += OnNotUsingCamera;
     }
 
     private void OnDisable()
     {
-        EventManager.UsingCamera -= OnUsingCamera;
-        EventManager.NotUsingCamera -= OnNotUsingCamera;
+        EventManager.OnUsingCamera -= OnUsingCamera;
+        EventManager.OnNotUsingCamera -= OnNotUsingCamera;
     }
 
     private void OnUsingCamera()

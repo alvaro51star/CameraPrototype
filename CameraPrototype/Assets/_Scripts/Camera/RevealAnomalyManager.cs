@@ -6,13 +6,13 @@ public class RevealAnomalyManager : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.TakingPhoto += OnTakingPhoto;
-        EventManager.RemovePhoto += OnRemovePhoto;
+        EventManager.OnTakingPhoto += OnTakingPhoto;
+        EventManager.OnRemovePhoto += OnRemovePhoto;
     }
     private void OnDisable()
     {
-        EventManager.TakingPhoto -= OnTakingPhoto;
-        EventManager.RemovePhoto -= OnRemovePhoto;
+        EventManager.OnTakingPhoto -= OnTakingPhoto;
+        EventManager.OnRemovePhoto -= OnRemovePhoto;
     }
     private void Start()
     {

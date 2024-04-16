@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class InteractionScript : MonoBehaviour
 {
-    public abstract void Action();
+    public abstract void Action(GameObject player);
 }

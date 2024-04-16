@@ -50,7 +50,7 @@ public class PhotoCapture : MonoBehaviour
             
             if (canTakePhoto)
             {
-                EventManager.TakingPhoto?.Invoke();
+                EventManager.OnTakingPhoto?.Invoke();
 
                 StartCoroutine(CapturePhoto());
                 //TestCapturePhoto();
@@ -68,7 +68,7 @@ public class PhotoCapture : MonoBehaviour
         else
         {
             RemovePhoto();
-            EventManager.RemovePhoto?.Invoke();
+            EventManager.OnRemovePhoto?.Invoke();
             m_tookFirstPhoto = false;
         }
     }

@@ -125,7 +125,7 @@ public class UIManager : MonoBehaviour
     {
         m_noteText.text = " ";
         m_notePanel.SetActive(false);
-        EventManager.StopReading?.Invoke();
+        EventManager.OnStopReading?.Invoke();
         ShowInput(true);
     }
 

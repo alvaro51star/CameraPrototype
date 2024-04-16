@@ -18,8 +18,8 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
         return m_needsButton;
     }
 
-    public void Interact()
+    public void Interact(GameObject player)
     {
-        m_interactionScript.Action();
+        m_interactionScript.Action(player);
     }
 }

@@ -15,18 +15,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.TakingPhoto += CanWalkFalse;
-        EventManager.RemovePhoto += CanWalkTrue;
-        EventManager.IsReading += IsReading;
-        EventManager.StopReading += StopReading;
+        EventManager.OnTakingPhoto += CanWalkFalse;
+        EventManager.OnRemovePhoto += CanWalkTrue;
+        EventManager.OnIsReading += IsReading;
+        EventManager.OnStopReading += StopReading;
     }
 
     private void OnDisable()
     {
-        EventManager.TakingPhoto -= CanWalkFalse;
-        EventManager.RemovePhoto -= CanWalkTrue;
-        EventManager.IsReading   -= IsReading;
-        EventManager.StopReading -= StopReading;
+        EventManager.OnTakingPhoto -= CanWalkFalse;
+        EventManager.OnRemovePhoto -= CanWalkTrue;
+        EventManager.OnIsReading   -= IsReading;
+        EventManager.OnStopReading -= StopReading;
     }
 
     private void Start()

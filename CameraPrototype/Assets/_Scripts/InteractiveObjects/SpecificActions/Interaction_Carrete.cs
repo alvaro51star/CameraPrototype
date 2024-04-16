@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractivePickUp : InteractionScript, I_ActivateDeactivate
+public class Interaction_Carrete : InteractivePickUp
 {
     //Variables
+    [SerializeField] int m_carreteAñadido;
     public override void Action(GameObject player)
     {
+        EventManager.OnAddRoll?.Invoke(m_carreteAñadido);
         UIManager.instance.ShowInput(false);
         ChangeActiveMode(gameObject, false);
-    }
-    public void ChangeActiveMode(GameObject gameObjectToDeactivate, bool mode)
-    {
-        gameObjectToDeactivate.SetActive(mode);
     }
 }
