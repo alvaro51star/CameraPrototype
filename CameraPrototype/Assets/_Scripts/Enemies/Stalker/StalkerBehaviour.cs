@@ -97,7 +97,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && currentTimeLooked >= maxTimeLooked)
+        if (other.gameObject.CompareTag("Player") && currentTimeLooked >= maxTimeLooked && !isStunned)
         {
             Debug.Log("Player detectado");
             states = playerCatchState;
