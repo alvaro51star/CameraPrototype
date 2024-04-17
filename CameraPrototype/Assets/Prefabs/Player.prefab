@@ -928,6 +928,10 @@ MonoBehaviour:
   enemy: {fileID: 0}
   maxDistance: 10
   maxAngleVision: 15
+  maxAngleVisionJumpScare: 30
+  timeForNewJumpScare: 20
+  jumpScareSoundEffect: {fileID: 8300000, guid: 189837364385b1f44811c2f191e3d32b,
+    type: 3}
   enemyCatchTp: {fileID: 1446436902641835883}
 --- !u!114 &973116271337381815
 MonoBehaviour:

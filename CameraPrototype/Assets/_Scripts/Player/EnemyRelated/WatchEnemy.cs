@@ -7,20 +7,22 @@ public class WatchEnemy : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private float maxDistance = 5f;
     [SerializeField] private float maxAngleVision = 15f;
+    [SerializeField] private float maxAngleVisionJumpScare = 30f;
+    [SerializeField] private float timeForNewJumpScare = 10f;
+
+    [SerializeField] private AudioClip jumpScareSoundEffect;
+
+    private bool jumpScareOnCD = false;
 
     public Transform enemyCatchTp;
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
-        canSeeEnemy();
+        CanSeeEnemy();
+        JumpScareStalker();
     }
 
-    private void canSeeEnemy()
+    private void CanSeeEnemy()
     {
         if (enemy.layer != default)
         {
@@ -37,5 +39,37 @@ public class WatchEnemy : MonoBehaviour
                 hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
             }
         }
+    }
+
+    private void JumpScareStalker()
+    {
+        Vector3 rayDirection = enemy.transform.position - transform.position;
+        float distance = Vector3.Distance(transform.position, enemy.transform.position);
+        if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance))
+        {
+            float angle = Vector3.Angle(rayDirection, transform.forward);
+            if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)
+            {
+                if (distance <= 5f && !jumpScareOnCD)
+                {
+                    StartCoroutine(JumpScareCD());
+                }
+                else
+                {
+                    if (Random.Range(1, 6) < 3 && !jumpScareOnCD)
+                    {
+                        StartCoroutine(JumpScareCD());
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator JumpScareCD()
+    {
+        jumpScareOnCD = true;
+        AudioManager.Instance.ReproduceSound(jumpScareSoundEffect);
+        yield return new WaitForSeconds(timeForNewJumpScare);
+        jumpScareOnCD = false;
     }
 }
