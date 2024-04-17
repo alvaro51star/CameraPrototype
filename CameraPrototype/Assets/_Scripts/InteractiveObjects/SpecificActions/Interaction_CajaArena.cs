@@ -7,6 +7,7 @@ public class Interaction_CajaArena : AffectsIndirectly
     //Variables
     [SerializeField] protected bool m_appears;
     [SerializeField] private bool m_figurePicked;
+    [SerializeField] private GameObject m_figure;
 
     public override void Action(GameObject player)
     {
@@ -21,6 +22,7 @@ public class Interaction_CajaArena : AffectsIndirectly
         if (m_figurePicked)
         {
             ChangeActiveMode(m_targetObject, m_appears);
+            ChangeActiveMode(m_figure, true);
         }
     }
 
