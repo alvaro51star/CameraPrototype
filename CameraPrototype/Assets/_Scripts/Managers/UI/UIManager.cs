@@ -170,6 +170,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            EventManager.OnIsReading?.Invoke();
             ShowInput(false);
         }
     }

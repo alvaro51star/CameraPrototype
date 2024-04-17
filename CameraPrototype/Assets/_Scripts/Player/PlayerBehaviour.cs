@@ -9,17 +9,22 @@ public class PlayerBehaviour : MonoBehaviour
     private bool m_canInteract = false;
     private InteractiveObject m_interactingObject;
     private bool m_hasCameraEquiped = false;
+    private bool m_isReading;
 
     private void OnEnable()
     {
         EventManager.OnUsingCamera += OnUsingCamera;
         EventManager.OnNotUsingCamera += OnNotUsingCamera;
+        EventManager.OnIsReading += IsReading;
+        EventManager.OnStopReading += StopReading;
     }
 
     private void OnDisable()
     {
         EventManager.OnUsingCamera -= OnUsingCamera;
         EventManager.OnNotUsingCamera -= OnNotUsingCamera;
+        EventManager.OnIsReading -= IsReading;
+        EventManager.OnStopReading -= StopReading;
     }
     
     private void OnNotUsingCamera()
@@ -35,6 +40,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         m_hasCameraEquiped = true;
         StopInteracting();
+    }
+
+    private void IsReading()
+    {
+        m_isReading = true;
+    }
+
+    private void StopReading()
+    {
+        m_isReading = false;
     }
 
     public bool GetCanTakePicture()
@@ -79,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Interaction()
     {
-        if (m_canInteract && m_interactingObject != null)
+        if (m_canInteract && m_interactingObject != null && !m_isReading)
         {
             m_interactingObject.Interact(this.gameObject);
         }

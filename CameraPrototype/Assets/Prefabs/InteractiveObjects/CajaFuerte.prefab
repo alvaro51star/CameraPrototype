@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
 --- !u!114 &5036124179987220680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,11 +198,11 @@ MonoBehaviour:
   m_dissapears: 0
   m_correctCode: 0000
   m_keySounds:
-  - {fileID: 8300000, guid: 965d99869a3734c46893e4e255fb399d, type: 3}
-  - {fileID: 8300000, guid: 942c49accb5f0e0428af99afad138537, type: 3}
-  - {fileID: 8300000, guid: 4ca40b8ba7c20024c837b54092b6b31c, type: 3}
-  - {fileID: 8300000, guid: 83794d4899c706946b0fe02b76611f62, type: 3}
-  m_wrongSound: {fileID: 8300000, guid: c30ba7814108a8740b41ac8e4ea275e9, type: 3}
-  m_rightSound: {fileID: 8300000, guid: 95d1de57d73331a419754d177a13bff2, type: 3}
-  m_safeUnlockSound: {fileID: 8300000, guid: 8544fdad60021554ab99f5b2632e1f61, type: 3}
+  - {fileID: 8300000, guid: 7b05344d8619f704695ea1db426386e4, type: 3}
+  - {fileID: 8300000, guid: 59c00c0da836a9e419b0631e6917e739, type: 3}
+  - {fileID: 8300000, guid: 6fe7b58317f836b4da7eb8312b8a7a99, type: 3}
+  - {fileID: 8300000, guid: 1bcab01a3f95c9a42998d2a9de0a8ea7, type: 3}
+  m_wrongSound: {fileID: 8300000, guid: 7dcd8675f60e43d4a9a7cde87b18494b, type: 3}
+  m_rightSound: {fileID: 8300000, guid: 0310061e5acbc7a4f9169ff19dbb2b23, type: 3}
+  m_safeUnlockSound: {fileID: 8300000, guid: 30355e767b359e746a6bf2b9a1b7e157, type: 3}
   m_safeOpen: {fileID: 8300000, guid: 8b4483d25f493bf4e80c6f6ca1a918e4, type: 3}
