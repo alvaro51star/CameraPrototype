@@ -9,6 +9,8 @@ public class PlayerCatchState : State
     private GameObject player;
     private GameObject enemy;
 
+    [SerializeField] private AudioClip jumpScareSound;
+
     UIManager uiManager;
 
     public override void Enter()
@@ -41,6 +43,7 @@ public class PlayerCatchState : State
         navMesh.isStopped = true;
         navMesh.velocity = Vector3.zero;
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        AudioManager.Instance.ReproduceSound(jumpScareSound);
         animator.Play("Kill");
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return new WaitForSeconds(1.5f);

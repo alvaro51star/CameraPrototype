@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd00a805b8af474582a5ebe822952a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8324941161663551707}
+  animator: {fileID: 0}
   enemy: {fileID: 1829624780751140221}
   objectMesh: {fileID: 7728619579183819350}
   currentTime: 0
@@ -568,7 +568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e707bccd2bb4cd449e791ff90a6eea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8324941161663551707}
+  animator: {fileID: 0}
+  jumpScareSound: {fileID: 8300000, guid: 2897aa95f29a4414cba79438d6638617, type: 3}
 --- !u!1 &7391612708222366937
 GameObject:
   m_ObjectHideFlags: 0
