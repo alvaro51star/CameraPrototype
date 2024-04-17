@@ -22,12 +22,10 @@ public class DoubleAction : InteractionScript
     protected virtual void FirstAction()
     {
         m_firstAction = false;
-        print("FirstAction");
     }
 
     protected virtual void SecondActon()
     {
         m_firstAction = true;
-        print("SecondAction");
     }
 }

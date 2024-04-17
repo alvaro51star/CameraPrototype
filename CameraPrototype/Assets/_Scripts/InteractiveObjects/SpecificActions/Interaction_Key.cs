@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction_Key : InteractivePickUp
+public class Interaction_Key : AffectsIndirectly
 {
-    //Variables
-    [SerializeField] Interaction_Door m_door;
-    public override void Action(GameObject player)
+    protected override void FirstAction()
     {
-        m_door.UnlockDoor();
-        print("abro puerta");
-        base.Action(player);
+        Interaction_Door door = m_targetObject.GetComponent<Interaction_Door>();
+        door?.UnlockDoor();
+        print("funciono");
     }
 }
