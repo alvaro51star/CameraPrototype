@@ -38,10 +38,7 @@ public class PhotoCapture : MonoBehaviour
                               UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
         //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla        
     }
-    private void Update()
-    {
-        Debug.Log(canTakePhoto);
-    }
+
     public void TakePhoto()
     {
         m_tookFirstPhoto = true;
