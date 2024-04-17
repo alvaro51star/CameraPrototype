@@ -20,7 +20,8 @@ public class UIManager : MonoBehaviour
     private bool m_canPause = true;
     [SerializeField] private GameObject endMenu;
     [SerializeField] private GameObject m_cameraUI;
-        //Notes
+    [SerializeField] private GameObject m_controls;
+    //Notes
     [SerializeField] private GameObject m_notePanel;
     [SerializeField] private TextMeshProUGUI m_noteText;
     //Input
@@ -135,4 +136,19 @@ public class UIManager : MonoBehaviour
     {
         m_interactInputImage.SetActive(mode);
     }
+
+    public void controls()
+    {
+        m_controls.SetActive(true);
+        m_cameraUI.SetActive(false);
+        playerPhotoCapture.enabled = false;
+        pauseMenu.SetActive(false);
+
+        if (mouseLimited)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+    }
+
 }
