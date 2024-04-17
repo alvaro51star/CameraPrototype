@@ -9715,6 +9715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5c96b567226fd4648b9cef2fcb1d2c07,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c96b567226fd4648b9cef2fcb1d2c07,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -18033,6 +18038,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1631538004331319585, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_BaseOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1645945226976980357, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_Enabled
@@ -18051,8 +18061,14 @@ PrefabInstance:
     - target: {fileID: 1829624780751140221, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3200292740505092337, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: stunnedAnimation
+      value: 
+      objectReference: {fileID: -203655887218126122, guid: b742490e7088bb345b8131b7d239a956,
+        type: 3}
     - target: {fileID: 3691916542636007125, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_Enabled
@@ -26842,7 +26858,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1569882514
@@ -26860,7 +26876,7 @@ MonoBehaviour:
   uiManager: {fileID: 880958709}
   objectMesh: {fileID: 1569882518}
   player: {fileID: 152173181}
-  animator: {fileID: 1569882516}
+  animator: {fileID: 0}
   stalkState: {fileID: 2003581995}
   stunnedState: {fileID: 1089239150}
   chaseState: {fileID: 234692116}
@@ -26892,12 +26908,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &1569882516 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5c96b567226fd4648b9cef2fcb1d2c07,
-    type: 3}
-  m_PrefabInstance: {fileID: 475317087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1569882517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5c96b567226fd4648b9cef2fcb1d2c07,

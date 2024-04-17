@@ -14,7 +14,7 @@ public class StunnedState : State
 
     public override void Enter()
     {
-        maxTimeStunned = stunnedAnimation.length;
+        //maxTimeStunned = stunnedAnimation.length;
         animator.Play("Stun");
         currentTime = 0f;
         isComplete = false;
