@@ -25,11 +25,12 @@ public class PlayerCatchState : State
         
     }
 
-    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, UIManager uiManager)
+    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, UIManager uiManager, Animator animator)
     {
         this.navMesh = navMeshAgent;
         this.player = player;
         this.uiManager = uiManager;
+        this.animator = animator;
     }
 
     private IEnumerator CatchPlayer(GameObject player)
