@@ -45,7 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         m_interactingObject = other.GetComponent<InteractiveObject>();
-        if (m_interactingObject != null && !m_hasCameraEquiped)
+        if (m_interactingObject != null && !m_hasCameraEquiped && m_interactingObject.gameObject.layer != 6 && m_interactingObject.gameObject.layer != 7)
         {
             IsBesideInteractableObject();
         }
