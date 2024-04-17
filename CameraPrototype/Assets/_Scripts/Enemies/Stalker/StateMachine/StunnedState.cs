@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class StunnedState : State
 {
-    private NavMeshAgent navMesh;
+    [SerializeField] private NavMeshAgent navMesh;
 
     [SerializeField] private AnimationClip stunnedAnimation;
 
