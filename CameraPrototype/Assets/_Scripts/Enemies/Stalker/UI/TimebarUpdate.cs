@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class TimebarUpdate : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private Image fill;
+
+    [SerializeField] private float currentTimeLooked;
 
     private void OnEnable()
     {
@@ -16,6 +18,11 @@ public class NewBehaviourScript : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnTimeAdded -= UpdateBar;
+    }
+
+    private void Start()
+    {
+        fill.fillAmount = 0;
     }
 
     // Update is called once per frame
