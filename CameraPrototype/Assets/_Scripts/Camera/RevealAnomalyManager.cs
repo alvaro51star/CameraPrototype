@@ -43,7 +43,7 @@ public class RevealAnomalyManager : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            //other.GetComponent<StalkerBehaviour>().StunEnemy();
+            other.GetComponent<StalkerBehaviour>().StunEnemy();
         }
     }    
 
