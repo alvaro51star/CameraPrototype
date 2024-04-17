@@ -5384,9 +5384,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Movimiento: WASD\nCorrer: Shift Izquierdo\nSacar c\xE1mara: Bot\xF3n Derecho
-    (rat\xF3n)\nSacar foto: Bot\xF3n Izquierdo (rat\xF3n)\nInteractuar: E\nMen\xFA
-    de Pausa: ESC"
+  m_text: 'Movement: WASD
+
+    Run: Left Shift
+
+    Take out camera: Right Mouse
+    Button
+
+    Take a photo: Left Mouse Button
+
+    Interact: E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
