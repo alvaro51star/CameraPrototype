@@ -24,4 +24,8 @@ public class GameManager : MonoBehaviour
     {
         GUIUtility.systemCopyBuffer = str;
     }
+
+    private void OnApplicationQuit() {
+        
+    }
 }

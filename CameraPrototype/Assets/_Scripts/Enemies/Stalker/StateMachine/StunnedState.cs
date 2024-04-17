@@ -36,8 +36,9 @@ public class StunnedState : State
     }
 
 
-    public void SetUp(NavMeshAgent navMesh)
+    public void SetUp(NavMeshAgent navMesh, Animator animator)
     {
         this.navMesh = navMesh;
+        this.animator = animator;
     }
 }

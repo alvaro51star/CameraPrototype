@@ -53,9 +53,10 @@ public class StalkState : State
         currentTime = 0;
     }
 
-    public void SetUp(GameObject enemy, Renderer objectMesh)
+    public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator)
     {
         this.enemy = enemy;
         this.objectMesh = objectMesh;
+        this.animator = animator;
     }
 }

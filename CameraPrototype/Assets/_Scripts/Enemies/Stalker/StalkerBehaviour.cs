@@ -14,6 +14,8 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private Renderer objectMesh;
     [SerializeField] private GameObject player;
 
+    [SerializeField] private Animator animator;
+
     [Header("States")]
     State states;
     public StalkState stalkState;
@@ -42,10 +44,10 @@ public class StalkerBehaviour : MonoBehaviour
         navMesh = GetComponent<NavMeshAgent>();
 
         //Set ups de los estados
-        stalkState.SetUp(gameObject, objectMesh);
-        stunnedState.SetUp(navMesh);
-        chaseState.SetUp(navMesh, player);
-        playerCatchState.SetUp(navMesh, player, uiManager);
+        stalkState.SetUp(gameObject, objectMesh, animator);
+        stunnedState.SetUp(navMesh, animator);
+        chaseState.SetUp(navMesh, player, animator);
+        playerCatchState.SetUp(navMesh, player, uiManager, animator);
 
 
         states = stalkState;
@@ -102,7 +104,7 @@ public class StalkerBehaviour : MonoBehaviour
         }
     }
 
-    
+
 
     #region StalkBehaviour
 

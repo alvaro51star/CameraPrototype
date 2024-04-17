@@ -32,10 +32,11 @@ public class ChaseState : State
         Chase();
     }
 
-    public void SetUp(NavMeshAgent navMeshAgent, GameObject player)
+    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, Animator animator)
     {
         navMesh = navMeshAgent;
         this.player = player;
+        this.animator = animator;
     }
 
     private void Chase()
