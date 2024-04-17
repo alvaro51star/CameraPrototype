@@ -15,7 +15,7 @@ public class StunnedState : State
     public override void Enter()
     {
         maxTimeStunned = stunnedAnimation.length;
-        //TODO animator.Play("StunnedAnimation");
+        animator.Play("Stun");
         currentTime = 0f;
         isComplete = false;
         navMesh.isStopped = true;
