@@ -26,8 +26,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_noteText;
     //Input
     [SerializeField] private GameObject m_interactInputImage;
-
+    //Dialogue
     public GameObject dialoguePanel;
+    //puzles
+    //CajaFuerte
+    [SerializeField] private GameObject m_safePanel;
+    [SerializeField] private GameObject m_redLight;
+    [SerializeField] private GameObject m_greenLight;
+    [SerializeField] private TextMeshProUGUI m_safeNumberText;
 
     private void Awake()
     {
@@ -137,7 +143,7 @@ public class UIManager : MonoBehaviour
         m_interactInputImage.SetActive(mode);
     }
 
-    public void controls()
+    public void Controls()
     {
         m_controls.SetActive(true);
         m_cameraUI.SetActive(false);
@@ -151,4 +157,47 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //puzles
+    //Caja fuerte
+
+    public void ShowSafe(bool mode)
+    {
+        m_safePanel.SetActive(mode);
+        if (!mode)
+        {
+            EventManager.OnStopReading?.Invoke();
+            ShowInput(true);
+        }
+        else
+        {
+            ShowInput(false);
+        }
+    }
+
+    public void ShowLight(bool mode, bool redLight)
+    {
+        if (mode)
+        {
+            if (redLight)
+            {
+                m_redLight.SetActive(true);
+                m_greenLight.SetActive(false);
+            }
+            else
+            {
+                m_redLight.SetActive(false);
+                m_greenLight.SetActive(true);
+            }
+        }
+        else
+        {
+            m_redLight.SetActive(false);
+            m_greenLight.SetActive(false);
+        }
+    }
+
+    public void ChangeCodeDisplay(string num)
+    {
+        m_safeNumberText.text = num;
+    }
 }
