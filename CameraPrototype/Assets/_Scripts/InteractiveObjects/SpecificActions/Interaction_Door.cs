@@ -8,6 +8,10 @@ public class Interaction_Door : DoubleAction
     [SerializeField] private Animator m_animator;
     [SerializeField] private bool m_isLocked;
 
+    private void Start()
+    {
+        //m_animator = GetComponent<Animator>
+    }
     protected override void FirstAction()
     {
         if (m_isLocked)
