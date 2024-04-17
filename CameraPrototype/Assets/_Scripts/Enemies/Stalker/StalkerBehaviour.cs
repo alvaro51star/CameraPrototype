@@ -25,6 +25,7 @@ public class StalkerBehaviour : MonoBehaviour
 
 
     public bool isVisible = false;
+    public bool isStunned = false;
 
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private Collider collision;
@@ -44,10 +45,10 @@ public class StalkerBehaviour : MonoBehaviour
         navMesh = GetComponent<NavMeshAgent>();
 
         //Set ups de los estados
-        stalkState.SetUp(gameObject, objectMesh, animator);
-        stunnedState.SetUp(navMesh, animator);
-        chaseState.SetUp(navMesh, player, animator);
-        playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject);
+        stalkState.SetUp(gameObject, objectMesh, animator, this);
+        stunnedState.SetUp(navMesh, animator, this);
+        chaseState.SetUp(navMesh, player, animator, this);
+        playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
 
 
         states = stalkState;
@@ -110,6 +111,11 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void AddVision(float deltaTime)
     {
+        if (isStunned)
+        {
+            return;
+        }
+
         Debug.Log($"Time looked = {currentTimeLooked}");
         currentTimeLooked += deltaTime;
 
@@ -132,7 +138,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void StunEnemy()
     {
-        //isStunned = true;
+        isStunned = true;
         states = stunnedState;
         states.Enter();
     }

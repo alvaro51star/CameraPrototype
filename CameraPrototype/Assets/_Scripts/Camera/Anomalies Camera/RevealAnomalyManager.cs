@@ -21,7 +21,7 @@ public class RevealAnomalyManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //necesario que las anomalias tengan Rigid Body y Collider
-        if (other.gameObject.GetComponent<AnomaliesData>())
+        if (other.gameObject.GetComponent<AnomaliesData>() && other.gameObject.GetComponent<AnomaliesData>().enabled)
         {
             Vector3 directionRayCast = (other.GetComponent<Renderer>().bounds.center - transform.position).normalized;
             RaycastHit hit;
@@ -41,7 +41,7 @@ public class RevealAnomalyManager : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<AnomaliesData>().enabled)
         {
             other.GetComponent<StalkerBehaviour>().StunEnemy();
         }

@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 7131918987698065131}
   - component: {fileID: 2054462419731427599}
   - component: {fileID: 8636441088171959244}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AnomaliesRadar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

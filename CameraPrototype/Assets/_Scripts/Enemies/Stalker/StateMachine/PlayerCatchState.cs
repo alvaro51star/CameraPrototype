@@ -18,7 +18,7 @@ public class PlayerCatchState : State
 
     public override void Exit()
     {
-
+        isComplete = false;
     }
 
     public override void Do()
@@ -26,25 +26,26 @@ public class PlayerCatchState : State
 
     }
 
-    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, UIManager uiManager, Animator animator, GameObject enemy)
+    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, UIManager uiManager, Animator animator, GameObject enemy, StalkerBehaviour stalkerBehaviour)
     {
         this.navMesh = navMeshAgent;
         this.player = player;
         this.uiManager = uiManager;
         this.animator = animator;
         this.enemy = enemy;
+        this.stalkerBehaviour = stalkerBehaviour;
     }
 
     private IEnumerator CatchPlayer(GameObject player)
     {
         navMesh.isStopped = true;
         navMesh.velocity = Vector3.zero;
-        transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
         animator.Play("Kill");
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return new WaitForSeconds(1.5f);
         //EndGame
-        GameManager.Instance.CopyTimeToClipboard();
+        //GameManager.Instance.CopyTimeToClipboard();
         uiManager.ActivateEndMenu();
     }
 }

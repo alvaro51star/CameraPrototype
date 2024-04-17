@@ -25,6 +25,7 @@ public class ChaseState : State
     public override void Exit()
     {
         enteredAnimation = false;
+        isComplete = false;
     }
 
     public override void Do()
@@ -32,11 +33,12 @@ public class ChaseState : State
         Chase();
     }
 
-    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, Animator animator)
+    public void SetUp(NavMeshAgent navMeshAgent, GameObject player, Animator animator, StalkerBehaviour stalkerBehaviour)
     {
         navMesh = navMeshAgent;
         this.player = player;
         this.animator = animator;
+        this.stalkerBehaviour = stalkerBehaviour;
     }
 
     private void Chase()

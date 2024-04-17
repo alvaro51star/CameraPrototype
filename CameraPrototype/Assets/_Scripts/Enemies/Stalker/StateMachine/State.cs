@@ -11,7 +11,7 @@ public abstract class State : MonoBehaviour
 
     public float time => Time.time - startTime;
 
-    protected Animator animator;
+    public Animator animator;
 
     protected StalkerBehaviour stalkerBehaviour;
 

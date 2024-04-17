@@ -15,9 +15,10 @@ public class StunnedState : State
     public override void Enter()
     {
         //maxTimeStunned = stunnedAnimation.length;
+        //stalkerBehaviour.isStunned = true;
+        isComplete = false;
         animator.Play("Stun");
         currentTime = 0f;
-        isComplete = false;
         navMesh.isStopped = true;
     }
 
@@ -33,12 +34,15 @@ public class StunnedState : State
     public override void Exit()
     {
         navMesh.isStopped = false;
+        isComplete = false;
+        stalkerBehaviour.isStunned = false;
     }
 
 
-    public void SetUp(NavMeshAgent navMesh, Animator animator)
+    public void SetUp(NavMeshAgent navMesh, Animator animator, StalkerBehaviour stalkerBehaviour)
     {
         this.navMesh = navMesh;
         this.animator = animator;
+        this.stalkerBehaviour = stalkerBehaviour;
     }
 }

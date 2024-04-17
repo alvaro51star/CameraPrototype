@@ -19,7 +19,7 @@ public class StalkState : State
 
     public override void Exit()
     {
-        
+        isComplete = false;
     }
 
     public override void Do()
@@ -53,10 +53,11 @@ public class StalkState : State
         currentTime = 0;
     }
 
-    public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator)
+    public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator, StalkerBehaviour stalkerBehaviour)
     {
         this.enemy = enemy;
         this.objectMesh = objectMesh;
         this.animator = animator;
+        this.stalkerBehaviour = stalkerBehaviour;
     }
 }

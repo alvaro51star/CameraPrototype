@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00085241604, g: 0.003611387, b: 0.0064444034, a: 1}
+  m_IndirectSpecularColor: {r: 0.0008525523, g: 0.0036115542, b: 0.006444635, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5100,6 +5100,21 @@ PrefabInstance:
       propertyPath: m_photoCapture
       value: 
       objectReference: {fileID: 1479721960}
+    - target: {fileID: 1080576186868286945, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1446436902641835883, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.471
+      objectReference: {fileID: 0}
+    - target: {fileID: 1446436902641835883, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.369
+      objectReference: {fileID: 0}
     - target: {fileID: 2304275377204725996, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_IsActive
@@ -5160,6 +5175,11 @@ PrefabInstance:
       propertyPath: m_uiManager
       value: 
       objectReference: {fileID: 880958709}
+    - target: {fileID: 7131918987698065131, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: anomalyRadarUI
+      value: 
+      objectReference: {fileID: 915555783}
     - target: {fileID: 8894318954006076969, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: maxPhotos
@@ -5456,6 +5476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0f2f96996ed6746946ac3ffd25d423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   navMesh: {fileID: 0}
   player: {fileID: 0}
   enteredAnimation: 0
@@ -16484,6 +16505,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &915555783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7176293010101081550, guid: eb661e1f3c148c94d9c1e2446d29274f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1005787305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &925486100
 Mesh:
   m_ObjectHideFlags: 0
@@ -18033,6 +18060,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1727401593}
     m_Modifications:
+    - target: {fileID: 1028197911189958791, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 152173181}
+    - target: {fileID: 1028197911189958791, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: navMesh
+      value: 
+      objectReference: {fileID: 979886996}
+    - target: {fileID: 1028197911189958791, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 979886987}
     - target: {fileID: 1631538004331319585, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_Enabled
@@ -18041,7 +18083,7 @@ PrefabInstance:
     - target: {fileID: 1631538004331319585, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_BaseOffset
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1645945226976980357, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
@@ -18065,6 +18107,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3200292740505092337, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 979886987}
+    - target: {fileID: 3200292740505092337, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
       propertyPath: stunnedAnimation
       value: 
       objectReference: {fileID: -203655887218126122, guid: b742490e7088bb345b8131b7d239a956,
@@ -18074,6 +18121,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4521408614634366248, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 979886987}
+    - target: {fileID: 4521408614634366248, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: objectMesh
+      value: 
+      objectReference: {fileID: 979886999}
     - target: {fileID: 5344141134764701389, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: m_UseGravity
@@ -18159,6 +18216,16 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 880958709}
+    - target: {fileID: 7198676210993295849, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.997
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173929886800728489, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 979886987}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18204,6 +18271,18 @@ Animator:
 --- !u!136 &979886993 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 3691916542636007125, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+    type: 3}
+  m_PrefabInstance: {fileID: 979886976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &979886996 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1631538004331319585, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+    type: 3}
+  m_PrefabInstance: {fileID: 979886976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &979886999 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7728619579183819350, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
     type: 3}
   m_PrefabInstance: {fileID: 979886976}
   m_PrefabAsset: {fileID: 0}
@@ -20177,6 +20256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c6afa0bb6f01a84986a885d72116c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   stunnedAnimation: {fileID: -203655887218126122, guid: b742490e7088bb345b8131b7d239a956,
     type: 3}
   maxTimeStunned: 3
@@ -26882,6 +26962,7 @@ MonoBehaviour:
   chaseState: {fileID: 234692116}
   playerCatchState: {fileID: 2072074528}
   isVisible: 0
+  isStunned: 0
   navMesh: {fileID: 0}
   collision: {fileID: 1569882510}
   triggerCollision: {fileID: 1569882515}
@@ -46823,6 +46904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd00a805b8af474582a5ebe822952a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   objectMesh: {fileID: 0}
   currentTime: 0
   timeBeforeChangingPoint: 5
@@ -47524,6 +47606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e707bccd2bb4cd449e791ff90a6eea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!43 &2090548967
 Mesh:
   m_ObjectHideFlags: 0
