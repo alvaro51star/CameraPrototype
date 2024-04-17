@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8324941161663551707}
+  enemy: {fileID: 1829624780751140221}
   objectMesh: {fileID: 7728619579183819350}
   currentTime: 0
   timeBeforeChangingPoint: 5

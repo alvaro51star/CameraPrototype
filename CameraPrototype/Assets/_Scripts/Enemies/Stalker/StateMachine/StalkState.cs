@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StalkState : State
 {
-    private GameObject enemy;
+    [SerializeField] private GameObject enemy;
     [SerializeField] private Renderer objectMesh;
 
     public float currentTime;
