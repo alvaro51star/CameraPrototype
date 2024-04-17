@@ -47,7 +47,7 @@ public class StalkerBehaviour : MonoBehaviour
         stalkState.SetUp(gameObject, objectMesh, animator);
         stunnedState.SetUp(navMesh, animator);
         chaseState.SetUp(navMesh, player, animator);
-        playerCatchState.SetUp(navMesh, player, uiManager, animator);
+        playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject);
 
 
         states = stalkState;
