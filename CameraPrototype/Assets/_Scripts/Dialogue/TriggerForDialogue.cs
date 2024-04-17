@@ -7,7 +7,6 @@ using UnityEngine;
 public class TriggerForDialogue : MonoBehaviour
 {
     [SerializeField] private DialogueController dialogueController;
-    [SerializeField] private bool isInteractive;
 
     [TextArea(2, 4)] public string[] textLines;// 2 = minNumLineas, 6 = maxNumLineas
 
@@ -15,19 +14,22 @@ public class TriggerForDialogue : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!dialogueController.didDialogueStart && !isInteractive)
+            if (!dialogueController.didDialogueStart)
             {
-                dialogueController.StartDialogue(textLines, isInteractive, gameObject);
+                dialogueController.StartDialogue(textLines, gameObject);
                 Debug.Log("Start dialogue");
             }
         }
     }
 
-    private void OnTriggerStay(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E) && !dialogueController.didDialogueStart && isInteractive)
+        if (other.gameObject.CompareTag("Player"))
         {
-            dialogueController.StartDialogue(textLines, isInteractive, gameObject);
+            if (dialogueController.didDialogueStart)
+            {
+                this.gameObject.SetActive(false); //para que no vuelva a saltar el trigger           
+            }
         }
     }
 }

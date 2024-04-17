@@ -10,6 +10,7 @@ public class DialogueController : MonoBehaviour
     [Header("Text variables")]
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
+    [SerializeField] private float nexLineTime;
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
@@ -17,7 +18,6 @@ public class DialogueController : MonoBehaviour
    
     private int lineIndex;
     private string[] dialogueLines;
-    private bool isInteractive;
     private GameObject activeTrigger;
     private void Awake()
     {
@@ -30,22 +30,20 @@ public class DialogueController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Start()
+
+    public void StartDialogue(string[] textLines, GameObject trigger)
     {
-        //uiManager = GetComponent<UIManager>();
-        //audioSource = GetComponent<AudioSource>();
-    }
-    public void StartDialogue(string[] textLines, bool _isInteractive, GameObject trigger)
-    {
-        isInteractive = _isInteractive;
         activeTrigger = trigger;
         /*
-        uiManager.IsInGame(false);
-        uiManager.DesactivateAllUIGameObjects();
+        uiManager.IsInGame(false); // parar interacciones
+        uiManager.DesactivateAllUIGameObjects(); //desactivar UI (ya lo ha hecho miriam)
         SoundManager.instance.ReproduceSound(AudioClipsNames.Pop, audioSource);
-        uiManager.ActivateUIGameObjects(uiManager.dialoguePanel, true);
+        uiManager.ActivateUIGameObjects(uiManager.dialoguePanel, true); //activar ui dialogo
         
         uiManager.dialoguePanel.SetActive(true);*/
+
+        uiManager.dialoguePanel.SetActive(true);
+
         didDialogueStart = true;
         dialogueLines = textLines;
         lineIndex = 0;
@@ -55,13 +53,10 @@ public class DialogueController : MonoBehaviour
     {
         didDialogueStart = false;
         /*
-        uiManager.DesactivateAllUIGameObjects();
-        uiManager.IsInGame(true);
+        uiManager.DesactivateAllUIGameObjects(); //desactivar ui dialogo
+        uiManager.IsInGame(true); //meter interaccion
         */
-        if (!isInteractive)
-        {
-            Destroy(activeTrigger);
-        }
+        uiManager.dialoguePanel.SetActive(false);
     }
     private IEnumerator ShowLine()
     {
@@ -71,6 +66,9 @@ public class DialogueController : MonoBehaviour
             dialogueText.text += ch;
             yield return new WaitForSecondsRealtime(typingTime);
         }
+
+        yield return new WaitForSecondsRealtime(nexLineTime);
+        NextDialogueLine();
     }
     public void NextDialogueLine()
     {
