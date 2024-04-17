@@ -68,5 +68,7 @@ public class AnomaliesData : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
+        this.enabled = false;
     }
 }
