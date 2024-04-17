@@ -11,7 +11,7 @@ public class PlayerCatchState : State
 
     [SerializeField] private AudioClip jumpScareSound;
 
-    UIManager uiManager;
+    [SerializeField] private UIManager uiManager;
 
     public override void Enter()
     {
