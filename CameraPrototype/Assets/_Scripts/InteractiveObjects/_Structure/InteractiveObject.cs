@@ -7,6 +7,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     //Variables
     [SerializeField] private bool m_needsButton;
     [SerializeField] private InteractionScript m_interactionScript;
+    [SerializeField] private AudioClip m_interactSound;
 
     private void Start()
     {
@@ -21,5 +22,6 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     public void Interact(GameObject player)
     {
         m_interactionScript.Action(player);
+        AudioManager.Instance.ReproduceSound(m_interactSound);
     }
 }

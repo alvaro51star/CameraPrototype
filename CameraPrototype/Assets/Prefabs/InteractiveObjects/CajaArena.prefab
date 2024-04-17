@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
 --- !u!114 &5594875329717649240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +118,7 @@ MonoBehaviour:
   m_appears: 1
   m_figurePicked: 0
   m_figure: {fileID: 5661576950487176082}
+  m_arenaSound: {fileID: 8300000, guid: 455c37dd56971a84692bf34a77c8108b, type: 3}
 --- !u!1 &2598613212580722960
 GameObject:
   m_ObjectHideFlags: 0
