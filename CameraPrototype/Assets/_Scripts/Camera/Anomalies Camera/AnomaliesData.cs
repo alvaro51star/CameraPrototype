@@ -15,10 +15,10 @@ public class AnomaliesData : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Anomalies");
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Anomalies"));
             //Para hacer todos los hijos
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies");
-            // }
+             for (int i = 0; i < transform.childCount; i++)
+             {
+                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies");
+             }
 
             if (GetComponent<StalkerBehaviour>())
             {
@@ -33,10 +33,10 @@ public class AnomaliesData : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer("Anomalies2");
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Anomalies2"));
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies2");
-            // }
+             for (int i = 0; i < transform.childCount; i++)
+             {
+                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies2");
+             }
         }
     }
 
@@ -51,10 +51,10 @@ public class AnomaliesData : MonoBehaviour
 
             gameObject.layer = LayerMask.NameToLayer("Default");
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
-            // }
+             for (int i = 0; i < transform.childCount; i++)
+             {
+                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
+             }
             if (GetComponent<StalkerBehaviour>())
             {
                 GetComponent<StalkerBehaviour>().enabled = true;
