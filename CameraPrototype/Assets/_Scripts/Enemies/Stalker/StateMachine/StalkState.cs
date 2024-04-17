@@ -13,7 +13,7 @@ public class StalkState : State
     public override void Enter()
     {
         currentTime = 0f;
-        //animator.Play("ChaseAnimation");
+        animator.Play("Idle");
         isComplete = false;
     }
 

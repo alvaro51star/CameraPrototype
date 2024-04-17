@@ -17,7 +17,7 @@ public class ChaseState : State
 
         if (enteredAnimation == false)
         {
-            //animator.Play("ChaseAnimation");
+            animator.Play("Run");
         }
         enteredAnimation = true;
     }
