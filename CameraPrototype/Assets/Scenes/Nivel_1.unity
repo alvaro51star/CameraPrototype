@@ -13735,6 +13735,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 958987538}
+    - target: {fileID: 8995647910752376247, guid: 8b374daae33f30342b9d9c7fc081b092,
+        type: 3}
+      propertyPath: m_Name
+      value: Puertas (boceto)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995647910752376247, guid: 8b374daae33f30342b9d9c7fc081b092,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9002476564935366243, guid: 8b374daae33f30342b9d9c7fc081b092,
         type: 3}
       propertyPath: m_IsActive
@@ -29746,6 +29756,11 @@ PrefabInstance:
       propertyPath: anomalyRadarUI
       value: 
       objectReference: {fileID: 194193634}
+    - target: {fileID: 8894318954006076969, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: maxPhotos
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8894318954006076969, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: maxPhotosTMP
