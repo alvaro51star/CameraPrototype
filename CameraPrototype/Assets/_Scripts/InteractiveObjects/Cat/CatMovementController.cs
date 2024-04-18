@@ -35,6 +35,7 @@ public class CatMovementController : MonoBehaviour
             else
             {
                 this.enabled = false;
+                this.gameObject.GetComponent<InteractiveObject>().enabled = false;
             }
         }        
     }
