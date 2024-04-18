@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform m_camera;
     public bool m_canWalk = true;
 
+    //gravity
+    [SerializeField] private float m_gravity = 9.8f;
+    [SerializeField] private float m_terminalVelocity;
+    private float m_verticalVelocity;
+
+
     private void OnEnable()
     {
         EventManager.OnTakingPhoto += CanWalkFalse;
@@ -36,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!m_charController.isGrounded)
+        {
+            ApplyGravity();
+        }
         if (m_canWalk)
         {
             Movement();
@@ -89,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
         movement.Normalize();
 
-        m_charController.Move(movement *(m_speed * Time.deltaTime));
+        m_charController.Move(movement *(m_speed * Time.deltaTime) + Vector3.up * (m_verticalVelocity * Time.deltaTime));
     }
     
     private void Rotation()
@@ -116,5 +126,14 @@ public class PlayerMovement : MonoBehaviour
         cameraRotation = new Vector3(Mathf.Clamp(angleTransfomation, -m_upDownRange, m_upDownRange), 0, 0);
 
         m_camera.localEulerAngles = cameraRotation;
+    }
+
+    private void ApplyGravity()
+    {
+        m_verticalVelocity -= m_gravity * Time.deltaTime;
+        if (m_verticalVelocity <= -m_terminalVelocity)
+        {
+            m_verticalVelocity = -m_terminalVelocity;
+        }
     }
 }

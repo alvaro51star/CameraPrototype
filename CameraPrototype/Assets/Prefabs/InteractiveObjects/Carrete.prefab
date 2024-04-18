@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_targetObject: {fileID: 0}
-  m_dissapears: 0
-  m_rollAdded: 0
+  m_dissapears: 1
+  m_rollAdded: 1
 --- !u!1 &7619448738428849251
 GameObject:
   m_ObjectHideFlags: 0

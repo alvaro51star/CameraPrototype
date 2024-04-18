@@ -913,6 +913,8 @@ MonoBehaviour:
   m_upDownRange: 60
   m_camera: {fileID: 1932318058781030498}
   m_canWalk: 1
+  m_gravity: 9.8
+  m_terminalVelocity: 0
 --- !u!114 &4666557413774929715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,7 +968,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 2, z: 3}
+  m_Size: {x: 3, y: 3.71, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8477173990252478856
 MonoBehaviour:

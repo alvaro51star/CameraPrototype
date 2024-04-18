@@ -16857,6 +16857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 0}
 --- !u!65 &1048559687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43412,16 +43413,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrete
       objectReference: {fileID: 0}
-    - target: {fileID: 8056918256493050061, guid: 9333e1ae6538a334087ecf95b25101fd,
-        type: 3}
-      propertyPath: m_rollAdded
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8056918256493050061, guid: 9333e1ae6538a334087ecf95b25101fd,
-        type: 3}
-      propertyPath: m_dissapears
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43624,6 +43615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 0}
 --- !u!1001 &8356019191148970003
 PrefabInstance:
   m_ObjectHideFlags: 0
