@@ -114,10 +114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 0}
-  m_isLocked: 1
+  m_isLocked: 0
   m_doorOpen: {fileID: 8300000, guid: dd33ebfa73217674580798aa6fa44fdc, type: 3}
   m_doorClose: {fileID: 8300000, guid: 9c00be4baaef0ab48896f686472d8a23, type: 3}
   m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
+  m_doorInteract: 0
 --- !u!95 &2693481449752395402
 Animator:
   serializedVersion: 5
@@ -131,7 +132,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d2d6fe32cd7212440b323d21f1abc7a3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

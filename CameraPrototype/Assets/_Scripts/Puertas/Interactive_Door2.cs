@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction_Door : DoubleAction
+public class Interactive_Door2 : DoubleAction
 {
-    //Variables 
     [SerializeField] private Animator m_animator;
     [SerializeField] private bool m_isLocked;
     [SerializeField] private AudioClip m_doorOpen;
     [SerializeField] private AudioClip m_doorClose;
     [SerializeField] private AudioClip m_doorLocked;
-    private int m_doorInteract = 0;
+    [SerializeField] private bool m_doorInteract = false;
+
 
     private void Start()
     {
@@ -27,9 +27,8 @@ public class Interaction_Door : DoubleAction
         {
             base.FirstAction();
             AudioManager.Instance.ReproduceSound(m_doorOpen);
-            //m_animator.SetTrigger("Abrir");
-            m_doorInteract = 2;
-            m_animator.SetInteger("Abrir", m_doorInteract);
+            m_doorInteract = true;
+            m_animator.SetBool("AbrirPuerta", m_doorInteract);
         }
     }
 
@@ -37,9 +36,8 @@ public class Interaction_Door : DoubleAction
     {
         base.SecondActon();
         AudioManager.Instance.ReproduceSound(m_doorClose);
-        //m_animator.SetTrigger("Cerrar");
-        m_doorInteract = 1;
-        m_animator.SetInteger("Abrir", m_doorInteract);
+        m_doorInteract = false;
+        m_animator.SetBool("AbrirPuerta", m_doorInteract);
     }
 
     public void UnlockDoor()
