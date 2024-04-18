@@ -19760,6 +19760,94 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &952383419
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 949133118189671830, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_Name
+      value: Nota
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079898189619740222, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_noteText
+      value: Did you know that cats can see anomalies?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.51387
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.03781107
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.32928276
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.779
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.306
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98943657
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.14496665
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -16.671
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5deb1ff3236af3419e2e31746a27857, type: 3}
 --- !u!43 &958987538
 Mesh:
   m_ObjectHideFlags: 0
@@ -32768,6 +32856,11 @@ PrefabInstance:
       propertyPath: playerPhotoCapture
       value: 
       objectReference: {fileID: 1829697208}
+    - target: {fileID: 7513210719908813401, guid: 8ae2dc09f02668d46823b9e4350e5f93,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 8990804525839902296, guid: 8ae2dc09f02668d46823b9e4350e5f93,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -38697,3 +38790,4 @@ SceneRoots:
   - {fileID: 2123627873}
   - {fileID: 2110997127}
   - {fileID: 1737282420}
+  - {fileID: 952383419}
