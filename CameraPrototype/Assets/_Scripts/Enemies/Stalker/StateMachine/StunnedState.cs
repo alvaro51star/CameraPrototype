@@ -12,8 +12,14 @@ public class StunnedState : State
     float currentTime;
     [SerializeField] private float maxTimeStunned = 3f;
 
+    [SerializeField] private float secondsToAdd = 0.5f;
+
     public override void Enter()
     {
+        if (stalkerBehaviour.currentTimeLooked >= stalkerBehaviour.maxTimeLooked)
+        {
+            AddSecondsToEnemyBar();
+        }
         //maxTimeStunned = stunnedAnimation.length;
         //stalkerBehaviour.isStunned = true;
         isComplete = false;
@@ -21,6 +27,8 @@ public class StunnedState : State
         currentTime = 0f;
         navMesh.isStopped = true;
     }
+
+    
 
     public override void Do()
     {
@@ -44,5 +52,11 @@ public class StunnedState : State
         this.navMesh = navMesh;
         this.animator = animator;
         this.stalkerBehaviour = stalkerBehaviour;
+    }
+
+    private void AddSecondsToEnemyBar()
+    {
+        stalkerBehaviour.currentTimeLooked = stalkerBehaviour.maxTimeLooked - secondsToAdd;
+        EventManager.OnTimeAdded?.Invoke(stalkerBehaviour.currentTimeLooked, stalkerBehaviour.maxTimeLooked);
     }
 }

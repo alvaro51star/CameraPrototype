@@ -34,13 +34,14 @@ public class StalkerBehaviour : MonoBehaviour
     #region Time Variables
     [Space]
     [Header("Time Variables")]
-    [SerializeField] private float maxTimeLooked = 2f;
-    [SerializeField] private float currentTimeLooked = 0;
+    public float maxTimeLooked = 2f;
+    public float currentTimeLooked = 0;
 
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         navMesh = GetComponent<NavMeshAgent>();
 
@@ -49,6 +50,11 @@ public class StalkerBehaviour : MonoBehaviour
         stunnedState.SetUp(navMesh, animator, this);
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
+    }
+
+    void Start()
+    {
+        
 
 
         states = stalkState;
@@ -130,6 +136,8 @@ public class StalkerBehaviour : MonoBehaviour
     #endregion
 
 
+    #region Useful Functions
+
     public void ActivateCollision()
     {
         collision.isTrigger = false;
@@ -142,5 +150,8 @@ public class StalkerBehaviour : MonoBehaviour
         states = stunnedState;
         states.Enter();
     }
+
+    #endregion
+
 
 }
