@@ -11,8 +11,13 @@ public class ChaseState : State
 
     public bool enteredAnimation = false;
 
+    
+
     public override void Enter()
     {
+        stateName = "Chase";
+        EventManager.OnStatusChange?.Invoke(stateName);
+        
         isComplete = false;
 
         if (enteredAnimation == false)

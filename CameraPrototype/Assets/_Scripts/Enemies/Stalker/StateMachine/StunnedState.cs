@@ -16,6 +16,9 @@ public class StunnedState : State
 
     public override void Enter()
     {
+        stateName = "Stunned";
+        EventManager.OnStatusChange?.Invoke(stateName);
+        
         if (stalkerBehaviour.currentTimeLooked >= stalkerBehaviour.maxTimeLooked)
         {
             AddSecondsToEnemyBar();

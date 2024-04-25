@@ -28,6 +28,11 @@ public class TimebarUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
         if (player != null)
         {
             transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));

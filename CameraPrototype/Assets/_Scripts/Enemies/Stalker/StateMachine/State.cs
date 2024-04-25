@@ -13,6 +13,8 @@ public abstract class State : MonoBehaviour
 
     public Animator animator;
 
+    protected string stateName;
+
     protected StalkerBehaviour stalkerBehaviour;
 
     public virtual void Enter() { }

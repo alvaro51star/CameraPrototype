@@ -12,6 +12,9 @@ public class StalkState : State
 
     public override void Enter()
     {
+        stateName = "Stalk";
+        EventManager.OnStatusChange?.Invoke(stateName);
+
         currentTime = 0f;
         animator.Play("Idle");
         isComplete = false;

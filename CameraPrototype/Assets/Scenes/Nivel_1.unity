@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0008525523, g: 0.0036115542, b: 0.006444635, a: 1}
+  m_IndirectSpecularColor: {r: 0.00085241604, g: 0.003611387, b: 0.0064444034, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9988,7 +9988,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4362919670425549604, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1634635203}
   m_SourcePrefab: {fileID: 100100000, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7, type: 3}
 --- !u!1001 &696868638
 PrefabInstance:
@@ -27324,6 +27328,38 @@ Transform:
   - {fileID: 378301157}
   m_Father: {fileID: 2089878071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1634635199 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4362919670425549604, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+    type: 3}
+  m_PrefabInstance: {fileID: 694204907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1634635201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1853749481366320684, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+    type: 3}
+  m_PrefabInstance: {fileID: 694204907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634635199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1634635203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634635199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0521355169e1cb4c96594086dbe0d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 1634635201}
+  player: {fileID: 1905819165}
 --- !u!1 &1646091805
 GameObject:
   m_ObjectHideFlags: 0
