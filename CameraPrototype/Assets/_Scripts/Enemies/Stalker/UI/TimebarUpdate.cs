@@ -25,20 +25,6 @@ public class TimebarUpdate : MonoBehaviour
         fill.fillAmount = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        LookAtPlayer();
-    }
-
-    private void LookAtPlayer()
-    {
-        if (player != null)
-        {
-            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-        }
-    }
-
     private void UpdateBar(float currentTime, float maxTimeLooked)
     {
         fill.fillAmount = currentTime / maxTimeLooked;

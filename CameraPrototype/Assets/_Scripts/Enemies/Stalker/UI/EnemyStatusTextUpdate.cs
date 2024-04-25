@@ -32,7 +32,8 @@ public class EnemyStatusTextUpdate : MonoBehaviour
     {
         if (player != null)
         {
-            transform.LookAt(new Vector3(-player.transform.position.x, transform.position.y, player.transform.position.z));
+            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 180, transform.rotation.z));
         }
     }
 }
