@@ -11,19 +11,18 @@ public class ChaseState : State
 
     public bool enteredAnimation = false;
 
-    
+
 
     public override void Enter()
     {
         stateName = "Chase";
         EventManager.OnStatusChange?.Invoke(stateName);
-        
+
+        navMesh.isStopped = false;
+
         isComplete = false;
 
-        if (enteredAnimation == false)
-        {
-            animator.Play("Run");
-        }
+        animator.Play("Run");
         enteredAnimation = true;
     }
 

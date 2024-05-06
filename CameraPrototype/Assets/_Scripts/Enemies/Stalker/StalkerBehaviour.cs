@@ -11,7 +11,7 @@ public class StalkerBehaviour : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
 
-    [SerializeField] private Renderer objectMesh;
+    [SerializeField] public Renderer objectMesh;
     [SerializeField] private GameObject player;
 
     [SerializeField] private Animator animator;
