@@ -466,6 +466,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 1378080955486067464}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_renderer: {fileID: 5838620355294836284}
 --- !u!114 &1378080955486067464
 MonoBehaviour:
   m_ObjectHideFlags: 0

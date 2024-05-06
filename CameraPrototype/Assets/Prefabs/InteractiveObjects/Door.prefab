@@ -101,6 +101,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 613711491022696571}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_renderer: {fileID: 2515729665379471048}
 --- !u!114 &613711491022696571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +119,6 @@ MonoBehaviour:
   m_doorOpen: {fileID: 8300000, guid: dd33ebfa73217674580798aa6fa44fdc, type: 3}
   m_doorClose: {fileID: 8300000, guid: 9c00be4baaef0ab48896f686472d8a23, type: 3}
   m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
-  m_doorInteract: 0
 --- !u!95 &2693481449752395402
 Animator:
   serializedVersion: 5

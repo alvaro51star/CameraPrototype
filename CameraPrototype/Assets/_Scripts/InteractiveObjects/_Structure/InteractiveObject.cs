@@ -8,6 +8,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     [SerializeField] private bool m_needsButton;
     [SerializeField] private InteractionScript m_interactionScript;
     [SerializeField] private AudioClip m_interactSound;
+    [SerializeField] public Renderer m_renderer;
 
     private void Start()
     {

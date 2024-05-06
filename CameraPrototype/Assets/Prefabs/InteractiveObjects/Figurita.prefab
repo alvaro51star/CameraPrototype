@@ -181,6 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 0}
+  m_renderer: {fileID: 3701752743784822006}
 --- !u!114 &6006915991493800928
 MonoBehaviour:
   m_ObjectHideFlags: 0
