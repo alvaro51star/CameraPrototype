@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class StalkState : State
 {
@@ -15,6 +16,9 @@ public class StalkState : State
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
+        enemy.GetComponent<NavMeshAgent>().destination = enemy.transform.position;
+        enemy.GetComponent<NavMeshAgent>().isStopped = true;
+
         currentTime = 0f;
         animator.Play("Idle");
         isComplete = false;
@@ -23,6 +27,7 @@ public class StalkState : State
     public override void Exit()
     {
         isComplete = false;
+        enemy.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     public override void Do()
