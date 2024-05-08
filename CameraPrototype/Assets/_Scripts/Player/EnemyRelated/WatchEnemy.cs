@@ -31,9 +31,8 @@ public class WatchEnemy : MonoBehaviour
 
         Vector3 rayDirection = enemy.transform.position - transform.position;
         Debug.DrawRay(transform.position, rayDirection.normalized * maxDistance, Color.red);
-        if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance))
         {
-            Debug.Log(hit.transform.name);
             float angle = Vector3.Angle(rayDirection, transform.forward);
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
             {
@@ -46,7 +45,7 @@ public class WatchEnemy : MonoBehaviour
     {
         Vector3 rayDirection = enemy.transform.position - transform.position;
         float distance = Vector3.Distance(transform.position, enemy.transform.position);
-        if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance) && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance) && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
         {
             float angle = Vector3.Angle(rayDirection, transform.forward);
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)
