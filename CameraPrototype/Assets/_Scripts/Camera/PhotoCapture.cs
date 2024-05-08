@@ -12,7 +12,8 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
-    [SerializeField] private RenderTexture anomaliesCamRT;
+    //[SerializeField] private RenderTexture anomaliesCamRT;
+    [SerializeField] private Camera anomaliesCamera;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -26,6 +27,9 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private AudioClip cameraClickClip;
     [SerializeField] private AudioClip noPhotosClip;
 
+    [Header("Scripts")]
+    [SerializeField] private SavePhoto savePhoto;
+
     private Texture2D screenCapture;
     private bool viewingPhoto;
     private bool m_tookFirstPhoto;
@@ -34,9 +38,9 @@ public class PhotoCapture : MonoBehaviour
 
     private void Start()
     {
-        screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
-                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla        
+
+        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla
+
     }
 
     public void TakePhoto()
@@ -88,18 +92,47 @@ public class PhotoCapture : MonoBehaviour
         m_tookFirstPhoto = false;
         cameraUI.SetActive(false);//quitar UI tipo REC
         viewingPhoto = true;
+
+        Time.timeScale = 0;
+
         StartCoroutine(CameraFlashEffect());
+
+        RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture);
+
+        RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        renderTexture.Create();
+
+        anomaliesCamera.targetTexture = renderTexture;
 
         yield return new WaitForEndOfFrame(); //asi lo hara despues de renderizar todo        
 
+        //RenderTexture anomaliesCamRT = anomaliesCamera.targetTexture;
+        //RenderTexture anomaliesCamRT = new RenderTexture(Screen.width, Screen.height, 0);
+        //anomaliesCamRT.Create();
+        //anomaliesCamRT = anomaliesCamera.targetTexture;
+        //print(anomaliesCamRT);
+        //anomaliesCamera.targetTexture = anomaliesCamRT;
+        //print(anomaliesCamRT);
 
-        Graphics.CopyTexture(anomaliesCamRT, screenCapture);
+        
+
+        screenCapture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
+        Graphics.CopyTexture(renderTexture, screenCapture);      
+
+
+        
+        //savePhoto.PhotoSave(screenCapture);
+
+        //RenderTexture.ReleaseTemporary(anomaliesCamRT);
+        //anomaliesCamera.targetTexture = null;
 
         ShowPhoto();
     }
 
-    private void TestCapturePhoto()
+    /*private void TestCapturePhoto()
     {
+        m_tookFirstPhoto = false;
+
         cameraUI.SetActive(false);
         viewingPhoto = true;
         StartCoroutine(CameraFlashEffect());
@@ -113,18 +146,23 @@ public class PhotoCapture : MonoBehaviour
             screenCapture.SetPixelData(action.GetData<byte>(), 0);
             screenCapture.Apply();
         });
+
+        savePhoto.PhotoSave(screenCapture);
+
         ShowPhoto();
-    }
+    }*/
 
     private void ShowPhoto()//turns texture into sprite and puts it in UI
     {
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
-        //guardar photoSprite para el inventario
+        //photoDisplayArea.material.mainTexture = screenCapture;
+
+        savePhoto.PhotoSave(photoSprite);
 
         photoFrame.SetActive(true);        
-        fadingAnimation.Play("PhotoFade");
+        fadingAnimation.Play("PhotoFade");        
     }
 
     private IEnumerator CameraFlashEffect()
@@ -142,6 +180,8 @@ public class PhotoCapture : MonoBehaviour
         viewingPhoto = false;
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
+
+        Time.timeScale = 1;
     }
 
 }
