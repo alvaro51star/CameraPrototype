@@ -48,9 +48,6 @@ public class StalkerBehaviour : MonoBehaviour
 
     void Start()
     {
-        
-
-
         states = stalkState;
         states.Enter();
 

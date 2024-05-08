@@ -19,4 +19,7 @@ public static class EventManager
     //Enemies
     public static Action<float, float> OnTimeAdded;
     public static Action<string> OnStatusChange;
+
+    //Level
+    public static Action<int> OnLevelIntensityChange;
 }
