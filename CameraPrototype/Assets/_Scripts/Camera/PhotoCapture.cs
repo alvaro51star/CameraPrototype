@@ -125,7 +125,7 @@ public class PhotoCapture : MonoBehaviour
     }
 
     private void TestCapturePhoto()//only worked in second photo until I created the texture in the start??
-        //no usamos ReadPixels() porque no funciona en RenderTexture
+                                   //no usamos ReadPixels() porque no funciona en RenderTexture
     {
         m_tookFirstPhoto = false;
 

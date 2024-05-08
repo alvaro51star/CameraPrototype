@@ -8,12 +8,12 @@ public class SavePhoto : MonoBehaviour
     private int m_numPhotosTaken = 1;
     byte[] fotoData;
     Texture2D tex;
-    [SerializeField] Camera myCamera;
+    //[SerializeField] Camera myCamera;
 
-    [SerializeField] private Image image;
+    //[SerializeField] private Image image;
     private string filePath;
    
-    public void PhotoSave (Sprite spriteToSave)
+    public void PhotoSave (Sprite spriteToSave) //no tiene sentido pasarle un sprite, hay que cambiar esto
     {
         //Texture2D renderResult = new Texture2D(texture.width, texture.height, TextureFormat.ARGB32, true);
         //Rect rect = new Rect(0, 0, texture.width, texture.height);
@@ -32,7 +32,7 @@ public class SavePhoto : MonoBehaviour
         T.Apply();
         print(T);
 
-        image.material.mainTexture = T;
+        //image.material.mainTexture = T;
 
         byte[] byteArray = T.EncodeToPNG();
         filePath = Application.dataPath + "/Resources/" + "Fotos" + SceneManager.GetActiveScene().name;
@@ -51,7 +51,7 @@ public class SavePhoto : MonoBehaviour
             tex.LoadImage(fotoData);
             Sprite photoSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
             new Vector2(0.5f, 0.5f), 100);
-            image.sprite = photoSprite;
+            //image.sprite = photoSprite;
         }
     }
 
