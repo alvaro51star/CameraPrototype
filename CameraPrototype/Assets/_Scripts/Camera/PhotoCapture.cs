@@ -15,7 +15,6 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
-    //[SerializeField] private RenderTexture anomaliesCamRT;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -36,14 +35,19 @@ public class PhotoCapture : MonoBehaviour
     private bool viewingPhoto;
     private bool m_tookFirstPhoto; //solucion a que el input no vaya muy bien
     public bool canTakePhoto = true;
-    public bool hasCameraEquiped;
+    public bool hasCameraEquiped; //solucion input
 
     private RenderTexture m_renderTexture;
 
     private void Start()
     {
         m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        m_renderTexture.Create();
+        m_renderTexture.Create(); //creando la textura al principio ha empezado a funcionar el TestCapturePhoto()
+
+        anomaliesCamera.targetTexture = m_renderTexture;
+
+        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
+                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
     }
     public void TakePhoto()
     {
@@ -87,7 +91,7 @@ public class PhotoCapture : MonoBehaviour
         hasCameraEquiped = mode;
     }
     
-
+    //NO SE PUEDE GUARDAR LAS FOTOS CON ESTO, EL COPY TEXTURE SOLO LO HACE LA GPU Y NO PASA A LA CPU
     private IEnumerator CapturePhoto()//reads renderTexture and copies it to local Texture2D
     {
         m_tookFirstPhoto = false;
@@ -120,7 +124,8 @@ public class PhotoCapture : MonoBehaviour
         ShowPhoto();
     }
 
-    private void TestCapturePhoto()//only works in second photo????
+    private void TestCapturePhoto()//only worked in second photo until I created the texture in the start??
+        //no usamos ReadPixels() porque no funciona en RenderTexture
     {
         m_tookFirstPhoto = false;
 
@@ -128,26 +133,25 @@ public class PhotoCapture : MonoBehaviour
         viewingPhoto = true;
        
         
-        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture); //esto da error en la segunda foto
+        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture); //esto da error en la segunda foto ????
 
-        //RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        //renderTexture.Create();
+        //RenderTexture m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        //m_renderTexture.Create();
 
-        anomaliesCamera.targetTexture = m_renderTexture;        
+        //anomaliesCamera.targetTexture = m_renderTexture;        
 
-        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
-                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
+        //screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
+                              //UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
 
         //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
         AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) => 
-        {            
+        {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
-            Debug.Log("TestCapturePhoto taking photo");
+            //Debug.Log("TestCapturePhoto taking photo");
             ShowPhoto(); //even though it does save an image, it is really dark (looks af if flash isn't working) and the UI works weird 
-        });        
-
-        //ShowPhoto();//it shows a grey image, maybe the default sprite is grey???
+        });             //parece que esta cogiendo datos no actualizados (de antes del flash)
+        
     }
 
 
