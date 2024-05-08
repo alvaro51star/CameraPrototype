@@ -13,7 +13,7 @@ public class SavePhoto : MonoBehaviour
     [SerializeField] private Image image;
     private string filePath;
    
-    public void PhotoSave (Sprite texture)
+    public void PhotoSave (Sprite spriteToSave)
     {
         //Texture2D renderResult = new Texture2D(texture.width, texture.height, TextureFormat.ARGB32, true);
         //Rect rect = new Rect(0, 0, texture.width, texture.height);
@@ -24,10 +24,10 @@ public class SavePhoto : MonoBehaviour
 
         //texture.ReadPixels(rect, 0, 0);
 
-        Texture2D T = new Texture2D((int)texture.rect.width, (int)texture.rect.height);
+        Texture2D T = new Texture2D((int)spriteToSave.rect.width, (int)spriteToSave.rect.height);
 
-        var pixels = texture.texture.GetPixels((int)texture.textureRect.x, (int)texture.textureRect.y,
-                                                (int)texture.textureRect.width, (int)texture.textureRect.height);
+        var pixels = spriteToSave.texture.GetPixels((int)spriteToSave.textureRect.x, (int)spriteToSave.textureRect.y,
+                                                (int)spriteToSave.textureRect.width, (int)spriteToSave.textureRect.height);
         T.SetPixels(pixels);
         T.Apply();
         print(T);

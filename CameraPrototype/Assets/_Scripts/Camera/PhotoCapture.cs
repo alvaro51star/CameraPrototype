@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
+    [Header("Cameras")]
+    [SerializeField] private Camera anomaliesCamera;
+
     [Header("Photo Taker")]
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
     //[SerializeField] private RenderTexture anomaliesCamRT;
-    [SerializeField] private Camera anomaliesCamera;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -32,30 +34,29 @@ public class PhotoCapture : MonoBehaviour
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    private bool m_tookFirstPhoto;
+    private bool m_tookFirstPhoto; //solucion a que el input no vaya muy bien
     public bool canTakePhoto = true;
     public bool hasCameraEquiped;
 
+    private RenderTexture m_renderTexture;
+
     private void Start()
     {
-
-        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla
-
+        m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        m_renderTexture.Create();
     }
-
     public void TakePhoto()
     {
         m_tookFirstPhoto = true;
         if (!viewingPhoto && hasCameraEquiped)
-        {
-            Debug.Log("foto");
-            
+        {            
             if (canTakePhoto)
             {
                 EventManager.OnTakingPhoto?.Invoke();
-
-                StartCoroutine(CapturePhoto());
-                //TestCapturePhoto();
+                Time.timeScale = 0f;
+                StartCoroutine(CameraFlashEffect());
+                //StartCoroutine(CapturePhoto());
+                TestCapturePhoto();
             }
             else
             {
@@ -64,7 +65,6 @@ public class PhotoCapture : MonoBehaviour
                 cameraAudio.clip = noPhotosClip;
                 cameraAudio.Play();
             }
-
         }
 
         else
@@ -72,6 +72,7 @@ public class PhotoCapture : MonoBehaviour
             RemovePhoto();
             EventManager.OnRemovePhoto?.Invoke();
             m_tookFirstPhoto = false;
+            Time.timeScale = 1f;
         }
     }
 
@@ -87,22 +88,19 @@ public class PhotoCapture : MonoBehaviour
     }
     
 
-    private IEnumerator CapturePhoto()//reads renderTexture and copies it to local variable
+    private IEnumerator CapturePhoto()//reads renderTexture and copies it to local Texture2D
     {
         m_tookFirstPhoto = false;
         cameraUI.SetActive(false);//quitar UI tipo REC
-        viewingPhoto = true;
+        viewingPhoto = true;       
 
-        Time.timeScale = 0;
+        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture);
 
-        StartCoroutine(CameraFlashEffect());
+        //RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        //renderTexture.Create();
 
-        RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture);
-
-        RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        renderTexture.Create();
-
-        anomaliesCamera.targetTexture = renderTexture;
+        anomaliesCamera.targetTexture = m_renderTexture;
+        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, TextureFormat.ARGB32, false);
 
         yield return new WaitForEndOfFrame(); //asi lo hara despues de renderizar todo        
 
@@ -113,15 +111,8 @@ public class PhotoCapture : MonoBehaviour
         //print(anomaliesCamRT);
         //anomaliesCamera.targetTexture = anomaliesCamRT;
         //print(anomaliesCamRT);
-
-        
-
-        screenCapture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
-        Graphics.CopyTexture(renderTexture, screenCapture);      
-
-
-        
-        //savePhoto.PhotoSave(screenCapture);
+       
+        Graphics.CopyTexture(m_renderTexture, screenCapture);      
 
         //RenderTexture.ReleaseTemporary(anomaliesCamRT);
         //anomaliesCamera.targetTexture = null;
@@ -129,35 +120,42 @@ public class PhotoCapture : MonoBehaviour
         ShowPhoto();
     }
 
-    /*private void TestCapturePhoto()
+    private void TestCapturePhoto()//only works in second photo????
     {
         m_tookFirstPhoto = false;
 
         cameraUI.SetActive(false);
         viewingPhoto = true;
-        StartCoroutine(CameraFlashEffect());
+       
+        
+        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture); //esto da error en la segunda foto
+
+        //RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        //renderTexture.Create();
+
+        anomaliesCamera.targetTexture = m_renderTexture;        
+
+        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
+                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
 
         //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
-        AsyncGPUReadback.Request(anomaliesCamRT, 0, (AsyncGPUReadbackRequest action) => 
-        {
-            
-            screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
-                                          UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-            screenCapture.SetPixelData(action.GetData<byte>(), 0);
+        AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) => 
+        {            
+            screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
-        });
+            Debug.Log("TestCapturePhoto taking photo");
+            ShowPhoto(); //even though it does save an image, it is really dark (looks af if flash isn't working) and the UI works weird 
+        });        
 
-        savePhoto.PhotoSave(screenCapture);
+        //ShowPhoto();//it shows a grey image, maybe the default sprite is grey???
+    }
 
-        ShowPhoto();
-    }*/
 
-    private void ShowPhoto()//turns texture into sprite and puts it in UI
+    private void ShowPhoto()//turns texture into sprite, puts it in UI and saves it calling PhotoSave
     {
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
-        //photoDisplayArea.material.mainTexture = screenCapture;
 
         savePhoto.PhotoSave(photoSprite);
 
@@ -180,8 +178,6 @@ public class PhotoCapture : MonoBehaviour
         viewingPhoto = false;
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
-
-        Time.timeScale = 1;
     }
 
 }
