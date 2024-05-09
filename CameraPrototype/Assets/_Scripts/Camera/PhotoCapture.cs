@@ -56,10 +56,9 @@ public class PhotoCapture : MonoBehaviour
         {            
             if (canTakePhoto)
             {
-                EventManager.OnTakingPhoto?.Invoke();
-                Time.timeScale = 0f;
-                StartCoroutine(CameraFlashEffect());                
+                StartCoroutine(CameraFlashEffect());
                 CapturePhoto();
+                EventManager.OnTakingPhoto?.Invoke();                
             }
             else
             {
@@ -107,7 +106,8 @@ public class PhotoCapture : MonoBehaviour
         AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) =>
         {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
-            screenCapture.Apply();            
+            screenCapture.Apply();
+            Time.timeScale = 0f;
             ShowPhoto();
         });             
     }
@@ -119,7 +119,7 @@ public class PhotoCapture : MonoBehaviour
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
 
-        savePhoto.PhotoSave(photoSprite);
+        savePhoto.PhotoSave(screenCapture);
 
         photoFrame.SetActive(true);        
         fadingAnimation.Play("PhotoFade");        
