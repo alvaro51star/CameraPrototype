@@ -8,11 +8,13 @@ using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
+    [Header("Cameras")]
+    [SerializeField] private Camera anomaliesCamera;
+
     [Header("Photo Taker")]
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
-    [SerializeField] private RenderTexture anomaliesCamRT;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -26,32 +28,37 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private AudioClip cameraClickClip;
     [SerializeField] private AudioClip noPhotosClip;
 
+    [Header("Scripts")]
+    [SerializeField] private SavePhoto savePhoto;
+
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    private bool m_tookFirstPhoto;
+    private bool m_tookFirstPhoto; //solucion a que el input no vaya muy bien
     public bool canTakePhoto = true;
-    public bool hasCameraEquiped;
+    public bool hasCameraEquiped; //solucion input
+
+    private RenderTexture m_renderTexture;
 
     private void Start()
     {
-        screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
-                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-        //anomaliesCamRT esta a 1920 x 1080, en futuro buscar que se adapte al tamanio de la pantalla        
-    }
+        m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        m_renderTexture.Create(); //creando la textura al principio ha empezado a funcionar el TestCapturePhoto()
 
+        anomaliesCamera.targetTexture = m_renderTexture;
+
+        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
+                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
+    }
     public void TakePhoto()
     {
         m_tookFirstPhoto = true;
         if (!viewingPhoto && hasCameraEquiped)
-        {
-            Debug.Log("foto");
-            
+        {            
             if (canTakePhoto)
             {
-                EventManager.OnTakingPhoto?.Invoke();
-
-                StartCoroutine(CapturePhoto());
-                //TestCapturePhoto();
+                StartCoroutine(CameraFlashEffect());
+                CapturePhoto();
+                EventManager.OnTakingPhoto?.Invoke();                
             }
             else
             {
@@ -60,7 +67,6 @@ public class PhotoCapture : MonoBehaviour
                 cameraAudio.clip = noPhotosClip;
                 cameraAudio.Play();
             }
-
         }
 
         else
@@ -68,6 +74,7 @@ public class PhotoCapture : MonoBehaviour
             RemovePhoto();
             EventManager.OnRemovePhoto?.Invoke();
             m_tookFirstPhoto = false;
+            Time.timeScale = 1f;
         }
     }
 
@@ -80,51 +87,42 @@ public class PhotoCapture : MonoBehaviour
     public void SetHasCameraEquiped(bool mode)
     {
         hasCameraEquiped = mode;
-    }
-    
+    }        
 
-    private IEnumerator CapturePhoto()//reads renderTexture and copies it to local variable
+    private void CapturePhoto()//needs to create the textures in start
     {
         m_tookFirstPhoto = false;
-        cameraUI.SetActive(false);//quitar UI tipo REC
-        viewingPhoto = true;
-        StartCoroutine(CameraFlashEffect());
 
-        yield return new WaitForEndOfFrame(); //asi lo hara despues de renderizar todo        
-
-
-        Graphics.CopyTexture(anomaliesCamRT, screenCapture);
-
-        ShowPhoto();
-    }
-
-    private void TestCapturePhoto()
-    {
         cameraUI.SetActive(false);
         viewingPhoto = true;
-        StartCoroutine(CameraFlashEffect());
 
-        //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
-        AsyncGPUReadback.Request(anomaliesCamRT, 0, (AsyncGPUReadbackRequest action) => 
-        {
-            
-            screenCapture = new Texture2D(anomaliesCamRT.width, anomaliesCamRT.height, anomaliesCamRT.graphicsFormat,
-                                          UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-            screenCapture.SetPixelData(action.GetData<byte>(), 0);
-            screenCapture.Apply();
-        });
-        ShowPhoto();
+        StartCoroutine(SaveInTextureRenderedTexture());
+        
     }
 
-    private void ShowPhoto()//turns texture into sprite and puts it in UI
+    private IEnumerator SaveInTextureRenderedTexture()
+    {
+        yield return new WaitForEndOfFrame();//para que flash este renderizado
+        AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) =>
+        {
+            screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
+            screenCapture.Apply();
+            Time.timeScale = 0f;
+            ShowPhoto();
+        });             
+    }
+
+
+    private void ShowPhoto()//turns texture into sprite, puts it in UI and saves it calling PhotoSave
     {
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
-        //guardar photoSprite para el inventario
+
+        savePhoto.PhotoSave(screenCapture);
 
         photoFrame.SetActive(true);        
-        fadingAnimation.Play("PhotoFade");
+        fadingAnimation.Play("PhotoFade");        
     }
 
     private IEnumerator CameraFlashEffect()

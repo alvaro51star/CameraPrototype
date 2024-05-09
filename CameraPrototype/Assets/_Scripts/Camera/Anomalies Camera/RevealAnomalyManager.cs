@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RevealAnomalyManager : MonoBehaviour
 {
+    [SerializeField] private BoxCollider boxCollider;
     private void OnEnable()
     {
         EventManager.OnTakingPhoto += OnTakingPhoto;
@@ -23,10 +24,11 @@ public class RevealAnomalyManager : MonoBehaviour
         //necesario que las anomalias tengan Rigid Body y Collider
         if (other.gameObject.GetComponent<AnomaliesData>() && other.gameObject.GetComponent<AnomaliesData>().enabled)
         {
+            Debug.Log(other.name + "has entered anomalies trigger");
             Vector3 directionRayCast = (other.GetComponent<Renderer>().bounds.center - transform.position).normalized;
             RaycastHit hit;
             float maxDistanceRaycast = Vector3.Distance(transform.position, other.GetComponent<Renderer>().bounds.center);
-            //Debug.DrawRay(transform.position, directionRayCast * maxDistanceRaycast, Color.red);
+            Debug.DrawRay(transform.position, directionRayCast * maxDistanceRaycast, Color.red);
 
             if (Physics.Raycast(transform.position, directionRayCast, out hit, maxDistanceRaycast))
             {
@@ -36,6 +38,7 @@ public class RevealAnomalyManager : MonoBehaviour
                     {
                         hit.collider.gameObject.GetComponent<AnomaliesData>().AnomalyRevealed();
                         hit.collider.gameObject.GetComponent<AnomaliesData>().enabled = false;
+                        Debug.Log(other.name + "is revealed");
                     }
                 }                
             }
@@ -45,16 +48,27 @@ public class RevealAnomalyManager : MonoBehaviour
         {
             other.GetComponent<StalkerBehaviour>().StunEnemy();
         }
-    }    
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
+            boxCollider.enabled = true;
+        }
+    }
 
     private void OnTakingPhoto()
     {
-        GetComponent<BoxCollider>().enabled = true;
+        boxCollider.enabled = true;
+        Debug.Log("Is taking photo");
     }
 
     private void OnRemovePhoto()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        boxCollider.enabled = false;
+        Debug.Log("Is removing photo");
     }
 
 }
