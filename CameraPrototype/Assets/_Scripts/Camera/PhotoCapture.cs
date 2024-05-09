@@ -58,9 +58,8 @@ public class PhotoCapture : MonoBehaviour
             {
                 EventManager.OnTakingPhoto?.Invoke();
                 Time.timeScale = 0f;
-                StartCoroutine(CameraFlashEffect());
-                //StartCoroutine(CapturePhoto());
-                TestCapturePhoto();
+                StartCoroutine(CameraFlashEffect());                
+                CapturePhoto();
             }
             else
             {
@@ -89,75 +88,28 @@ public class PhotoCapture : MonoBehaviour
     public void SetHasCameraEquiped(bool mode)
     {
         hasCameraEquiped = mode;
-    }
-    
-    //NO SE PUEDE GUARDAR LAS FOTOS CON ESTO, EL COPY TEXTURE SOLO LO HACE LA GPU Y NO PASA A LA CPU
-    private IEnumerator CapturePhoto()//reads renderTexture and copies it to local Texture2D
-    {
-        m_tookFirstPhoto = false;
-        cameraUI.SetActive(false);//quitar UI tipo REC
-        viewingPhoto = true;       
+    }        
 
-        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture);
-
-        //RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        //renderTexture.Create();
-
-        anomaliesCamera.targetTexture = m_renderTexture;
-        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, TextureFormat.ARGB32, false);
-
-        yield return new WaitForEndOfFrame(); //asi lo hara despues de renderizar todo        
-
-        //RenderTexture anomaliesCamRT = anomaliesCamera.targetTexture;
-        //RenderTexture anomaliesCamRT = new RenderTexture(Screen.width, Screen.height, 0);
-        //anomaliesCamRT.Create();
-        //anomaliesCamRT = anomaliesCamera.targetTexture;
-        //print(anomaliesCamRT);
-        //anomaliesCamera.targetTexture = anomaliesCamRT;
-        //print(anomaliesCamRT);
-       
-        Graphics.CopyTexture(m_renderTexture, screenCapture);      
-
-        //RenderTexture.ReleaseTemporary(anomaliesCamRT);
-        //anomaliesCamera.targetTexture = null;
-
-        ShowPhoto();
-    }
-
-    private void TestCapturePhoto()//only worked in second photo until I created the texture in the start??
-                                   //no usamos ReadPixels() porque no funciona en RenderTexture
+    private void CapturePhoto()//needs to create the textures in start
     {
         m_tookFirstPhoto = false;
 
         cameraUI.SetActive(false);
         viewingPhoto = true;
 
-
-        //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture); //esto da error en la segunda foto ????
-
-        //RenderTexture m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        //m_renderTexture.Create();
-
-        //anomaliesCamera.targetTexture = m_renderTexture;        
-
-        //screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
-        //UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
-
-        //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
-        StartCoroutine(TestCapture2());
+        StartCoroutine(SaveInTextureRenderedTexture());
         
     }
 
-    private IEnumerator TestCapture2()
+    private IEnumerator SaveInTextureRenderedTexture()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();//para que flash este renderizado
         AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) =>
         {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
-            screenCapture.Apply();
-            //Debug.Log("TestCapturePhoto taking photo");
-            ShowPhoto(); //even though it does save an image, it is really dark (looks af if flash isn't working) and the UI works weird 
-        });             //parece que esta cogiendo datos no actualizados (de antes del flash)
+            screenCapture.Apply();            
+            ShowPhoto();
+        });             
     }
 
 
