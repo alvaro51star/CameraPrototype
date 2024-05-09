@@ -30529,6 +30529,11 @@ PrefabInstance:
       propertyPath: m_AllowXRRendering
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3966516001980533802, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4666557413774929715, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: enemy
@@ -30678,8 +30683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f527431ef38339d4a8e28be07c028c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCamera: {fileID: 1818788221}
-  image: {fileID: 0}
 --- !u!43 &1832311975
 Mesh:
   m_ObjectHideFlags: 0

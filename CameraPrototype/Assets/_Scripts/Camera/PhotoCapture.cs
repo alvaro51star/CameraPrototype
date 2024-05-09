@@ -131,8 +131,8 @@ public class PhotoCapture : MonoBehaviour
 
         cameraUI.SetActive(false);
         viewingPhoto = true;
-       
-        
+
+
         //RenderTexture.ReleaseTemporary(anomaliesCamera.targetTexture); //esto da error en la segunda foto ????
 
         //RenderTexture m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
@@ -141,17 +141,23 @@ public class PhotoCapture : MonoBehaviour
         //anomaliesCamera.targetTexture = m_renderTexture;        
 
         //screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
-                              //UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
+        //UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
 
         //esto seria la manera correcta pero funciona haciendo dos fotos, no a la primera
-        AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) => 
+        StartCoroutine(TestCapture2());
+        
+    }
+
+    private IEnumerator TestCapture2()
+    {
+        yield return new WaitForEndOfFrame();
+        AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) =>
         {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
             //Debug.Log("TestCapturePhoto taking photo");
             ShowPhoto(); //even though it does save an image, it is really dark (looks af if flash isn't working) and the UI works weird 
         });             //parece que esta cogiendo datos no actualizados (de antes del flash)
-        
     }
 
 
