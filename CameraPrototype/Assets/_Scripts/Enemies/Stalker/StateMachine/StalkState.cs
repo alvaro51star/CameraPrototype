@@ -19,9 +19,16 @@ public class StalkState : State
         enemy.GetComponent<NavMeshAgent>().destination = enemy.transform.position;
         enemy.GetComponent<NavMeshAgent>().isStopped = true;
 
+        
+
         currentTime = 0f;
         animator.Play("Idle");
         isComplete = false;
+
+        if (!objectMesh.isVisible)
+        {
+            TPToNextPosition();
+        }
     }
 
     public override void Exit()

@@ -10,9 +10,10 @@ public class LevelManager : MonoBehaviour
     public int intensityLevel = 0;
     private int tempValue;
 
-    [SerializeField] private float timeToEnterFirstLevel = 120f;
-    [SerializeField] private float timeToEnterSecondLevel = 300f;
-    [SerializeField] private float timeToEnterThirdLevel = 480f;
+    public float timeToEnterFirstLevel = 120f;
+    public float timeToEnterSecondLevel = 300f;
+    public float timeToEnterThirdLevel = 480f;
+    
     private float currentTime = 0f;
 
     private void Awake()
