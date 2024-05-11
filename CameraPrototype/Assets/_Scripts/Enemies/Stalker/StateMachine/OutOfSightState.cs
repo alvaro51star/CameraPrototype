@@ -17,6 +17,7 @@ public class OutOfSightState : State
         EventManager.OnStatusChange?.Invoke(stateName);
 
         isComplete = false;
+        currentTime = 0;
 
         enemy.transform.position = tpPoint.position;
     }

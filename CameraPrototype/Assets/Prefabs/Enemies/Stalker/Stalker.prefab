@@ -284,6 +284,7 @@ MonoBehaviour:
   stunnedState: {fileID: 3200292740505092337}
   chaseState: {fileID: 1028197911189958791}
   playerCatchState: {fileID: 9173929886800728489}
+  outOfSightState: {fileID: 67095677258754304}
   isVisible: 0
   isStunned: 0
   navMesh: {fileID: 0}

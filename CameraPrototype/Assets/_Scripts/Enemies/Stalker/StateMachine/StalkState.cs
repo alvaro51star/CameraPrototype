@@ -21,6 +21,8 @@ public class StalkState : State
     private const float timeLevel1 = 10f;
     private const float timeLevel2 = 5f;
 
+    private bool hasBeenVisible = false;
+
 
     public override void Enter()
     {
@@ -33,6 +35,7 @@ public class StalkState : State
         currentTime = 0f;
         animator.Play("Idle");
         isComplete = false;
+        hasBeenVisible = false;
 
         if (!objectMesh.isVisible)
         {
@@ -53,17 +56,26 @@ public class StalkState : State
 
     public override void Do()
     {
+        if (objectMesh.isVisible)
+        {
+            hasBeenVisible = true;
+        }
         Stalk();
     }
 
     private void Stalk()
     {
-        currentTime += Time.deltaTime;
+        if (hasBeenVisible)
+        {
+            currentTime += Time.deltaTime;
+        }
 
         if (LevelManager.instance.intensityLevel == 0)
         {
             if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
             {
+                Debug.Log("Entrado en out of sight");
+                stalkerBehaviour.OutOfSight();
                 isComplete = true;
             }
         }
@@ -72,6 +84,7 @@ public class StalkState : State
             if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
             {
                 isComplete = true;
+                stalkerBehaviour.OutOfSight();
             }
         }
         else if (LevelManager.instance.intensityLevel == 2)
@@ -79,6 +92,7 @@ public class StalkState : State
             if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
             {
                 isComplete = true;
+                stalkerBehaviour.OutOfSight();
             }
         }
         else if (LevelManager.instance.intensityLevel == 3)
@@ -89,8 +103,6 @@ public class StalkState : State
                 ResetTimer();
             }
         }
-
-
     }
 
     private void TPToNextPosition()
