@@ -23,30 +23,29 @@ public class AnomalyBehaviour : MonoBehaviour
         anomaliesData = GetComponent<AnomaliesData>();
     }    
     
-    private void OnTakingPhoto()
+    private void OnTakingPhoto()//checks conditions to reveal the anomaly
     {
         if(!isInPlayersTrigger)
             return;
-        Debug.Log(isInPlayersTrigger);
+
         anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
         
-        if (anomaliesData != null && anomaliesData.isActiveAndEnabled)
-        {
-            /*Plane[] planes = GeometryUtility.CalculateFrustumPlanes(anomalyCamera);
-            if (GeometryUtility.TestPlanesAABB(planes, gameObject.GetComponent<Renderer>().bounds))
-            {
-                Debug.Log(gameObject.name + " inside frustrum");
-                RevealAnomaly();
-            }       */
-            if (!MeshIsVisibleToCamera(anomalyCamera, gameObject.GetComponent<Renderer>()))
-                return;
-            Debug.Log(gameObject.name + " is visible");
-            RevealAnomaly();
-        }
+        if(!anomalyCamera)
+            return;
+
+        if(!anomaliesData)
+            return;
+
+        if (!anomaliesData.isActiveAndEnabled)
+            return;
+
+        if (!MeshIsVisibleToCamera(anomalyCamera, gameObject.GetComponent<Renderer>()))
+            return;
+
+        RevealAnomaly();
     }
     private void RevealAnomaly()
     {
-
         if (anomaliesData.revealType)
         {
             if (transform.CompareTag("Enemy"))
