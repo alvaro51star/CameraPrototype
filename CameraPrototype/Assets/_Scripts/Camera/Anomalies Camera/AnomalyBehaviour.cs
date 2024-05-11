@@ -7,7 +7,7 @@ public class AnomalyBehaviour : MonoBehaviour
 {
     private Camera anomalyCamera;
     private AnomaliesData anomaliesData;
-    private bool isVisible;
+    public bool isInPlayersTrigger;
     private void OnEnable()
     {
         EventManager.OnTakingPhoto += OnTakingPhoto;
@@ -25,6 +25,9 @@ public class AnomalyBehaviour : MonoBehaviour
     
     private void OnTakingPhoto()
     {
+        if(!isInPlayersTrigger)
+            return;
+        Debug.Log(isInPlayersTrigger);
         anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
         
         if (anomaliesData != null && anomaliesData.isActiveAndEnabled)
