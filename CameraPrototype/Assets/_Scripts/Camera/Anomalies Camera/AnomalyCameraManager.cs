@@ -13,8 +13,8 @@ public class AnomalyCameraManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.OnUsingCamera += OnUsingCamera;
-        EventManager.OnNotUsingCamera += OnNotUsingCamera;
+        EventManager.OnUsingCamera -= OnUsingCamera;
+        EventManager.OnNotUsingCamera -= OnNotUsingCamera;
     }
 
     private void OnUsingCamera()
