@@ -39,36 +39,4 @@ public class AnomaliesData : MonoBehaviour
              }
         }
     }
-
-    /*public void AnomalyRevealed()
-    {
-        if (revealType)
-        {
-            if (transform.CompareTag("Enemy"))
-            {
-                gameObject.GetComponent<StalkerBehaviour>().ActivateCollision();
-            }
-
-            gameObject.layer = LayerMask.NameToLayer("Default");
-            transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
-             for (int i = 0; i < transform.childCount; i++)
-             {
-                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
-             }
-            if (GetComponent<StalkerBehaviour>())
-            {
-                GetComponent<StalkerBehaviour>().enabled = true;
-            }
-            else if (GetComponent<Llave>())
-            {
-                GetComponent<Llave>().enabled = true;
-            }
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-
-        this.enabled = false;
-    }*/
 }
