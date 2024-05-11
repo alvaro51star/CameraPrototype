@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StalkPoint
   - Enemy
+  - AnomalyCamera
   layers:
   - Default
   - TransparentFX

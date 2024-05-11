@@ -40,7 +40,7 @@ public class AnomaliesData : MonoBehaviour
         }
     }
 
-    public void AnomalyRevealed()
+    /*public void AnomalyRevealed()
     {
         if (revealType)
         {
@@ -70,5 +70,5 @@ public class AnomaliesData : MonoBehaviour
         }
 
         this.enabled = false;
-    }
+    }*/
 }
