@@ -56,9 +56,9 @@ public class PhotoCapture : MonoBehaviour
         {            
             if (canTakePhoto)
             {
+                EventManager.OnTakingPhoto?.Invoke();
                 StartCoroutine(CameraFlashEffect());
-                CapturePhoto();
-                EventManager.OnTakingPhoto?.Invoke();                
+                CapturePhoto();            
             }
             else
             {
@@ -96,8 +96,7 @@ public class PhotoCapture : MonoBehaviour
         cameraUI.SetActive(false);
         viewingPhoto = true;
 
-        StartCoroutine(SaveRenderTextureInTexture());
-        
+        StartCoroutine(SaveRenderTextureInTexture());        
     }
 
     private IEnumerator SaveRenderTextureInTexture()
