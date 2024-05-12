@@ -4667,6 +4667,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6623795988402879775, guid: 3d0f321b0bb205f40bd076955101db01,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7472922145532258580, guid: 3d0f321b0bb205f40bd076955101db01,
         type: 3}
       propertyPath: m_IsActive
@@ -30687,7 +30692,7 @@ PrefabInstance:
     - target: {fileID: 2605687872625625690, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2605687872625625690, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
