@@ -100,8 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 613711491022696571}
+  m_interactText: 
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
-  m_renderer: {fileID: 2515729665379471048}
+  m_interactionPivot: {fileID: 1540949969979984189}
+  m_isAnomaly: 0
 --- !u!114 &613711491022696571
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     //Variables
-    [SerializeField] float m_distanceToScreenCenter;
+    [SerializeField] float m_minAngleToScreenCenter;
     [SerializeField] Camera m_cam;
     private bool m_canInteract = false;
     private List<InteractiveObject> m_interactiveObjects = new List<InteractiveObject>();
@@ -31,14 +31,23 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnIsReading -= IsReading;
         EventManager.OnStopReading -= StopReading;
     }
-    
+
+    private void Update()
+    {
+        if (m_interactiveObjects.Count != 0)
+        {
+            print("checking)");
+            CheckActualInputInteractiveObject();
+        }
+    }
+
     private void NotUsingCamera()
     {
         m_hasCameraEquiped = false;
-        if (m_interactiveObjects != null)
-        {
-            IsBesideInteractableObject();
-        }
+        //if (m_interactiveObjects != null)
+        //{
+        //    IsBesideInteractableObject();
+        //}
     }
 
     private void UsingCamera()
@@ -71,47 +80,40 @@ public class PlayerBehaviour : MonoBehaviour
         InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
         if (interactiveObject != null)
         {
-            m_interactiveObjects.Add(interactiveObject);
-            if (!m_hasCameraEquiped && 
-                m_interactiveObjects[m_interactiveObjects.LastIndexOf(interactiveObject)].gameObject.layer != 6 && 
-                m_interactiveObjects[m_interactiveObjects.LastIndexOf(interactiveObject)].gameObject.layer != 7)
+            if (!m_hasCameraEquiped && !interactiveObject.m_isAnomaly)
             {
-                if (m_interactiveObjects[m_interactiveObjects.LastIndexOf(interactiveObject)].GetNeedsButton())
+                if (interactiveObject.GetNeedsButton())
                 {
+                    m_interactiveObjects.Add(interactiveObject);
                     IsBesideInteractableObject();
                 }
                 else
                 {
-                    m_actualSimpleInteractiveObject = m_interactiveObjects[m_interactiveObjects.LastIndexOf(interactiveObject)];
-                    m_interactiveObjects.RemoveAt(m_interactiveObjects.LastIndexOf(interactiveObject));
+                    m_actualSimpleInteractiveObject = interactiveObject;
                     SimpleInteraction();
                 }
             }
-            print(m_cam.WorldToScreenPoint(interactiveObject.transform.position));
         }
-
     }
-
 
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
-        CheckActualInputInteractiveObject();
         UIManager.instance.ShowInput(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject != null)
+        if (interactiveObject != null && m_interactiveObjects.Contains(interactiveObject))
         {
-            m_interactiveObjects.RemoveAt(m_interactiveObjects.LastIndexOf(interactiveObject));
+            m_interactiveObjects.RemoveAt(m_interactiveObjects.IndexOf(interactiveObject));
 
             if (m_actualInputInteractiveObject == interactiveObject)
             {
                 m_actualInputInteractiveObject = null;
-                StopInteracting();
             }
+            StopInteracting();
         }
     }
 
@@ -133,30 +135,52 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void InputInteraction()
     {
+        if (m_actualInputInteractiveObject == null)
+        {
+            print("wtf");
+        }
+
         if (m_canInteract && m_actualInputInteractiveObject != null && !m_isReading)
         {
+            print("interacts");
             m_actualInputInteractiveObject.Interact(this.gameObject);
         }
     }
 
     public void CheckActualInputInteractiveObject()
     {
-        List<InteractiveObject> temporalInteractiveObjects = new List<InteractiveObject>();
-        for (int i = 0; i < m_interactiveObjects.Count; i++)
+        InteractiveObject nearestIteractiveObject = null;
+        float nearestAngle = 100;
+        int i = 0;
+
+        for (i = 0; i < m_interactiveObjects.Count; i++)
         {
-            if (m_interactiveObjects[i].m_renderer.isVisible)
+            if (i == 0)
             {
-                temporalInteractiveObjects.Add(m_interactiveObjects[i]);
+                nearestIteractiveObject = m_interactiveObjects[0];
+            }
+
+            Vector3 priorVectorDirector = nearestIteractiveObject.transform.position - m_cam.transform.position;
+            Vector3 actualVectorDirector =  m_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
+            float priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
+            float actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
+
+            if (actualAngle <= priorAngle)
+            {
+                nearestIteractiveObject = m_interactiveObjects[i];
+                nearestAngle = actualAngle;
             }
         }
 
-        int nearestObjectIndex = 0;
-        Vector2 mindistancetoScreenCenter = new Vector2(Screen.height / 4, Screen.width / 4); 
-        List<InteractiveObject> temporalInteractiveObjects2 = new List<InteractiveObject>();
-        for (int j = 0; j < temporalInteractiveObjects.Count; j++)
+        if (nearestAngle <= m_minAngleToScreenCenter)
         {
-            Vector3 distToLeftDownCorner = m_cam.WorldToScreenPoint(temporalInteractiveObjects[j].transform.position);
-            //if(distToLeftDownCorner)
+            m_actualInputInteractiveObject = nearestIteractiveObject;
+        }
+
+        else
+        {
+            print("null");
+            m_actualInputInteractiveObject = null;
         }
     }
 }
