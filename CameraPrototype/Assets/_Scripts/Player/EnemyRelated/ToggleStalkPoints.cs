@@ -10,7 +10,7 @@ public class ToggleStalkPoints : MonoBehaviour
     {
         if (other.TryGetComponent<StalkPointBehaviour>(out StalkPointBehaviour stalkPoint))
         {
-            //Debug.Log("Localizao");
+            Debug.Log("Localizao");
             //TODO comprobar que esté en visión
 
             // Vector3 direction = transform.position - stalkPoint.transform.position;
@@ -38,7 +38,7 @@ public class ToggleStalkPoints : MonoBehaviour
     {
         if (other.TryGetComponent<StalkPointBehaviour>(out StalkPointBehaviour stalkPoint))
         {
-            //Debug.Log("Perdido");
+            Debug.Log("Perdido");
             stalkPoint.TogglePosition(false);
             StalkPointsManager.instance.ModifyStalkPointList(stalkPoint, false);
         }

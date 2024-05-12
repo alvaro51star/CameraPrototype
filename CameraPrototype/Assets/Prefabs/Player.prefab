@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: 8894318954006076969}
   - component: {fileID: 1060018834660487488}
   - component: {fileID: 7436156349101976439}
-  - component: {fileID: 2286071687243610095}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -187,17 +186,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b8291c4fcfd8498d244be5cb16fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomaliesCamera: {fileID: 950392395326506303}
   photoDisplayArea: {fileID: 0}
   photoFrame: {fileID: 0}
   cameraUI: {fileID: 0}
+  anomaliesCamRT: {fileID: 8400000, guid: ed764a1833741eb4e992c1d2ff564c70, type: 2}
   cameraFlash: {fileID: 3966516001980533802}
   flashTime: 0.2
   fadingAnimation: {fileID: 0}
   cameraAudio: {fileID: 1060018834660487488}
   cameraClickClip: {fileID: 8300000, guid: 3d4705b85564a6047b1db0676cf182f8, type: 3}
   noPhotosClip: {fileID: 8300000, guid: 999bd9f014d5f4e4ab17d0a8bf21ed9b, type: 3}
-  savePhoto: {fileID: 2286071687243610095}
   canTakePhoto: 1
   hasCameraEquiped: 0
 --- !u!114 &8894318954006076969
@@ -214,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photoCapture: {fileID: 2592600347508512828}
   availablePhotos: 0
-  maxPhotos: 15
+  maxPhotos: 20
   availablePhotosTMP: {fileID: 0}
   maxPhotosTMP: {fileID: 0}
 --- !u!82 &1060018834660487488
@@ -326,18 +324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnomaliesCameraGO: {fileID: 2605687872625625690}
---- !u!114 &2286071687243610095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304275377204725996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f527431ef38339d4a8e28be07c028c91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5132457571456488487
 Transform:
   m_ObjectHideFlags: 0
@@ -412,12 +398,12 @@ Camera:
     serializedVersion: 2
     m_Bits: 87
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: ed764a1833741eb4e992c1d2ff564c70, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -451,7 +437,7 @@ MonoBehaviour:
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
-  m_AllowXRRendering: 0
+  m_AllowXRRendering: 1
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -725,7 +711,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.77903, y: 0.77903, z: 0.77903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5801539952395094264}
@@ -928,7 +914,7 @@ MonoBehaviour:
   m_camera: {fileID: 1932318058781030498}
   m_canWalk: 1
   m_gravity: 9.8
-  m_terminalVelocity: 10
+  m_terminalVelocity: 0
 --- !u!114 &4666557413774929715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a877032003705b74da5b826f77b205a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_photoCapture: {fileID: 2592600347508512828}
+  m_photoCapture: {fileID: 0}
   CameraUI: {fileID: 0}
 --- !u!65 &7761437460544118505
 BoxCollider:
@@ -1172,7 +1158,7 @@ GameObject:
   - component: {fileID: 7149150529477757679}
   - component: {fileID: 4838232260108709856}
   - component: {fileID: 1219243147293141486}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UI Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1298,7 +1284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5801539952395094264}
-  - component: {fileID: 7753986273190574696}
+  - component: {fileID: 1080576186868286945}
   - component: {fileID: 5936613635591711961}
   m_Layer: 2
   m_Name: RevealingAnomaliesManager
@@ -1316,13 +1302,13 @@ Transform:
   m_GameObject: {fileID: 7801862685913070269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1, z: 0.4}
+  m_LocalPosition: {x: -0, y: 1, z: 1.5000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9088011822157485522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7753986273190574696
+--- !u!65 &1080576186868286945
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1339,10 +1325,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 2.9999995, z: 29.584877}
-  m_Center: {x: 0, y: 0, z: 14.7924385}
+  m_Size: {x: 5, y: 3, z: 20}
+  m_Center: {x: 0, y: 0, z: 10}
 --- !u!114 &5936613635591711961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,7 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d325bc9d63a95469a3b27c72dcfd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCollider: {fileID: 7753986273190574696}
 --- !u!1 &8792227271324220954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,7 +1401,7 @@ Transform:
   m_GameObject: {fileID: 8827896949882553812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.59, y: -0.531, z: 1.59}
+  m_LocalPosition: {x: 0, y: -0.531, z: 2.768}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
