@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 8894318954006076969}
   - component: {fileID: 1060018834660487488}
   - component: {fileID: 7436156349101976439}
+  - component: {fileID: 586381003278203724}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -187,16 +188,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b8291c4fcfd8498d244be5cb16fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anomaliesCamera: {fileID: 950392395326506303}
   photoDisplayArea: {fileID: 0}
   photoFrame: {fileID: 0}
   cameraUI: {fileID: 0}
-  anomaliesCamRT: {fileID: 8400000, guid: ed764a1833741eb4e992c1d2ff564c70, type: 2}
   cameraFlash: {fileID: 3966516001980533802}
   flashTime: 0.2
   fadingAnimation: {fileID: 0}
   cameraAudio: {fileID: 1060018834660487488}
   cameraClickClip: {fileID: 8300000, guid: 3d4705b85564a6047b1db0676cf182f8, type: 3}
   noPhotosClip: {fileID: 8300000, guid: 999bd9f014d5f4e4ab17d0a8bf21ed9b, type: 3}
+  savePhoto: {fileID: 586381003278203724}
   canTakePhoto: 1
   hasCameraEquiped: 0
 --- !u!114 &8894318954006076969
@@ -325,6 +327,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnomaliesCameraGO: {fileID: 2605687872625625690}
+--- !u!114 &586381003278203724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195075f305266ee4397460a82630bc48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0
