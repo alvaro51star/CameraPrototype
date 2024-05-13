@@ -36,7 +36,6 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (m_interactiveObjects.Count != 0)
         {
-            print("checking)");
             CheckActualInputInteractiveObject();
         }
     }
@@ -134,11 +133,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void InputInteraction()
     {
-        if (m_actualInputInteractiveObject == null)
-        {
-            print("wtf");
-        }
-
         if (m_canInteract && m_actualInputInteractiveObject != null && !m_isReading)
         {
             print("interacts");
@@ -184,6 +178,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             print("null");
             m_actualInputInteractiveObject = null;
+            StopInteracting();
         }
 
 
