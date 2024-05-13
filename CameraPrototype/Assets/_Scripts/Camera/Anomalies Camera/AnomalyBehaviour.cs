@@ -7,7 +7,7 @@ public class AnomalyBehaviour : MonoBehaviour
 {
     private Camera anomalyCamera;
     private AnomaliesData anomaliesData;
-    public bool isInPlayersTrigger;
+    [HideInInspector] public bool isInPlayersTrigger;
     private void OnEnable()
     {
         EventManager.OnTakingPhoto += OnTakingPhoto;
@@ -44,7 +44,7 @@ public class AnomalyBehaviour : MonoBehaviour
 
         RevealAnomaly();
     }
-    private void RevealAnomaly()
+    public void RevealAnomaly()
     {
         if (anomaliesData.revealType)
         {
@@ -71,6 +71,11 @@ public class AnomalyBehaviour : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+        }
+
+        if (gameObject.GetComponent<AnomaliesLink>())
+        {
+            gameObject.GetComponent<AnomaliesLink>().RevealOtherAnomaly();
         }
 
         anomaliesData.enabled = false;
