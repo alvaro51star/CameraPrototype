@@ -10,12 +10,15 @@ public class StalkerBehaviour : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    public Transform pointToLook;
+
     [Header("States")]
     State states;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
     public PlayerCatchState playerCatchState;
+    public OutOfSightState outOfSightState;
 
 
     public bool isVisible = false;
@@ -44,13 +47,11 @@ public class StalkerBehaviour : MonoBehaviour
         stunnedState.SetUp(navMesh, animator, this);
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
+        outOfSightState.SetUp(gameObject, this);
     }
 
     void Start()
     {
-        
-
-
         states = stalkState;
         states.Enter();
 
@@ -144,6 +145,13 @@ public class StalkerBehaviour : MonoBehaviour
         states = stunnedState;
         states.Enter();
     }
+
+    public void OutOfSight()
+    {
+        states = outOfSightState;
+        states.Enter();
+    }
+
 
     #endregion
 
