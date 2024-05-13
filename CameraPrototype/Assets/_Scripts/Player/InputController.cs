@@ -49,7 +49,7 @@ public class InputController : MonoBehaviour
     {
         if (context.performed)
         {
-            m_playerBehaviour.Interaction();
+            m_playerBehaviour.InputInteraction();
         }
     }
 
