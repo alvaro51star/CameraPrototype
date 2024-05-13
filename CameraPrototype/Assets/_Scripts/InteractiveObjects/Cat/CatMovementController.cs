@@ -7,36 +7,33 @@ public class CatMovementController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
-    private int timesPetted, maxTimesPetted;
+    private int destinationPoint, maxDestinationPoints;
 
-    private void OnEnable()
-    {
-        EventManager.OnCatPetted += OnCatPetted;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnCatPetted -= OnCatPetted;
-    }
     private void Start()
     {
-        maxTimesPetted = destination.Count;
+        maxDestinationPoints = destination.Count;
     }
 
-    private void OnCatPetted()
+    private void CatMovement()
     {
        if(!agent.hasPath)
         {
-            timesPetted++;           
-            if (timesPetted <= maxTimesPetted)
+            destinationPoint++;           
+            if (destinationPoint <= maxDestinationPoints)
             {              
-                agent.SetDestination(destination[timesPetted - 1].position);
+                agent.SetDestination(destination[destinationPoint - 1].position);
             }
             else
             {
                 this.enabled = false;
-                this.gameObject.GetComponent<InteractiveObject>().enabled = false;
             }
         }        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!other.gameObject.CompareTag("Player"))
+            return;
+        CatMovement();       
     }
 }
