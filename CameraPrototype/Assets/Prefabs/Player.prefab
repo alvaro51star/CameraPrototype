@@ -928,6 +928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  cameraTransform: {fileID: 6993178769227744097}
   maxDistance: 10
   maxAngleVision: 15
   maxAngleVisionJumpScare: 30

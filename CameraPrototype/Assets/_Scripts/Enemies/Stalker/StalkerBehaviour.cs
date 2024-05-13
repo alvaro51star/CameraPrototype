@@ -10,6 +10,8 @@ public class StalkerBehaviour : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    public Transform pointToLook;
+
     [Header("States")]
     State states;
     public StalkState stalkState;
