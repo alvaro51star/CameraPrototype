@@ -133,6 +133,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void StopInteracting()
     {
         m_canInteract = false;
+        m_isLockedDoor = false;
         UIManager.instance.InteractionAvialable(false, false);
         UIManager.instance.SetInteractionText(false, "");
     }

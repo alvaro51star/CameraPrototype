@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5042473886982327070}
   - component: {fileID: 3911481500043232269}
   - component: {fileID: 6755603954344858013}
-  - component: {fileID: 86269157577422800}
+  - component: {fileID: 4607164012327114277}
   m_Layer: 0
   m_Name: ObjetoMalditoFinal
   m_TagString: Untagged
@@ -8701,7 +8701,7 @@ MonoBehaviour:
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 0}
   m_interactionPivot: {fileID: 6622900257994407915}
---- !u!114 &86269157577422800
+--- !u!114 &4607164012327114277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8710,7 +8710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3574943763969383776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df6f66434a6ead48a0b6709a6a5306c, type: 3}
+  m_Script: {fileID: 11500000, guid: c4375f7bc090e484c963eed7f69cc1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactText: Coge el objeto maldito
@@ -8719,3 +8719,4 @@ MonoBehaviour:
   m_targetObject: {fileID: 0}
   m_dissapears: 1
   m_affectsPositive: 0
+  m_finalTrigger: {fileID: 0}

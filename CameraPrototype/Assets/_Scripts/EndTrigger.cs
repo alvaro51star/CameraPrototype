@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour
 {
-    [SerializeField] private UIManager uIManager;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PlayerMovement>())
+        if(other.gameObject.tag == "Player")
         {            
-            uIManager.ActivateLoseMenu();
-            GameManager.Instance.CopyTimeToClipboard();
-        }//
+            TestingManager.Instance.AddTime(GameFinalState.Win);
+            UIManager.instance.ActivateWinMenu();
+        }
     }
 }
