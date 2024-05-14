@@ -5069,7 +5069,7 @@ MonoBehaviour:
   mouseLimited: 1
   pauseMenu: {fileID: 2110951741907010571}
   diaryPanel: {fileID: 2736315905493729124}
-  loseMenu: {fileID: 0}
+  loseMenu: {fileID: 7641473580033363112}
   winMenu: {fileID: 0}
   m_cameraUI: {fileID: 0}
   m_controls: {fileID: 1885132690962163979}
@@ -5081,6 +5081,7 @@ MonoBehaviour:
   m_interactionText: {fileID: 8208548784858997318}
   m_lockImage: {fileID: 5224835171361323292}
   dialoguePanel: {fileID: 4533068616784040531}
+  m_isInDialogue: 0
   m_safePanel: {fileID: 5461678836108991559}
   m_redLight: {fileID: 6303702912065453149}
   m_greenLight: {fileID: 4929196969937939583}
@@ -5097,10 +5098,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dca77670897ff34a83b32b0ecee26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 6868914737284953283}
   dialogueText: {fileID: 6975795034243279877}
   typingTime: 0.03
   nexLineTime: 2
+  elevatorAnimator: {fileID: 0}
+  elevatorAnimator2: {fileID: 0}
   dialogueGameObject: {fileID: 4533068616784040531}
   didDialogueStart: 0
 --- !u!1 &5461678836108991559
