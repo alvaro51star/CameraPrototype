@@ -46,9 +46,13 @@ public class TestingManager : MonoBehaviour
         {
             timeString.Concat(" ---> Win");
         }
-        else
+        else if (finalState == GameFinalState.Lost)
         {
             timeString.Concat(" ---> Lost");
+        }
+        else
+        {
+            timeString.Concat(" ---> Exit from pause menu");
         }
 
         GameManager.Instance.AddTimeToList(timeString);
@@ -58,5 +62,6 @@ public class TestingManager : MonoBehaviour
 public enum GameFinalState
 {
     Lost,
-    Win
+    Win,
+    ExitFromPauseMenu
 }
