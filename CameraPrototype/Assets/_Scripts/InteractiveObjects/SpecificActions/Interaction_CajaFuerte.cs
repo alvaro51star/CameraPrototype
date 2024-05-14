@@ -14,23 +14,13 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     [SerializeField] private AudioClip m_safeOpen;
     private bool m_isOpen = false;
     private string m_actualCode = "";
-    private bool m_hasOpened;
 
     protected override void FirstAction()
     {
-        if (!m_hasOpened)
+        if (!m_isOpen)
         {
-            if (!m_isOpen)
-            {
-                UIManager.instance.ShowSafe(true);
-                EventManager.OnIsReading?.Invoke();
-            }
-            else
-            {
-                AudioManager.Instance.ReproduceSound(m_safeOpen);
-                ChangeActiveMode(m_targetObject, true);
-                m_hasOpened = true;
-            }
+            UIManager.instance.ShowSafe(true);
+            EventManager.OnIsReading?.Invoke();
         }
     }
 
@@ -67,6 +57,8 @@ public class Interaction_CajaFuerte : AffectsIndirectly
             UIManager.instance.ShowLight(true, false);
             AudioManager.Instance.ReproduceSound(m_rightSound);
             AudioManager.Instance.ReproduceSound(m_safeUnlockSound);
+            AudioManager.Instance.ReproduceSound(m_safeOpen);
+            ChangeActiveMode(m_targetObject, true);
         }
         else
         {

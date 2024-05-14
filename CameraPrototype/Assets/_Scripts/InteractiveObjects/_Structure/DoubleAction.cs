@@ -6,6 +6,13 @@ public class DoubleAction : InteractionScript
 {
     //Variables
     protected bool m_firstAction = true;
+    [SerializeField] protected string m_firstMessage;
+    [SerializeField] protected string m_secondMessage;
+    private void Start()
+    {
+        m_interactText = m_firstMessage;
+    }
+
     public override void Action(GameObject player)
     {
         if (m_firstAction)
@@ -22,10 +29,12 @@ public class DoubleAction : InteractionScript
     protected virtual void FirstAction()
     {
         m_firstAction = false;
+        m_interactText = m_firstMessage;
     }
 
     protected virtual void SecondActon()
     {
         m_firstAction = true;
+        m_interactText = m_secondMessage;
     }
 }

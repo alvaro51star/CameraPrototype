@@ -101,6 +101,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionPivot: {fileID: 0}
 --- !u!114 &5594875329717649240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37de282b26ef824ab7dca4847525741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_interactText: "Colocar mu\xF1eco"
   m_targetObject: {fileID: 4610608307435983090}
   m_dissapears: 0
   m_appears: 1

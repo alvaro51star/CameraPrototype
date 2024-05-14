@@ -99,6 +99,7 @@ public class UIManager : MonoBehaviour
             pauseMenu.SetActive(true);
             m_cameraUI.SetActive(false);
             SetPointersActive(false);
+            SetInteractionText(false, "");
             m_isGamePaused = true;
             playerPhotoCapture.enabled = false;
             Time.timeScale = 0f;
@@ -141,6 +142,7 @@ public class UIManager : MonoBehaviour
         m_cameraUI.SetActive(false);
         endMenu.SetActive(true);
         SetPointersActive(false);
+        SetInteractionText(false, "");
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
     }
@@ -156,6 +158,7 @@ public class UIManager : MonoBehaviour
         m_noteText.text = noteText;
         m_notePanel.SetActive(true);
         SetPointersActive(false);
+        SetInteractionText(false, "");
         EventManager.OnIsReading?.Invoke();
         m_isReading = true;
 
@@ -222,6 +225,7 @@ public class UIManager : MonoBehaviour
         if (isLockedDoor)
         {
             ChangeDoorLock(true);
+            SetInteractionText(false, "");
         }
         else
         {
@@ -264,6 +268,7 @@ public class UIManager : MonoBehaviour
         {
             EventManager.OnStopReading?.Invoke();
             SetPointersActive(true);
+            SetInteractionText(false, "");
             m_isReading = false;
 
             m_isGamePaused = false;

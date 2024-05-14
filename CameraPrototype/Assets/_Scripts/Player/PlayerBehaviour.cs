@@ -99,9 +99,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
-        UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionText());
         if (!UIManager.instance.GetIsGamePaused() && !m_isReading)
         {
+            UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
             print("me activo");
             if (m_isLockedDoor)
             {
@@ -133,6 +133,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         m_canInteract = false;
         UIManager.instance.InteractionAvialable(false, false);
+        UIManager.instance.SetInteractionText(false, "");
     }
 
     public void SimpleInteraction()

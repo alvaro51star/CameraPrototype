@@ -37,6 +37,7 @@ public class Interaction_Door : DoubleAction
             //m_animator.SetTrigger("Abrir");
             m_doorInteract = 2;
             m_animator.SetInteger("Abrir", m_doorInteract);
+            
         }
     }
 

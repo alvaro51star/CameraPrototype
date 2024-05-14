@@ -14,6 +14,8 @@ public static class EventManager
     //Puerta
     public static Action OnDoorLocked;
     public static Action OnDoorUnLocked;
+    public static Action OnDoorOpened;
+    public static Action OnDoorClosed;
 
     //Interactions
     public static Action OnIsReading;
