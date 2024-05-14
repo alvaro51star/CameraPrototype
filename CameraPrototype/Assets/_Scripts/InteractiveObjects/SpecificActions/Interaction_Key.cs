@@ -7,7 +7,7 @@ public class Interaction_Key : AffectsIndirectly
     protected override void FirstAction()
     {
         Interaction_Door door = m_targetObject.GetComponent<Interaction_Door>();
-        door?.SetlockDoor(false);
+        door?.SetlockDoor(m_affectsPositive);
         print("funciono");
     }
 }

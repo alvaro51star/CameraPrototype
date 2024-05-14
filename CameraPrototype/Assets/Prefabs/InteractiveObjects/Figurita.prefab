@@ -200,3 +200,4 @@ MonoBehaviour:
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1
+  m_affectsPositive: 1

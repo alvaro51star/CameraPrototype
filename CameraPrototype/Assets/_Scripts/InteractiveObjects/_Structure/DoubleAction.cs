@@ -29,12 +29,14 @@ public class DoubleAction : InteractionScript
     protected virtual void FirstAction()
     {
         m_firstAction = false;
-        m_interactText = m_firstMessage;
     }
 
     protected virtual void SecondActon()
     {
         m_firstAction = true;
-        m_interactText = m_secondMessage;
+        if (m_secondMessage != null)
+        {
+            m_interactText = m_secondMessage;
+        }
     }
 }

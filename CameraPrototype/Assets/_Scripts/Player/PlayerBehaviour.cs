@@ -138,12 +138,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void SimpleInteraction()
     {
-        if (m_canInteract && m_interactiveObjects != null && !m_isReading)
-        {
-            m_actualSimpleInteractiveObject.Interact(this.gameObject);
-            m_actualSimpleInteractiveObject = null;
-            StopInteracting();
-        }
+        m_actualSimpleInteractiveObject.Interact(this.gameObject);
+        m_actualSimpleInteractiveObject = null;
     }
 
     public void InputInteraction()
