@@ -11,6 +11,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
     [SerializeField] private float nexLineTime;
+    [SerializeField] private Animator elevatorAnimator;
+    [SerializeField] private Animator elevatorAnimator2;
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
@@ -18,7 +20,7 @@ public class DialogueController : MonoBehaviour
    
     private int lineIndex;
     private string[] dialogueLines;
-    private GameObject activeTrigger;
+    //private GameObject activeTrigger;
     private void Awake()
     {
         if (instance == null)
@@ -33,7 +35,8 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(string[] textLines, GameObject trigger)
     {
-        activeTrigger = trigger;
+        //activeTrigger = trigger;
+        EventManager.OnIsReading?.Invoke();
         /*
         uiManager.IsInGame(false); // parar interacciones
         uiManager.DesactivateAllUIGameObjects(); //desactivar UI (ya lo ha hecho miriam)
@@ -49,6 +52,7 @@ public class DialogueController : MonoBehaviour
         lineIndex = 0;
         StartCoroutine(ShowLine());
     }
+
     public void EndDialogue()
     {
         didDialogueStart = false;
@@ -57,7 +61,13 @@ public class DialogueController : MonoBehaviour
         uiManager.IsInGame(true); //meter interaccion
         */
         uiManager.dialoguePanel.SetActive(false);
+
+        elevatorAnimator.Play("ANIM_PuertaASC1");
+        elevatorAnimator2.Play("ANIM_PuertaASC2");
+
+        EventManager.OnStopReading?.Invoke();
     }
+
     private IEnumerator ShowLine()
     {
         dialogueText.text = string.Empty;
@@ -70,6 +80,7 @@ public class DialogueController : MonoBehaviour
         yield return new WaitForSecondsRealtime(nexLineTime);
         NextDialogueLine();
     }
+
     public void NextDialogueLine()
     {
         //SoundManager.instance.ReproduceSound(AudioClipsNames.Click, audioSource);
@@ -95,6 +106,7 @@ public class DialogueController : MonoBehaviour
             EndLineFast();
         }
     }
+
     private void EndLineFast()
     {
         StopAllCoroutines();
