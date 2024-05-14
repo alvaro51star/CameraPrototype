@@ -57,6 +57,14 @@ public class TestingManager : MonoBehaviour
 
         GameManager.Instance.AddTimeToList(timeString);
     }
+
+    public void AddTimeFromMenu()
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        string timeString = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
+        timeString.Concat(" ---> Exit from pause menu");
+        GameManager.Instance.AddTimeToList(timeString);
+    }
 }
 
 public enum GameFinalState
