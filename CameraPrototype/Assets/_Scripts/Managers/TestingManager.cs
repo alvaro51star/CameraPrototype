@@ -50,6 +50,10 @@ public class TestingManager : MonoBehaviour
         {
             timeString.Concat(" ---> Lost");
         }
+        else if (finalState == GameFinalState.RestartFromMenu)
+        {
+            timeString.Concat(" ---> Restart from pause menu");
+        }
         else
         {
             timeString.Concat(" ---> Exit from pause menu");
@@ -58,11 +62,19 @@ public class TestingManager : MonoBehaviour
         GameManager.Instance.AddTimeToList(timeString);
     }
 
-    public void AddTimeFromMenu()
+    public void AddTimeFromExit()
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);
         string timeString = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
         timeString.Concat(" ---> Exit from pause menu");
+        GameManager.Instance.AddTimeToList(timeString);
+    }
+
+    public void AddTimeFromRestart()
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        string timeString = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
+        timeString.Concat(" ---> Restart from pause menu");
         GameManager.Instance.AddTimeToList(timeString);
     }
 }
@@ -71,5 +83,6 @@ public enum GameFinalState
 {
     Lost,
     Win,
-    ExitFromPauseMenu
+    ExitFromPauseMenu,
+    RestartFromMenu
 }

@@ -52,6 +52,5 @@ public class GameManager : MonoBehaviour
     {
         CopyTimeToClipboard();
     }
-
-
+    
 }

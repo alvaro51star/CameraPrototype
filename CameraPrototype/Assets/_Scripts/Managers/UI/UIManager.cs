@@ -162,10 +162,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void LoadSceneMainMenu()
-    {
-        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
-    }
+    
 
     public void ActivateWinMenu()
     {
