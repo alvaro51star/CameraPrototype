@@ -49,6 +49,6 @@ public class PlayerCatchState : State
         yield return new WaitForSeconds(1.5f);
         //EndGame
         TestingManager.Instance.AddTime(GameFinalState.Lost);
-        uiManager.ActivateEndMenu();
+        uiManager.ActivateLoseMenu();
     }
 }
