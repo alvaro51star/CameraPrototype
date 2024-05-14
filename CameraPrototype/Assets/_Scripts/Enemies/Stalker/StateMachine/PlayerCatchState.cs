@@ -49,6 +49,6 @@ public class PlayerCatchState : State
         yield return new WaitForSeconds(1.5f);
         //EndGame
         //GameManager.Instance.CopyTimeToClipboard();
-        uiManager.ActivateLoseMenu();
+        uiManager.ActivateEndMenu();
     }
 }
