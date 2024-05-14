@@ -28,7 +28,14 @@ public class InputController : MonoBehaviour
 
     public void OnPauseMenu(InputAction.CallbackContext context)
     {
-        UIManager.instance.PauseMenu();
+        if (UIManager.instance.GetIsPauseMenuActive())
+        {
+            UIManager.instance.Resume();
+        }
+        else
+        {
+            UIManager.instance.PauseMenu();
+        }
     }
 
     public void OnTakePhoto(InputAction.CallbackContext context)
