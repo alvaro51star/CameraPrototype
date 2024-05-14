@@ -130,8 +130,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void StopInteracting()
     {
-        m_canInteract = false;
-        UIManager.instance.InteractionAvialable(false, false);
+        if (!m_isReading)
+        {
+            m_canInteract = false;
+            UIManager.instance.InteractionAvialable(false, false);
+        }
     }
 
     public void SimpleInteraction()

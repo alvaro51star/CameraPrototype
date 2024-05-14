@@ -29,6 +29,9 @@ public class CameraManager : MonoBehaviour
     {
         m_photoCapture.SetHasCameraEquiped(false);
         CameraUI.SetActive(false);
-        UIManager.instance.SetPointersActive(true);
+        if (!UIManager.instance.GetIsReading())
+        {
+            UIManager.instance.SetPointersActive(true);
+        }
     }
 }

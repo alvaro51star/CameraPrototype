@@ -78,6 +78,11 @@ public class UIManager : MonoBehaviour
         {
             m_isGamePaused = false;
             SetPointersActive(true);
+            EventManager.OnStopReading?.Invoke();
+        }
+        else
+        {
+            EventManager.OnIsReading?.Invoke();
         }
 
         Time.timeScale = 1f;
@@ -115,6 +120,11 @@ public class UIManager : MonoBehaviour
     public bool GetIsPauseMenuActive()
     {
         return pauseMenu.activeSelf;
+    }
+
+    public bool GetIsReading()
+    {
+        return m_isReading;
     }
 
     //end menu
