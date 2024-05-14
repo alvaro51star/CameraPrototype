@@ -6,11 +6,15 @@ public class WatchEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Transform cameraTransform;
+    [Space]
+    [Header("Angle of vision variables")]
     [SerializeField] private float maxDistance = 5f;
-    [SerializeField] private float maxAngleVision = 15f;
+    [SerializeField] private float maxAngleVision = 20f;
+
+    [Space]
+    [Header("Jumpscare variables")]
     [SerializeField] private float maxAngleVisionJumpScare = 30f;
     [SerializeField] private float timeForNewJumpScare = 10f;
-
     [SerializeField] private AudioClip jumpScareSoundEffect;
 
     private bool jumpScareOnCD = false;
