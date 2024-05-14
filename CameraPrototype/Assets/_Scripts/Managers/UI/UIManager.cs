@@ -264,11 +264,17 @@ public class UIManager : MonoBehaviour
         {
             EventManager.OnStopReading?.Invoke();
             SetPointersActive(true);
+            m_isReading = false;
+
+            m_isGamePaused = false;
         }
         else
         {
             EventManager.OnIsReading?.Invoke();
             SetPointersActive(false);
+            m_isReading = true;
+
+            m_isGamePaused = true;
         }
     }
 

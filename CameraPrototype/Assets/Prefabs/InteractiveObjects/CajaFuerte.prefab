@@ -182,7 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactText: 
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionPivot: {fileID: 0}
 --- !u!114 &5036124179987220680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_targetObject: {fileID: 2207561933780244472}
   m_dissapears: 0
   m_correctCode: 6339
+  m_maxCodeNumber: 4
   m_keySounds:
   - {fileID: 8300000, guid: 7b05344d8619f704695ea1db426386e4, type: 3}
   - {fileID: 8300000, guid: 59c00c0da836a9e419b0631e6917e739, type: 3}

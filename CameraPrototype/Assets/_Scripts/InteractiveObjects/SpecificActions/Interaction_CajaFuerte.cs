@@ -6,6 +6,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
 {
     //Variables 
     [SerializeField] private string m_correctCode;
+    [SerializeField] private int m_maxCodeNumber;
     [SerializeField] private AudioClip[] m_keySounds;
     [SerializeField] private AudioClip m_wrongSound;
     [SerializeField] private AudioClip m_rightSound;
@@ -36,7 +37,10 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     public void AddActualCode(GameObject button)
     {
         ReproduceKeySound();
-        m_actualCode += button.name;
+        if (m_actualCode.Length < m_maxCodeNumber)
+        {
+            m_actualCode += button.name;
+        }
         UIManager.instance.ChangeCodeDisplay(m_actualCode);
         UIManager.instance.ShowLight(false, true);
     }
