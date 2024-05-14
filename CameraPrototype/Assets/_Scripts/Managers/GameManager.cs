@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private float playtestTime = 0f;
 
+    public List<string> timesInPlaytest;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,23 +22,25 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(Instance);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddTimeToList(String time)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            playtestTime += Time.deltaTime;
-        }
+        timesInPlaytest.Add(time);
     }
 
     public void CopyTimeToClipboard()
     {
-        TimeSpan time = TimeSpan.FromSeconds(playtestTime);
-        string timeString = string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
-        CopyToClipboard(timeString);
+        System.Text.StringBuilder times = new();
+
+        foreach (var time in timesInPlaytest)
+        {
+            times.AppendLine(time);
+        }
+
+        CopyToClipboard(times.ToString());
     }
 
     public void CopyToClipboard(string str)
@@ -49,5 +53,5 @@ public class GameManager : MonoBehaviour
         CopyTimeToClipboard();
     }
 
-    
+
 }
