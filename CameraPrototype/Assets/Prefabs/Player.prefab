@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 1060018834660487488}
   - component: {fileID: 7436156349101976439}
   - component: {fileID: 586381003278203724}
+  - component: {fileID: 4387893766438552301}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -339,6 +340,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195075f305266ee4397460a82630bc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4387893766438552301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a877032003705b74da5b826f77b205a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_photoCapture: {fileID: 2592600347508512828}
+  CameraUI: {fileID: 0}
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +721,6 @@ GameObject:
   - component: {fileID: 7021817640465769526}
   - component: {fileID: 1121478310474210229}
   - component: {fileID: 4666557413774929715}
-  - component: {fileID: 973116271337381815}
   - component: {fileID: 7761437460544118505}
   - component: {fileID: 8477173990252478856}
   m_Layer: 2
@@ -891,6 +905,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b6f88360-9dfb-4d42-9f77-649ffe320869
     m_ActionName: CameraPlayer/FocusCamera[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56a453a3-5643-4dab-b13a-99e7ba5bdd8a
+    m_ActionName: CameraPlayer/SkipText[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CameraPlayer
@@ -909,6 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_photoCapture: {fileID: 2592600347508512828}
+  m_dialogueController: {fileID: 0}
 --- !u!114 &1121478310474210229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,20 +969,6 @@ MonoBehaviour:
   jumpScareSoundEffect: {fileID: 8300000, guid: 189837364385b1f44811c2f191e3d32b,
     type: 3}
   enemyCatchTp: {fileID: 1446436902641835883}
---- !u!114 &973116271337381815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5044894124721260897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a877032003705b74da5b826f77b205a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_photoCapture: {fileID: 0}
-  CameraUI: {fileID: 0}
 --- !u!65 &7761437460544118505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -997,6 +1002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518b25756d43f754d8595120336210c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_minAngleToScreenCenter: 0
+  m_cam: {fileID: 0}
 --- !u!1 &5080582896938564869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5523773442113696523}
   - component: {fileID: 7870634677840387860}
+  - component: {fileID: 4777315484523945257}
   m_Layer: 0
   m_Name: AnomaliesCameraTrigger
   m_TagString: Untagged
@@ -1215,6 +1223,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4777315484523945257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623395459564982910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe83276f47783964897266fd8866d1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7592565844524331916
 GameObject:
   m_ObjectHideFlags: 0
