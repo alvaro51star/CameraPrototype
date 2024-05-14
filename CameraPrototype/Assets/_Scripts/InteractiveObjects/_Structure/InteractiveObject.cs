@@ -27,7 +27,11 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     public void Interact(GameObject player)
     {
         m_interactionScript.Action(player);
-        AudioManager.Instance.ReproduceSound(m_interactSound);
+        if (m_interactSound != null)
+        {
+            AudioManager.Instance.ReproduceSound(m_interactSound);
+        }
+
     }
 
     public InteractionScript GetInteractionScript()

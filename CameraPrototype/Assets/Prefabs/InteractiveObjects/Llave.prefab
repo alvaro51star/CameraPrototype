@@ -480,7 +480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactText: Coger llave
-  m_firstMessage: 
+  m_firstMessage: Coger llave
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1
+  m_affectsPositive: 0

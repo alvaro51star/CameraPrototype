@@ -45,10 +45,6 @@ public class PlayerBehaviour : MonoBehaviour
     private void NotUsingCamera()
     {
         m_hasCameraEquiped = false;
-        //if (m_interactiveObjects != null)
-        //{
-        //    IsBesideInteractableObject();
-        //}
     }
 
     private void UsingCamera()
@@ -71,6 +67,11 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnIsReading += IsReading;
     }
 
+    public bool GetIsReading()
+    {
+        return m_isReading;
+    }
+
     public bool GetCanTakePicture()
     {
         return m_hasCameraEquiped;
@@ -79,7 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject != null)
+        if (interactiveObject != null && interactiveObject.enabled == true)
         {
             if (interactiveObject.gameObject.layer != 6 && interactiveObject.gameObject.layer != 7)
             {
@@ -138,12 +139,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void SimpleInteraction()
     {
-        if (m_canInteract && m_interactiveObjects != null && !m_isReading)
-        {
-            m_actualSimpleInteractiveObject.Interact(this.gameObject);
-            m_actualSimpleInteractiveObject = null;
-            StopInteracting();
-        }
+        m_actualSimpleInteractiveObject.Interact(this.gameObject);
+        m_actualSimpleInteractiveObject = null;
     }
 
     public void InputInteraction()
@@ -220,6 +217,11 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 m_interactiveObjects.RemoveAt(i);
             }
+        }
+        if (m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.gameObject.activeSelf == false)
+        {
+            m_actualInputInteractiveObject = null;
+            StopInteracting();
         }
     }
 }

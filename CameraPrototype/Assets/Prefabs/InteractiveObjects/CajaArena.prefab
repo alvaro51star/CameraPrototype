@@ -93,7 +93,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479643690568977667}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
@@ -115,8 +115,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactText: "Colocar mu\xF1eco"
+  m_firstMessage: "Colocar mu\xF1eco"
+  m_secondMessage: 
   m_targetObject: {fileID: 4610608307435983090}
   m_dissapears: 0
+  m_affectsPositive: 0
   m_appears: 1
   m_figurePicked: 0
   m_figure: {fileID: 5661576950487176082}

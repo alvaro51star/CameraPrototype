@@ -196,7 +196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactText: "Coger mu\xF1eco"
-  m_firstMessage: 
+  m_firstMessage: "Coger mu\xF1eco"
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1
+  m_affectsPositive: 1

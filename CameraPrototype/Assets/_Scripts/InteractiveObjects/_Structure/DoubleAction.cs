@@ -8,7 +8,7 @@ public class DoubleAction : InteractionScript
     protected bool m_firstAction = true;
     [SerializeField] protected string m_firstMessage;
     [SerializeField] protected string m_secondMessage;
-    private void Start()
+    protected virtual void Start()
     {
         m_interactText = m_firstMessage;
     }
@@ -29,12 +29,15 @@ public class DoubleAction : InteractionScript
     protected virtual void FirstAction()
     {
         m_firstAction = false;
-        m_interactText = m_firstMessage;
+        if (m_secondMessage != "")
+        {
+            m_interactText = m_secondMessage;
+        }
     }
 
     protected virtual void SecondActon()
     {
         m_firstAction = true;
-        m_interactText = m_secondMessage;
+        m_interactText = m_firstMessage;
     }
 }
