@@ -5,7 +5,7 @@ using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
-    [SerializeField] private UIManager uiManager;
+    //[SerializeField] private UIManager uiManager;
     //[SerializeField] private AudioSource audioSource;
     [Header("Text variables")]
     [SerializeField] private TMP_Text dialogueText;
@@ -45,7 +45,12 @@ public class DialogueController : MonoBehaviour
         
         uiManager.dialoguePanel.SetActive(true);*/
 
-        uiManager.dialoguePanel.SetActive(true);
+        UIManager.instance.dialoguePanel.SetActive(true);
+        UIManager.instance.SetIsGamePaused(true);
+        UIManager.instance.SetPointersActive(false);
+        UIManager.instance.SetInteractionText(false, "");
+        UIManager.instance.SetIsReading(true);
+        UIManager.instance.m_isInDialogue = true;
 
         didDialogueStart = true;
         dialogueLines = textLines;
@@ -60,7 +65,11 @@ public class DialogueController : MonoBehaviour
         uiManager.DesactivateAllUIGameObjects(); //desactivar ui dialogo
         uiManager.IsInGame(true); //meter interaccion
         */
-        uiManager.dialoguePanel.SetActive(false);
+        UIManager.instance.dialoguePanel.SetActive(false);
+        UIManager.instance.SetIsGamePaused(false);
+        UIManager.instance.SetPointersActive(true);
+        UIManager.instance.SetIsReading(false);
+        UIManager.instance.m_isInDialogue = false;
 
         elevatorAnimator.Play("ANIM_PuertaASC1");
         elevatorAnimator2.Play("ANIM_PuertaASC2");

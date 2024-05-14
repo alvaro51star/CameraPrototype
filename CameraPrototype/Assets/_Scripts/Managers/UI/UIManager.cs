@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     private bool m_isLockedDoor;
     //Dialogue
     public GameObject dialoguePanel;
+    public bool m_isInDialogue;
     //puzles
     //CajaFuerte
     [SerializeField] private GameObject m_safePanel;
@@ -133,6 +134,11 @@ public class UIManager : MonoBehaviour
         return m_isGamePaused;
     }
 
+    public void SetIsGamePaused(bool mode)
+    {
+        m_isGamePaused = mode;
+    }
+
     public bool GetIsPauseMenuActive()
     {
         return pauseMenu.activeSelf;
@@ -141,6 +147,11 @@ public class UIManager : MonoBehaviour
     public bool GetIsReading()
     {
         return m_isReading;
+    }
+
+    public void SetIsReading(bool mode)
+    {
+        m_isReading = mode;
     }
 
     //end menus
