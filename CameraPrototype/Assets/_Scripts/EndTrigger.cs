@@ -9,7 +9,7 @@ public class EndTrigger : MonoBehaviour
     {
         if(other.GetComponent<PlayerMovement>())
         {            
-            uIManager.ActivateEndMenu();
+            uIManager.ActivateLoseMenu();
             GameManager.Instance.CopyTimeToClipboard();
         }//
     }

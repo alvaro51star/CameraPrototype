@@ -2166,13 +2166,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5364716822162790000}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 6868914737284953283}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Diary
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5067,7 +5067,9 @@ MonoBehaviour:
   playerPhotoCapture: {fileID: 0}
   mouseLimited: 1
   pauseMenu: {fileID: 2110951741907010571}
-  endMenu: {fileID: 7641473580033363112}
+  diaryPanel: {fileID: 2736315905493729124}
+  looseMenu: {fileID: 7641473580033363112}
+  winMenu: {fileID: 0}
   m_cameraUI: {fileID: 0}
   m_controls: {fileID: 1885132690962163979}
   m_notePanel: {fileID: 2310250467231436396}
@@ -6429,7 +6431,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6881445003708829874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6868914737284953283}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Diary
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6303702912065453149
 GameObject:
   m_ObjectHideFlags: 0
@@ -7043,7 +7057,7 @@ GameObject:
   - component: {fileID: 3691450860928253628}
   - component: {fileID: 6036533076403514913}
   m_Layer: 5
-  m_Name: End (Image)
+  m_Name: Loose (Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
