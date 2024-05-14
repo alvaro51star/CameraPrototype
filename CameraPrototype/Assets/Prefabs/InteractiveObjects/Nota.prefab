@@ -99,6 +99,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 6079898189619740222}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionPivot: {fileID: 0}
 --- !u!114 &6079898189619740222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c53405a3e812642a05b0a4cb0e3b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_interactText: Leer nota
   m_noteText: Prueba de texto
   m_paperSound: {fileID: 8300000, guid: b8a3266c1ea5f6f4995fcf6d74618791, type: 3}
 --- !u!1 &2721949071048622559

@@ -6,11 +6,13 @@ public class Interaction_Door : DoubleAction
 {
     //Variables 
     [SerializeField] private Animator m_animator;
-    [SerializeField] private bool m_isLocked;
+    [SerializeField] private bool m_isLocked; 
     [SerializeField] private AudioClip m_doorOpen;
     [SerializeField] private AudioClip m_doorClose;
     [SerializeField] private AudioClip m_doorLocked;
+    [SerializeField] private bool m_isPuertaPrincipal;
     private int m_doorInteract = 0;
+    private bool m_discoveredLocked = false;
 
     private void Start()
     {
@@ -21,6 +23,11 @@ public class Interaction_Door : DoubleAction
         if (m_isLocked)
         {
             AudioManager.Instance.ReproduceSound(m_doorLocked);
+            if (!m_discoveredLocked && !m_isPuertaPrincipal)
+            {
+                print("discovered door locjed");
+                m_discoveredLocked = true;
+            }
         }
 
         else
@@ -30,6 +37,7 @@ public class Interaction_Door : DoubleAction
             //m_animator.SetTrigger("Abrir");
             m_doorInteract = 2;
             m_animator.SetInteger("Abrir", m_doorInteract);
+            
         }
     }
 
@@ -42,8 +50,17 @@ public class Interaction_Door : DoubleAction
         m_animator.SetInteger("Abrir", m_doorInteract);
     }
 
-    public void UnlockDoor()
+    public void SetlockDoor(bool mode)
     {
-        m_isLocked = false;
+        m_isLocked = mode;
+        if (!mode && !m_isPuertaPrincipal)
+        {
+            m_discoveredLocked = false;
+        }
+    }
+
+    public bool GetDiscoveredLocked()
+    {
+        return m_discoveredLocked;
     }
 }

@@ -466,6 +466,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 1378080955486067464}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionPivot: {fileID: 0}
 --- !u!114 &1378080955486067464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,5 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df6f66434a6ead48a0b6709a6a5306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_interactText: Coger llave
+  m_firstMessage: 
+  m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1

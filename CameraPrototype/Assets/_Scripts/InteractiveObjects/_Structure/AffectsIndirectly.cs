@@ -27,7 +27,6 @@ public class AffectsIndirectly : DoubleAction, I_ActivateDeactivate
 
     protected virtual void Disappear()
     {
-        UIManager.instance.ShowInput(false);
         ChangeActiveMode(gameObject, false);
     }
 

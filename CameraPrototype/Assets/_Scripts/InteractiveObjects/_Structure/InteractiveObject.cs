@@ -7,7 +7,6 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     //Variables
     [SerializeField] private bool m_needsButton;
     [SerializeField] private InteractionScript m_interactionScript;
-    [SerializeField] private string m_interactText;
     [SerializeField] private AudioClip m_interactSound;
     public Transform m_interactionPivot;
 
@@ -30,4 +29,10 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
         m_interactionScript.Action(player);
         AudioManager.Instance.ReproduceSound(m_interactSound);
     }
+
+    public InteractionScript GetInteractionScript()
+    {
+        return m_interactionScript;
+    }
+
 }
