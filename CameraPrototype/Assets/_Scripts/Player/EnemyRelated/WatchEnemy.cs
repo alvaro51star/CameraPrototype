@@ -6,11 +6,15 @@ public class WatchEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Transform cameraTransform;
+    [Space]
+    [Header("Angle of vision variables")]
     [SerializeField] private float maxDistance = 5f;
-    [SerializeField] private float maxAngleVision = 15f;
+    [SerializeField] private float maxAngleVision = 20f;
+
+    [Space]
+    [Header("Jumpscare variables")]
     [SerializeField] private float maxAngleVisionJumpScare = 30f;
     [SerializeField] private float timeForNewJumpScare = 10f;
-
     [SerializeField] private AudioClip jumpScareSoundEffect;
 
     private bool jumpScareOnCD = false;
@@ -36,10 +40,11 @@ public class WatchEnemy : MonoBehaviour
             Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
             float angle = Vector3.Angle(cameraTransform.forward, rayDirection);
             
-            if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision)
+            if (angle <= maxAngleVision)
             {
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.green);
-                hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
+                //hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
+                enemy.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
             }
         }
     }

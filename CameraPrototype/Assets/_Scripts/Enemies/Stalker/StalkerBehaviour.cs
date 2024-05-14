@@ -4,14 +4,12 @@ using UnityEngine.AI;
 public class StalkerBehaviour : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
-
-    [SerializeField] public Renderer objectMesh;
+    public Renderer objectMesh;
     [SerializeField] private GameObject player;
-
     [SerializeField] private Animator animator;
 
     public Transform pointToLook;
-
+    [Space]
     [Header("States")]
     State states;
     public StalkState stalkState;
@@ -20,10 +18,13 @@ public class StalkerBehaviour : MonoBehaviour
     public PlayerCatchState playerCatchState;
     public OutOfSightState outOfSightState;
 
-
+    [Space]
+    [Header("Public variables")]
     public bool isVisible = false;
     public bool isStunned = false;
 
+    [Space]
+    [Header("Collision related variables")]
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private Collider collision;
     [SerializeField] private Collider triggerCollision;
@@ -117,7 +118,6 @@ public class StalkerBehaviour : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Time looked = {currentTimeLooked}");
         currentTimeLooked += deltaTime;
 
         if (currentTimeLooked >= maxTimeLooked)
