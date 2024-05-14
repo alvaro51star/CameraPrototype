@@ -27,6 +27,7 @@ public class TriggerForDialogue : MonoBehaviour
         {
             if (dialogueController.didDialogueStart)
             {
+                this.gameObject.GetComponent<Collider>().enabled = false;
                 this.gameObject.SetActive(false); //para que no vuelva a saltar el trigger           
             }
         }
