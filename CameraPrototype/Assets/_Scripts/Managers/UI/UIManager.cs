@@ -16,9 +16,11 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject diaryPanel;
     private bool m_isGamePaused = false;
     private bool m_canPause = true;
-    [SerializeField] private GameObject endMenu;
+    [SerializeField] private GameObject loseMenu;
+    [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject m_cameraUI;
     [SerializeField] private GameObject m_controls;
     //Notes
@@ -106,10 +108,23 @@ public class UIManager : MonoBehaviour
 
             if (mouseLimited)
             {
-                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-            }
-            
+            }            
+        }
+    }
+
+    public void Diary()
+    {
+        if(!diaryPanel.activeSelf)
+        {
+            diaryPanel.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            diaryPanel.SetActive(false);
+            pauseMenu.SetActive(true);
         }
     }
 
@@ -128,9 +143,9 @@ public class UIManager : MonoBehaviour
         return m_isReading;
     }
 
-    //end menu
+    //end menus
 
-    public void ActivateEndMenu()
+    public void ActivateLoseMenu()
     {
         if (mouseLimited)
         {
@@ -140,7 +155,7 @@ public class UIManager : MonoBehaviour
         m_canPause = false;
         m_isGamePaused = true;
         m_cameraUI.SetActive(false);
-        endMenu.SetActive(true);
+        loseMenu.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
         playerPhotoCapture.enabled = false;
@@ -150,6 +165,23 @@ public class UIManager : MonoBehaviour
     public void LoadSceneMainMenu()
     {
         SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+    }
+
+    public void ActivateWinMenu()
+    {
+        if (mouseLimited)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        m_canPause = false;
+        m_isGamePaused = true;
+        m_cameraUI.SetActive(false);
+        winMenu.SetActive(true);
+        SetPointersActive(false);
+        SetInteractionText(false, "");
+        playerPhotoCapture.enabled = false;
+        Time.timeScale = 0f;
     }
 
     //notes
