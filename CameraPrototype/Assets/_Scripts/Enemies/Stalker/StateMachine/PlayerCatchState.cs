@@ -48,7 +48,7 @@ public class PlayerCatchState : State
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return new WaitForSeconds(1.5f);
         //EndGame
-        //GameManager.Instance.CopyTimeToClipboard();
+        TestingManager.Instance.AddTime(GameFinalState.Lost);
         uiManager.ActivateEndMenu();
     }
 }
