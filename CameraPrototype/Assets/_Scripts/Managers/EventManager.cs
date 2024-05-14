@@ -11,6 +11,10 @@ public static class EventManager
     //Gato
     public static Action OnCatPetted;
 
+    //Puerta
+    public static Action OnDoorLocked;
+    public static Action OnDoorUnLocked;
+
     //Interactions
     public static Action OnIsReading;
     public static Action OnStopReading;

@@ -24,8 +24,14 @@ public class UIManager : MonoBehaviour
     //Notes
     [SerializeField] private GameObject m_notePanel;
     [SerializeField] private TextMeshProUGUI m_noteText;
-    //Input
+    private bool m_isReading;
+    //Interaction
     [SerializeField] private GameObject m_interactInputImage;
+    [SerializeField] private GameObject m_punteroInteraction;
+    [SerializeField] private GameObject m_punteros;
+    [SerializeField] private TextMeshProUGUI m_interactionText;
+    [SerializeField] private GameObject m_lockImage;
+    private bool m_isLockedDoor;
     //Dialogue
     public GameObject dialoguePanel;
     //puzles
@@ -59,7 +65,6 @@ public class UIManager : MonoBehaviour
     //pause menu
     public void Resume()
     {
-        m_isPauseMenuActive = false;
         m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
         playerPhotoCapture.enabled = true;
@@ -68,6 +73,11 @@ public class UIManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+        if (!m_isReading)
+        {
+            m_isPauseMenuActive = false;
+            SetPointersActive(true);
         }
 
         Time.timeScale = 1f;
@@ -83,6 +93,7 @@ public class UIManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             m_cameraUI.SetActive(false);
+            SetPointersActive(false);
             m_isPauseMenuActive = true;
             playerPhotoCapture.enabled = false;
             Time.timeScale = 0f;
@@ -92,6 +103,7 @@ public class UIManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
             }
+            
         }
     }
 
@@ -113,6 +125,7 @@ public class UIManager : MonoBehaviour
         m_isPauseMenuActive = true;
         m_cameraUI.SetActive(false);
         endMenu.SetActive(true);
+        SetPointersActive(false);
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
     }
@@ -127,20 +140,89 @@ public class UIManager : MonoBehaviour
     {
         m_noteText.text = noteText;
         m_notePanel.SetActive(true);
-        ShowInput(false);
+        SetPointersActive(false);
+        EventManager.OnIsReading?.Invoke();
+        m_isReading = true;
+
+        m_isPauseMenuActive = true;
     }
     public void DeactivateNote()
     {
         m_noteText.text = " ";
         m_notePanel.SetActive(false);
         EventManager.OnStopReading?.Invoke();
-        ShowInput(true);
+        SetPointersActive(true);
+        m_isReading = false;
+
+        m_isPauseMenuActive = false;
     }
 
-    //Input
+    //Interaction
     public void ShowInput(bool mode)
     {
         m_interactInputImage.SetActive(mode);
+    }
+
+    public void ChangeInteractionPointer(bool mode)
+    {
+        if (mode)
+        {
+            m_punteroInteraction.SetActive(true);
+            ShowInput(true);
+        }
+        else
+        {
+            m_punteroInteraction.SetActive(false);
+            ShowInput(false);
+        }
+    }
+
+    public void SetInteractionText(bool mode, string text)
+    {
+        if (mode)
+        {
+            m_interactionText.gameObject.SetActive(true);
+            m_interactionText.text = text;
+        }
+        else
+        {
+            m_interactionText.text = "";
+            m_interactionText.gameObject.SetActive(false);
+        }
+    }
+
+    public void ChangeDoorLock(bool mode)
+    {
+        if (m_lockImage.activeSelf != mode)
+        {
+            m_punteros.SetActive(!mode);
+            ShowInput(!mode);
+            m_lockImage.SetActive(mode);
+            m_isLockedDoor = mode;
+        }
+    }
+
+    public void InteractionAvialable(bool mode, bool isLockedDoor)
+    {
+        if (isLockedDoor)
+        {
+            ChangeDoorLock(true);
+        }
+        else
+        {
+            ChangeDoorLock(false);
+            ChangeInteractionPointer(mode);
+        }
+    }
+
+    public void SetPointersActive(bool mode)
+    {
+        m_punteros.SetActive(mode);
+        m_lockImage.SetActive(m_isLockedDoor);
+        if (!mode)
+        {
+            ShowInput(false);
+        }
     }
 
     public void Controls()
@@ -166,12 +248,12 @@ public class UIManager : MonoBehaviour
         if (!mode)
         {
             EventManager.OnStopReading?.Invoke();
-            ShowInput(true);
+            SetPointersActive(true);
         }
         else
         {
             EventManager.OnIsReading?.Invoke();
-            ShowInput(false);
+            SetPointersActive(false);
         }
     }
 

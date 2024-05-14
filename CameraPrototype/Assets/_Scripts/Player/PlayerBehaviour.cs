@@ -15,6 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
     private InteractiveObject m_actualInputInteractiveObject;
     private bool m_hasCameraEquiped = false;
     private bool m_isReading;
+    private bool m_isLockedDoor;
 
     private void OnEnable()
     {
@@ -37,6 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (m_interactiveObjects.Count != 0)
         {
             CheckActualInputInteractiveObject();
+            CheckObjectListNull();
         }
     }
 
@@ -97,7 +99,18 @@ public class PlayerBehaviour : MonoBehaviour
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
-        UIManager.instance.ShowInput(true);
+        if (!UIManager.instance.GetIsPauseMenuActive() && !m_isReading)
+        {
+            print("me activo");
+            if (m_isLockedDoor)
+            {
+                UIManager.instance.InteractionAvialable(true, true);
+            }
+            else
+            {
+                UIManager.instance.InteractionAvialable(true, false);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -118,7 +131,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void StopInteracting()
     {
         m_canInteract = false;
-        UIManager.instance.ShowInput(false);
+        UIManager.instance.InteractionAvialable(false, false);
     }
 
     public void SimpleInteraction()
@@ -168,8 +181,21 @@ public class PlayerBehaviour : MonoBehaviour
         if (nearestAngle <= m_minAngleToScreenCenter)
         {
             m_actualInputInteractiveObject = nearestIteractiveObject;
-            if (!m_hasCameraEquiped)
+            
+
+            if (!m_hasCameraEquiped && !m_isReading)
             {
+                if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>() != null)
+                {
+                    if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>().GetDiscoveredLocked())
+                    {
+                        m_isLockedDoor = true;
+                    }
+                    else
+                    {
+                        m_isLockedDoor = false;
+                    }
+                }
                 IsBesideInteractableObject();
             }
         }
@@ -182,5 +208,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
 
+    }
+
+    private void CheckObjectListNull()
+    {
+        for (int i = 0; i < m_interactiveObjects.Count; i++)
+        {
+            if (m_interactiveObjects[i] == null || m_interactiveObjects[i].gameObject.activeSelf == false)
+            {
+                m_interactiveObjects.RemoveAt(i);
+            }
+        }
     }
 }

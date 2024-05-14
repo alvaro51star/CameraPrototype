@@ -20291,7 +20291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &985447375
 Transform:
   m_ObjectHideFlags: 0
@@ -23104,6 +23104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b4f94634c026f44bbc8811fb412a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intensityLevel: 0
+  timeToEnterFirstLevel: 120
+  timeToEnterSecondLevel: 300
+  timeToEnterThirdLevel: 480
 --- !u!1 &1298316855
 GameObject:
   m_ObjectHideFlags: 0
