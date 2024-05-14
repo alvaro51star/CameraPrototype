@@ -14,8 +14,9 @@ public class Interaction_Door : DoubleAction
     private int m_doorInteract = 0;
     private bool m_discoveredLocked = false;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_animator = GetComponent<Animator>();
     }
     protected override void FirstAction()

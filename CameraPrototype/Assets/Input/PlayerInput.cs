@@ -98,6 +98,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipText"",
+                    ""type"": ""Button"",
+                    ""id"": ""56a453a3-5643-4dab-b13a-99e7ba5bdd8a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -294,7 +303,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -307,6 +316,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""FocusCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b427f887-2eb0-45c7-ba7c-b10f3019f67b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""FocusCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80e321c1-d845-4e72-bfd7-b1f85f79ac6b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SkipText"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abdb8aab-b7ae-4435-8d14-9c6a6fd941fe"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""SkipText"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -353,6 +395,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CameraPlayer_RotatePlayer = m_CameraPlayer.FindAction("RotatePlayer", throwIfNotFound: true);
         m_CameraPlayer_PauseMenu = m_CameraPlayer.FindAction("PauseMenu", throwIfNotFound: true);
         m_CameraPlayer_FocusCamera = m_CameraPlayer.FindAction("FocusCamera", throwIfNotFound: true);
+        m_CameraPlayer_SkipText = m_CameraPlayer.FindAction("SkipText", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -422,6 +465,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraPlayer_RotatePlayer;
     private readonly InputAction m_CameraPlayer_PauseMenu;
     private readonly InputAction m_CameraPlayer_FocusCamera;
+    private readonly InputAction m_CameraPlayer_SkipText;
     public struct CameraPlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -434,6 +478,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @RotatePlayer => m_Wrapper.m_CameraPlayer_RotatePlayer;
         public InputAction @PauseMenu => m_Wrapper.m_CameraPlayer_PauseMenu;
         public InputAction @FocusCamera => m_Wrapper.m_CameraPlayer_FocusCamera;
+        public InputAction @SkipText => m_Wrapper.m_CameraPlayer_SkipText;
         public InputActionMap Get() { return m_Wrapper.m_CameraPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -467,6 +512,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @FocusCamera.started += instance.OnFocusCamera;
             @FocusCamera.performed += instance.OnFocusCamera;
             @FocusCamera.canceled += instance.OnFocusCamera;
+            @SkipText.started += instance.OnSkipText;
+            @SkipText.performed += instance.OnSkipText;
+            @SkipText.canceled += instance.OnSkipText;
         }
 
         private void UnregisterCallbacks(ICameraPlayerActions instance)
@@ -495,6 +543,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @FocusCamera.started -= instance.OnFocusCamera;
             @FocusCamera.performed -= instance.OnFocusCamera;
             @FocusCamera.canceled -= instance.OnFocusCamera;
+            @SkipText.started -= instance.OnSkipText;
+            @SkipText.performed -= instance.OnSkipText;
+            @SkipText.canceled -= instance.OnSkipText;
         }
 
         public void RemoveCallbacks(ICameraPlayerActions instance)
@@ -540,5 +591,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRotatePlayer(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnFocusCamera(InputAction.CallbackContext context);
+        void OnSkipText(InputAction.CallbackContext context);
     }
 }

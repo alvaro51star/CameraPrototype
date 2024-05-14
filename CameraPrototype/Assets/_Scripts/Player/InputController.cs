@@ -71,4 +71,12 @@ public class InputController : MonoBehaviour
             EventManager.OnNotUsingCamera?.Invoke();
         }
     }
+
+    public void OnSkipText(InputAction.CallbackContext context)
+    {
+        if (context.performed && m_playerBehaviour.GetIsReading())
+        {
+
+        }
+    }
 }

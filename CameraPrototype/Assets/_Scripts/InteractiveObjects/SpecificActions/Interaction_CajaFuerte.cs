@@ -59,6 +59,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
             AudioManager.Instance.ReproduceSound(m_safeUnlockSound);
             AudioManager.Instance.ReproduceSound(m_safeOpen);
             ChangeActiveMode(m_targetObject, true);
+            GetComponent<InteractiveObject>().enabled = false;
         }
         else
         {

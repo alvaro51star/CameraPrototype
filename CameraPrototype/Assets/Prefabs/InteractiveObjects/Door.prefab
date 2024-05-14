@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c15e0ff17e7f64596fc4132f86f08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: 
+  m_interactText: Abrir puerta
   m_firstMessage: Abrir puerta
   m_secondMessage: Cerrar puerta
   m_animator: {fileID: 0}
