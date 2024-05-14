@@ -9,11 +9,13 @@ public class InputController : MonoBehaviour
     private PlayerMovement m_playerMovement;
     private PlayerBehaviour m_playerBehaviour;
     [SerializeField] private PhotoCapture m_photoCapture;
+    [SerializeField] private DialogueController m_dialogueController;
 
     private void Start()
     {
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerBehaviour = GetComponent<PlayerBehaviour>();
+        m_dialogueController = UIManager.instance.GetComponent<DialogueController>();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -74,9 +76,9 @@ public class InputController : MonoBehaviour
 
     public void OnSkipText(InputAction.CallbackContext context)
     {
-        if (context.performed && m_playerBehaviour.GetIsReading())
+        if (context.performed && UIManager.instance.m_isInDialogue)
         {
-
+            m_dialogueController.NextDialogueLine();
         }
     }
 }
