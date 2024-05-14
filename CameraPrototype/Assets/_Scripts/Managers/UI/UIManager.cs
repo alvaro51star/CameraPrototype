@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
-    private bool m_isPauseMenuActive = false;
+    private bool m_isGamePaused = false;
     private bool m_canPause = true;
     [SerializeField] private GameObject endMenu;
     [SerializeField] private GameObject m_cameraUI;
@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
         }
         if (!m_isReading)
         {
-            m_isPauseMenuActive = false;
+            m_isGamePaused = false;
             SetPointersActive(true);
         }
 
@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
             pauseMenu.SetActive(true);
             m_cameraUI.SetActive(false);
             SetPointersActive(false);
-            m_isPauseMenuActive = true;
+            m_isGamePaused = true;
             playerPhotoCapture.enabled = false;
             Time.timeScale = 0f;
 
@@ -107,9 +107,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public bool GetIsGamePaused()
+    {
+        return m_isGamePaused;
+    }
+
     public bool GetIsPauseMenuActive()
     {
-        return m_isPauseMenuActive;
+        return pauseMenu.activeSelf;
     }
 
     //end menu
@@ -122,7 +127,7 @@ public class UIManager : MonoBehaviour
             Cursor.visible = true;
         }
         m_canPause = false;
-        m_isPauseMenuActive = true;
+        m_isGamePaused = true;
         m_cameraUI.SetActive(false);
         endMenu.SetActive(true);
         SetPointersActive(false);
@@ -144,7 +149,7 @@ public class UIManager : MonoBehaviour
         EventManager.OnIsReading?.Invoke();
         m_isReading = true;
 
-        m_isPauseMenuActive = true;
+        m_isGamePaused = true;
     }
     public void DeactivateNote()
     {
@@ -154,7 +159,7 @@ public class UIManager : MonoBehaviour
         SetPointersActive(true);
         m_isReading = false;
 
-        m_isPauseMenuActive = false;
+        m_isGamePaused = false;
     }
 
     //Interaction

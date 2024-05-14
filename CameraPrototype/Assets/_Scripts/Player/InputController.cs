@@ -42,7 +42,7 @@ public class InputController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!UIManager.instance.GetIsPauseMenuActive())
+            if (!UIManager.instance.GetIsGamePaused())
             {
                 if (m_photoCapture.GetFirstPhotoTaken() == false)
                 {
@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour
 
     public void OnFocusCamera(InputAction.CallbackContext context)
     {
-        if (context.started && !UIManager.instance.GetIsPauseMenuActive())
+        if (context.started && !UIManager.instance.GetIsGamePaused())
         {
             EventManager.OnUsingCamera?.Invoke();
         }

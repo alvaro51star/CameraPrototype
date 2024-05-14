@@ -99,7 +99,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
-        if (!UIManager.instance.GetIsPauseMenuActive() && !m_isReading)
+        if (!UIManager.instance.GetIsGamePaused() && !m_isReading)
         {
             print("me activo");
             if (m_isLockedDoor)
