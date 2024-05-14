@@ -99,6 +99,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
+        UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionText());
         if (!UIManager.instance.GetIsGamePaused() && !m_isReading)
         {
             print("me activo");
@@ -130,11 +131,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void StopInteracting()
     {
-        if (!m_isReading)
-        {
-            m_canInteract = false;
-            UIManager.instance.InteractionAvialable(false, false);
-        }
+        m_canInteract = false;
+        UIManager.instance.InteractionAvialable(false, false);
     }
 
     public void SimpleInteraction()

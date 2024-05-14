@@ -30,4 +30,14 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
         m_interactionScript.Action(player);
         AudioManager.Instance.ReproduceSound(m_interactSound);
     }
+
+    public InteractionScript GetInteractionScript()
+    {
+        return m_interactionScript;
+    }
+
+    public string GetInteractionText()
+    {
+        return m_interactText;
+    }
 }
