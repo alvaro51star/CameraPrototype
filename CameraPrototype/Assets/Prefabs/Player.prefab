@@ -772,8 +772,8 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 0
   m_StepOffset: 0
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.1
+  m_MinMoveDistance: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5553918729671026205
 MonoBehaviour:
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518b25756d43f754d8595120336210c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minAngleToScreenCenter: 0
+  m_minAngleToScreenCenter: 25
   m_cam: {fileID: 6707834567669073283}
 --- !u!1 &5080582896938564869
 GameObject:
