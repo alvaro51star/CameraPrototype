@@ -5502,7 +5502,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 2110951741907010571}
   diaryPanel: {fileID: 2736315905493729124}
   loseMenu: {fileID: 7641473580033363112}
-  winMenu: {fileID: 0}
+  winMenu: {fileID: 942205434975170975}
   m_cameraUI: {fileID: 0}
   m_controls: {fileID: 1885132690962163979}
   m_notePanel: {fileID: 2310250467231436396}
