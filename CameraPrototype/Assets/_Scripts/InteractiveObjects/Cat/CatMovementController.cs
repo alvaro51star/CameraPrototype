@@ -18,22 +18,32 @@ public class CatMovementController : MonoBehaviour
 
     private void CatMovement()
     {
-       if(!agent.hasPath)
+        if (agent.hasPath)
+            return;
+
+        destinationPoint++;        
+
+        if (destinationPoint <= maxDestinationPoints)
         {
-            destinationPoint++;
-            if (destinationPoint <= maxDestinationPoints)
-            {              
-                agent.SetDestination(destination[destinationPoint - 1].position);
-            }
-            else
+            var path = new NavMeshPath();
+            agent.CalculatePath(destination[destinationPoint - 1].position, path);
+
+            if (path.status != NavMeshPathStatus.PathComplete)
             {
-                m_collider.enabled = false;
-                this.enabled = false;                
+                destinationPoint--;
+                return;
             }
-        }        
+            agent.transform.LookAt(destination[destinationPoint - 1].position);
+            agent.SetDestination(destination[destinationPoint - 1].position);
+        }
+        else
+        {
+            m_collider.enabled = false;
+            this.enabled = false;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(!other.gameObject.CompareTag("Player"))
             return;
