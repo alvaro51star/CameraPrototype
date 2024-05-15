@@ -44,19 +44,19 @@ public class TestingManager : MonoBehaviour
 
         if (finalState == GameFinalState.Win)
         {
-            timeString.Concat(" ---> Win");
+            timeString += " ---> Win";
         }
         else if (finalState == GameFinalState.Lost)
         {
-            timeString.Concat(" ---> Lost");
+            timeString += " ---> Lost";
         }
         else if (finalState == GameFinalState.RestartFromMenu)
         {
-            timeString.Concat(" ---> Restart from pause menu");
+            timeString += " ---> Restart from pause menu";
         }
         else
         {
-            timeString.Concat(" ---> Exit from pause menu");
+            timeString += " ---> Exit from pause menu";
         }
 
         GameManager.Instance.AddTimeToList(timeString);
@@ -66,7 +66,7 @@ public class TestingManager : MonoBehaviour
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);
         string timeString = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
-        timeString.Concat(" ---> Exit from pause menu");
+        timeString += " ---> Exit from pause menu";
         GameManager.Instance.AddTimeToList(timeString);
     }
 
@@ -74,7 +74,7 @@ public class TestingManager : MonoBehaviour
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);
         string timeString = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
-        timeString.Concat(" ---> Restart from pause menu");
+        timeString += " ---> Restart from pause menu";
         GameManager.Instance.AddTimeToList(timeString);
     }
 }
