@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8893260237653506510}
-  - component: {fileID: 5458996487438786039}
+  - component: {fileID: 3436372289346897553}
   - component: {fileID: 9044838456842322384}
   - component: {fileID: 9185544597836393816}
   - component: {fileID: 6240631938174568748}
@@ -40,7 +40,7 @@ Transform:
   - {fileID: 7796724164049083011}
   m_Father: {fileID: 6941629015520404048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5458996487438786039
+--- !u!65 &3436372289346897553
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_doorClose: {fileID: 8300000, guid: 9c00be4baaef0ab48896f686472d8a23, type: 3}
   m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
   m_isPuertaPrincipal: 0
+  m_collider: {fileID: 4819155054347006577}
 --- !u!95 &5436261081058750397
 Animator:
   serializedVersion: 5
@@ -320,6 +321,7 @@ GameObject:
   - component: {fileID: 426712906589573333}
   - component: {fileID: 4739666709425491240}
   - component: {fileID: 8346832382212247363}
+  - component: {fileID: 4819155054347006577}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -392,6 +394,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4819155054347006577
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296156424016315225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.99999934, y: 0.94, z: 1.5786458}
+  m_Center: {x: -1.8570215e-15, y: -0.02, z: 0}
 --- !u!1 &2515412299560909694
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +719,7 @@ Transform:
   m_GameObject: {fileID: 8187854819151855042}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.02, y: 0.336, z: 1.307}
+  m_LocalPosition: {x: -0.02, y: 0.379, z: 1.307}
   m_LocalScale: {x: 0.20843045, y: 0.028584424, z: 0.828348}
   m_ConstrainProportionsScale: 0
   m_Children: []

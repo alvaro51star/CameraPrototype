@@ -11,6 +11,7 @@ public class Interaction_Door : DoubleAction
     [SerializeField] private AudioClip m_doorClose;
     [SerializeField] private AudioClip m_doorLocked;
     [SerializeField] private bool m_isPuertaPrincipal;
+    [SerializeField] private Collider m_collider;
     private int m_doorInteract = 0;
     private bool m_discoveredLocked = false;
 
@@ -45,7 +46,6 @@ public class Interaction_Door : DoubleAction
     protected override void SecondActon()
     {
         base.SecondActon();
-        AudioManager.Instance.ReproduceSound(m_doorClose);
         //m_animator.SetTrigger("Cerrar");
         m_doorInteract = 1;
         m_animator.SetInteger("Abrir", m_doorInteract);
@@ -71,5 +71,23 @@ public class Interaction_Door : DoubleAction
     public bool GetDiscoveredLocked()
     {
         return m_discoveredLocked;
+    }
+
+    public void SetCollisionFalse()
+    {
+        m_collider.enabled = false;
+    }
+
+    public void SetCollisionTrue()
+    {
+        m_collider.enabled = true;
+    }
+
+    public void PlayCloseSound()
+    {
+        if (m_doorInteract == 1)
+        {
+            AudioManager.Instance.ReproduceSound(m_doorClose);
+        }
     }
 }
