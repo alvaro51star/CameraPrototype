@@ -141,8 +141,9 @@ public class StalkState : State
         {
             closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
         }
-
+        enemy.GetComponent<NavMeshAgent>().enabled = false;
         enemy.transform.position = closestPosition.position;
+        enemy.GetComponent<NavMeshAgent>().enabled = true;
         //transform.LookAt(player.transform);
     }
 

@@ -20,13 +20,13 @@ public class OutOfSightState : State
     {
         stateName = "OutOfSight";
         EventManager.OnStatusChange?.Invoke(stateName);
+        enemy.GetComponent<NavMeshAgent>().isStopped = true;
+        enemy.GetComponent<NavMeshAgent>().speed = 0f;
 
         isComplete = false;
         currentTime = 0;
-
+        enemy.GetComponent<NavMeshAgent>().enabled = false;
         enemy.transform.position = tpPoint.position;
-        enemy.GetComponent<NavMeshAgent>().isStopped = true;
-        enemy.GetComponent<NavMeshAgent>().speed = 0f;
 
     }
 
@@ -68,6 +68,7 @@ public class OutOfSightState : State
     public override void Exit()
     {
         currentTime = 0;
+        enemy.GetComponent<NavMeshAgent>().enabled = true;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
