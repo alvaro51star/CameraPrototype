@@ -94,6 +94,9 @@ public class DialogueController : MonoBehaviour
     {
         //SoundManager.instance.ReproduceSound(AudioClipsNames.Click, audioSource);
 
+        if(dialogueText.text == string.Empty)
+            return; 
+
         if (dialogueText.text == dialogueLines[lineIndex]) //si enseña la linea completa
         {
             lineIndex++;
