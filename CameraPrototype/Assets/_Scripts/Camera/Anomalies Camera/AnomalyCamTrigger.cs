@@ -34,8 +34,14 @@ public class AnomalyCamTrigger : MonoBehaviour
     {
         if (!other.GetComponent<AnomalyBehaviour>())
             return;
-        if(!other.GetComponent<AnomalyBehaviour>().isActiveAndEnabled)
+        if (other.GetComponent<AnomalyBehaviour>().isActiveAndEnabled)
+        {
+            other.GetComponent<AnomalyBehaviour>().isInPlayersTrigger = true;
+        }
+        if(!other.GetComponent<StalkerBehaviour>())
             return;
-        other.GetComponent<AnomalyBehaviour>().isInPlayersTrigger = true;
+        if(!other.GetComponent<StalkerBehaviour>().isActiveAndEnabled)
+            return;
+        other.GetComponent<StalkerBehaviour>().StunEnemy();
     }
 }
