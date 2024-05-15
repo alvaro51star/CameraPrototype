@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class OutOfSightState : State
 {
@@ -24,6 +25,9 @@ public class OutOfSightState : State
         currentTime = 0;
 
         enemy.transform.position = tpPoint.position;
+        enemy.GetComponent<NavMeshAgent>().isStopped = true;
+        enemy.GetComponent<NavMeshAgent>().speed = 0f;
+
     }
 
     public override void Do()
@@ -64,6 +68,7 @@ public class OutOfSightState : State
     public override void Exit()
     {
         currentTime = 0;
+        enemy.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)

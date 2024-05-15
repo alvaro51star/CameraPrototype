@@ -107,8 +107,6 @@ public class StalkerBehaviour : MonoBehaviour
         }
     }
 
-
-
     #region StalkBehaviour
 
     public void AddVision(float deltaTime)
