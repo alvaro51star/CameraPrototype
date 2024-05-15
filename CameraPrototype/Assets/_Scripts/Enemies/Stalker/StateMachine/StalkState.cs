@@ -18,9 +18,9 @@ public class StalkState : State
     [SerializeField] private float timeToCompleteStalk_Level1 = 10f;
     [SerializeField] private float timeToCompleteStalk_Level2 = 5f;
 
-    private const float timeLevel0 = 20f;
-    private const float timeLevel1 = 10f;
-    private const float timeLevel2 = 5f;
+    private const float timeLevel0 = 15f;
+    private const float timeLevel1 = 7.5f;
+    private const float timeLevel2 = 3f;
 
     private bool hasBeenVisible = false;
 
