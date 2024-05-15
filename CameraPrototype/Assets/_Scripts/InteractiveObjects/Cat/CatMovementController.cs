@@ -8,7 +8,6 @@ public class CatMovementController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
     private int destinationPoint, maxDestinationPoints;
-    [SerializeField] private CatSounds catSounds;
 
     private void Start()
     {
@@ -19,15 +18,14 @@ public class CatMovementController : MonoBehaviour
     {
        if(!agent.hasPath)
         {
-            destinationPoint++;           
+            destinationPoint++;
             if (destinationPoint <= maxDestinationPoints)
             {              
                 agent.SetDestination(destination[destinationPoint - 1].position);
             }
             else
             {
-                catSounds.CatGrowl();
-                this.enabled = false;
+                this.enabled = false;                
             }
         }        
     }
