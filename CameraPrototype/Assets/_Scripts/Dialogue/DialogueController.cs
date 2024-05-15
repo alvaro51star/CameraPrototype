@@ -71,10 +71,9 @@ public class DialogueController : MonoBehaviour
         UIManager.instance.SetIsReading(false);
         UIManager.instance.m_isInDialogue = false;
 
-        elevatorAnimator.Play("ANIM_PuertaASC1");
-        elevatorAnimator2.Play("ANIM_PuertaASC2");
-
         EventManager.OnStopReading?.Invoke();
+        elevatorAnimator.enabled = true;
+        elevatorAnimator2.enabled = true;
     }
 
     private IEnumerator ShowLine()
