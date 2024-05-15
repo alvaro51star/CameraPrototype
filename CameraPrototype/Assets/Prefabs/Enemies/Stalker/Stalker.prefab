@@ -244,7 +244,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.44, z: 0}
 --- !u!135 &1659365039449232602
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -438,6 +438,9 @@ MonoBehaviour:
   animator: {fileID: 8324941161663551707}
   enemy: {fileID: 1829624780751140221}
   tpPoint: {fileID: 0}
+  timeToBeOutInLevel0: 30
+  timeToBeOutInLevel1: 20
+  timeToBeOutInLevel2: 10
 --- !u!1 &2583848469770610721
 GameObject:
   m_ObjectHideFlags: 0
