@@ -41,7 +41,7 @@ public class PhotoCapture : MonoBehaviour
 
     private void Start()
     {
-        m_renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        m_renderTexture = new RenderTexture(Screen.width, Screen.height, anomaliesCamera.targetTexture.depth);
         m_renderTexture.Create(); //creando la textura al principio ha empezado a funcionar bien CapturePhoto()
 
         anomaliesCamera.targetTexture = m_renderTexture;
