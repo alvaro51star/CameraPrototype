@@ -716,7 +716,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9088011822157485522}
-  - component: {fileID: 5215475885131330435}
+  - component: {fileID: 3091991602365778240}
   - component: {fileID: 5553918729671026205}
   - component: {fileID: 7021817640465769526}
   - component: {fileID: 1121478310474210229}
@@ -749,7 +749,7 @@ Transform:
   - {fileID: 1446436902641835883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &5215475885131330435
+--- !u!143 &3091991602365778240
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -773,7 +773,7 @@ CharacterController:
   m_SlopeLimit: 0
   m_StepOffset: 0
   m_SkinWidth: 0.1
-  m_MinMoveDistance: 0.1
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5553918729671026205
 MonoBehaviour:
