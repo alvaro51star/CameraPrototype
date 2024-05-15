@@ -84,16 +84,16 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
             {
-                isComplete = true;
                 stalkerBehaviour.OutOfSight();
+                isComplete = true;
             }
         }
         else if (LevelManager.instance.intensityLevel == 2)
         {
             if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
             {
-                isComplete = true;
                 stalkerBehaviour.OutOfSight();
+                isComplete = true;
             }
         }
         else if (LevelManager.instance.intensityLevel == 3)
