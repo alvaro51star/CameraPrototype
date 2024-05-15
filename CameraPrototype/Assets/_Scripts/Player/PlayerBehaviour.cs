@@ -15,7 +15,9 @@ public class PlayerBehaviour : MonoBehaviour
     private InteractiveObject m_actualInputInteractiveObject;
     private bool m_hasCameraEquiped = false;
     private bool m_isReading;
+    private bool m_isDoor;
     private bool m_isLockedDoor;
+    private bool m_isCat;
 
     private void OnEnable()
     {
@@ -104,13 +106,22 @@ public class PlayerBehaviour : MonoBehaviour
         {
             UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
             print("me activo");
-            if (m_isLockedDoor)
+            if (m_isDoor)
             {
-                UIManager.instance.InteractionAvialable(true, true);
+                if (m_isLockedDoor)
+                {
+                    UIManager.instance.InteractionAvialable(true, true, false);
+                }
+                else
+                {
+                    UIManager.instance.InteractionAvialable(true, false, false);
+                }
+
             }
-            else
+            else if (!m_isDoor && m_isCat)
             {
-                UIManager.instance.InteractionAvialable(true, false);
+                UIManager.instance.InteractionAvialable(true, false, true);
+
             }
         }
     }
@@ -134,7 +145,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         m_canInteract = false;
         m_isLockedDoor = false;
-        UIManager.instance.InteractionAvialable(false, false);
+        m_isDoor = false;
+        m_isCat = false;
+        UIManager.instance.InteractionAvialable(false, false, false);
         UIManager.instance.SetInteractionText(false, "");
     }
 
@@ -187,6 +200,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>() != null)
                 {
+                    m_isDoor = true;
                     if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>().GetDiscoveredLocked())
                     {
                         m_isLockedDoor = true;
@@ -196,13 +210,17 @@ public class PlayerBehaviour : MonoBehaviour
                         m_isLockedDoor = false;
                     }
                 }
+                if (m_actualInputInteractiveObject.GetComponent<Interaction_Cat>() != null)
+                {
+                    m_isCat = true;
+                    print("gato");
+                }
                 IsBesideInteractableObject();
             }
         }
 
         else
         {
-            print("null");
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }

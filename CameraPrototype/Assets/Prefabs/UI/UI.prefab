@@ -5512,6 +5512,7 @@ MonoBehaviour:
   m_punteros: {fileID: 2323980061140859090}
   m_interactionText: {fileID: 8208548784858997318}
   m_lockImage: {fileID: 5224835171361323292}
+  m_petImage: {fileID: 3475182698661049439}
   dialoguePanel: {fileID: 4533068616784040531}
   m_isInDialogue: 0
   m_safePanel: {fileID: 5461678836108991559}

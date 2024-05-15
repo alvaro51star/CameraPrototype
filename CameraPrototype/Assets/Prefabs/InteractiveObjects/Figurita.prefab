@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ecd51ff6df46141ae4c9a0ade6365c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: "Coger mu\xF1eco"
-  m_firstMessage: "Coger mu\xF1eco"
+  m_interactText: Take figurine
+  m_firstMessage: Take figurine
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1

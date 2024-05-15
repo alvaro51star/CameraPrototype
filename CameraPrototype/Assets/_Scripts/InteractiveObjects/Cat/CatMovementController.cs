@@ -8,10 +8,12 @@ public class CatMovementController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
     private int destinationPoint, maxDestinationPoints;
+    private Collider m_collider;
 
     private void Start()
     {
         maxDestinationPoints = destination.Count;
+        m_collider = GetComponent<Collider>();
     }
 
     private void CatMovement()
@@ -25,6 +27,7 @@ public class CatMovementController : MonoBehaviour
             }
             else
             {
+                m_collider.enabled = false;
                 this.enabled = false;                
             }
         }        
