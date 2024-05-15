@@ -15,6 +15,7 @@ public class PlayerCatchState : State
 
     public override void Enter()
     {
+        navMesh.enabled = true;
         StartCoroutine(CatchPlayer(player));
     }
 
