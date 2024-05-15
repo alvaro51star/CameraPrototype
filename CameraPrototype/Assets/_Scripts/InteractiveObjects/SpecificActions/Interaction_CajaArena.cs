@@ -27,6 +27,7 @@ public class Interaction_CajaArena : AffectsIndirectly
             ChangeActiveMode(m_figure, true);
             SetFigurePicked(false);
             GetComponent<InteractiveObject>().enabled = false;
+
         }
     }
 
