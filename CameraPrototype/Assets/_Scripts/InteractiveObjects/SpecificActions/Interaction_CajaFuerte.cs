@@ -12,6 +12,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     [SerializeField] private AudioClip m_rightSound;
     [SerializeField] private AudioClip m_safeUnlockSound;
     [SerializeField] private AudioClip m_safeOpen;
+    [SerializeField] private Animator anim;
     private bool m_isOpen = false;
     private string m_actualCode = "";
 
@@ -60,6 +61,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
             AudioManager.Instance.ReproduceSound(m_safeOpen);
             ChangeActiveMode(m_targetObject, true);
             GetComponent<InteractiveObject>().enabled = false;
+            anim.SetInteger("Abrir", 1);
         }
         else
         {
