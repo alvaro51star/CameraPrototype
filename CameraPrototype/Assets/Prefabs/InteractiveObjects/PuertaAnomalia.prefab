@@ -702,9 +702,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c15e0ff17e7f64596fc4132f86f08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Abrir puerta
-  m_firstMessage: Abrir puerta
-  m_secondMessage: Cerrar puerta
+  m_interactText: Open Door
+  m_firstMessage: Open Door
+  m_secondMessage: Close Door
   m_animator: {fileID: 0}
   m_isLocked: 0
   m_doorOpen: {fileID: 8300000, guid: dd33ebfa73217674580798aa6fa44fdc, type: 3}

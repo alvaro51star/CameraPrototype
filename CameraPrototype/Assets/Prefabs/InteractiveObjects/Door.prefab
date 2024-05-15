@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 613711491022696571}
   - component: {fileID: 2693481449752395402}
   - component: {fileID: 7189673109830568861}
+  - component: {fileID: 974176438548709169}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_doorClose: {fileID: 8300000, guid: 9c00be4baaef0ab48896f686472d8a23, type: 3}
   m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
   m_isPuertaPrincipal: 0
+  m_collider: {fileID: 0}
 --- !u!95 &2693481449752395402
 Animator:
   serializedVersion: 5
@@ -187,6 +189,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &974176438548709169
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910839991268187380}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3058990914945589396
 GameObject:
   m_ObjectHideFlags: 0
