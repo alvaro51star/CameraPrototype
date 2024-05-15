@@ -123,6 +123,10 @@ public class PlayerBehaviour : MonoBehaviour
                 UIManager.instance.InteractionAvialable(true, false, true);
 
             }
+            else if (!m_isDoor && !m_isCat)
+            {
+                    UIManager.instance.InteractionAvialable(true, false, false);
+            }
         }
     }
 
@@ -237,7 +241,7 @@ public class PlayerBehaviour : MonoBehaviour
                 m_interactiveObjects.RemoveAt(i);
             }
         }
-        if (m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.gameObject.activeSelf == false)
+        if (m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.gameObject.activeSelf == false || m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.enabled == false)
         {
             m_actualInputInteractiveObject = null;
             StopInteracting();
