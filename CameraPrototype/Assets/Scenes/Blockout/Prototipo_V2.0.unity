@@ -47172,6 +47172,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &830463620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1292897283591136968, guid: 902fb9af69be9664aaaa9aa4a3ee8fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449362011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &836414075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77739,6 +77745,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423336150}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1427000429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4437168019676150527, guid: 04e6895f3cf6c704fa531b35161cbca8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2068342524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427564018
 GameObject:
   m_ObjectHideFlags: 0
@@ -116826,6 +116838,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3840125387617275675, guid: 04e6895f3cf6c704fa531b35161cbca8,
+        type: 3}
+      propertyPath: m_interactionPivot
+      value: 
+      objectReference: {fileID: 1427000429}
+    - target: {fileID: 6554965641267764218, guid: 04e6895f3cf6c704fa531b35161cbca8,
+        type: 3}
+      propertyPath: m_targetObject
+      value: 
+      objectReference: {fileID: 830463620}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
