@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CatSounds : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource meowAudioSource;
+    [SerializeField] private AudioSource growlAudioSource;
 
     private void OnEnable()
     {
@@ -18,9 +19,17 @@ public class CatSounds : MonoBehaviour
 
     private void OnCatPetted()
     {
-        if(!audioSource.isPlaying)
+        if(!meowAudioSource.isPlaying)
         {
-            audioSource.Play();
+            meowAudioSource.Play();
+        }
+    }
+
+    public void CatGrowl()
+    {
+        if (!growlAudioSource.isPlaying)
+        {
+            growlAudioSource.Play();
         }
     }
 }

@@ -18,14 +18,14 @@ public class CatMovementController : MonoBehaviour
     {
        if(!agent.hasPath)
         {
-            destinationPoint++;           
+            destinationPoint++;
             if (destinationPoint <= maxDestinationPoints)
             {              
                 agent.SetDestination(destination[destinationPoint - 1].position);
             }
             else
             {
-                this.enabled = false;
+                this.enabled = false;                
             }
         }        
     }
