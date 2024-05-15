@@ -32,7 +32,6 @@ Transform:
   m_LocalScale: {x: 0.23817, y: 3.5563173, z: 1.3271}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7842257018286008451}
   - {fileID: 9019400124849155645}
   - {fileID: 3241026196383320940}
   m_Father: {fileID: 3764709040349900746}
@@ -68,11 +67,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 0.5, y: 0.5, z: 0.87}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.315, z: 0.75}
   m_TimeToStationary: 0.5
 --- !u!23 &295625410239298351
 MeshRenderer:
@@ -434,14 +433,14 @@ Transform:
   m_GameObject: {fileID: 3585068467062365800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.041986316, y: 0.35148725, z: 0.745234}
-  m_LocalScale: {x: 0.7535227, y: 0.33529067, z: 5.8029604}
+  m_LocalPosition: {x: 0, y: 1.2500002, z: 0.9890001}
+  m_LocalScale: {x: 1, y: 1.1924, z: 1.382091}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3090414848905849409}
   - {fileID: 7727720712421351840}
   - {fileID: 5697380824783380296}
-  m_Father: {fileID: 8362936686060441711}
+  m_Father: {fileID: 3764709040349900746}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &4604604793406395803
 GameObject:
@@ -472,6 +471,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7842257018286008451}
   - {fileID: 8362936686060441711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
