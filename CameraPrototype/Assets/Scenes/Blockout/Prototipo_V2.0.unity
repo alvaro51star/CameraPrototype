@@ -9959,6 +9959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07d8759452a9a64a9345feb2073e37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformToGrowl: {fileID: 2069333726}
 --- !u!65 &194343752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -117350,6 +117351,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 242480919}
   m_SourcePrefab: {fileID: 100100000, guid: ae1228569026fe7418e0013f54393a56, type: 3}
+--- !u!4 &2069333726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2857921972314257836, guid: ae1228569026fe7418e0013f54393a56,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069333725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2070568147
 GameObject:
   m_ObjectHideFlags: 0
