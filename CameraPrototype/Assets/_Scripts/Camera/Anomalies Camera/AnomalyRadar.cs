@@ -43,6 +43,7 @@ public class AnomalyRadar : MonoBehaviour
     }
     private void OnNotUsingCamera()
     {
+        anomalyRadarUI.SetActive(false);
         this.gameObject.GetComponent<Collider>().enabled = false;
     }
 }
