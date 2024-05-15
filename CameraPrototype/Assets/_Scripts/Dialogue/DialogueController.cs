@@ -105,12 +105,13 @@ public class DialogueController : MonoBehaviour
                 EndDialogue();
             }
         }
-        else if (lineIndex > dialogueLines.Length)
-        {
-            EndDialogue();
-        }
         else
         {
+            if (lineIndex > dialogueLines.Length)
+            {
+                EndDialogue();
+                return;
+            }
             EndLineFast();
         }
     }
