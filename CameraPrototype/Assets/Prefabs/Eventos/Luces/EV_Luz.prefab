@@ -322,8 +322,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 14.680702, y: 4.546708, z: 10.458232}
+  m_Center: {x: -4.808838, y: -1.773354, z: -0.12490606}
 --- !u!114 &6043237766469395092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,5 +338,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightFlickering: {fileID: 872380294167874923}
   luzSonidoFeedback: {fileID: 813392434593370400}
-  isFlickering: 0
-  timeDelay: 0
+  nRandomTime1: 1
+  nRandomTime2: 2
