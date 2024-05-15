@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnomalyCameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject AnomaliesCameraGO;
+    [SerializeField] private GameObject anomaliesCameraGO;
     private void OnEnable()
     {
         EventManager.OnUsingCamera += OnUsingCamera;
@@ -17,13 +17,20 @@ public class AnomalyCameraManager : MonoBehaviour
         EventManager.OnNotUsingCamera += OnNotUsingCamera;
     }
 
+    private void Start()
+    {
+        anomaliesCameraGO.SetActive(false);
+    }
+
     private void OnUsingCamera()
     {
-        AnomaliesCameraGO.SetActive(true);
+        if (!anomaliesCameraGO)
+            anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");
+        anomaliesCameraGO.SetActive(true);
     }
 
     private void OnNotUsingCamera()
     {
-        AnomaliesCameraGO.SetActive(false);
+        anomaliesCameraGO.SetActive(false);
     }
 }
