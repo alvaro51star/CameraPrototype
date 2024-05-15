@@ -41,6 +41,7 @@ public class PlayerCatchState : State
     private IEnumerator CatchPlayer(GameObject player)
     {
         player.GetComponent<PlayerMovement>().m_canWalk = false;
+        player.transform.LookAt(enemy.transform);
         navMesh.isStopped = true;
         navMesh.velocity = Vector3.zero;
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
