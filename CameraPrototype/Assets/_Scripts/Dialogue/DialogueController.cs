@@ -74,6 +74,7 @@ public class DialogueController : MonoBehaviour
         EventManager.OnStopReading?.Invoke();
         elevatorAnimator.enabled = true;
         elevatorAnimator2.enabled = true;
+        this.enabled = false;
     }
 
     private IEnumerator ShowLine()
