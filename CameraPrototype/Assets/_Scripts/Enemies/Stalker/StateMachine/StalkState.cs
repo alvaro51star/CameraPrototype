@@ -131,7 +131,7 @@ public class StalkState : State
             foreach (var stalkPoint in stalkPointsReachable)
             {
                 if (Vector3.Distance(stalkPoint.position, stalkerBehaviour.player.transform.position)
-                 <= Vector3.Distance(closestPosition.position, stalkerBehaviour.player.transform.position))
+                    <= Vector3.Distance(closestPosition.position, stalkerBehaviour.player.transform.position))
                 {
                     closestPosition = stalkPoint;
                 }

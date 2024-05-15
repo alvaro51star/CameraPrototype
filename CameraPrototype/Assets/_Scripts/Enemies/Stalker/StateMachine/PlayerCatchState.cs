@@ -40,12 +40,12 @@ public class PlayerCatchState : State
 
     private IEnumerator CatchPlayer(GameObject player)
     {
+        player.GetComponent<PlayerMovement>().m_canWalk = false;
         navMesh.isStopped = true;
         navMesh.velocity = Vector3.zero;
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
         AudioManager.Instance.ReproduceSound(jumpScareSound);
         animator.Play("Kill");
-        player.GetComponent<PlayerMovement>().m_canWalk = false;
         yield return new WaitForSeconds(1.5f);
         //EndGame
         TestingManager.Instance.AddTime(GameFinalState.Lost);
