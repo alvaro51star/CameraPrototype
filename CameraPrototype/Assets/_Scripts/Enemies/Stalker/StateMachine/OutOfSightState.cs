@@ -10,6 +10,10 @@ public class OutOfSightState : State
 
     [SerializeField] private Transform tpPoint;
 
+    [SerializeField] private float timeToBeOutInLevel0 = 30f;
+    [SerializeField] private float timeToBeOutInLevel1 = 20f;
+    [SerializeField] private float timeToBeOutInLevel2 = 10f;
+
 
     public override void Enter()
     {
@@ -28,15 +32,16 @@ public class OutOfSightState : State
 
         if (LevelManager.instance.intensityLevel == 0)
         {
-            if (currentTime < LevelManager.instance.timeToEnterFirstLevel)
+            if (currentTime < timeToBeOutInLevel0)
             {
                 return;
             }
+            
             isComplete = true;
         }
         else if (LevelManager.instance.intensityLevel == 1)
         {
-            if (currentTime < LevelManager.instance.timeToEnterSecondLevel)
+            if (currentTime < timeToBeOutInLevel1)
             {
                 return;
             }
@@ -44,7 +49,7 @@ public class OutOfSightState : State
         }
         else if (LevelManager.instance.intensityLevel == 2)
         {
-            if (currentTime < LevelManager.instance.timeToEnterThirdLevel)
+            if (currentTime < timeToBeOutInLevel2)
             {
                 return;
             }

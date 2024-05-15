@@ -40,11 +40,10 @@ public class WatchEnemy : MonoBehaviour
             Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
             float angle = Vector3.Angle(cameraTransform.forward, rayDirection);
             
-            if (angle <= maxAngleVision)
+            if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision)
             {
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.green);
-                //hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
-                enemy.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
+                hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
             }
         }
     }

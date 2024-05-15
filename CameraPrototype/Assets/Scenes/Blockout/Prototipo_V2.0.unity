@@ -68724,7 +68724,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1826923247}
   - {fileID: 1448166696}
   - {fileID: 1459838708}
   - {fileID: 1746476124}
@@ -101231,7 +101230,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1300459420}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
         type: 3}
@@ -101256,17 +101255,17 @@ PrefabInstance:
     - target: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
         type: 3}
@@ -101293,12 +101292,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87608382d3df1b54982a1ab6998bce6d, type: 3}
---- !u!4 &1826923247 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 802288772501416384, guid: 87608382d3df1b54982a1ab6998bce6d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1826923246}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1838070016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119123,11 +119116,12 @@ SceneRoots:
   - {fileID: 1876563109}
   - {fileID: 787490109}
   - {fileID: 576869639}
-  - {fileID: 1300459420}
   - {fileID: 817548637}
   - {fileID: 336678267}
   - {fileID: 2105010078}
   - {fileID: 88730263}
   - {fileID: 212823248}
   - {fileID: 1255512961}
+  - {fileID: 1300459420}
+  - {fileID: 1826923246}
   - {fileID: 987655572}
