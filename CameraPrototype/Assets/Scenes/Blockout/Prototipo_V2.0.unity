@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 10432646}
   - component: {fileID: 10432650}
   - component: {fileID: 10432649}
+  - component: {fileID: 10432651}
   m_Layer: 0
   m_Name: Marco(Mario)
   m_TagString: Untagged
@@ -930,6 +931,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7409458, y: 1.6034644, z: 0.15314674}
   m_Center: {x: -0.8405843, y: 0.8259102, z: 0.07522488}
+--- !u!114 &10432651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10432643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446ee032a613bbe42a8f73982c25b008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GO: {fileID: 110351200}
 --- !u!1 &10728418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5546,6 +5560,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108588096}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &110351200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7184452908038043689, guid: f8d258756d5a3794dabc7256edea4215,
+    type: 3}
+  m_PrefabInstance: {fileID: 2059794949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &116700097
 Mesh:
   m_ObjectHideFlags: 0
@@ -23385,7 +23405,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2059794949}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 110351200}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf52942a12de0ff4cac41b0efda079cc, type: 3}
@@ -94699,6 +94719,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1764966871}
     m_Modifications:
+    - target: {fileID: 1446436902641835883, guid: 5393f11780f6f364aafd39ee8d8d3942,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.635
+      objectReference: {fileID: 0}
     - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: cameraUI
@@ -94817,7 +94842,7 @@ PrefabInstance:
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.596
+      value: -5.89
       objectReference: {fileID: 0}
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
@@ -94827,7 +94852,7 @@ PrefabInstance:
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.901
+      value: 7.44
       objectReference: {fileID: 0}
     - target: {fileID: 9088011822157485522, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
@@ -116994,6 +117019,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CajaFuerte
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184452908038043689, guid: f8d258756d5a3794dabc7256edea4215,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786601962253106517, guid: f8d258756d5a3794dabc7256edea4215,
         type: 3}
