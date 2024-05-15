@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -111,7 +112,37 @@ public class StalkState : State
         {
             return;
         }
-        enemy.transform.position = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform.position;
+
+        Transform closestPosition;
+        List<Transform> stalkPointsReachable = new();
+
+        foreach (var stalkPoint in StalkPointsManager.instance.activeStalkPoints)
+        {
+            NavMeshPath path = new();
+            if (enemy.GetComponent<NavMeshAgent>().CalculatePath(stalkPoint.transform.position, path))
+            {
+                stalkPointsReachable.Add(stalkPoint.transform);
+            }
+        }
+
+        if (stalkPointsReachable.Count > 0)
+        {
+            closestPosition = stalkPointsReachable[0];
+            foreach (var stalkPoint in stalkPointsReachable)
+            {
+                if (Vector3.Distance(stalkPoint.position, stalkerBehaviour.player.transform.position)
+                 <= Vector3.Distance(closestPosition.position, stalkerBehaviour.player.transform.position))
+                {
+                    closestPosition = stalkPoint;
+                }
+            }
+        }
+        else
+        {
+            closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
+        }
+
+        enemy.transform.position = closestPosition.position;
         //transform.LookAt(player.transform);
     }
 
