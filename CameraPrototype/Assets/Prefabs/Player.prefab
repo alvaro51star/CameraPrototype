@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_minAngleToScreenCenter: 0
-  m_cam: {fileID: 0}
+  m_cam: {fileID: 6707834567669073283}
 --- !u!1 &5080582896938564869
 GameObject:
   m_ObjectHideFlags: 0

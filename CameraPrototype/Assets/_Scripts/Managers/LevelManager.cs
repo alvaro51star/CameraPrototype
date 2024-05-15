@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
 
         if (tempValue != intensityLevel)
         {
-            EventManager.OnLevelIntensityChange.Invoke(intensityLevel);
+            EventManager.OnLevelIntensityChange?.Invoke(intensityLevel);
             tempValue = intensityLevel;
         }
     }
