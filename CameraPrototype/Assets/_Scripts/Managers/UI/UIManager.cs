@@ -320,6 +320,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadSceneMainMenu()
+    {
+        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     //puzles
     //Caja fuerte
 
