@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df6f66434a6ead48a0b6709a6a5306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Coger llave
-  m_firstMessage: Coger llave
+  m_interactText: Take key
+  m_firstMessage: Take key
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1

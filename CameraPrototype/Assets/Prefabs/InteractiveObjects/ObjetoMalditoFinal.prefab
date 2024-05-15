@@ -8713,8 +8713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4375f7bc090e484c963eed7f69cc1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Coge el objeto maldito
-  m_firstMessage: Coge el objeto maldito
+  m_interactText: Take cursed object
+  m_firstMessage: Take cursed object
   m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1

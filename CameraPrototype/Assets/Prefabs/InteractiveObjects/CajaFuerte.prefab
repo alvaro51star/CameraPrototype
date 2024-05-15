@@ -196,9 +196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf52942a12de0ff4cac41b0efda079cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: "Introducir c\xF3digo"
+  m_interactText: Put code
+  m_firstMessage: Put code
+  m_secondMessage: 
   m_targetObject: {fileID: 2207561933780244472}
   m_dissapears: 0
+  m_affectsPositive: 0
   m_correctCode: 6339
   m_maxCodeNumber: 4
   m_keySounds:

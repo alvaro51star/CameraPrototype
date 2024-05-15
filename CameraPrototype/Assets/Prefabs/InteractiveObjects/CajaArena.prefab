@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37de282b26ef824ab7dca4847525741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: "Colocar mu\xF1eco"
-  m_firstMessage: "Colocar mu\xF1eco"
+  m_interactText: Put figurine
+  m_firstMessage: Put figurine
   m_secondMessage: 
   m_targetObject: {fileID: 4610608307435983090}
   m_dissapears: 0

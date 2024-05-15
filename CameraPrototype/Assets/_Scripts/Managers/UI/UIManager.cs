@@ -33,7 +33,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject m_punteros;
     [SerializeField] private TextMeshProUGUI m_interactionText;
     [SerializeField] private GameObject m_lockImage;
+    [SerializeField] private GameObject m_petImage;
     private bool m_isLockedDoor;
+    private bool m_isPetCat;
     //Dialogue
     public GameObject dialoguePanel;
     public bool m_isInDialogue;
@@ -260,17 +262,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void InteractionAvialable(bool mode, bool isLockedDoor)
+    public void ChangePetCat(bool mode)
     {
-        if (isLockedDoor)
+        if (m_petImage.activeSelf != mode)
+        {
+            m_punteros.SetActive(!mode);
+            ShowInput(!mode);
+            m_petImage.SetActive(mode);
+            m_isPetCat= mode;
+        }
+    }
+
+    public void InteractionAvialable(bool mode, bool isLockedDoor, bool isCat)
+    {
+        if (isLockedDoor && !isCat)
         {
             ChangeDoorLock(true);
+            ChangePetCat(false);
             SetInteractionText(false, "");
         }
-        else
+        else if(!isLockedDoor && !isCat)
         {
             ChangeDoorLock(false);
+            ChangePetCat(false);
             ChangeInteractionPointer(mode);
+        }
+        else if (!isLockedDoor && isCat)
+        {
+            ChangeDoorLock(false);
+            ChangePetCat(true);
+            SetInteractionText(false, "");
         }
     }
 
@@ -278,6 +299,7 @@ public class UIManager : MonoBehaviour
     {
         m_punteros.SetActive(mode);
         m_lockImage.SetActive(m_isLockedDoor);
+        m_petImage.SetActive(m_isPetCat);
         if (!mode)
         {
             ShowInput(false);
