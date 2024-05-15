@@ -252,7 +252,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048197468116743267}
-  - component: {fileID: 6173994510979938770}
+  - component: {fileID: 5366889033498306649}
+  - component: {fileID: 2898187557333515870}
   m_Layer: 0
   m_Name: MarcoPuerta_01
   m_TagString: Untagged
@@ -278,7 +279,7 @@ Transform:
   - {fileID: 3557894896464070281}
   m_Father: {fileID: 1895202040265329537}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &6173994510979938770
+--- !u!114 &5366889033498306649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,10 +288,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4839056474684116495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64a97ad9099f4d42b6c2d1a8e68b18d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d61abdabda17524bbba73d4387d096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalyToReveal: {fileID: 8163153020225591871}
+  revealType: 1
+--- !u!114 &2898187557333515870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839056474684116495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eab1c9b1bca2f448868edfb8801d0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInPlayersTrigger: 0
 --- !u!1 &5470470785011641010
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +616,7 @@ GameObject:
   - component: {fileID: 719662176351354727}
   - component: {fileID: 2485912231538081292}
   - component: {fileID: 14743006148556809}
+  - component: {fileID: 2513679952400585369}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -817,3 +832,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2513679952400585369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163153020225591871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64a97ad9099f4d42b6c2d1a8e68b18d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalyToReveal: {fileID: 4839056474684116495}
