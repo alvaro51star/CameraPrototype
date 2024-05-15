@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 [RequireComponent(typeof(Collider))]
 public class GrowlTrigger : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GrowlTrigger : MonoBehaviour
     {
         if(!other.gameObject.GetComponent<CatSounds>() || !other.gameObject.GetComponent<CatSounds>().isActiveAndEnabled)
             return;
+        other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
         other.gameObject.transform.LookAt(transformToGrowl.position);
         other.gameObject.GetComponent<CatSounds>().CatGrowl();
         this.enabled = false;
