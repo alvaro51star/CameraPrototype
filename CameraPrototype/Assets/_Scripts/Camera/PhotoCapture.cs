@@ -118,7 +118,7 @@ public class PhotoCapture : MonoBehaviour
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
 
-        savePhoto.PhotoSave(screenCapture);
+        //savePhoto.PhotoSave(screenCapture);
 
         photoFrame.SetActive(true);        
         fadingAnimation.Play("PhotoFade");        
