@@ -5,12 +5,14 @@ using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
-    [SerializeField] private UIManager uiManager;
+    //[SerializeField] private UIManager uiManager;
     //[SerializeField] private AudioSource audioSource;
     [Header("Text variables")]
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
     [SerializeField] private float nexLineTime;
+    [SerializeField] private Animator elevatorAnimator;
+    [SerializeField] private Animator elevatorAnimator2;
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
@@ -18,7 +20,7 @@ public class DialogueController : MonoBehaviour
    
     private int lineIndex;
     private string[] dialogueLines;
-    private GameObject activeTrigger;
+    //private GameObject activeTrigger;
     private void Awake()
     {
         if (instance == null)
@@ -33,7 +35,8 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(string[] textLines, GameObject trigger)
     {
-        activeTrigger = trigger;
+        //activeTrigger = trigger;
+        EventManager.OnIsReading?.Invoke();
         /*
         uiManager.IsInGame(false); // parar interacciones
         uiManager.DesactivateAllUIGameObjects(); //desactivar UI (ya lo ha hecho miriam)
@@ -42,13 +45,19 @@ public class DialogueController : MonoBehaviour
         
         uiManager.dialoguePanel.SetActive(true);*/
 
-        uiManager.dialoguePanel.SetActive(true);
+        UIManager.instance.dialoguePanel.SetActive(true);
+        UIManager.instance.SetIsGamePaused(true);
+        UIManager.instance.SetPointersActive(false);
+        UIManager.instance.SetInteractionText(false, "");
+        UIManager.instance.SetIsReading(true);
+        UIManager.instance.m_isInDialogue = true;
 
         didDialogueStart = true;
         dialogueLines = textLines;
         lineIndex = 0;
         StartCoroutine(ShowLine());
     }
+
     public void EndDialogue()
     {
         didDialogueStart = false;
@@ -56,8 +65,18 @@ public class DialogueController : MonoBehaviour
         uiManager.DesactivateAllUIGameObjects(); //desactivar ui dialogo
         uiManager.IsInGame(true); //meter interaccion
         */
-        uiManager.dialoguePanel.SetActive(false);
+        UIManager.instance.dialoguePanel.SetActive(false);
+        UIManager.instance.SetIsGamePaused(false);
+        UIManager.instance.SetPointersActive(true);
+        UIManager.instance.SetIsReading(false);
+        UIManager.instance.m_isInDialogue = false;
+
+        EventManager.OnStopReading?.Invoke();
+        elevatorAnimator.enabled = true;
+        elevatorAnimator2.enabled = true;
+        this.enabled = false;
     }
+
     private IEnumerator ShowLine()
     {
         dialogueText.text = string.Empty;
@@ -70,9 +89,13 @@ public class DialogueController : MonoBehaviour
         yield return new WaitForSecondsRealtime(nexLineTime);
         NextDialogueLine();
     }
+
     public void NextDialogueLine()
     {
         //SoundManager.instance.ReproduceSound(AudioClipsNames.Click, audioSource);
+
+        if(dialogueText.text == string.Empty)
+            return; 
 
         if (dialogueText.text == dialogueLines[lineIndex]) //si enseña la linea completa
         {
@@ -86,15 +109,17 @@ public class DialogueController : MonoBehaviour
                 EndDialogue();
             }
         }
-        else if (lineIndex > dialogueLines.Length)
-        {
-            EndDialogue();
-        }
         else
         {
+            if (lineIndex > dialogueLines.Length)
+            {
+                EndDialogue();
+                return;
+            }
             EndLineFast();
         }
     }
+
     private void EndLineFast()
     {
         StopAllCoroutines();

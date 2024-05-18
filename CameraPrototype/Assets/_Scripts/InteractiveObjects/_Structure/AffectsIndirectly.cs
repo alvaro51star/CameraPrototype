@@ -7,6 +7,7 @@ public class AffectsIndirectly : DoubleAction, I_ActivateDeactivate
     //Variables
     [SerializeField] protected GameObject m_targetObject;
     [SerializeField] protected bool m_dissapears;
+    [SerializeField] protected bool m_affectsPositive;
     public override void Action(GameObject player)
     {
         if (m_dissapears)
@@ -27,7 +28,6 @@ public class AffectsIndirectly : DoubleAction, I_ActivateDeactivate
 
     protected virtual void Disappear()
     {
-        UIManager.instance.ShowInput(false);
         ChangeActiveMode(gameObject, false);
     }
 

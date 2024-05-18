@@ -1,32 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using DG.Tweening;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class StalkerBehaviour : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
-
-    [SerializeField] private Renderer objectMesh;
-    [SerializeField] private GameObject player;
-
+    public Renderer objectMesh;
+    public GameObject player;
     [SerializeField] private Animator animator;
 
+    public Transform pointToLook;
+    [Space]
     [Header("States")]
     State states;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
     public PlayerCatchState playerCatchState;
+    public OutOfSightState outOfSightState;
 
-
+    [Space]
+    [Header("Public variables")]
     public bool isVisible = false;
     public bool isStunned = false;
 
+    [Space]
+    [Header("Collision related variables")]
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private Collider collision;
     [SerializeField] private Collider triggerCollision;
@@ -50,13 +48,11 @@ public class StalkerBehaviour : MonoBehaviour
         stunnedState.SetUp(navMesh, animator, this);
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
+        outOfSightState.SetUp(gameObject, this);
     }
 
     void Start()
     {
-        
-
-
         states = stalkState;
         states.Enter();
 
@@ -111,8 +107,6 @@ public class StalkerBehaviour : MonoBehaviour
         }
     }
 
-
-
     #region StalkBehaviour
 
     public void AddVision(float deltaTime)
@@ -122,7 +116,6 @@ public class StalkerBehaviour : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Time looked = {currentTimeLooked}");
         currentTimeLooked += deltaTime;
 
         if (currentTimeLooked >= maxTimeLooked)
@@ -150,6 +143,13 @@ public class StalkerBehaviour : MonoBehaviour
         states = stunnedState;
         states.Enter();
     }
+
+    public void OutOfSight()
+    {
+        states = outOfSightState;
+        states.Enter();
+    }
+
 
     #endregion
 

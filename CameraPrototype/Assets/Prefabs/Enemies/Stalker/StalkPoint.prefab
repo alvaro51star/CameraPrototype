@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5460312398694486916}
   - component: {fileID: 5040172000668141455}
   - component: {fileID: 8566432077370948989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StalkPoint
   m_TagString: StalkPoint
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5869632128851500820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}

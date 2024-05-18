@@ -181,6 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
+  m_interactSound: {fileID: 0}
+  m_interactionPivot: {fileID: 0}
 --- !u!114 &6006915991493800928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,5 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ecd51ff6df46141ae4c9a0ade6365c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_interactText: Take figurine
+  m_firstMessage: Take figurine
+  m_secondMessage: 
   m_targetObject: {fileID: 0}
   m_dissapears: 1
+  m_affectsPositive: 1

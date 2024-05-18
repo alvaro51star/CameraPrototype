@@ -6,37 +6,32 @@ public class Interaction_CajaFuerte : AffectsIndirectly
 {
     //Variables 
     [SerializeField] private string m_correctCode;
+    [SerializeField] private int m_maxCodeNumber;
     [SerializeField] private AudioClip[] m_keySounds;
     [SerializeField] private AudioClip m_wrongSound;
     [SerializeField] private AudioClip m_rightSound;
     [SerializeField] private AudioClip m_safeUnlockSound;
     [SerializeField] private AudioClip m_safeOpen;
+    [SerializeField] private Animator anim;
     private bool m_isOpen = false;
     private string m_actualCode = "";
-    private bool m_hasOpened;
 
     protected override void FirstAction()
     {
-        if (!m_hasOpened)
+        if (!m_isOpen)
         {
-            if (!m_isOpen)
-            {
-                UIManager.instance.ShowSafe(true);
-                EventManager.OnIsReading?.Invoke();
-            }
-            else
-            {
-                AudioManager.Instance.ReproduceSound(m_safeOpen);
-                ChangeActiveMode(m_targetObject, true);
-                m_hasOpened = true;
-            }
+            UIManager.instance.ShowSafe(true);
+            EventManager.OnIsReading?.Invoke();
         }
     }
 
     public void AddActualCode(GameObject button)
     {
         ReproduceKeySound();
-        m_actualCode += button.name;
+        if (m_actualCode.Length < m_maxCodeNumber)
+        {
+            m_actualCode += button.name;
+        }
         UIManager.instance.ChangeCodeDisplay(m_actualCode);
         UIManager.instance.ShowLight(false, true);
     }
@@ -63,6 +58,10 @@ public class Interaction_CajaFuerte : AffectsIndirectly
             UIManager.instance.ShowLight(true, false);
             AudioManager.Instance.ReproduceSound(m_rightSound);
             AudioManager.Instance.ReproduceSound(m_safeUnlockSound);
+            AudioManager.Instance.ReproduceSound(m_safeOpen);
+            ChangeActiveMode(m_targetObject, true);
+            GetComponent<InteractiveObject>().enabled = false;
+            anim.SetInteger("Abrir", 1);
         }
         else
         {

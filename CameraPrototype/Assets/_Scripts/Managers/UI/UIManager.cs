@@ -16,18 +16,29 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
-    private bool m_isPauseMenuActive = false;
+    [SerializeField] private GameObject diaryPanel;
+    private bool m_isGamePaused = false;
     private bool m_canPause = true;
-    [SerializeField] private GameObject endMenu;
+    [SerializeField] private GameObject loseMenu;
+    [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject m_cameraUI;
     [SerializeField] private GameObject m_controls;
     //Notes
     [SerializeField] private GameObject m_notePanel;
     [SerializeField] private TextMeshProUGUI m_noteText;
-    //Input
+    private bool m_isReading;
+    //Interaction
     [SerializeField] private GameObject m_interactInputImage;
+    [SerializeField] private GameObject m_punteroInteraction;
+    [SerializeField] private GameObject m_punteros;
+    [SerializeField] private TextMeshProUGUI m_interactionText;
+    [SerializeField] private GameObject m_lockImage;
+    [SerializeField] private GameObject m_petImage;
+    private bool m_isLockedDoor;
+    private bool m_isPetCat;
     //Dialogue
     public GameObject dialoguePanel;
+    public bool m_isInDialogue;
     //puzles
     //CajaFuerte
     [SerializeField] private GameObject m_safePanel;
@@ -59,7 +70,6 @@ public class UIManager : MonoBehaviour
     //pause menu
     public void Resume()
     {
-        m_isPauseMenuActive = false;
         m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
         playerPhotoCapture.enabled = true;
@@ -68,6 +78,16 @@ public class UIManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+        if (!m_isReading)
+        {
+            m_isGamePaused = false;
+            SetPointersActive(true);
+            EventManager.OnStopReading?.Invoke();
+        }
+        else
+        {
+            EventManager.OnIsReading?.Invoke();
         }
 
         Time.timeScale = 1f;
@@ -83,26 +103,62 @@ public class UIManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             m_cameraUI.SetActive(false);
-            m_isPauseMenuActive = true;
+            SetPointersActive(false);
+            SetInteractionText(false, "");
+            m_isGamePaused = true;
             playerPhotoCapture.enabled = false;
             Time.timeScale = 0f;
 
             if (mouseLimited)
             {
-                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-            }
+            }            
         }
+    }
+
+    public void Diary()
+    {
+        if(!diaryPanel.activeSelf)
+        {
+            diaryPanel.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            diaryPanel.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    public bool GetIsGamePaused()
+    {
+        return m_isGamePaused;
+    }
+
+    public void SetIsGamePaused(bool mode)
+    {
+        m_isGamePaused = mode;
     }
 
     public bool GetIsPauseMenuActive()
     {
-        return m_isPauseMenuActive;
+        return pauseMenu.activeSelf;
     }
 
-    //end menu
+    public bool GetIsReading()
+    {
+        return m_isReading;
+    }
 
-    public void ActivateEndMenu()
+    public void SetIsReading(bool mode)
+    {
+        m_isReading = mode;
+    }
+
+    //end menus
+
+    public void ActivateLoseMenu()
     {
         if (mouseLimited)
         {
@@ -110,16 +166,32 @@ public class UIManager : MonoBehaviour
             Cursor.visible = true;
         }
         m_canPause = false;
-        m_isPauseMenuActive = true;
+        m_isGamePaused = true;
         m_cameraUI.SetActive(false);
-        endMenu.SetActive(true);
+        loseMenu.SetActive(true);
+        SetPointersActive(false);
+        SetInteractionText(false, "");
         playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
     }
 
-    public void LoadSceneMainMenu()
+    
+
+    public void ActivateWinMenu()
     {
-        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+        if (mouseLimited)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        m_canPause = false;
+        m_isGamePaused = true;
+        m_cameraUI.SetActive(false);
+        winMenu.SetActive(true);
+        SetPointersActive(false);
+        SetInteractionText(false, "");
+        playerPhotoCapture.enabled = false;
+        Time.timeScale = 0f;
     }
 
     //notes
@@ -127,20 +199,111 @@ public class UIManager : MonoBehaviour
     {
         m_noteText.text = noteText;
         m_notePanel.SetActive(true);
-        ShowInput(false);
+        SetPointersActive(false);
+        SetInteractionText(false, "");
+        EventManager.OnIsReading?.Invoke();
+        m_isReading = true;
+
+        m_isGamePaused = true;
     }
     public void DeactivateNote()
     {
         m_noteText.text = " ";
         m_notePanel.SetActive(false);
         EventManager.OnStopReading?.Invoke();
-        ShowInput(true);
+        SetPointersActive(true);
+        m_isReading = false;
+
+        m_isGamePaused = false;
     }
 
-    //Input
+    //Interaction
     public void ShowInput(bool mode)
     {
         m_interactInputImage.SetActive(mode);
+    }
+
+    public void ChangeInteractionPointer(bool mode)
+    {
+        if (mode)
+        {
+            m_punteroInteraction.SetActive(true);
+            ShowInput(true);
+        }
+        else
+        {
+            m_punteroInteraction.SetActive(false);
+            ShowInput(false);
+        }
+    }
+
+    public void SetInteractionText(bool mode, string text)
+    {
+        if (mode)
+        {
+            m_interactionText.gameObject.SetActive(true);
+            m_interactionText.text = text;
+        }
+        else
+        {
+            m_interactionText.text = "";
+            m_interactionText.gameObject.SetActive(false);
+        }
+    }
+
+    public void ChangeDoorLock(bool mode)
+    {
+        if (m_lockImage.activeSelf != mode)
+        {
+            m_punteros.SetActive(!mode);
+            ShowInput(!mode);
+            m_lockImage.SetActive(mode);
+            m_isLockedDoor = mode;
+        }
+    }
+
+    public void ChangePetCat(bool mode)
+    {
+        if (m_petImage.activeSelf != mode)
+        {
+            m_punteros.SetActive(!mode);
+            ShowInput(!mode);
+            m_petImage.SetActive(mode);
+            m_isPetCat= mode;
+        }
+    }
+
+    public void InteractionAvialable(bool mode, bool isLockedDoor, bool isCat)
+    {
+        if (isLockedDoor && !isCat)
+        {
+            ChangeDoorLock(true);
+            ChangePetCat(false);
+            SetInteractionText(false, "");
+        }
+        else if(!isLockedDoor && !isCat)
+        {
+            ChangeDoorLock(false);
+            ChangePetCat(false);
+            ChangeInteractionPointer(mode);
+        }
+        else if (!isLockedDoor && isCat)
+        {
+            ChangeDoorLock(false);
+            ChangePetCat(true);
+            SetInteractionText(false, "");
+        }
+    }
+
+    public void SetPointersActive(bool mode)
+    {
+        m_punteros.SetActive(mode);
+        m_lockImage.SetActive(m_isLockedDoor);
+        m_petImage.SetActive(m_isPetCat);
+        if (!mode)
+        {
+            ShowInput(false);
+        }
     }
 
     public void Controls()
@@ -157,6 +320,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadSceneMainMenu()
+    {
+        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     //puzles
     //Caja fuerte
 
@@ -166,12 +339,19 @@ public class UIManager : MonoBehaviour
         if (!mode)
         {
             EventManager.OnStopReading?.Invoke();
-            ShowInput(true);
+            SetPointersActive(true);
+            SetInteractionText(false, "");
+            m_isReading = false;
+
+            m_isGamePaused = false;
         }
         else
         {
             EventManager.OnIsReading?.Invoke();
-            ShowInput(false);
+            SetPointersActive(false);
+            m_isReading = true;
+
+            m_isGamePaused = true;
         }
     }
 

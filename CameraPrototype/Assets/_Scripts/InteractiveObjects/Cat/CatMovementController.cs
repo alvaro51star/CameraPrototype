@@ -7,36 +7,46 @@ public class CatMovementController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
-    private int timesPetted, maxTimesPetted;
+    private int destinationPoint, maxDestinationPoints;
+    private Collider m_collider;
 
-    private void OnEnable()
-    {
-        EventManager.OnCatPetted += OnCatPetted;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnCatPetted -= OnCatPetted;
-    }
     private void Start()
     {
-        maxTimesPetted = destination.Count;
+        maxDestinationPoints = destination.Count;
+        m_collider = GetComponent<Collider>();
     }
 
-    private void OnCatPetted()
+    private void CatMovement()
     {
-       if(!agent.hasPath)
+        if (agent.hasPath)
+            return;
+
+        destinationPoint++;        
+
+        if (destinationPoint <= maxDestinationPoints)
         {
-            timesPetted++;           
-            if (timesPetted <= maxTimesPetted)
-            {              
-                agent.SetDestination(destination[timesPetted - 1].position);
-            }
-            else
+            var path = new NavMeshPath();
+            agent.CalculatePath(destination[destinationPoint - 1].position, path);
+
+            if (path.status != NavMeshPathStatus.PathComplete)
             {
-                this.enabled = false;
-                this.gameObject.GetComponent<InteractiveObject>().enabled = false;
+                destinationPoint--;
+                return;
             }
-        }        
+            agent.transform.LookAt(destination[destinationPoint - 1].position);
+            agent.SetDestination(destination[destinationPoint - 1].position);
+        }
+        else
+        {
+            m_collider.enabled = false;
+            this.enabled = false;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(!other.gameObject.CompareTag("Player"))
+            return;
+        CatMovement();       
     }
 }

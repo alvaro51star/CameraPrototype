@@ -5,11 +5,16 @@ using UnityEngine;
 public class WatchEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
+    [SerializeField] private Transform cameraTransform;
+    [Space]
+    [Header("Angle of vision variables")]
     [SerializeField] private float maxDistance = 5f;
-    [SerializeField] private float maxAngleVision = 15f;
+    [SerializeField] private float maxAngleVision = 20f;
+
+    [Space]
+    [Header("Jumpscare variables")]
     [SerializeField] private float maxAngleVisionJumpScare = 30f;
     [SerializeField] private float timeForNewJumpScare = 10f;
-
     [SerializeField] private AudioClip jumpScareSoundEffect;
 
     private bool jumpScareOnCD = false;
@@ -29,13 +34,15 @@ public class WatchEnemy : MonoBehaviour
             return;
         }
 
-        Vector3 rayDirection = enemy.transform.position - transform.position;
-        Debug.DrawRay(transform.position, rayDirection.normalized * maxDistance, Color.red);
-        if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance))
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
         {
-            float angle = Vector3.Angle(rayDirection, transform.forward);
+            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
+            float angle = Vector3.Angle(cameraTransform.forward, rayDirection);
+            
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision)
             {
+                Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.green);
                 hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
             }
         }
@@ -43,9 +50,9 @@ public class WatchEnemy : MonoBehaviour
 
     private void JumpScareStalker()
     {
-        Vector3 rayDirection = enemy.transform.position - transform.position;
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - transform.position;
         float distance = Vector3.Distance(transform.position, enemy.transform.position);
-        if (Physics.Raycast(transform.position, rayDirection.normalized, out RaycastHit hit, maxDistance))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance) && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
         {
             float angle = Vector3.Angle(rayDirection, transform.forward);
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)

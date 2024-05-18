@@ -25,6 +25,9 @@ public class Interaction_CajaArena : AffectsIndirectly
             AudioManager.Instance.ReproduceSound(m_arenaSound);
             ChangeActiveMode(m_targetObject, m_appears);
             ChangeActiveMode(m_figure, true);
+            SetFigurePicked(false);
+            GetComponent<InteractiveObject>().enabled = false;
+
         }
     }
 

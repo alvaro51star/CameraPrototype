@@ -16,20 +16,18 @@ public class TriggerForDialogue : MonoBehaviour
         {
             if (!dialogueController.didDialogueStart)
             {
-                dialogueController.StartDialogue(textLines, gameObject);
-                Debug.Log("Start dialogue");
+                dialogueController.StartDialogue(textLines, gameObject);                
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other) //para que no vuelva a saltar el trigger  
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (dialogueController.didDialogueStart)
-            {
-                this.gameObject.SetActive(false); //para que no vuelva a saltar el trigger           
-            }
+            this.gameObject.GetComponent<Collider>().enabled = false;
+            this.gameObject.SetActive(false);
+            this.enabled = false;
         }
     }
 }

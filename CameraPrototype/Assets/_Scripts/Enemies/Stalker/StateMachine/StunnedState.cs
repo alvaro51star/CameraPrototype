@@ -18,6 +18,8 @@ public class StunnedState : State
     {
         stateName = "Stunned";
         EventManager.OnStatusChange?.Invoke(stateName);
+
+        navMesh.enabled = true;
         
         if (stalkerBehaviour.currentTimeLooked >= stalkerBehaviour.maxTimeLooked)
         {

@@ -11,6 +11,12 @@ public static class EventManager
     //Gato
     public static Action OnCatPetted;
 
+    //Puerta
+    public static Action OnDoorLocked;
+    public static Action OnDoorUnLocked;
+    public static Action OnDoorOpened;
+    public static Action OnDoorClosed;
+
     //Interactions
     public static Action OnIsReading;
     public static Action OnStopReading;
@@ -19,4 +25,7 @@ public static class EventManager
     //Enemies
     public static Action<float, float> OnTimeAdded;
     public static Action<string> OnStatusChange;
+
+    //Level
+    public static Action<int> OnLevelIntensityChange;
 }
