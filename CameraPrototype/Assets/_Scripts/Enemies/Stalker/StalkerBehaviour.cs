@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,12 +7,12 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     public Renderer objectMesh;
     public GameObject player;
-    [SerializeField] private Animator animator;
+    public Animator animator;
 
     public Transform pointToLook;
     [Space]
     [Header("States")]
-    State states;
+    public State states;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
@@ -28,6 +29,7 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private Collider collision;
     [SerializeField] private Collider triggerCollision;
+    public bool playerCatched = false;
 
     #region Time Variables
     [Space]
@@ -72,10 +74,12 @@ public class StalkerBehaviour : MonoBehaviour
         {
             isVisible = false;
         }
-
-        if (states.isComplete)
+        if (playerCatched == false)
         {
-            SelectNextState();
+            if (states.isComplete)
+            {
+                SelectNextState();
+            }
         }
 
         states.Do();
@@ -84,6 +88,8 @@ public class StalkerBehaviour : MonoBehaviour
     private void SelectNextState()
     {
         states.Exit();
+
+
 
         if (currentTimeLooked >= maxTimeLooked)
         {
@@ -94,13 +100,19 @@ public class StalkerBehaviour : MonoBehaviour
             states = stalkState;
         }
 
+        if (playerCatched == true)
+        {
+            states = playerCatchState;
+        }
+
         states.Enter();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && currentTimeLooked >= maxTimeLooked && !isStunned)
+        if (other.gameObject.CompareTag("Player") && states == chaseState)
         {
+            playerCatched = true;
             Debug.Log("Player detectado");
             states = playerCatchState;
             states.Enter();
@@ -111,7 +123,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void AddVision(float deltaTime)
     {
-        if (isStunned)
+        if (isStunned || playerCatched == true)
         {
             return;
         }
