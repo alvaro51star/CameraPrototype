@@ -32481,6 +32481,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stalker
       objectReference: {fileID: 0}
+    - target: {fileID: 2697096913380047595, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.13381095
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697096913380047595, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6610566
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697096913380047595, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9150943
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697096913380047595, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697096913380047595, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3832830943809074695, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: playerTransform
@@ -32546,6 +32571,21 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 2089306816}
+    - target: {fileID: 7806699325591559533, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806699325591559533, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806699325591559533, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.26415092
+      objectReference: {fileID: 0}
     - target: {fileID: 7990854237865562750, guid: 440d1eddb64e7ac4d8ef22dfeff82fa7,
         type: 3}
       propertyPath: player
@@ -94624,11 +94664,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_speed
       value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1446436902641835883, guid: 5393f11780f6f364aafd39ee8d8d3942,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.635
       objectReference: {fileID: 0}
     - target: {fileID: 2592600347508512828, guid: 5393f11780f6f364aafd39ee8d8d3942,
         type: 3}
