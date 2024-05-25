@@ -15,6 +15,7 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
+    [SerializeField] private float timeShowingPhoto;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -71,10 +72,7 @@ public class PhotoCapture : MonoBehaviour
 
         else
         {
-            RemovePhoto();
-            EventManager.OnRemovePhoto?.Invoke();
-            m_tookFirstPhoto = false;
-            Time.timeScale = 1f;
+            RemovePhoto();            
         }
     }
 
@@ -121,7 +119,8 @@ public class PhotoCapture : MonoBehaviour
         //savePhoto.PhotoSave(screenCapture);
 
         photoFrame.SetActive(true);        
-        fadingAnimation.Play("PhotoFade");        
+        fadingAnimation.Play("PhotoFade");
+        StartCoroutine(AutoRemovePhoto());
     }
 
     private IEnumerator CameraFlashEffect()
@@ -139,6 +138,18 @@ public class PhotoCapture : MonoBehaviour
         viewingPhoto = false;
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
+
+        EventManager.OnRemovePhoto?.Invoke();
+        m_tookFirstPhoto = false;
+        Time.timeScale = 1f;
     }
 
+    private IEnumerator AutoRemovePhoto()
+    {
+        yield return new WaitForSecondsRealtime(timeShowingPhoto);
+        if (viewingPhoto)
+        {
+            RemovePhoto();
+        }
+    }
 }
