@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class State : MonoBehaviour
 {
-    public bool isComplete  { get; protected set; } = false;
+    public bool isComplete  { get; set; } = false;
 
     protected float startTime;
 

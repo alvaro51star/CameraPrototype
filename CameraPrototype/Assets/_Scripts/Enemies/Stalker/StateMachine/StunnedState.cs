@@ -16,6 +16,7 @@ public class StunnedState : State
 
     public override void Enter()
     {
+        stalkerBehaviour.chasePlayer = false;
         stateName = "Stunned";
         EventManager.OnStatusChange?.Invoke(stateName);
 
@@ -49,6 +50,7 @@ public class StunnedState : State
         navMesh.isStopped = false;
         isComplete = false;
         stalkerBehaviour.isStunned = false;
+        stalkerBehaviour.lastState = stalkerBehaviour.stunnedState;
     }
 
 

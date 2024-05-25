@@ -15,21 +15,25 @@ public class ChaseState : State
 
     public override void Enter()
     {
+        Debug.Log("Chase state");
         stateName = "Chase";
         EventManager.OnStatusChange?.Invoke(stateName);
-
+        navMesh.enabled = true;
         navMesh.isStopped = false;
 
         isComplete = false;
 
         animator.Play("Run");
         enteredAnimation = true;
+
+        stalkerBehaviour.ActivateCollision();
     }
 
     public override void Exit()
     {
         enteredAnimation = false;
         isComplete = false;
+        stalkerBehaviour.lastState = stalkerBehaviour.chaseState;
     }
 
     public override void Do()
@@ -47,7 +51,20 @@ public class ChaseState : State
 
     private void Chase()
     {
-        navMesh.SetDestination(player.transform.position);
+        if (navMesh.isActiveAndEnabled)
+        {
+            navMesh.SetDestination(player.transform.position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            stalkerBehaviour.states = stalkerBehaviour.playerCatchState;
+            stalkerBehaviour.playerCatched = true;
+            isComplete = true;
+        }
     }
 
 }
