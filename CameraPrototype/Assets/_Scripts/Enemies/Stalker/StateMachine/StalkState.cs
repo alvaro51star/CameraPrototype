@@ -36,6 +36,7 @@ public class StalkState : State
 
     public override void Enter()
     {
+        animator.enabled = true;
         audioSource.Play();
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
