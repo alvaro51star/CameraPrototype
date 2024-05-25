@@ -70,6 +70,7 @@ public class OutOfSightState : State
         currentTime = 0;
         enemy.GetComponent<NavMeshAgent>().enabled = true;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;
+        stalkerBehaviour.lastState = stalkerBehaviour.outOfSightState;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)

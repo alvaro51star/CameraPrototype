@@ -18,8 +18,8 @@ public class ChaseState : State
         Debug.Log("Chase state");
         stateName = "Chase";
         EventManager.OnStatusChange?.Invoke(stateName);
-        if (navMesh.isActiveAndEnabled)
-            navMesh.isStopped = false;
+        navMesh.enabled = true;
+        navMesh.isStopped = false;
 
         isComplete = false;
 
@@ -33,6 +33,7 @@ public class ChaseState : State
     {
         enteredAnimation = false;
         isComplete = false;
+        stalkerBehaviour.lastState = stalkerBehaviour.chaseState;
     }
 
     public override void Do()

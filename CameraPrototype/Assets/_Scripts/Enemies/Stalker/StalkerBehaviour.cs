@@ -19,6 +19,8 @@ public class StalkerBehaviour : MonoBehaviour
     public PlayerCatchState playerCatchState;
     public OutOfSightState outOfSightState;
 
+    public State lastState = null;
+
     [Space]
     [Header("Public variables")]
     public bool isVisible = false;
@@ -89,8 +91,6 @@ public class StalkerBehaviour : MonoBehaviour
     {
         states.Exit();
 
-
-
         if (currentTimeLooked >= maxTimeLooked)
         {
             states = chaseState;
@@ -159,6 +159,13 @@ public class StalkerBehaviour : MonoBehaviour
     public void OutOfSight()
     {
         states = outOfSightState;
+        states.Enter();
+    }
+
+    public void PlayerCatch()
+    {
+        playerCatched = true;
+        states = playerCatchState;
         states.Enter();
     }
 

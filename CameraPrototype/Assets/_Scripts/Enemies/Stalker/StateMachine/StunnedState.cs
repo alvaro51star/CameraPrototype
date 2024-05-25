@@ -49,6 +49,7 @@ public class StunnedState : State
         navMesh.isStopped = false;
         isComplete = false;
         stalkerBehaviour.isStunned = false;
+        stalkerBehaviour.lastState = stalkerBehaviour.stunnedState;
     }
 
 

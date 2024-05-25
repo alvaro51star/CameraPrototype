@@ -50,9 +50,9 @@ public class WatchEnemy : MonoBehaviour
 
     private void JumpScareStalker()
     {
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - transform.position;
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
         float distance = Vector3.Distance(transform.position, enemy.transform.position);
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance) && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
         {
             float angle = Vector3.Angle(rayDirection, transform.forward);
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)
