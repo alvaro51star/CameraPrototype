@@ -26,9 +26,12 @@ public class StalkState : State
 
     bool firstTimeEntered = false;
 
+    [SerializeField] private AudioSource audioSource;
+
 
     public override void Enter()
     {
+        audioSource.Play();
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
@@ -61,6 +64,7 @@ public class StalkState : State
 
     public override void Exit()
     {
+        audioSource.Stop();
         isComplete = false;
         hasBeenVisible = false;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;

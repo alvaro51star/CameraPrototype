@@ -112,6 +112,7 @@ public class StalkerBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && states == chaseState)
         {
+            states.Exit();
             playerCatched = true;
             Debug.Log("Player detectado");
             states = playerCatchState;
@@ -132,6 +133,7 @@ public class StalkerBehaviour : MonoBehaviour
 
         if (currentTimeLooked >= maxTimeLooked)
         {
+            states.Exit();
             states = chaseState;
             states.Enter();
         }
