@@ -87,7 +87,7 @@ public class DialogueController : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(nexLineTime);
-        NextDialogueLine();
+        //NextDialogueLine();
     }
 
     public void NextDialogueLine()
