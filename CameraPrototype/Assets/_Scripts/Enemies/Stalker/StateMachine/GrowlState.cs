@@ -15,6 +15,7 @@ public class GrowlState : State
 
     public override void Enter()
     {
+        animator.enabled = true;
         animationLenght = growlAnimation.length;
 
         stateName = "Growl";
