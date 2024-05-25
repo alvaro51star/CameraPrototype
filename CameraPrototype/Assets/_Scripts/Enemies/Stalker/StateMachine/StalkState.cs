@@ -22,6 +22,8 @@ public class StalkState : State
     private const float timeLevel1 = 7.5f;
     private const float timeLevel2 = 3f;
 
+    [SerializeField] private float maxDistanceToGrowlState = 2f;
+
     private bool hasBeenVisible = false;
 
     bool firstTimeEntered = false;
@@ -73,6 +75,8 @@ public class StalkState : State
 
     public override void Do()
     {
+        CheckDistance();
+
         if (objectMesh.isVisible)
         {
             hasBeenVisible = true;
@@ -185,5 +189,17 @@ public class StalkState : State
         this.objectMesh = objectMesh;
         this.animator = animator;
         this.stalkerBehaviour = stalkerBehaviour;
+    }
+
+    private void CheckDistance()
+    {
+
+        if (Physics.Raycast(transform.position, stalkerBehaviour.player.transform.position, out RaycastHit hit, maxDistanceToGrowlState))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                stalkerBehaviour.Growl();
+            }
+        }
     }
 }
