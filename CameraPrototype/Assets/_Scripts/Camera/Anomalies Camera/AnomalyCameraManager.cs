@@ -24,13 +24,25 @@ public class AnomalyCameraManager : MonoBehaviour
 
     private void OnUsingCamera()
     {
-        if (!anomaliesCameraGO)
+        if (anomaliesCameraGO == null)
+        {
             anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");
-        anomaliesCameraGO.SetActive(true);
+        }
+        if (anomaliesCameraGO && !anomaliesCameraGO.activeSelf)
+        {
+            anomaliesCameraGO.SetActive(true);
+        }
     }
 
     private void OnNotUsingCamera()
     {
-        anomaliesCameraGO.SetActive(false);
+        if (anomaliesCameraGO == null)
+        {
+            anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");
+        }
+        if (anomaliesCameraGO && !anomaliesCameraGO.activeSelf)
+        {
+            anomaliesCameraGO.SetActive(false);
+        }
     }
 }
