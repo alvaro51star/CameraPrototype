@@ -25,6 +25,7 @@ public static class EventManager
     //Enemies
     public static Action<float, float> OnTimeAdded;
     public static Action<string> OnStatusChange;
+    public static Action OnEnemyRevealed;
 
     //Level
     public static Action<int> OnLevelIntensityChange;

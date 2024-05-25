@@ -8,12 +8,31 @@ public class CatMovementController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
     private int destinationPoint, maxDestinationPoints;
-    private Collider m_collider;
+    //private Collider m_collider;
+
+    private void OnEnable()
+    {
+        EventManager.OnEnemyRevealed += OnEnemyRevealed;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnEnemyRevealed -= OnEnemyRevealed;
+    }
 
     private void Start()
     {
         maxDestinationPoints = destination.Count;
-        m_collider = GetComponent<Collider>();
+    }
+
+    private void OnDoorOpened()
+    {        
+        CatMovement();
+    }
+
+    private void OnEnemyRevealed()
+    {
+        CatMovement();
     }
 
     private void CatMovement()
@@ -31,6 +50,7 @@ public class CatMovementController : MonoBehaviour
             if (path.status != NavMeshPathStatus.PathComplete)
             {
                 destinationPoint--;
+                StartCoroutine(TryAgain());
                 return;
             }
             agent.transform.LookAt(destination[destinationPoint - 1].position);
@@ -38,15 +58,16 @@ public class CatMovementController : MonoBehaviour
         }
         else
         {
-            m_collider.enabled = false;
             this.enabled = false;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private IEnumerator TryAgain()
     {
-        if(!other.gameObject.CompareTag("Player"))
-            return;
-        CatMovement();       
+        yield return new WaitForSeconds(3f);
+
+        CatMovement();
+
     }
+    
 }
