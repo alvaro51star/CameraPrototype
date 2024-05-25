@@ -30,6 +30,9 @@ public class StalkState : State
 
     [SerializeField] private AudioSource audioSource;
 
+    [SerializeField] private Transform rayPoint;
+    private bool growlCalled = false;
+
 
     public override void Enter()
     {
@@ -75,7 +78,11 @@ public class StalkState : State
 
     public override void Do()
     {
-        CheckDistance();
+
+        if (!growlCalled)
+        {
+            CheckDistance();
+        }
 
         if (objectMesh.isVisible)
         {
@@ -193,11 +200,15 @@ public class StalkState : State
 
     private void CheckDistance()
     {
-
-        if (Physics.Raycast(transform.position, stalkerBehaviour.player.transform.position, out RaycastHit hit, maxDistanceToGrowlState))
+        Vector3 dir = stalkerBehaviour.player.transform.position - transform.position;
+        Debug.DrawRay(transform.position, dir * maxDistanceToGrowlState, Color.red);
+        if (Physics.Raycast(rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))
         {
-            if (hit.transform.CompareTag("Player"))
+
+            if (hit.transform.gameObject.CompareTag("Player"))
             {
+                growlCalled = true;
+                Debug.Log("Choco con el player");
                 stalkerBehaviour.Growl();
             }
         }

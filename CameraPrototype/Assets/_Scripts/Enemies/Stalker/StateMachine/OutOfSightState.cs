@@ -18,6 +18,7 @@ public class OutOfSightState : State
 
     public override void Enter()
     {
+        stalkerBehaviour.chasePlayer = false;
         stateName = "OutOfSight";
         EventManager.OnStatusChange?.Invoke(stateName);
         enemy.GetComponent<NavMeshAgent>().isStopped = true;

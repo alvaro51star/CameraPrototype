@@ -16,6 +16,7 @@ public class StunnedState : State
 
     public override void Enter()
     {
+        stalkerBehaviour.chasePlayer = false;
         stateName = "Stunned";
         EventManager.OnStatusChange?.Invoke(stateName);
 

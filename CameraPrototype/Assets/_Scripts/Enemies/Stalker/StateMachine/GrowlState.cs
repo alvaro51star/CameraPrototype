@@ -40,7 +40,7 @@ public class GrowlState : State
     public override void Exit()
     {
         isComplete = false;
-        stalkerBehaviour.Growl();
+        stalkerBehaviour.ChasePlayer();
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)

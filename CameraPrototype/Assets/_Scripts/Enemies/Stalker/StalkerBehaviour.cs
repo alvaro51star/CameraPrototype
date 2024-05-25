@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,6 +19,7 @@ public class StalkerBehaviour : MonoBehaviour
     public ChaseState chaseState;
     public PlayerCatchState playerCatchState;
     public OutOfSightState outOfSightState;
+    public GrowlState growlState;
 
     public State lastState = null;
 
@@ -25,6 +27,7 @@ public class StalkerBehaviour : MonoBehaviour
     [Header("Public variables")]
     public bool isVisible = false;
     public bool isStunned = false;
+    public bool chasePlayer = false;
 
     [Space]
     [Header("Collision related variables")]
@@ -53,6 +56,7 @@ public class StalkerBehaviour : MonoBehaviour
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
         outOfSightState.SetUp(gameObject, this);
+        growlState.SetUp(gameObject, this);
     }
 
     void Start()
@@ -91,7 +95,8 @@ public class StalkerBehaviour : MonoBehaviour
     {
         states.Exit();
 
-        if (currentTimeLooked >= maxTimeLooked)
+
+        if (currentTimeLooked >= maxTimeLooked || chasePlayer)
         {
             states = chaseState;
         }
@@ -169,6 +174,29 @@ public class StalkerBehaviour : MonoBehaviour
         playerCatched = true;
         states = playerCatchState;
         states.Enter();
+    }
+
+    public void Growl()
+    {
+        states.Exit();
+        states = growlState;
+        states.Enter();
+    }
+
+    public void ChasePlayer()
+    {
+        chasePlayer = true;
+        states = chaseState;
+        states.Enter();
+    }
+
+    public bool IsAttackingPlayer()
+    {
+        if (states == playerCatchState)
+        {
+            return true;
+        }
+        return false;   
     }
 
 
