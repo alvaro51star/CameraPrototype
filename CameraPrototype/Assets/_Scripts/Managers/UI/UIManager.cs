@@ -139,11 +139,19 @@ public class UIManager : MonoBehaviour
         {
             storyBookPanel.SetActive(true);
             pauseMenu.SetActive(false);
+
+            SetPointersActive(false);
+            EventManager.OnIsReading?.Invoke();
+            m_isReading = true;
+            SetInteractionText(false, "");
         }
         else
         {
             storyBookPanel.SetActive(false);
-            pauseMenu.SetActive(true);
+
+            SetPointersActive(true);
+            EventManager.OnStopReading?.Invoke();
+            m_isReading = false;
         }
     }
 
