@@ -12,6 +12,7 @@ public class Interaction_Door : DoubleAction
     [SerializeField] private AudioClip m_doorLocked;
     [SerializeField] private bool m_isPuertaPrincipal;
     [SerializeField] private Collider m_collider;
+    [SerializeField] private bool m_isCatDoor;
     private int m_doorInteract = 0;
     private bool m_discoveredLocked = false;
 
@@ -36,9 +37,13 @@ public class Interaction_Door : DoubleAction
         {
             base.FirstAction();
             AudioManager.Instance.ReproduceSound(m_doorOpen);
-            //m_animator.SetTrigger("Abrir");
             m_doorInteract = 2;
             m_animator.SetInteger("Abrir", m_doorInteract);
+            if (m_isCatDoor)
+            {
+                EventManager.OnDoorOpened?.Invoke();
+                m_isCatDoor = false;
+            }
             
         }
     }
