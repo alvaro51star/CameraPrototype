@@ -8,16 +8,19 @@ public class CatMovementController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> destination;
     private int destinationPoint, maxDestinationPoints;
+    private bool firstDoor = true;
     //private Collider m_collider;
 
     private void OnEnable()
     {
         EventManager.OnEnemyRevealed += OnEnemyRevealed;
+        EventManager.OnDoorOpened += OnDoorOpened;
     }
 
     private void OnDisable()
     {
         EventManager.OnEnemyRevealed -= OnEnemyRevealed;
+        EventManager.OnDoorOpened -= OnDoorOpened;
     }
 
     private void Start()
@@ -26,35 +29,44 @@ public class CatMovementController : MonoBehaviour
     }
 
     private void OnDoorOpened()
-    {        
-        CatMovement();
+    {
+        if (firstDoor)
+        {
+            CatMovement(destination[0].position);
+            firstDoor = false;
+        }
+        else
+        {
+            CatMovement(destination[2].position);
+        }
     }
 
     private void OnEnemyRevealed()
     {
-        CatMovement();
+        CatMovement(destination[1].position);
     }
 
-    private void CatMovement()
+    private void CatMovement(Vector3 destination)
     {
-        if (agent.hasPath)
+        /*if (agent.hasPath)
+        {
+            StartCoroutine(TryAgain(destination));
             return;
-
-        destinationPoint++;        
+        }    */    
 
         if (destinationPoint <= maxDestinationPoints)
         {
             var path = new NavMeshPath();
-            agent.CalculatePath(destination[destinationPoint - 1].position, path);
+            agent.CalculatePath(destination, path);
 
             if (path.status != NavMeshPathStatus.PathComplete)
             {
                 destinationPoint--;
-                StartCoroutine(TryAgain());
+                StartCoroutine(TryAgain(destination));
                 return;
             }
-            agent.transform.LookAt(destination[destinationPoint - 1].position);
-            agent.SetDestination(destination[destinationPoint - 1].position);
+            agent.transform.LookAt(destination);
+            agent.SetDestination(destination);
         }
         else
         {
@@ -62,11 +74,11 @@ public class CatMovementController : MonoBehaviour
         }
     }
 
-    private IEnumerator TryAgain()
+    private IEnumerator TryAgain(Vector3 destination)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
-        CatMovement();
+        CatMovement(destination);
 
     }
     
