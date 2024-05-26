@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject diaryPanel;
+    [SerializeField] private GameObject storyBookPanel;
+
     private bool m_isGamePaused = false;
     private bool m_canPause = true;
     [SerializeField] private GameObject loseMenu;
@@ -127,6 +129,20 @@ public class UIManager : MonoBehaviour
         else
         {
             diaryPanel.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    public void StoryBook()
+    {
+        if (!storyBookPanel.activeSelf)
+        {
+            storyBookPanel.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            storyBookPanel.SetActive(false);
             pauseMenu.SetActive(true);
         }
     }
