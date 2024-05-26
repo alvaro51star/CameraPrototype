@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraRollController : MonoBehaviour
 {
     [SerializeField] private PhotoCapture photoCapture;
+    [SerializeField] private TextForDialogue textForDialogue;
     [Header("Carrete UI")]
     public int availablePhotos;
     [SerializeField] private int maxPhotos;
@@ -41,6 +42,7 @@ public class CameraRollController : MonoBehaviour
         {
             availablePhotosTMP.color = Color.red;
             photoCapture.canTakePhoto = false;
+            textForDialogue.StartDialogue();
         }
     }
 

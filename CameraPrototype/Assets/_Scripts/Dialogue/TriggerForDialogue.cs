@@ -16,7 +16,7 @@ public class TriggerForDialogue : MonoBehaviour
         {
             if (!dialogueController.didDialogueStart)
             {
-                dialogueController.StartDialogue(textLines, gameObject);                
+                dialogueController.StartDialogue(textLines);                
             }
         }
     }
