@@ -866,6 +866,7 @@ MonoBehaviour:
   m_needsButton: 0
   m_interactionScript: {fileID: 10432647}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionAngle: 0
   m_interactionPivot: {fileID: 1455384964373550700}
 --- !u!23 &10432649
 MeshRenderer:
@@ -36821,6 +36822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185544597836393816, guid: 902fb9af69be9664aaaa9aa4a3ee8fc0,
+        type: 3}
+      propertyPath: m_interactionAngle
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
