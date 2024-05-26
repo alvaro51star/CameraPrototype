@@ -152,4 +152,9 @@ public class PhotoCapture : MonoBehaviour
             RemovePhoto();
         }
     }
+
+    public bool GetViewingPhoto()
+    {
+        return viewingPhoto;
+    }
 }
