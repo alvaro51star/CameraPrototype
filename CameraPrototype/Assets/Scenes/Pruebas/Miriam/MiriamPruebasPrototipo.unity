@@ -850,6 +850,7 @@ MonoBehaviour:
   m_doorLocked: {fileID: 0}
   m_isPuertaPrincipal: 0
   m_collider: {fileID: 0}
+  m_isCatDoor: 0
 --- !u!114 &10432648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36764,6 +36765,11 @@ PrefabInstance:
     - target: {fileID: 6240631938174568748, guid: 902fb9af69be9664aaaa9aa4a3ee8fc0,
         type: 3}
       propertyPath: m_isLocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240631938174568748, guid: 902fb9af69be9664aaaa9aa4a3ee8fc0,
+        type: 3}
+      propertyPath: m_isCatDoor
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6941629015520404048, guid: 902fb9af69be9664aaaa9aa4a3ee8fc0,
