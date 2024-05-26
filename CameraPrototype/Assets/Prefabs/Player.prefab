@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 7436156349101976439}
   - component: {fileID: 586381003278203724}
   - component: {fileID: 4387893766438552301}
+  - component: {fileID: 8485402160083179917}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -216,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoCapture: {fileID: 2592600347508512828}
+  textForDialogue: {fileID: 8485402160083179917}
   availablePhotos: 0
   maxPhotos: 20
   availablePhotosTMP: {fileID: 0}
@@ -355,6 +357,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_photoCapture: {fileID: 2592600347508512828}
   CameraUI: {fileID: 0}
+--- !u!114 &8485402160083179917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d14f212a41d2b4a9c391274aaeb687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueController: {fileID: 0}
+  textLines:
+  - You have no camera roll left!!
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0
