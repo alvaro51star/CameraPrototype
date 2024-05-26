@@ -295,6 +295,7 @@ MonoBehaviour:
   lastState: {fileID: 0}
   isVisible: 0
   isStunned: 0
+  chasePlayer: 0
   navMesh: {fileID: 0}
   collision: {fileID: 3691916542636007125}
   triggerCollision: {fileID: 1659365039449232602}
@@ -495,7 +496,7 @@ MonoBehaviour:
   animator: {fileID: 8324941161663551707}
   enemy: {fileID: 1829624780751140221}
   audioSource: {fileID: 1247585134476043462}
-  growlAnimation: {fileID: -203655887218126122, guid: 2c0c299b043da37408e732ecc98573b6,
+  growlAnimation: {fileID: -203655887218126122, guid: aff1aa8ce4b9789408a45eac7e1dad40,
     type: 3}
 --- !u!82 &1247585134476043462
 AudioSource:
