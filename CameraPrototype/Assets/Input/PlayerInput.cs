@@ -107,6 +107,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraRollCheat"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b5555ed-f4ff-49d3-a235-db9bf3d591b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SkipText"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24b1122e-0928-4bcb-8298-8c1dc38c3a78"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CameraRollCheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -396,6 +416,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CameraPlayer_PauseMenu = m_CameraPlayer.FindAction("PauseMenu", throwIfNotFound: true);
         m_CameraPlayer_FocusCamera = m_CameraPlayer.FindAction("FocusCamera", throwIfNotFound: true);
         m_CameraPlayer_SkipText = m_CameraPlayer.FindAction("SkipText", throwIfNotFound: true);
+        m_CameraPlayer_CameraRollCheat = m_CameraPlayer.FindAction("CameraRollCheat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -466,6 +487,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraPlayer_PauseMenu;
     private readonly InputAction m_CameraPlayer_FocusCamera;
     private readonly InputAction m_CameraPlayer_SkipText;
+    private readonly InputAction m_CameraPlayer_CameraRollCheat;
     public struct CameraPlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -479,6 +501,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CameraPlayer_PauseMenu;
         public InputAction @FocusCamera => m_Wrapper.m_CameraPlayer_FocusCamera;
         public InputAction @SkipText => m_Wrapper.m_CameraPlayer_SkipText;
+        public InputAction @CameraRollCheat => m_Wrapper.m_CameraPlayer_CameraRollCheat;
         public InputActionMap Get() { return m_Wrapper.m_CameraPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -515,6 +538,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SkipText.started += instance.OnSkipText;
             @SkipText.performed += instance.OnSkipText;
             @SkipText.canceled += instance.OnSkipText;
+            @CameraRollCheat.started += instance.OnCameraRollCheat;
+            @CameraRollCheat.performed += instance.OnCameraRollCheat;
+            @CameraRollCheat.canceled += instance.OnCameraRollCheat;
         }
 
         private void UnregisterCallbacks(ICameraPlayerActions instance)
@@ -546,6 +572,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SkipText.started -= instance.OnSkipText;
             @SkipText.performed -= instance.OnSkipText;
             @SkipText.canceled -= instance.OnSkipText;
+            @CameraRollCheat.started -= instance.OnCameraRollCheat;
+            @CameraRollCheat.performed -= instance.OnCameraRollCheat;
+            @CameraRollCheat.canceled -= instance.OnCameraRollCheat;
         }
 
         public void RemoveCallbacks(ICameraPlayerActions instance)
@@ -592,5 +621,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnFocusCamera(InputAction.CallbackContext context);
         void OnSkipText(InputAction.CallbackContext context);
+        void OnCameraRollCheat(InputAction.CallbackContext context);
     }
 }
