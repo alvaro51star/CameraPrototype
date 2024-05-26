@@ -13,11 +13,13 @@ public class CatMovementController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnEnemyRevealed += OnEnemyRevealed;
+        EventManager.OnDoorClosed += OnDoorOpened;
     }
 
     private void OnDisable()
     {
         EventManager.OnEnemyRevealed -= OnEnemyRevealed;
+        EventManager.OnDoorClosed -= OnDoorOpened;
     }
 
     private void Start()
