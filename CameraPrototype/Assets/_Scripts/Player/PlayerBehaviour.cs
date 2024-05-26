@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     //Variables
-    [SerializeField] float m_minAngleToScreenCenter;
     [SerializeField] Camera m_cam;
     private bool m_canInteract = false;
     private List<InteractiveObject> m_interactiveObjects = new List<InteractiveObject>();
@@ -195,7 +194,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (nearestAngle <= m_minAngleToScreenCenter)
+        if (nearestAngle <= nearestIteractiveObject.GetInteractionAngle())
         {
             m_actualInputInteractiveObject = nearestIteractiveObject;
             

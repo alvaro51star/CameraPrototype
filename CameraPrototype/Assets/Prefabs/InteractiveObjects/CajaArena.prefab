@@ -102,6 +102,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionAngle: 15
   m_interactionPivot: {fileID: 0}
 --- !u!114 &5594875329717649240
 MonoBehaviour:
