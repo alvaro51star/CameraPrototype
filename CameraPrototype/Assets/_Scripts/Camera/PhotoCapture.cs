@@ -40,6 +40,8 @@ public class PhotoCapture : MonoBehaviour
 
     private RenderTexture m_renderTexture;
 
+    private Sprite m_photoSprite;
+
     private void Start()
     {
         m_renderTexture = new RenderTexture(Screen.width, Screen.height, anomaliesCamera.targetTexture.depth);
@@ -105,6 +107,7 @@ public class PhotoCapture : MonoBehaviour
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
             Time.timeScale = 0f;
+            AlbumManager.instance.AddPhoto(screenCapture);
             ShowPhoto();
         });             
     }
@@ -115,6 +118,7 @@ public class PhotoCapture : MonoBehaviour
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
+        m_photoSprite = photoSprite;
 
         //savePhoto.PhotoSave(screenCapture);
 
@@ -142,6 +146,7 @@ public class PhotoCapture : MonoBehaviour
         EventManager.OnRemovePhoto?.Invoke();
         m_tookFirstPhoto = false;
         Time.timeScale = 1f;
+
     }
 
     private IEnumerator AutoRemovePhoto()
