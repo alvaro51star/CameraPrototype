@@ -108,7 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5951873451470955019}
-  destination: []
+  destination:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3630740198822510381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +141,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 8300000, guid: cc3f3313f8ae0a043ae9b7e0d83b7794, type: 3}
+  m_interactionAngle: 15
   m_interactionPivot: {fileID: 4046824652726361374}
 --- !u!114 &7405290046500708042
 MonoBehaviour:
