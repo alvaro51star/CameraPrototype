@@ -119,7 +119,7 @@ MonoBehaviour:
   m_targetObject: {fileID: 0}
   m_dissapears: 1
   m_affectsPositive: 0
-  m_rollAdded: 1
+  m_rollAdded: 2
 --- !u!1001 &3004644437173311422
 PrefabInstance:
   m_ObjectHideFlags: 0
