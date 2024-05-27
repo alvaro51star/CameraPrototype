@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     //Variables
-    [SerializeField] float m_minAngleToScreenCenter;
     [SerializeField] Camera m_cam;
     private bool m_canInteract = false;
     private List<InteractiveObject> m_interactiveObjects = new List<InteractiveObject>();
@@ -18,6 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool m_isDoor;
     private bool m_isLockedDoor;
     private bool m_isCat;
+    private bool m_isRedBeard;
 
     private void OnEnable()
     {
@@ -105,7 +105,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (!UIManager.instance.GetIsGamePaused() && !m_isReading)
         {
             UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
-            print("me activo");
             if (m_isDoor)
             {
                 if (m_isLockedDoor)
@@ -125,7 +124,11 @@ public class PlayerBehaviour : MonoBehaviour
             }
             else if (!m_isDoor && !m_isCat)
             {
-                    UIManager.instance.InteractionAvialable(true, false, false);
+                UIManager.instance.InteractionAvialable(true, false, false);
+                if (m_isRedBeard)
+                {
+                    UIManager.instance.ShowInput(false);
+                }
             }
         }
     }
@@ -151,6 +154,7 @@ public class PlayerBehaviour : MonoBehaviour
         m_isLockedDoor = false;
         m_isDoor = false;
         m_isCat = false;
+        m_isRedBeard = false;
         UIManager.instance.InteractionAvialable(false, false, false);
         UIManager.instance.SetInteractionText(false, "");
     }
@@ -195,7 +199,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (nearestAngle <= m_minAngleToScreenCenter)
+        if (nearestAngle <= nearestIteractiveObject.GetInteractionAngle())
         {
             m_actualInputInteractiveObject = nearestIteractiveObject;
             
@@ -217,7 +221,10 @@ public class PlayerBehaviour : MonoBehaviour
                 if (m_actualInputInteractiveObject.GetComponent<Interaction_Cat>() != null)
                 {
                     m_isCat = true;
-                    print("gato");
+                }
+                if (m_actualInputInteractiveObject.GetComponent<Interaction_RedBeard>() != null)
+                {
+                    m_isRedBeard = true;
                 }
                 IsBesideInteractableObject();
             }

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionAngle: 15
   m_interactionPivot: {fileID: 0}
 --- !u!114 &8056918256493050061
 MonoBehaviour:
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_targetObject: {fileID: 0}
   m_dissapears: 1
   m_affectsPositive: 0
-  m_rollAdded: 1
+  m_rollAdded: 2
 --- !u!1001 &3004644437173311422
 PrefabInstance:
   m_ObjectHideFlags: 0

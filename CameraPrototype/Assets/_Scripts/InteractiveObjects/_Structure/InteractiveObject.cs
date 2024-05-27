@@ -8,6 +8,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     [SerializeField] private bool m_needsButton;
     [SerializeField] private InteractionScript m_interactionScript;
     [SerializeField] private AudioClip m_interactSound;
+    [SerializeField] float m_interactionAngle;
     public Transform m_interactionPivot;
 
     private void Start()
@@ -39,4 +40,8 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
         return m_interactionScript;
     }
 
+    public float GetInteractionAngle()
+    {
+        return m_interactionAngle;
+    }
 }

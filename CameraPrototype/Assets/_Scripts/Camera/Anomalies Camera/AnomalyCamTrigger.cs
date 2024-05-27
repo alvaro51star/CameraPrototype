@@ -32,6 +32,8 @@ public class AnomalyCamTrigger : MonoBehaviour
     {
         if(!m_stalkerBehaviour)
             return;
+        if(m_stalkerBehaviour.IsAttackingPlayer())
+            return;
         m_stalkerBehaviour.StunEnemy();
     }
 

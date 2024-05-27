@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,34 +8,44 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     public Renderer objectMesh;
     public GameObject player;
-    [SerializeField] private Animator animator;
+    public Animator animator;
 
     public Transform pointToLook;
     [Space]
     [Header("States")]
-    State states;
+    public State states;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
     public PlayerCatchState playerCatchState;
     public OutOfSightState outOfSightState;
+    public GrowlState growlState;
+
+    public State lastState = null;
 
     [Space]
     [Header("Public variables")]
     public bool isVisible = false;
     public bool isStunned = false;
+    public bool chasePlayer = false;
+    public bool isGrowling = false;
 
     [Space]
     [Header("Collision related variables")]
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField] private Collider collision;
     [SerializeField] private Collider triggerCollision;
+    public bool playerCatched = false;
 
     #region Time Variables
     [Space]
     [Header("Time Variables")]
     public float maxTimeLooked = 2f;
     public float currentTimeLooked = 0;
+
+    [Space]
+    [Header("Final TP point")]
+    [SerializeField] private Transform finalTpPoint;
 
     #endregion
 
@@ -49,6 +61,7 @@ public class StalkerBehaviour : MonoBehaviour
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
         outOfSightState.SetUp(gameObject, this);
+        growlState.SetUp(gameObject, this);
     }
 
     void Start()
@@ -72,10 +85,12 @@ public class StalkerBehaviour : MonoBehaviour
         {
             isVisible = false;
         }
-
-        if (states.isComplete)
+        if (playerCatched == false)
         {
-            SelectNextState();
+            if (states.isComplete)
+            {
+                SelectNextState();
+            }
         }
 
         states.Do();
@@ -85,7 +100,8 @@ public class StalkerBehaviour : MonoBehaviour
     {
         states.Exit();
 
-        if (currentTimeLooked >= maxTimeLooked)
+
+        if (currentTimeLooked >= maxTimeLooked || chasePlayer)
         {
             states = chaseState;
         }
@@ -94,13 +110,20 @@ public class StalkerBehaviour : MonoBehaviour
             states = stalkState;
         }
 
+        if (playerCatched == true)
+        {
+            states = playerCatchState;
+        }
+
         states.Enter();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && currentTimeLooked >= maxTimeLooked && !isStunned)
+        if (other.gameObject.CompareTag("Player") && states == chaseState)
         {
+            states.Exit();
+            playerCatched = true;
             Debug.Log("Player detectado");
             states = playerCatchState;
             states.Enter();
@@ -111,15 +134,19 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void AddVision(float deltaTime)
     {
-        if (isStunned)
+        if (isStunned || playerCatched == true || isGrowling)
         {
+            player.GetComponent<WatchEnemy>().DesactivateFeedback();
             return;
         }
+
+        player.GetComponent<WatchEnemy>().ActivateFeedbacks();
 
         currentTimeLooked += deltaTime;
 
         if (currentTimeLooked >= maxTimeLooked)
         {
+            states.Exit();
             states = chaseState;
             states.Enter();
         }
@@ -140,15 +167,57 @@ public class StalkerBehaviour : MonoBehaviour
     public void StunEnemy()
     {
         isStunned = true;
+        states.Exit();
         states = stunnedState;
         states.Enter();
     }
 
     public void OutOfSight()
     {
+        states.Exit();
         states = outOfSightState;
         states.Enter();
     }
+
+    public void PlayerCatch()
+    {
+        playerCatched = true;
+        states = playerCatchState;
+        states.Enter();
+    }
+
+    public void Growl()
+    {
+        states.Exit();
+        states = growlState;
+        states.Enter();
+    }
+
+    public void ChasePlayer()
+    {
+        chasePlayer = true;
+        states = chaseState;
+        states.Enter();
+    }
+
+    public bool IsAttackingPlayer()
+    {
+        if (states == playerCatchState)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //TODO hacer evento de persecucion
+
+    // public void EventPersecution()
+    // {
+    //     navMesh.enabled = false;
+    //     transform.position = finalTpPoint.position;
+    //     navMesh.enabled = true;
+    //     Growl();
+    // }
 
 
     #endregion

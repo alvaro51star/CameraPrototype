@@ -182,6 +182,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
   m_interactSound: {fileID: 0}
+  m_interactionAngle: 15
   m_interactionPivot: {fileID: 0}
 --- !u!114 &6006915991493800928
 MonoBehaviour:

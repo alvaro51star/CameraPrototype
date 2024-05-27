@@ -28,16 +28,16 @@ public class AnomalyBehaviour : MonoBehaviour
         if(!isInPlayersTrigger)
             return;
 
-        anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
-        
-        if(!anomalyCamera)
-            return;
-
-        if(!anomaliesData)
+        if (!anomaliesData)
             return;
 
         if (!anomaliesData.isActiveAndEnabled)
             return;
+
+        anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
+        
+        if(!anomalyCamera)
+            return;        
 
         if (!MeshIsVisibleToCamera(anomalyCamera, gameObject.GetComponent<Renderer>()))
             return;
@@ -51,6 +51,7 @@ public class AnomalyBehaviour : MonoBehaviour
             if (transform.CompareTag("Enemy"))
             {
                 gameObject.GetComponent<StalkerBehaviour>().ActivateCollision();
+                EventManager.OnEnemyRevealed?.Invoke();
             }
 
             gameObject.layer = LayerMask.NameToLayer("Default");

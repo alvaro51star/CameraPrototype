@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
+
 
 public class WatchEnemy : MonoBehaviour
 {
@@ -16,6 +18,10 @@ public class WatchEnemy : MonoBehaviour
     [SerializeField] private float maxAngleVisionJumpScare = 30f;
     [SerializeField] private float timeForNewJumpScare = 10f;
     [SerializeField] private AudioClip jumpScareSoundEffect;
+
+    [Space]
+    [Header("Feel Variables")]
+    [SerializeField] private MMFeedbacks feedbackVigneteEnemy;
 
     private bool jumpScareOnCD = false;
 
@@ -39,7 +45,7 @@ public class WatchEnemy : MonoBehaviour
         {
             Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
             float angle = Vector3.Angle(cameraTransform.forward, rayDirection);
-            
+
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision)
             {
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.green);
@@ -50,9 +56,9 @@ public class WatchEnemy : MonoBehaviour
 
     private void JumpScareStalker()
     {
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - transform.position;
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
         float distance = Vector3.Distance(transform.position, enemy.transform.position);
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance) && enemy.GetComponent<StalkerBehaviour>().objectMesh.isVisible)
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
         {
             float angle = Vector3.Angle(rayDirection, transform.forward);
             if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)
@@ -78,5 +84,15 @@ public class WatchEnemy : MonoBehaviour
         AudioManager.Instance.ReproduceSound(jumpScareSoundEffect);
         yield return new WaitForSeconds(timeForNewJumpScare);
         jumpScareOnCD = false;
+    }
+
+    public void ActivateFeedbacks()
+    {
+        feedbackVigneteEnemy?.PlayFeedbacks();
+    }
+
+    public void DesactivateFeedback()
+    {
+        feedbackVigneteEnemy?.StopFeedbacks();
     }
 }

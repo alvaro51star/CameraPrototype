@@ -5,14 +5,15 @@ using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
-    //[SerializeField] private UIManager uiManager;
     //[SerializeField] private AudioSource audioSource;
     [Header("Text variables")]
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
     [SerializeField] private float nexLineTime;
+    [Header("Tutorial")]
     [SerializeField] private Animator elevatorAnimator;
     [SerializeField] private Animator elevatorAnimator2;
+    [SerializeField] private GameObject controlsGO;
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
@@ -33,17 +34,9 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    public void StartDialogue(string[] textLines, GameObject trigger)
+    public void StartDialogue(string[] textLines)
     {
-        //activeTrigger = trigger;
-        EventManager.OnIsReading?.Invoke();
-        /*
-        uiManager.IsInGame(false); // parar interacciones
-        uiManager.DesactivateAllUIGameObjects(); //desactivar UI (ya lo ha hecho miriam)
-        SoundManager.instance.ReproduceSound(AudioClipsNames.Pop, audioSource);
-        uiManager.ActivateUIGameObjects(uiManager.dialoguePanel, true); //activar ui dialogo
-        
-        uiManager.dialoguePanel.SetActive(true);*/
+        EventManager.OnIsReading?.Invoke();      
 
         UIManager.instance.dialoguePanel.SetActive(true);
         UIManager.instance.SetIsGamePaused(true);
@@ -61,10 +54,7 @@ public class DialogueController : MonoBehaviour
     public void EndDialogue()
     {
         didDialogueStart = false;
-        /*
-        uiManager.DesactivateAllUIGameObjects(); //desactivar ui dialogo
-        uiManager.IsInGame(true); //meter interaccion
-        */
+
         UIManager.instance.dialoguePanel.SetActive(false);
         UIManager.instance.SetIsGamePaused(false);
         UIManager.instance.SetPointersActive(true);
@@ -72,9 +62,15 @@ public class DialogueController : MonoBehaviour
         UIManager.instance.m_isInDialogue = false;
 
         EventManager.OnStopReading?.Invoke();
-        elevatorAnimator.enabled = true;
-        elevatorAnimator2.enabled = true;
-        this.enabled = false;
+        if (!elevatorAnimator.isActiveAndEnabled)
+        {
+            elevatorAnimator.enabled = true;
+            elevatorAnimator2.enabled = true;
+
+            if(controlsGO.activeSelf)
+                controlsGO.SetActive(false);
+        }
+        //this.enabled = false;
     }
 
     private IEnumerator ShowLine()
@@ -87,7 +83,7 @@ public class DialogueController : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(nexLineTime);
-        NextDialogueLine();
+        //NextDialogueLine();
     }
 
     public void NextDialogueLine()

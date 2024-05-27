@@ -103,6 +103,7 @@ MonoBehaviour:
   m_needsButton: 1
   m_interactionScript: {fileID: 6240631938174568748}
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactionAngle: 10
   m_interactionPivot: {fileID: 7796724164049083011}
 --- !u!114 &6240631938174568748
 MonoBehaviour:
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
   m_isPuertaPrincipal: 0
   m_collider: {fileID: 4819155054347006577}
+  m_isCatDoor: 0
 --- !u!95 &5436261081058750397
 Animator:
   serializedVersion: 5

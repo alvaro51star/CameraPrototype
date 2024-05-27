@@ -13,9 +13,21 @@ public class PlayerCatchState : State
 
     [SerializeField] private UIManager uiManager;
 
+    
+
     public override void Enter()
     {
-        navMesh.enabled = true;
+        animator.enabled = true;
+        Debug.Log("Player catch state");
+        animator = stalkerBehaviour.animator;
+        navMesh.enabled = false;
+        player.GetComponent<PlayerMovement>().m_canWalk = false;
+        animator.Play("Kill");
+        enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        AudioManager.Instance.ReproduceSound(jumpScareSound);
+        // animator.StopPlayback();
+        // animator.PlayInFixedTime("Kill");
+        
         StartCoroutine(CatchPlayer(player));
     }
 
@@ -41,15 +53,11 @@ public class PlayerCatchState : State
 
     private IEnumerator CatchPlayer(GameObject player)
     {
-        player.GetComponent<PlayerMovement>().m_canWalk = false;
-        navMesh.isStopped = true;
-        navMesh.velocity = Vector3.zero;
-        enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
-        AudioManager.Instance.ReproduceSound(jumpScareSound);
-        animator.Play("Kill");
         yield return new WaitForSeconds(1.5f);
         //EndGame
         TestingManager.Instance.AddTime(GameFinalState.Lost);
         uiManager.ActivateLoseMenu();
     }
+
+
 }

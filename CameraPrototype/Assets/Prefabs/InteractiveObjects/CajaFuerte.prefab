@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3705075844989974742
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.27, y: 0.54, z: 10.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.62207896, y: 0.62207896, z: 0.62207896}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8564541675534008652}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_interactSound: {fileID: 8300000, guid: f67ade7e5959b114db23668381c9609c, type: 3}
+  m_interactionAngle: 10
   m_interactionPivot: {fileID: 7514851762259983675}
 --- !u!114 &5036124179987220680
 MonoBehaviour:
@@ -127,10 +128,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59c00c0da836a9e419b0631e6917e739, type: 3}
   - {fileID: 8300000, guid: 6fe7b58317f836b4da7eb8312b8a7a99, type: 3}
   - {fileID: 8300000, guid: 1bcab01a3f95c9a42998d2a9de0a8ea7, type: 3}
-  m_wrongSound: {fileID: 8300000, guid: 7dcd8675f60e43d4a9a7cde87b18494b, type: 3}
-  m_rightSound: {fileID: 8300000, guid: 0310061e5acbc7a4f9169ff19dbb2b23, type: 3}
-  m_safeUnlockSound: {fileID: 8300000, guid: 30355e767b359e746a6bf2b9a1b7e157, type: 3}
-  m_safeOpen: {fileID: 8300000, guid: 8b4483d25f493bf4e80c6f6ca1a918e4, type: 3}
+  m_wrongSound: {fileID: 8300000, guid: 0e1dfd5c125c16e4681f96f446b58a85, type: 3}
+  m_rightSound: {fileID: 8300000, guid: 5b191748bb8399147a339d72dfc47279, type: 3}
+  m_safeUnlockSound: {fileID: 8300000, guid: 84c8dd9ea89fa6e46b5a553f9b37de87, type: 3}
+  m_safeOpen: {fileID: 8300000, guid: 7c65671da5ffbf24eaa73ac3ffeff016, type: 3}
   anim: {fileID: 3415558527878844370}
 --- !u!1 &8253035414361023315
 GameObject:
@@ -184,7 +185,8 @@ PrefabInstance:
     - target: {fileID: 6079898189619740222, guid: d5deb1ff3236af3419e2e31746a27857,
         type: 3}
       propertyPath: m_noteText
-      value: "Aqui habr\xEDa una nota que te ayudadr\xEDa para el pr\xF3ximo nivel."
+      value: It turns out that all the anomalies are connected, my mentor warned
+        me to be careful in this town and its anomalies
       objectReference: {fileID: 0}
     - target: {fileID: 7301028984481874722, guid: d5deb1ff3236af3419e2e31746a27857,
         type: 3}
@@ -346,6 +348,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6442298374534657108, guid: 769be2332bec2724a81776697b7d023e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ddb4f65a11c856488cc7421ade98c63, type: 2}
     - target: {fileID: -4620282718447106903, guid: 769be2332bec2724a81776697b7d023e,
         type: 3}
       propertyPath: m_IsActive
@@ -355,7 +362,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c1efdce74277fc9409ca082a3f6a91dd, type: 2}
+      objectReference: {fileID: 2100000, guid: 9ddb4f65a11c856488cc7421ade98c63, type: 2}
     - target: {fileID: 919132149155446097, guid: 769be2332bec2724a81776697b7d023e,
         type: 3}
       propertyPath: m_Name

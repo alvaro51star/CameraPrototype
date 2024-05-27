@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject diaryPanel;
+    [SerializeField] private GameObject storyBookPanel;
+
     private bool m_isGamePaused = false;
     private bool m_canPause = true;
     [SerializeField] private GameObject loseMenu;
@@ -46,6 +48,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject m_greenLight;
     [SerializeField] private TextMeshProUGUI m_safeNumberText;
 
+
+    //Album
+    [SerializeField] private GameObject m_albumPanel;
+    [SerializeField] private GameObject m_CloseUpImagePanel;
+    [SerializeField] private GameObject m_prevAlbumButtom;
+    [SerializeField] private GameObject m_nextAlbumButtom;
+    [SerializeField] private GameObject[] m_albumPhotos;
+    [SerializeField] private Image[] m_albumPhotosSprites;
+    [SerializeField] private Image m_closeUpPhoto;
+    private int m_albumPage = -1; //empieza en -1
+
+
     private void Awake()
     {
         if (instance == null)
@@ -72,6 +86,7 @@ public class UIManager : MonoBehaviour
     {
         m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
+        ShowAlbum(false);
         playerPhotoCapture.enabled = true;
 
         if (mouseLimited)
@@ -128,6 +143,28 @@ public class UIManager : MonoBehaviour
         {
             diaryPanel.SetActive(false);
             pauseMenu.SetActive(true);
+        }
+    }
+
+    public void StoryBook()
+    {
+        if (!storyBookPanel.activeSelf)
+        {
+            storyBookPanel.SetActive(true);
+            pauseMenu.SetActive(false);
+
+            SetPointersActive(false);
+            EventManager.OnIsReading?.Invoke();
+            m_isReading = true;
+            SetInteractionText(false, "");
+        }
+        else
+        {
+            storyBookPanel.SetActive(false);
+
+            SetPointersActive(true);
+            EventManager.OnStopReading?.Invoke();
+            m_isReading = false;
         }
     }
 
@@ -380,5 +417,125 @@ public class UIManager : MonoBehaviour
     public void ChangeCodeDisplay(string num)
     {
         m_safeNumberText.text = num;
+    }
+
+
+    //Album
+    public void ShowAlbum(bool mode)
+    {
+        if (mode)
+        {
+            m_albumPanel.SetActive(true);
+            AdvanceAlbumPage();
+        }
+        else
+        {
+            m_CloseUpImagePanel.SetActive(false);
+            m_albumPanel.SetActive(false);
+            m_albumPage = -1;
+        }
+    }
+
+    public void AdvanceAlbumPage()
+    {
+        m_albumPage++;
+        List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+        bool showButtons = false;
+        for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
+        {
+            if (i < sprites.Count)
+            {
+                m_albumPhotos[i].SetActive(true);
+                m_albumPhotosSprites[i].sprite = sprites[i];
+                showButtons = true;
+            }
+            else
+            {
+                m_albumPhotos[i].gameObject.SetActive(false);
+            }
+        }
+        if (showButtons == false)
+        {
+            m_prevAlbumButtom.SetActive(false);
+            m_nextAlbumButtom.SetActive(false);
+        }
+        else
+        {
+            if (m_albumPage != 0)
+            {
+                m_prevAlbumButtom.SetActive(true);
+            }
+            else
+            {
+                m_prevAlbumButtom.SetActive(false);
+            }
+
+            if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+            {
+                m_nextAlbumButtom.SetActive(true);
+            }
+            else
+            {
+                m_nextAlbumButtom.SetActive(false);
+            }
+        }
+    }
+
+    public void GoBackAlbumPage()
+    {
+        if (m_albumPage > 0)
+        {
+            m_albumPage--;
+            List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+            bool showButtons = false;
+            for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
+            {
+                if (i < sprites.Count)
+                {
+                    m_albumPhotos[i].SetActive(true);
+                    m_albumPhotosSprites[i].sprite = sprites[i];
+                    showButtons = true;
+                }
+                else
+                {
+                    m_albumPhotos[i].gameObject.SetActive(false);
+                }
+            }
+            if (showButtons == false)
+            {
+                m_prevAlbumButtom.SetActive(false);
+                m_nextAlbumButtom.SetActive(false);
+            }
+            else
+            {
+                if (m_albumPage != 0)
+                {
+                    m_prevAlbumButtom.SetActive(true);
+                }
+                if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+                {
+                    m_nextAlbumButtom.SetActive(true);
+                }
+                else
+                {
+                    m_nextAlbumButtom.SetActive(false);
+                }
+            }
+        }
+        if (m_albumPage == 0)
+        {
+            m_prevAlbumButtom.SetActive(false);
+        }
+    }
+
+    public void ShowCloseUpPhoto(Image photo)
+    {
+        m_CloseUpImagePanel.SetActive(true);
+        m_closeUpPhoto.sprite = photo.sprite;
+    }
+
+    public void CloseCloseUpPhoto()
+    {
+        m_CloseUpImagePanel.SetActive(false);
     }
 }

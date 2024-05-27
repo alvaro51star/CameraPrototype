@@ -15,6 +15,7 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private GameObject cameraUI;
+    [SerializeField] private float timeShowingPhoto;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
@@ -39,6 +40,8 @@ public class PhotoCapture : MonoBehaviour
 
     private RenderTexture m_renderTexture;
 
+    private Sprite m_photoSprite;
+
     private void Start()
     {
         m_renderTexture = new RenderTexture(Screen.width, Screen.height, anomaliesCamera.targetTexture.depth);
@@ -58,7 +61,8 @@ public class PhotoCapture : MonoBehaviour
             {
                 EventManager.OnTakingPhoto?.Invoke();
                 StartCoroutine(CameraFlashEffect());
-                CapturePhoto();            
+                CapturePhoto();
+
             }
             else
             {
@@ -71,10 +75,7 @@ public class PhotoCapture : MonoBehaviour
 
         else
         {
-            RemovePhoto();
-            EventManager.OnRemovePhoto?.Invoke();
-            m_tookFirstPhoto = false;
-            Time.timeScale = 1f;
+            RemovePhoto();            
         }
     }
 
@@ -106,6 +107,7 @@ public class PhotoCapture : MonoBehaviour
         {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
+
             Time.timeScale = 0f;
             ShowPhoto();
         });             
@@ -114,14 +116,20 @@ public class PhotoCapture : MonoBehaviour
 
     private void ShowPhoto()//turns texture into sprite, puts it in UI and saves it calling PhotoSave
     {
+
+        UIManager.instance.SetPointersActive(false);
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
+        m_photoSprite = photoSprite;
 
         //savePhoto.PhotoSave(screenCapture);
 
+        AlbumManager.instance.AddPhoto(photoSprite);
+
         photoFrame.SetActive(true);        
-        fadingAnimation.Play("PhotoFade");        
+        fadingAnimation.Play("PhotoFade");
+        StartCoroutine(AutoRemovePhoto());
     }
 
     private IEnumerator CameraFlashEffect()
@@ -139,6 +147,26 @@ public class PhotoCapture : MonoBehaviour
         viewingPhoto = false;
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
+
+        EventManager.OnRemovePhoto?.Invoke();
+        m_tookFirstPhoto = false;
+        Time.timeScale = 1f;
+
+        UIManager.instance.SetPointersActive(true);
+
     }
 
+    private IEnumerator AutoRemovePhoto()
+    {
+        yield return new WaitForSecondsRealtime(timeShowingPhoto);
+        if (viewingPhoto)
+        {
+            RemovePhoto();
+        }
+    }
+
+    public bool GetViewingPhoto()
+    {
+        return viewingPhoto;
+    }
 }

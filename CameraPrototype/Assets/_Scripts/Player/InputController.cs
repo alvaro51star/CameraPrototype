@@ -44,8 +44,9 @@ public class InputController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!UIManager.instance.GetIsGamePaused())
+            if (!UIManager.instance.GetIsGamePaused() && m_photoCapture.hasCameraEquiped|| !UIManager.instance.GetIsGamePaused() && m_photoCapture.GetViewingPhoto() == true)
             {
+                print("funciona");
                 if (m_photoCapture.GetFirstPhotoTaken() == false)
                 {
                     m_photoCapture.TakePhoto();
@@ -79,6 +80,14 @@ public class InputController : MonoBehaviour
         if (context.performed && UIManager.instance.m_isInDialogue)
         {
             m_dialogueController.NextDialogueLine();
+        }
+    }
+
+    public void OnCameraRollCheatCode(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EventManager.OnAddRoll?.Invoke(100);
         }
     }
 }
