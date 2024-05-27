@@ -1115,7 +1115,19 @@ MonoBehaviour:
     m_ActionId: 56a453a3-5643-4dab-b13a-99e7ba5bdd8a
     m_ActionName: CameraPlayer/SkipText[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7021817640465769526}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnCameraRollCheatCode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 5b5555ed-f4ff-49d3-a235-db9bf3d591b7
     m_ActionName: CameraPlayer/CameraRollCheat[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
