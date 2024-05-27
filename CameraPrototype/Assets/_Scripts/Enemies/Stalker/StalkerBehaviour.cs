@@ -213,6 +213,7 @@ public class StalkerBehaviour : MonoBehaviour
     {
         navMesh.enabled = false;
         transform.position = finalTpPoint.position;
+        navMesh.enabled = true;
         Growl();
     }
 
