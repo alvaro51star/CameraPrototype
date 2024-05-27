@@ -170,8 +170,10 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 7e492ad07b6d548eea10ccbd1962e88f, type: 3}
-  RandomSfx: []
+  Sfx: {fileID: 0}
+  RandomSfx:
+  - {fileID: 8300000, guid: e8123af982436594c9a4ddd37bec03f3, type: 3}
+  - {fileID: 8300000, guid: 6e02dfae995cdd44c8e84fc761742947, type: 3}
   TestButton: 0
   TestStopButton: 0
   PlayMethod: 1
@@ -322,8 +324,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 14.680702, y: 4.546708, z: 10.458232}
-  m_Center: {x: -4.808838, y: -1.773354, z: -0.12490606}
+  m_Size: {x: 3.7696152, y: 4.1217775, z: 4.9430084}
+  m_Center: {x: -0.10875797, y: -1.756578, z: -0.06996822}
 --- !u!114 &6043237766469395092
 MonoBehaviour:
   m_ObjectHideFlags: 0

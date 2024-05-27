@@ -296,6 +296,7 @@ MonoBehaviour:
   isVisible: 0
   isStunned: 0
   chasePlayer: 0
+  isGrowling: 0
   navMesh: {fileID: 0}
   collision: {fileID: 3691916542636007125}
   triggerCollision: {fileID: 1659365039449232602}
@@ -508,7 +509,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0443d1817cf59c5488b38d073d84541d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e92cbaddc4195f3489ea0ac997a9a1c2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1091,7 +1092,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1ee693306b2bca14393a9d93070be0c3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 11df2dbc8071d9146bf8d76ca667962d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.296
   m_Pitch: 1
@@ -1222,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8324941161663551707}
-  jumpScareSound: {fileID: 8300000, guid: 2897aa95f29a4414cba79438d6638617, type: 3}
+  jumpScareSound: {fileID: 8300000, guid: 71e32182202e41746a903e6c2524ac4e, type: 3}
   uiManager: {fileID: 0}
 --- !u!1 &7391612708222366937
 GameObject:
