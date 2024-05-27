@@ -15,6 +15,7 @@ public class GrowlState : State
 
     public override void Enter()
     {
+        stalkerBehaviour.isGrowling = true;
         animator.enabled = true;
         animationLenght = growlAnimation.length;
 
@@ -40,7 +41,11 @@ public class GrowlState : State
 
     public override void Exit()
     {
+
+        audioSource.Stop();
+        currentTime = 0f;
         isComplete = false;
+        stalkerBehaviour.isGrowling = false;
         stalkerBehaviour.ChasePlayer();
     }
 

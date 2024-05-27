@@ -75,12 +75,13 @@ public class StalkState : State
         hasBeenVisible = false;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;
         stalkerBehaviour.lastState = stalkerBehaviour.stalkState;
+        growlCalled = false;
     }
 
     public override void Do()
     {
 
-        if (!growlCalled)
+        if (!growlCalled && !stalkerBehaviour.isStunned)
         {
             CheckDistance();
         }
