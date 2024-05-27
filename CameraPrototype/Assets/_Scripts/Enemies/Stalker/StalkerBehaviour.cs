@@ -28,6 +28,7 @@ public class StalkerBehaviour : MonoBehaviour
     public bool isVisible = false;
     public bool isStunned = false;
     public bool chasePlayer = false;
+    public bool isGrowling = false;
 
     [Space]
     [Header("Collision related variables")]
@@ -129,7 +130,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void AddVision(float deltaTime)
     {
-        if (isStunned || playerCatched == true)
+        if (isStunned || playerCatched == true || isGrowling)
         {
             return;
         }
@@ -159,6 +160,7 @@ public class StalkerBehaviour : MonoBehaviour
     public void StunEnemy()
     {
         isStunned = true;
+        states.Exit();
         states = stunnedState;
         states.Enter();
     }

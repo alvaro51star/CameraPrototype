@@ -300,7 +300,7 @@ MonoBehaviour:
   collision: {fileID: 3691916542636007125}
   triggerCollision: {fileID: 1659365039449232602}
   playerCatched: 0
-  maxTimeLooked: 1
+  maxTimeLooked: 2
   currentTimeLooked: 0
 --- !u!195 &1631538004331319585
 NavMeshAgent:
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   timeToCompleteStalk_Level0: 20
   timeToCompleteStalk_Level1: 10
   timeToCompleteStalk_Level2: 5
-  maxDistanceToGrowlState: 2
+  maxDistanceToGrowlState: 1.25
   audioSource: {fileID: 5521217075694417613}
   rayPoint: {fileID: 3142997469726501096}
 --- !u!82 &5521217075694417613
