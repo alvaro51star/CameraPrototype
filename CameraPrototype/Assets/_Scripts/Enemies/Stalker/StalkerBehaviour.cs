@@ -43,6 +43,10 @@ public class StalkerBehaviour : MonoBehaviour
     public float maxTimeLooked = 2f;
     public float currentTimeLooked = 0;
 
+    [Space]
+    [Header("Final TP point")]
+    [SerializeField] private Transform finalTpPoint;
+
     #endregion
 
     // Start is called before the first frame update
@@ -170,6 +174,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void OutOfSight()
     {
+        states.Exit();
         states = outOfSightState;
         states.Enter();
     }
@@ -201,7 +206,15 @@ public class StalkerBehaviour : MonoBehaviour
         {
             return true;
         }
-        return false;   
+        return false;
+    }
+
+    public void EventPersecution()
+    {
+        navMesh.enabled = false;
+        transform.position = finalTpPoint.position;
+        navMesh.enabled = true;
+        Growl();
     }
 
 

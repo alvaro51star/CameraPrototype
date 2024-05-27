@@ -22,7 +22,7 @@ public class StalkState : State
     private const float timeLevel1 = 7.5f;
     private const float timeLevel2 = 3f;
 
-    [SerializeField] private float maxDistanceToGrowlState = 2f;
+    public float maxDistanceToGrowlState = 2f;
 
     private bool hasBeenVisible = false;
 
