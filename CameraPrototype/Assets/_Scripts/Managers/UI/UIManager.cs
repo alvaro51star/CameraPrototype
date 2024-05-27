@@ -48,6 +48,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject m_greenLight;
     [SerializeField] private TextMeshProUGUI m_safeNumberText;
 
+
+    //Album
+    [SerializeField] private GameObject m_albumPanel;
+    [SerializeField] private GameObject m_CloseUpImagePanel;
+    [SerializeField] private GameObject m_prevAlbumButtom;
+    [SerializeField] private GameObject m_nextAlbumButtom;
+    [SerializeField] private GameObject[] m_albumPhotos;
+    [SerializeField] private Image[] m_albumPhotosSprites;
+    [SerializeField] private Image m_closeUpPhoto;
+    private int m_albumPage = -1; //empieza en -1
+
+
     private void Awake()
     {
         if (instance == null)
@@ -404,5 +416,94 @@ public class UIManager : MonoBehaviour
     public void ChangeCodeDisplay(string num)
     {
         m_safeNumberText.text = num;
+    }
+
+
+    //Album
+    public void ShowAlbum(bool mode)
+    {
+        if (mode)
+        {
+            m_albumPanel.SetActive(true);
+            AdvanceAlbumPage();
+        }
+        else
+        {
+            m_albumPanel.SetActive(false);
+            m_albumPage = -1;
+        }
+    }
+
+    public void AdvanceAlbumPage()
+    {
+        m_albumPage++;
+        List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+        bool showButtons = false;
+        for (int i = 0; i < m_albumPhotos.Length; i++)
+        {
+            if (i < sprites.Count)
+            {
+                m_albumPhotos[i].SetActive(true);
+                m_albumPhotosSprites[i].sprite = sprites[i];
+                showButtons = true;
+            }
+            else
+            {
+                m_albumPhotos[i].gameObject.SetActive(false);
+            }
+        }
+        if (showButtons == false)
+        {
+            m_prevAlbumButtom.SetActive(false);
+            m_nextAlbumButtom.SetActive(false);
+        }
+        else
+        {
+            if (m_albumPage != 0)
+            {
+                m_prevAlbumButtom.SetActive(true);
+            }
+            if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+            {
+                m_nextAlbumButtom.SetActive(true);
+            }
+        }
+    }
+
+    public void GoBackAlbumPage()
+    {
+        if (m_albumPage > 0)
+        {
+            m_albumPage--;
+            List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+            for (int i = 0; i < m_albumPhotosSprites.Length; i++)
+            {
+                if (i < sprites.Count)
+                {
+                    m_albumPhotos[i].SetActive(true);
+                    m_albumPhotosSprites[i].sprite = sprites[i];
+                }
+
+                else
+                {
+                    m_albumPhotos[i].gameObject.SetActive(false);
+                }
+            }
+        }
+        if (m_albumPage == 0)
+        {
+            m_prevAlbumButtom.SetActive(false);
+        }
+    }
+
+    public void ShowCloseUpPhoto(Image photo)
+    {
+        m_CloseUpImagePanel.SetActive(true);
+        m_closeUpPhoto.sprite = photo.sprite;
+    }
+
+    public void CloseCloseUpPhoto()
+    {
+        m_CloseUpImagePanel.SetActive(false);
     }
 }
