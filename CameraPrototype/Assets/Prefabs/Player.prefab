@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 586381003278203724}
   - component: {fileID: 4387893766438552301}
   - component: {fileID: 8485402160083179917}
+  - component: {fileID: 5560301477075761429}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -372,6 +373,19 @@ MonoBehaviour:
   dialogueController: {fileID: 0}
   textLines:
   - You have no camera roll left!!
+--- !u!114 &5560301477075761429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304275377204725996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42784fdc8f1cdd845a7fa95e357d1164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_image: []
 --- !u!1 &2605687872625625690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,7 +1243,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2, z: 7}
+  m_Size: {x: 1.5, y: 2, z: 8}
   m_Center: {x: 0, y: 0, z: 4}
 --- !u!1 &6623395459564982910
 GameObject:
@@ -1283,7 +1297,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2, z: 7}
+  m_Size: {x: 1.5, y: 2, z: 8}
   m_Center: {x: 0, y: 0, z: 4}
 --- !u!114 &4777315484523945257
 MonoBehaviour:
