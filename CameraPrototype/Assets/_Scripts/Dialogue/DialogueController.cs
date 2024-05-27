@@ -10,8 +10,10 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingTime; //con 0.05s son 20 char/s
     [SerializeField] private float nexLineTime;
+    [Header("Tutorial")]
     [SerializeField] private Animator elevatorAnimator;
     [SerializeField] private Animator elevatorAnimator2;
+    [SerializeField] private GameObject controlsGO;
 
     public static DialogueController instance;
     public GameObject dialogueGameObject;
@@ -64,6 +66,9 @@ public class DialogueController : MonoBehaviour
         {
             elevatorAnimator.enabled = true;
             elevatorAnimator2.enabled = true;
+
+            if(controlsGO.activeSelf)
+                controlsGO.SetActive(false);
         }
         //this.enabled = false;
     }
