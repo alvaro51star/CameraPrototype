@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour
     {
         m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
+        ShowAlbum(false);
         playerPhotoCapture.enabled = true;
 
         if (mouseLimited)
@@ -429,6 +430,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            m_CloseUpImagePanel.SetActive(false);
             m_albumPanel.SetActive(false);
             m_albumPage = -1;
         }
@@ -439,7 +441,7 @@ public class UIManager : MonoBehaviour
         m_albumPage++;
         List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
         bool showButtons = false;
-        for (int i = 0; i < m_albumPhotos.Length; i++)
+        for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
         {
             if (i < sprites.Count)
             {
@@ -463,9 +465,18 @@ public class UIManager : MonoBehaviour
             {
                 m_prevAlbumButtom.SetActive(true);
             }
+            else
+            {
+                m_prevAlbumButtom.SetActive(false);
+            }
+
             if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
             {
                 m_nextAlbumButtom.SetActive(true);
+            }
+            else
+            {
+                m_nextAlbumButtom.SetActive(false);
             }
         }
     }
@@ -476,17 +487,38 @@ public class UIManager : MonoBehaviour
         {
             m_albumPage--;
             List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
-            for (int i = 0; i < m_albumPhotosSprites.Length; i++)
+            bool showButtons = false;
+            for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
             {
                 if (i < sprites.Count)
                 {
                     m_albumPhotos[i].SetActive(true);
                     m_albumPhotosSprites[i].sprite = sprites[i];
+                    showButtons = true;
                 }
-
                 else
                 {
                     m_albumPhotos[i].gameObject.SetActive(false);
+                }
+            }
+            if (showButtons == false)
+            {
+                m_prevAlbumButtom.SetActive(false);
+                m_nextAlbumButtom.SetActive(false);
+            }
+            else
+            {
+                if (m_albumPage != 0)
+                {
+                    m_prevAlbumButtom.SetActive(true);
+                }
+                if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+                {
+                    m_nextAlbumButtom.SetActive(true);
+                }
+                else
+                {
+                    m_nextAlbumButtom.SetActive(false);
                 }
             }
         }
