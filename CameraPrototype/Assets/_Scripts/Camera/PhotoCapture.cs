@@ -61,7 +61,8 @@ public class PhotoCapture : MonoBehaviour
             {
                 EventManager.OnTakingPhoto?.Invoke();
                 StartCoroutine(CameraFlashEffect());
-                CapturePhoto();            
+                CapturePhoto();
+
             }
             else
             {
@@ -106,8 +107,8 @@ public class PhotoCapture : MonoBehaviour
         {
             screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
             screenCapture.Apply();
+
             Time.timeScale = 0f;
-            AlbumManager.instance.AddPhoto(screenCapture);
             ShowPhoto();
         });             
     }
@@ -115,12 +116,16 @@ public class PhotoCapture : MonoBehaviour
 
     private void ShowPhoto()//turns texture into sprite, puts it in UI and saves it calling PhotoSave
     {
+
+        UIManager.instance.SetPointersActive(false);
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
         m_photoSprite = photoSprite;
 
         //savePhoto.PhotoSave(screenCapture);
+
+        AlbumManager.instance.AddPhoto(photoSprite);
 
         photoFrame.SetActive(true);        
         fadingAnimation.Play("PhotoFade");
@@ -146,6 +151,8 @@ public class PhotoCapture : MonoBehaviour
         EventManager.OnRemovePhoto?.Invoke();
         m_tookFirstPhoto = false;
         Time.timeScale = 1f;
+
+        UIManager.instance.SetPointersActive(true);
 
     }
 

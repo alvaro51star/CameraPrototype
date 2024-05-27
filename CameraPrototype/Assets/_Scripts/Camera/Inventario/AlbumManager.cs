@@ -8,8 +8,10 @@ public class AlbumManager : MonoBehaviour
     //Variables
     public static AlbumManager instance;
     private List<Sprite> m_photos = new List<Sprite>();
-    [SerializeField] Image[] m_image;
+    
+
     private int index = 0;
+
 
     private void Awake()
     {
@@ -23,40 +25,30 @@ public class AlbumManager : MonoBehaviour
         }
     }
 
-    public void AddPhoto(Texture2D newPhoto)
+    public void AddPhoto(Sprite newPhoto)
     {
+        Texture2D texture = new Texture2D(newPhoto.texture.width, newPhoto.texture.height);
+        Rect rect = new Rect(0, 0, newPhoto.texture.width, newPhoto.texture.height);
+        var pixels = newPhoto.texture.GetPixels((int)rect.x, (int)rect.y, (int)newPhoto.texture.width, (int)newPhoto.texture.height);
+        texture.SetPixels(pixels);
+        texture.Apply();
 
-        Sprite photoSprite = Sprite.Create(newPhoto, new Rect(0, 0, newPhoto.width, newPhoto.height),
+        Sprite sprite =  Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                                            new Vector2(0.5f, 0.5f), 100);
-        m_photos.Add(photoSprite);
-        //m_image[index].sprite = newPhoto;
-        //index++;
-    }
 
-    public IEnumerator AddPhotoCoroutine( Sprite newPhoto)
-    {
-        yield return new WaitForEndOfFrame();
+        m_photos.Add(sprite);
     }
-
-    //public Sprite[] GetTandaPhoto(int photoQuantity)
-    //{
-    //    Sprite[] photos = new Sprite[photoQuantity];
-    //    for (int i = 0; i < photoQuantity; i++)
-    //    {
-    //        photos[i] = m_photos[i];
-    //    }
-    //}
 
     public List<Sprite>  GetTandaPhoto(int pageIndex, int maxPhotoPerPage)
     {
         List<Sprite> sprites = new List<Sprite>();
         int photoIndex = pageIndex * maxPhotoPerPage;
-        for (int i = 0; i < maxPhotoPerPage; i++)
+        
+        //print("photopermpage" + maxPhotoPerPage);
+        for (int i = 0; i < maxPhotoPerPage && photoIndex < m_photos.Count; i++)
         {
-            if (photoIndex < m_photos.Count)
-            {
-                sprites.Add(m_photos[photoIndex]);
-            }
+            print("photo index: " + photoIndex);
+            sprites.Add(m_photos[photoIndex]);
             photoIndex++;
         }
         return sprites;
