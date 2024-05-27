@@ -9,6 +9,16 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
 
     [SerializeField] private GameObject enemy;
 
+    private void OnEnable()
+    {
+        EventManager.OnStopReading += TimeScaleNormal;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnStopReading -= TimeScaleNormal;
+    }
+
     protected override void FirstAction()
     {
         Interaction_Door door = m_targetObject.GetComponent<Interaction_Door>();
@@ -16,7 +26,18 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
         m_finalTrigger.SetActive(true);
 
         textForDialogue.StartDialogue();//provisional
-        enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+        //Time.timeScale = 0;
+        //enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+    }
+
+    public void TimeScaleNormal()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void TimeScaleStopped()
+    {
+        Time.timeScale = 0;
     }
 
     // IEnumerator EnemyEvent()

@@ -209,13 +209,15 @@ public class StalkerBehaviour : MonoBehaviour
         return false;
     }
 
-    public void EventPersecution()
-    {
-        navMesh.enabled = false;
-        transform.position = finalTpPoint.position;
-        navMesh.enabled = true;
-        Growl();
-    }
+    //TODO hacer evento de persecucion
+
+    // public void EventPersecution()
+    // {
+    //     navMesh.enabled = false;
+    //     transform.position = finalTpPoint.position;
+    //     navMesh.enabled = true;
+    //     Growl();
+    // }
 
 
     #endregion
