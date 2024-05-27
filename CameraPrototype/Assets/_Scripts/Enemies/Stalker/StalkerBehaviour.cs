@@ -132,8 +132,11 @@ public class StalkerBehaviour : MonoBehaviour
     {
         if (isStunned || playerCatched == true || isGrowling)
         {
+            player.GetComponent<WatchEnemy>().DesactivateFeedback();
             return;
         }
+
+        player.GetComponent<WatchEnemy>().ActivateFeedbacks();
 
         currentTimeLooked += deltaTime;
 
