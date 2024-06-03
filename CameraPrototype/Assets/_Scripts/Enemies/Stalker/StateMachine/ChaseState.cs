@@ -20,6 +20,7 @@ public class ChaseState : State
         stateName = "Chase";
         EventManager.OnStatusChange?.Invoke(stateName);
         navMesh.enabled = true;
+        navMesh.speed = stalkerBehaviour.enemySpeed;
         navMesh.isStopped = false;
 
         isComplete = false;
