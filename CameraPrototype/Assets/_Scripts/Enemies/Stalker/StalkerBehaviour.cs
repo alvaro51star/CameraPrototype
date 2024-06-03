@@ -29,6 +29,7 @@ public class StalkerBehaviour : MonoBehaviour
     public bool isStunned = false;
     public bool chasePlayer = false;
     public bool isGrowling = false;
+    public float enemySpeed = 3.5f;
 
     [Space]
     [Header("Collision related variables")]
@@ -66,6 +67,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     void Start()
     {
+        navMesh.speed = enemySpeed;
         states = stalkState;
         states.Enter();
 
@@ -181,6 +183,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void PlayerCatch()
     {
+        states.Exit();
         playerCatched = true;
         states = playerCatchState;
         states.Enter();
@@ -195,6 +198,7 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void ChasePlayer()
     {
+        states.Exit();
         chasePlayer = true;
         states = chaseState;
         states.Enter();

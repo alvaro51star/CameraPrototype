@@ -32,6 +32,7 @@ public class StunnedState : State
         isComplete = false;
         animator.Play("Stun");
         currentTime = 0f;
+        navMesh.speed = 0f;
         navMesh.isStopped = true;
     }
 
@@ -48,6 +49,7 @@ public class StunnedState : State
 
     public override void Exit()
     {
+        navMesh.speed = 3.5f;
         navMesh.isStopped = false;
         isComplete = false;
         stalkerBehaviour.isStunned = false;
