@@ -198,7 +198,6 @@ public class StalkerBehaviour : MonoBehaviour
 
     public void ChasePlayer()
     {
-        states.Exit();
         chasePlayer = true;
         states = chaseState;
         states.Enter();

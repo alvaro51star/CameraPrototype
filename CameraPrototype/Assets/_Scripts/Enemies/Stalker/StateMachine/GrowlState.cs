@@ -41,7 +41,6 @@ public class GrowlState : State
 
     public override void Exit()
     {
-
         audioSource.Stop();
         currentTime = 0f;
         isComplete = false;
