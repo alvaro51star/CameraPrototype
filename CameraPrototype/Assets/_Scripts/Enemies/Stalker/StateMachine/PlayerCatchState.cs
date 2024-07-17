@@ -18,7 +18,6 @@ public class PlayerCatchState : State
     public override void Enter()
     {
         animator.enabled = true;
-        Debug.Log("Player catch state");
         animator = stalkerBehaviour.animator;
         navMesh.enabled = false;
         player.GetComponent<PlayerMovement>().m_canWalk = false;

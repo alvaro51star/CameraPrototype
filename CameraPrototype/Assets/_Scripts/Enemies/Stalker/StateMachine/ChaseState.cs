@@ -16,7 +16,6 @@ public class ChaseState : State
     public override void Enter()
     {
         animator.enabled = true;
-        Debug.Log("Chase state");
         stateName = "Chase";
         EventManager.OnStatusChange?.Invoke(stateName);
         navMesh.enabled = true;

@@ -27,16 +27,13 @@ public class StunnedState : State
         {
             AddSecondsToEnemyBar();
         }
-        //maxTimeStunned = stunnedAnimation.length;
-        //stalkerBehaviour.isStunned = true;
+        
         isComplete = false;
         animator.Play("Stun");
         currentTime = 0f;
         navMesh.speed = 0f;
         navMesh.isStopped = true;
     }
-
-    
 
     public override void Do()
     {

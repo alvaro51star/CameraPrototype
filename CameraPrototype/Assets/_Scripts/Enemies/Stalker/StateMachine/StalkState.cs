@@ -104,7 +104,6 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
             {
-                Debug.Log("Entrado en out of sight");
                 stalkerBehaviour.OutOfSight();
                 ResetTimer();
                 isComplete = true;
@@ -177,7 +176,6 @@ public class StalkState : State
         enemy.transform.position = closestPosition.position;
         enemy.GetComponent<NavMeshAgent>().enabled = true;
         return true;
-        //transform.LookAt(player.transform);
     }
 
     private void ResetTimer()
@@ -210,7 +208,6 @@ public class StalkState : State
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 growlCalled = true;
-                Debug.Log("Choco con el player");
                 stalkerBehaviour.Growl();
             }
         }

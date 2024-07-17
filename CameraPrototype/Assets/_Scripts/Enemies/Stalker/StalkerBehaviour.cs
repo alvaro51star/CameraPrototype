@@ -39,16 +39,18 @@ public class StalkerBehaviour : MonoBehaviour
     public bool playerCatched = false;
 
     #region Time Variables
+    
     [Space]
     [Header("Time Variables")]
     public float maxTimeLooked = 2f;
     public float currentTimeLooked = 0;
 
+    #endregion
+
     [Space]
     [Header("Final TP point")]
     [SerializeField] private Transform finalTpPoint;
 
-    #endregion
 
     // Start is called before the first frame update
 
@@ -126,7 +128,6 @@ public class StalkerBehaviour : MonoBehaviour
         {
             states.Exit();
             playerCatched = true;
-            Debug.Log("Player detectado");
             states = playerCatchState;
             states.Enter();
         }
