@@ -63,7 +63,6 @@ public class ChaseState : State
         if (other.CompareTag("Player"))
         {
             stalkerBehaviour.EnterState(stalkerBehaviour.playerCatchState);
-            //stalkerBehaviour.currentState = stalkerBehaviour.playerCatchState;
             stalkerBehaviour.playerCatched = true;
             isComplete = true;
         }

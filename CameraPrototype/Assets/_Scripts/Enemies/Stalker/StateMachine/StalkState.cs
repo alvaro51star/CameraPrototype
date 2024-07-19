@@ -104,7 +104,6 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
             {
-                //stalkerBehaviour.OutOfSight();
                 stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
@@ -114,7 +113,6 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
             {
-                //stalkerBehaviour.OutOfSight();
                 stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
@@ -124,7 +122,6 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
             {
-                //stalkerBehaviour.OutOfSight();
                 stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
@@ -211,7 +208,6 @@ public class StalkState : State
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 growlCalled = true;
-                //stalkerBehaviour.Growl();
                 stalkerBehaviour.EnterState(stalkerBehaviour.growlState);
             }
         }

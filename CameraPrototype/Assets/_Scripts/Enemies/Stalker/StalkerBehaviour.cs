@@ -84,7 +84,7 @@ public class StalkerBehaviour : MonoBehaviour
         transform.LookAt(player.transform);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -180,35 +180,6 @@ public class StalkerBehaviour : MonoBehaviour
         isStunned = true;
         EnterState(stunnedState);
     }
-
-    // public void OutOfSight()
-    // {
-    //     currentState.Exit();
-    //     currentState = outOfSightState;
-    //     currentState.Enter();
-    // }
-
-    // public void PlayerCatch()
-    // {
-    //     currentState.Exit();
-    //     playerCatched = true;
-    //     currentState = playerCatchState;
-    //     currentState.Enter();
-    // }
-
-    // public void Growl()
-    // {
-    //     currentState.Exit();
-    //     currentState = growlState;
-    //     currentState.Enter();
-    // }
-
-    // public void ChasePlayer()
-    // {
-    //     chasePlayer = true;
-    //     currentState = chaseState;
-    //     currentState.Enter();
-    // }
 
     public void EnterState(State state)
     {

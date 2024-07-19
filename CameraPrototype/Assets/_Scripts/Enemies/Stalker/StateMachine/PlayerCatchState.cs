@@ -24,8 +24,6 @@ public class PlayerCatchState : State
         animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
         AudioManager.Instance.ReproduceSound(jumpScareSound);
-        // animator.StopPlayback();
-        // animator.PlayInFixedTime("Kill");
         
         StartCoroutine(CatchPlayer(player));
     }
