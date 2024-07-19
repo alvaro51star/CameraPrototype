@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class StalkerBehaviour : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private UIManager uiManager;
     public Renderer objectMesh;
     public GameObject player;
@@ -13,7 +15,7 @@ public class StalkerBehaviour : MonoBehaviour
     public Transform pointToLook;
     [Space]
     [Header("States")]
-    public State states;
+    public State currentState;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
@@ -38,25 +40,26 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private Collider triggerCollision;
     public bool playerCatched = false;
 
-    #region Time Variables
-    
+
+
     [Space]
     [Header("Time Variables")]
     public float maxTimeLooked = 2f;
     public float currentTimeLooked = 0;
 
-    #endregion
 
     [Space]
     [Header("Final TP point")]
     [SerializeField] private Transform finalTpPoint;
 
+    #endregion
 
-    // Start is called before the first frame update
 
     private void Awake()
     {
         navMesh = GetComponent<NavMeshAgent>();
+        player = FindObjectOfType<PlayerMovement>().gameObject;
+        uiManager = FindObjectOfType<UIManager>();
 
         //Set ups de los estados
         stalkState.SetUp(gameObject, objectMesh, animator, this);
@@ -69,9 +72,14 @@ public class StalkerBehaviour : MonoBehaviour
 
     void Start()
     {
+        if (!player)
+        {
+            Debug.LogError("No player found, please check if there is a player in scene");
+        }
+
         navMesh.speed = enemySpeed;
-        states = stalkState;
-        states.Enter();
+        currentState = stalkState;
+        currentState.Enter();
 
         transform.LookAt(player.transform);
     }
@@ -91,45 +99,45 @@ public class StalkerBehaviour : MonoBehaviour
         }
         if (playerCatched == false)
         {
-            if (states.isComplete)
+            if (currentState.isComplete)
             {
                 SelectNextState();
             }
         }
 
-        states.Do();
+        currentState.Do();
     }
 
     private void SelectNextState()
     {
-        states.Exit();
+        currentState.Exit();
 
 
         if (currentTimeLooked >= maxTimeLooked || chasePlayer)
         {
-            states = chaseState;
+            currentState = chaseState;
         }
         else
         {
-            states = stalkState;
+            currentState = stalkState;
         }
 
         if (playerCatched == true)
         {
-            states = playerCatchState;
+            currentState = playerCatchState;
         }
 
-        states.Enter();
+        currentState.Enter();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && states == chaseState)
+        if (other.gameObject.CompareTag("Player") && currentState == chaseState)
         {
-            states.Exit();
+            currentState.Exit();
             playerCatched = true;
-            states = playerCatchState;
-            states.Enter();
+            currentState = playerCatchState;
+            currentState.Enter();
         }
     }
 
@@ -149,9 +157,9 @@ public class StalkerBehaviour : MonoBehaviour
 
         if (currentTimeLooked >= maxTimeLooked)
         {
-            states.Exit();
-            states = chaseState;
-            states.Enter();
+            currentState.Exit();
+            currentState = chaseState;
+            currentState.Enter();
         }
 
         EventManager.OnTimeAdded?.Invoke(currentTimeLooked, maxTimeLooked);
@@ -170,43 +178,49 @@ public class StalkerBehaviour : MonoBehaviour
     public void StunEnemy()
     {
         isStunned = true;
-        states.Exit();
-        states = stunnedState;
-        states.Enter();
+        EnterState(stunnedState);
     }
 
-    public void OutOfSight()
-    {
-        states.Exit();
-        states = outOfSightState;
-        states.Enter();
-    }
+    // public void OutOfSight()
+    // {
+    //     currentState.Exit();
+    //     currentState = outOfSightState;
+    //     currentState.Enter();
+    // }
 
-    public void PlayerCatch()
-    {
-        states.Exit();
-        playerCatched = true;
-        states = playerCatchState;
-        states.Enter();
-    }
+    // public void PlayerCatch()
+    // {
+    //     currentState.Exit();
+    //     playerCatched = true;
+    //     currentState = playerCatchState;
+    //     currentState.Enter();
+    // }
 
-    public void Growl()
-    {
-        states.Exit();
-        states = growlState;
-        states.Enter();
-    }
+    // public void Growl()
+    // {
+    //     currentState.Exit();
+    //     currentState = growlState;
+    //     currentState.Enter();
+    // }
 
-    public void ChasePlayer()
+    // public void ChasePlayer()
+    // {
+    //     chasePlayer = true;
+    //     currentState = chaseState;
+    //     currentState.Enter();
+    // }
+
+    public void EnterState(State state)
     {
-        chasePlayer = true;
-        states = chaseState;
-        states.Enter();
+        currentState.Exit();
+        lastState = currentState;
+        currentState = state;
+        currentState.Enter();
     }
 
     public bool IsAttackingPlayer()
     {
-        if (states == playerCatchState)
+        if (currentState == playerCatchState)
         {
             return true;
         }

@@ -55,7 +55,7 @@ public class StalkState : State
             {
                 TPToNextPosition();
             }
-            if (stalkerBehaviour.lastState != null && stalkerBehaviour.states != stalkerBehaviour.stunnedState && stalkerBehaviour.states != stalkerBehaviour.stalkState)
+            if (stalkerBehaviour.lastState != null && stalkerBehaviour.currentState != stalkerBehaviour.stunnedState && stalkerBehaviour.currentState != stalkerBehaviour.stalkState)
                 TPToNextPosition();
         }
 
@@ -104,7 +104,8 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.OutOfSight();
+                //stalkerBehaviour.OutOfSight();
+                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -113,7 +114,8 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.OutOfSight();
+                //stalkerBehaviour.OutOfSight();
+                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -122,7 +124,8 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.OutOfSight();
+                //stalkerBehaviour.OutOfSight();
+                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -208,7 +211,8 @@ public class StalkState : State
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 growlCalled = true;
-                stalkerBehaviour.Growl();
+                //stalkerBehaviour.Growl();
+                stalkerBehaviour.EnterState(stalkerBehaviour.growlState);
             }
         }
     }
