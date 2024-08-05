@@ -22,7 +22,6 @@ public class AnomalyBehaviour : MonoBehaviour
     private void Start()
     {
         m_anomaliesData = GetComponent<AnomaliesData>();
-        //m_anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
         m_renderer = gameObject.GetComponent<Renderer>();
     }
 
