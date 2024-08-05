@@ -59,7 +59,6 @@ public class PhotoCapture : MonoBehaviour
         {            
             if (canTakePhoto)
             {
-                EventManager.OnTakingPhoto?.Invoke();
                 StartCoroutine(CameraFlashEffect());
                 CapturePhoto();
 
@@ -109,6 +108,7 @@ public class PhotoCapture : MonoBehaviour
             screenCapture.Apply();
 
             Time.timeScale = 0f;
+            EventManager.OnTakingPhoto?.Invoke();
             ShowPhoto();
         });             
     }

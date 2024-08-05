@@ -30,31 +30,39 @@ public class AnomalyCamTrigger : MonoBehaviour
 
     private void OnTakingPhoto()
     {
-        if(!m_stalkerBehaviour)
-            return;
-        if(m_stalkerBehaviour.IsAttackingPlayer())
-            return;
-        m_stalkerBehaviour.StunEnemy();
+        StartCoroutine(WaitEndFrameToStun());
     }
 
     private void OnRemovePhoto()
     {
-        m_collider.enabled = false;        
+        m_collider.enabled = false;
         m_stalkerBehaviour = null;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<AnomalyBehaviour>())
+        AnomalyBehaviour anomalyBehaviour = other.GetComponent<AnomalyBehaviour>();
+        if (!anomalyBehaviour)
             return;
-        if (other.GetComponent<AnomalyBehaviour>().isActiveAndEnabled)
-        {
-            other.GetComponent<AnomalyBehaviour>().isInPlayersTrigger = true;
-        }
-        if(!other.GetComponent<StalkerBehaviour>())
+        anomalyBehaviour.isInPlayersTrigger = true;
+
+        StalkerBehaviour stalkerBehaviour = other.GetComponent<StalkerBehaviour>();
+        if (!stalkerBehaviour)
             return;
-        if(!other.GetComponent<StalkerBehaviour>().isActiveAndEnabled)
-            return;
-        m_stalkerBehaviour = other.GetComponent<StalkerBehaviour>();
+        m_stalkerBehaviour = stalkerBehaviour;
+    }
+
+    private IEnumerator WaitEndFrameToStun()//needs to be done after enemy has a state
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (!m_stalkerBehaviour)
+            yield break;
+        if (!m_stalkerBehaviour.isActiveAndEnabled)
+            yield break;
+        if (m_stalkerBehaviour.IsAttackingPlayer())
+            yield break;
+
+        m_stalkerBehaviour.StunEnemy();
     }
 }
