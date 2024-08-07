@@ -37,7 +37,7 @@ public class StalkState : State
     public override void Enter()
     {
         animator.enabled = true;
-        audioSource.Play();
+        audioSource.Play(); //Sonido de idle 
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
@@ -70,7 +70,7 @@ public class StalkState : State
 
     public override void Exit()
     {
-        audioSource.Stop();
+        audioSource.Stop(); //Parar sonido
         isComplete = false;
         hasBeenVisible = false;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;
@@ -147,6 +147,7 @@ public class StalkState : State
         Transform closestPosition;
         List<Transform> stalkPointsReachable = new();
 
+        //Localiza los puntos a los que hay camino para llegar
         foreach (var stalkPoint in StalkPointsManager.instance.activeStalkPoints)
         {
             NavMeshPath path = new();
@@ -156,6 +157,7 @@ public class StalkState : State
             }
         }
 
+        //Si es mayor a 0 recorre el array y compara las distancias y se elige el mas cercano
         if (stalkPointsReachable.Count > 0)
         {
             closestPosition = stalkPointsReachable[0];
@@ -168,10 +170,11 @@ public class StalkState : State
                 }
             }
         }
-        else
+        else //Si no se pilla uno random activo y fuera
         {
             closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
         }
+
         enemy.GetComponent<NavMeshAgent>().enabled = false;
         enemy.transform.position = closestPosition.position;
         enemy.GetComponent<NavMeshAgent>().enabled = true;
@@ -183,6 +186,7 @@ public class StalkState : State
         currentTime = 0;
     }
 
+    //Calcular tiempo segun los niveles de intensidad y el tiempo maximo
     private void CalculateTimes()
     {
         timeToCompleteStalk_Level0 = Random.Range(timeLevel0 - timeLevel0 * 0.25f, timeLevel0 + timeLevel0 * 0.25f);
@@ -198,6 +202,7 @@ public class StalkState : State
         this.stalkerBehaviour = stalkerBehaviour;
     }
 
+    //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl
     private void CheckDistance()
     {
         Vector3 dir = stalkerBehaviour.player.transform.position - transform.position;

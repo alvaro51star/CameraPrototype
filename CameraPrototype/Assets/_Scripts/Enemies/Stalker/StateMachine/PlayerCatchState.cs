@@ -23,7 +23,8 @@ public class PlayerCatchState : State
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
-        AudioManager.Instance.ReproduceSound(jumpScareSound);
+
+        AudioManager.Instance.ReproduceSound(jumpScareSound); //Sonido Jumpscare
         
         StartCoroutine(CatchPlayer(player));
     }
