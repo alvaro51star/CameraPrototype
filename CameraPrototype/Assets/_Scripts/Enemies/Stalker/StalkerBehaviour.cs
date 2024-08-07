@@ -97,6 +97,7 @@ public class StalkerBehaviour : MonoBehaviour
         {
             isVisible = false;
         }
+        
         if (playerCatched == false)
         {
             if (currentState.isComplete)
@@ -130,6 +131,7 @@ public class StalkerBehaviour : MonoBehaviour
         currentState.Enter();
     }
 
+    //Solo sirve para cuando le estan persiguiendo que haga lo de que le pille
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && currentState == chaseState)
@@ -143,6 +145,8 @@ public class StalkerBehaviour : MonoBehaviour
 
     #region StalkBehaviour
 
+
+    //Anade vision al enemigo
     public void AddVision(float deltaTime)
     {
         if (isStunned || playerCatched == true || isGrowling)
@@ -157,9 +161,7 @@ public class StalkerBehaviour : MonoBehaviour
 
         if (currentTimeLooked >= maxTimeLooked)
         {
-            currentState.Exit();
-            currentState = chaseState;
-            currentState.Enter();
+            EnterState(chaseState);
         }
 
         EventManager.OnTimeAdded?.Invoke(currentTimeLooked, maxTimeLooked);
@@ -181,6 +183,7 @@ public class StalkerBehaviour : MonoBehaviour
         EnterState(stunnedState);
     }
 
+    //Funcion que se encarga de cambiar de estados
     public void EnterState(State state)
     {
         currentState.Exit();

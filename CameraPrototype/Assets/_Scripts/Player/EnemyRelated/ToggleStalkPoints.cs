@@ -17,7 +17,9 @@ public class ToggleStalkPoints : MonoBehaviour
 
     private void Update()
     {
-        transform.position = playerTransform.position;
+        if(playerTransform){
+            transform.position = playerTransform.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
