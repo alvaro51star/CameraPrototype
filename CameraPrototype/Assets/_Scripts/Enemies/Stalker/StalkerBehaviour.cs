@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class StalkerBehaviour : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private UIManager uiManager;
     public Renderer objectMesh;
     public GameObject player;
@@ -13,7 +15,7 @@ public class StalkerBehaviour : MonoBehaviour
     public Transform pointToLook;
     [Space]
     [Header("States")]
-    public State states;
+    public State currentState;
     public StalkState stalkState;
     public StunnedState stunnedState;
     public ChaseState chaseState;
@@ -38,23 +40,29 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private Collider triggerCollision;
     public bool playerCatched = false;
 
-    #region Time Variables
+
+
     [Space]
     [Header("Time Variables")]
     public float maxTimeLooked = 2f;
     public float currentTimeLooked = 0;
 
+
     [Space]
-    [Header("Final TP point")]
+    [Header("Persecution Variables")]
     [SerializeField] private Transform finalTpPoint;
+    [SerializeField] private float triggerRadius = 1f;
+    [SerializeField] private float enemyPersecutionSpeed = 2f;
+    public bool isInPersecution = false;
 
     #endregion
 
-    // Start is called before the first frame update
 
     private void Awake()
     {
         navMesh = GetComponent<NavMeshAgent>();
+        player = FindObjectOfType<PlayerMovement>().gameObject;
+        uiManager = FindObjectOfType<UIManager>();
 
         //Set ups de los estados
         stalkState.SetUp(gameObject, objectMesh, animator, this);
@@ -67,14 +75,19 @@ public class StalkerBehaviour : MonoBehaviour
 
     void Start()
     {
+        if (!player)
+        {
+            Debug.LogError("No player found, please check if there is a player in scene");
+        }
+
         navMesh.speed = enemySpeed;
-        states = stalkState;
-        states.Enter();
+        currentState = stalkState;
+        currentState.Enter();
 
         transform.LookAt(player.transform);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -87,53 +100,55 @@ public class StalkerBehaviour : MonoBehaviour
         {
             isVisible = false;
         }
+
         if (playerCatched == false)
         {
-            if (states.isComplete)
+            if (currentState.isComplete)
             {
                 SelectNextState();
             }
         }
 
-        states.Do();
+        currentState.Do();
     }
 
     private void SelectNextState()
     {
-        states.Exit();
+        currentState.Exit();
 
-
-        if (currentTimeLooked >= maxTimeLooked || chasePlayer)
+        if (currentTimeLooked >= maxTimeLooked || chasePlayer || isInPersecution)
         {
-            states = chaseState;
+            currentState = chaseState;
         }
         else
         {
-            states = stalkState;
+            currentState = stalkState;
         }
 
         if (playerCatched == true)
         {
-            states = playerCatchState;
+            currentState = playerCatchState;
         }
 
-        states.Enter();
+        currentState.Enter();
     }
 
+    //Solo sirve para cuando le estan persiguiendo que haga lo de que le pille
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && states == chaseState)
+        if (other.gameObject.CompareTag("Player") && currentState == chaseState)
         {
-            states.Exit();
+            currentState.Exit();
             playerCatched = true;
-            Debug.Log("Player detectado");
-            states = playerCatchState;
-            states.Enter();
+            currentState = playerCatchState;
+            currentState.Enter();
         }
     }
 
     #region StalkBehaviour
 
+
+    //Anade vision al enemigo
     public void AddVision(float deltaTime)
     {
         if (isStunned || playerCatched == true || isGrowling)
@@ -148,9 +163,7 @@ public class StalkerBehaviour : MonoBehaviour
 
         if (currentTimeLooked >= maxTimeLooked)
         {
-            states.Exit();
-            states = chaseState;
-            states.Enter();
+            EnterState(chaseState);
         }
 
         EventManager.OnTimeAdded?.Invoke(currentTimeLooked, maxTimeLooked);
@@ -169,58 +182,40 @@ public class StalkerBehaviour : MonoBehaviour
     public void StunEnemy()
     {
         isStunned = true;
-        states.Exit();
-        states = stunnedState;
-        states.Enter();
+        EnterState(stunnedState);
     }
 
-    public void OutOfSight()
+    //Funcion que se encarga de cambiar de estados
+    public void EnterState(State state)
     {
-        states.Exit();
-        states = outOfSightState;
-        states.Enter();
-    }
-
-    public void PlayerCatch()
-    {
-        states.Exit();
-        playerCatched = true;
-        states = playerCatchState;
-        states.Enter();
-    }
-
-    public void Growl()
-    {
-        states.Exit();
-        states = growlState;
-        states.Enter();
-    }
-
-    public void ChasePlayer()
-    {
-        chasePlayer = true;
-        states = chaseState;
-        states.Enter();
+        currentState.Exit();
+        lastState = currentState;
+        currentState = state;
+        currentState.Enter();
     }
 
     public bool IsAttackingPlayer()
     {
-        if (states == playerCatchState)
+        if (currentState == playerCatchState)
         {
             return true;
         }
         return false;
     }
 
-    //TODO hacer evento de persecucion
 
-    // public void EventPersecution()
-    // {
-    //     navMesh.enabled = false;
-    //     transform.position = finalTpPoint.position;
-    //     navMesh.enabled = true;
-    //     Growl();
-    // }
+    public void EventPersecution()
+    {
+        navMesh.enabled = false;
+        transform.position = finalTpPoint.position;
+        navMesh.enabled = true;
+        isInPersecution = true;
+        EnterState(growlState);
+
+        //Valores para la persecución
+        (triggerCollision as SphereCollider).radius = triggerRadius;
+        navMesh.speed = enemyPersecutionSpeed;
+    }
 
 
     #endregion

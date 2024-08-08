@@ -71,7 +71,7 @@ public class OutOfSightState : State
     {
         currentTime = 0;
         enemy.GetComponent<NavMeshAgent>().enabled = true;
-        enemy.GetComponent<NavMeshAgent>().speed = 3.5f;
+        enemy.GetComponent<NavMeshAgent>().speed = stalkerBehaviour.enemySpeed;
         enemy.GetComponent<NavMeshAgent>().isStopped = false;
         stalkerBehaviour.lastState = stalkerBehaviour.outOfSightState;
     }

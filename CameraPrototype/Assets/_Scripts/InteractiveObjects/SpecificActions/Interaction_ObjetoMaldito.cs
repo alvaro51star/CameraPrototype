@@ -27,7 +27,8 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
 
         textForDialogue.StartDialogue();//provisional
         //Time.timeScale = 0;
-        //enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+        enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+        //StartCoroutine(EnemyEvent());
     }
 
     public void TimeScaleNormal()
@@ -40,9 +41,9 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
         Time.timeScale = 0;
     }
 
-    // IEnumerator EnemyEvent()
-    // {
-    //     yield return new WaitForSeconds(0.1f);
-    //     enemy.GetComponent<StalkerBehaviour>().EventPersecution();
-    // }
+    IEnumerator EnemyEvent()
+    {
+        yield return new WaitForSeconds(0.1f);
+        enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+    }
 }

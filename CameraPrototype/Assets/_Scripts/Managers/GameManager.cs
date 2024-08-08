@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private float playtestTime = 0f;
-
     public List<string> timesInPlaytest;
 
     private void Awake()

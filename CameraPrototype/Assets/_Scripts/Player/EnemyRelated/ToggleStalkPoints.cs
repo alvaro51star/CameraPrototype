@@ -6,11 +6,27 @@ public class ToggleStalkPoints : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
 
+    private void Start()
+    {
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+        if (!playerTransform)
+        {
+            Debug.LogError("Jugador no encontrado, asegurese de que hay un jugador en la escena");
+        }
+    }
+
+    private void Update()
+    {
+        if(playerTransform){
+            transform.position = playerTransform.position;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<StalkPointBehaviour>(out StalkPointBehaviour stalkPoint))
         {
-            Debug.Log("Localizao");
+            //Debug.Log("Localizao");
             //TODO comprobar que esté en visión
 
             // Vector3 direction = transform.position - stalkPoint.transform.position;
@@ -29,10 +45,7 @@ public class ToggleStalkPoints : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        transform.position = playerTransform.position;
-    }
+    
 
     private void OnTriggerExit(Collider other)
     {

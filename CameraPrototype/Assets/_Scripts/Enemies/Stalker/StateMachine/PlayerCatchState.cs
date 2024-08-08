@@ -18,15 +18,13 @@ public class PlayerCatchState : State
     public override void Enter()
     {
         animator.enabled = true;
-        Debug.Log("Player catch state");
         animator = stalkerBehaviour.animator;
         navMesh.enabled = false;
         player.GetComponent<PlayerMovement>().m_canWalk = false;
         animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
-        AudioManager.Instance.ReproduceSound(jumpScareSound);
-        // animator.StopPlayback();
-        // animator.PlayInFixedTime("Kill");
+
+        AudioManager.Instance.ReproduceSound(jumpScareSound); //Sonido Jumpscare
         
         StartCoroutine(CatchPlayer(player));
     }
