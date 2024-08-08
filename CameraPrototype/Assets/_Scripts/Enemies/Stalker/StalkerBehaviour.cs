@@ -49,8 +49,11 @@ public class StalkerBehaviour : MonoBehaviour
 
 
     [Space]
-    [Header("Final TP point")]
+    [Header("Persecution Variables")]
     [SerializeField] private Transform finalTpPoint;
+    [SerializeField] private float triggerRadius = 1f;
+    [SerializeField] private float enemyPersecutionSpeed = 2f;
+    public bool isInPersecution = false;
 
     #endregion
 
@@ -84,7 +87,7 @@ public class StalkerBehaviour : MonoBehaviour
         transform.LookAt(player.transform);
     }
 
-    
+
     void Update()
     {
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -97,7 +100,7 @@ public class StalkerBehaviour : MonoBehaviour
         {
             isVisible = false;
         }
-        
+
         if (playerCatched == false)
         {
             if (currentState.isComplete)
@@ -113,8 +116,7 @@ public class StalkerBehaviour : MonoBehaviour
     {
         currentState.Exit();
 
-
-        if (currentTimeLooked >= maxTimeLooked || chasePlayer)
+        if (currentTimeLooked >= maxTimeLooked || chasePlayer || isInPersecution)
         {
             currentState = chaseState;
         }
@@ -201,15 +203,19 @@ public class StalkerBehaviour : MonoBehaviour
         return false;
     }
 
-    //TODO hacer evento de persecucion
 
-    // public void EventPersecution()
-    // {
-    //     navMesh.enabled = false;
-    //     transform.position = finalTpPoint.position;
-    //     navMesh.enabled = true;
-    //     Growl();
-    // }
+    public void EventPersecution()
+    {
+        navMesh.enabled = false;
+        transform.position = finalTpPoint.position;
+        navMesh.enabled = true;
+        isInPersecution = true;
+        EnterState(growlState);
+
+        //Valores para la persecución
+        (triggerCollision as SphereCollider).radius = triggerRadius;
+        navMesh.speed = enemyPersecutionSpeed;
+    }
 
 
     #endregion

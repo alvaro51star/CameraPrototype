@@ -45,7 +45,7 @@ public class GrowlState : State
         currentTime = 0f;
         isComplete = false;
         stalkerBehaviour.isGrowling = false;
-        stalkerBehaviour.EnterState(stalkerBehaviour.chaseState);
+        stalkerBehaviour.chasePlayer = true;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)
