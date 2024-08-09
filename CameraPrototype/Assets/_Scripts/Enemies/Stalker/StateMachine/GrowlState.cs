@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class GrowlState : State
 {
     [SerializeField] private GameObject enemy;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+    
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AnimationClip growlAnimation;
@@ -26,7 +28,7 @@ public class GrowlState : State
 
         audioSource.Play(); //Sonido de aullido
 
-        enemy.GetComponent<NavMeshAgent>().isStopped = true;
+        navMeshAgent.isStopped = true;
     }
 
     public override void Do()
@@ -48,9 +50,10 @@ public class GrowlState : State
         stalkerBehaviour.chasePlayer = true;
     }
 
-    public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)
+    public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
         this.enemy = enemy;
         this.stalkerBehaviour = stalkerBehaviour;
+        this.navMeshAgent = navMeshAgent;
     }
 }

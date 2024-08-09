@@ -10,6 +10,8 @@ public class StalkState : State
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Renderer objectMesh;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    
 
     public float currentTime;
     [SerializeField] private float timeBeforeChangingPoint = 5f;
@@ -41,8 +43,8 @@ public class StalkState : State
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
-        enemy.GetComponent<NavMeshAgent>().destination = enemy.transform.position;
-        enemy.GetComponent<NavMeshAgent>().isStopped = true;
+        _navMeshAgent.destination = enemy.transform.position;
+        _navMeshAgent.isStopped = true;
 
         currentTime = 0f;
         animator.Play("Idle");
@@ -73,7 +75,7 @@ public class StalkState : State
         audioSource.Stop(); //Parar sonido
         isComplete = false;
         hasBeenVisible = false;
-        enemy.GetComponent<NavMeshAgent>().isStopped = false;
+        _navMeshAgent.isStopped = false;
         stalkerBehaviour.lastState = stalkerBehaviour.stalkState;
         growlCalled = false;
     }
@@ -151,7 +153,7 @@ public class StalkState : State
         foreach (var stalkPoint in StalkPointsManager.instance.activeStalkPoints)
         {
             NavMeshPath path = new();
-            if (enemy.GetComponent<NavMeshAgent>().CalculatePath(stalkPoint.transform.position, path))
+            if (_navMeshAgent.CalculatePath(stalkPoint.transform.position, path))
             {
                 stalkPointsReachable.Add(stalkPoint.transform);
             }
@@ -175,9 +177,9 @@ public class StalkState : State
             closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
         }
 
-        enemy.GetComponent<NavMeshAgent>().enabled = false;
+        _navMeshAgent.enabled = false;
         enemy.transform.position = closestPosition.position;
-        enemy.GetComponent<NavMeshAgent>().enabled = true;
+        _navMeshAgent.enabled = true;
         return true;
     }
 
@@ -194,12 +196,13 @@ public class StalkState : State
         timeToCompleteStalk_Level2 = Random.Range(timeLevel2 - timeLevel2 * 0.25f, timeLevel2 + timeLevel2 * 0.25f);
     }
 
-    public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator, StalkerBehaviour stalkerBehaviour)
+    public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
         this.enemy = enemy;
         this.objectMesh = objectMesh;
         this.animator = animator;
         this.stalkerBehaviour = stalkerBehaviour;
+        _navMeshAgent = navMeshAgent;
     }
 
     //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl

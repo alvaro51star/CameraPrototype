@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class OutOfSightState : State
 {
     private float currentTime = 0;
 
-    [SerializeField] private GameObject enemy;
+    [FormerlySerializedAs("enemy")] [SerializeField] private GameObject _enemy;
+
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    
 
     [SerializeField] private Transform tpPoint;
 
@@ -22,13 +26,13 @@ public class OutOfSightState : State
         stalkerBehaviour.chasePlayer = false;
         stateName = "OutOfSight";
         EventManager.OnStatusChange?.Invoke(stateName);
-        enemy.GetComponent<NavMeshAgent>().isStopped = true;
-        enemy.GetComponent<NavMeshAgent>().speed = 0f;
+        _navMeshAgent.isStopped = true;
+        _navMeshAgent.speed = 0f;
 
         isComplete = false;
         currentTime = 0;
-        enemy.GetComponent<NavMeshAgent>().enabled = false;
-        enemy.transform.position = tpPoint.position;
+        _navMeshAgent.enabled = false;
+        _enemy.transform.position = tpPoint.position;
 
     }
 
@@ -70,15 +74,16 @@ public class OutOfSightState : State
     public override void Exit()
     {
         currentTime = 0;
-        enemy.GetComponent<NavMeshAgent>().enabled = true;
-        enemy.GetComponent<NavMeshAgent>().speed = stalkerBehaviour.enemySpeed;
-        enemy.GetComponent<NavMeshAgent>().isStopped = false;
+        _navMeshAgent.enabled = true;
+        _navMeshAgent.speed = stalkerBehaviour.enemySpeed;
+        _navMeshAgent.isStopped = false;
         stalkerBehaviour.lastState = stalkerBehaviour.outOfSightState;
     }
 
-    public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour)
+    public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
-        this.enemy = enemy;
+        this._enemy = enemy;
         this.stalkerBehaviour = stalkerBehaviour;
+        _navMeshAgent = navMeshAgent;
     }
 }
