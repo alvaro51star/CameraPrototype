@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class AnomalyRadar : MonoBehaviour
 {
     [SerializeField] private GameObject anomalyRadarUI;
     [SerializeField] private AudioSource audioSource;
+    private Collider _collider;
 
     private void OnEnable()
     {
@@ -18,6 +20,11 @@ public class AnomalyRadar : MonoBehaviour
         EventManager.OnUsingCamera -= OnUsingCamera;
         EventManager.OnNotUsingCamera -= OnNotUsingCamera;
 
+    }
+
+    private void Start()
+    {
+        _collider = GetComponent<Collider>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,11 +46,11 @@ public class AnomalyRadar : MonoBehaviour
 
     private void OnUsingCamera()
     {
-        this.gameObject.GetComponent<Collider>().enabled = true;
+        _collider.enabled = true;
     }
     private void OnNotUsingCamera()
     {
         anomalyRadarUI.SetActive(false);
-        this.gameObject.GetComponent<Collider>().enabled = false;
+        _collider.enabled = false;
     }
 }
