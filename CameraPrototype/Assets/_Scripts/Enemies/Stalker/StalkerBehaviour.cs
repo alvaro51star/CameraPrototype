@@ -65,12 +65,12 @@ public class StalkerBehaviour : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
 
         //Set ups de los estados
-        stalkState.SetUp(gameObject, objectMesh, animator, this);
+        stalkState.SetUp(gameObject, objectMesh, animator, this, navMesh);
         stunnedState.SetUp(navMesh, animator, this);
         chaseState.SetUp(navMesh, player, animator, this);
         playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
-        outOfSightState.SetUp(gameObject, this);
-        growlState.SetUp(gameObject, this);
+        outOfSightState.SetUp(gameObject, this, navMesh);
+        growlState.SetUp(gameObject, this, navMesh);
     }
 
     void Start()
