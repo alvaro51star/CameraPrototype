@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(AnomaliesData))]
 public class AnomalyBehaviour : MonoBehaviour
 {
-    private Camera anomalyCamera;
-    private AnomaliesData anomaliesData;
+    private Camera m_anomalyCamera;
+    private AnomaliesData m_anomaliesData;
+    private Renderer m_renderer;
     [HideInInspector] public bool isInPlayersTrigger;
     private void OnEnable()
     {
@@ -20,33 +21,38 @@ public class AnomalyBehaviour : MonoBehaviour
 
     private void Start()
     {
-        anomaliesData = GetComponent<AnomaliesData>();
-    }    
-    
+        m_anomaliesData = GetComponent<AnomaliesData>();
+        m_renderer = gameObject.GetComponent<Renderer>();
+    }
+
     private void OnTakingPhoto()//checks conditions to reveal the anomaly
     {
         if(!isInPlayersTrigger)
             return;
 
-        if (!anomaliesData)
+        if (!m_anomaliesData)
             return;
 
-        if (!anomaliesData.isActiveAndEnabled)
+        if (!m_anomaliesData.isActiveAndEnabled)
             return;
 
-        anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
-        
-        if(!anomalyCamera)
-            return;        
 
-        if (!MeshIsVisibleToCamera(anomalyCamera, gameObject.GetComponent<Renderer>()))
+        if (!m_anomalyCamera)
+        {
+            m_anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();//take the reference the first time
+        }
+        if (!m_anomalyCamera.isActiveAndEnabled)
+            return;
+
+        if (!MeshIsVisibleToCamera(m_anomalyCamera, m_renderer))
             return;
 
         RevealAnomaly();
     }
+   
     public void RevealAnomaly()
     {
-        if (anomaliesData.revealType)
+        if (m_anomaliesData.revealType)
         {
             if (transform.CompareTag("Enemy"))
             {
@@ -79,10 +85,11 @@ public class AnomalyBehaviour : MonoBehaviour
             gameObject.GetComponent<AnomaliesLink>().RevealOtherAnomaly();
         }
 
-        anomaliesData.enabled = false;
+        m_anomaliesData.enabled = false;
         this.enabled = false;
 
     }
+    
 
     private bool MeshIsVisibleToCamera(Camera camera, Renderer renderer)
     {
