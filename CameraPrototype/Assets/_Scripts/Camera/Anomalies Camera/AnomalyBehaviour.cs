@@ -1,13 +1,14 @@
 using MoreMountains.Tools;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(AnomaliesData))]
 public class AnomalyBehaviour : MonoBehaviour
 {
-    private Camera m_anomalyCamera;
-    private AnomaliesData m_anomaliesData;
-    private Renderer m_renderer;
+    private Camera _anomalyCamera;
+    private AnomaliesData _anomaliesData;
+    private Renderer _renderer;
+    private StalkerBehaviour _stalkerBehaviour;
+    private Llave _llave;
+    private AnomaliesLink _anomaliesLink;
     [HideInInspector] public bool isInPlayersTrigger;
     private void OnEnable()
     {
@@ -21,8 +22,10 @@ public class AnomalyBehaviour : MonoBehaviour
 
     private void Start()
     {
-        m_anomaliesData = GetComponent<AnomaliesData>();
-        m_renderer = gameObject.GetComponent<Renderer>();
+        _anomaliesData = GetComponent<AnomaliesData>();
+        _renderer = gameObject.GetComponent<Renderer>();
+        _stalkerBehaviour = GetComponent<StalkerBehaviour>();
+        _llave = GetComponent<Llave>();
     }
 
     private void OnTakingPhoto()//checks conditions to reveal the anomaly
@@ -30,21 +33,21 @@ public class AnomalyBehaviour : MonoBehaviour
         if(!isInPlayersTrigger)
             return;
 
-        if (!m_anomaliesData)
+        if (!_anomaliesData)
             return;
 
-        if (!m_anomaliesData.isActiveAndEnabled)
+        if (!_anomaliesData.isActiveAndEnabled)
             return;
 
 
-        if (!m_anomalyCamera)
+        if (!_anomalyCamera)
         {
-            m_anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();//take the reference the first time
+            _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();//take the reference the first time
         }
-        if (!m_anomalyCamera.isActiveAndEnabled)
+        if (!_anomalyCamera.isActiveAndEnabled)
             return;
 
-        if (!MeshIsVisibleToCamera(m_anomalyCamera, m_renderer))
+        if (!MeshIsVisibleToCamera(_anomalyCamera, _renderer))
             return;
 
         RevealAnomaly();
@@ -52,11 +55,12 @@ public class AnomalyBehaviour : MonoBehaviour
    
     public void RevealAnomaly()
     {
-        if (m_anomaliesData.revealType)
+        if (_anomaliesData.revealType)
         {
-            if (transform.CompareTag("Enemy"))
+            if (_stalkerBehaviour)
             {
-                gameObject.GetComponent<StalkerBehaviour>().ActivateCollision();
+                _stalkerBehaviour.ActivateCollision();
+                _stalkerBehaviour.enabled = true;
                 EventManager.OnEnemyRevealed?.Invoke();
             }
 
@@ -66,26 +70,23 @@ public class AnomalyBehaviour : MonoBehaviour
             {
                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
             }
-            if (GetComponent<StalkerBehaviour>())
+            
+            if (_llave)
             {
-                GetComponent<StalkerBehaviour>().enabled = true;
-            }
-            else if (GetComponent<Llave>())
-            {
-                GetComponent<Llave>().enabled = true;
+                _llave.enabled = true;
             }
         }
         else
         {
             gameObject.SetActive(false);
         }
-
-        if (gameObject.GetComponent<AnomaliesLink>())
+        
+        if (_anomaliesLink)
         {
-            gameObject.GetComponent<AnomaliesLink>().RevealOtherAnomaly();
+            _anomaliesLink.RevealOtherAnomaly();
         }
 
-        m_anomaliesData.enabled = false;
+        _anomaliesData.enabled = false;
         this.enabled = false;
 
     }
