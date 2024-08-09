@@ -16,6 +16,9 @@ public class Interaction_Door : DoubleAction
     private int m_doorInteract = 0;
     private bool m_discoveredLocked = false;
 
+    //Integración FMOD
+    [SerializeField] private string m_rutaEventoFMOD; //Hacen falta 3 sonidos: abrir, cerrar y bloqueado. Tal vez también uno al desbloquear la puerta
+
     protected override void Start()
     {
         base.Start();
@@ -26,6 +29,8 @@ public class Interaction_Door : DoubleAction
         if (m_isLocked)
         {
             AudioManager.Instance.ReproduceSound(m_doorLocked);
+            //LineaFMOD: puerta bloqueada.
+
             if (!m_discoveredLocked && !m_isPuertaPrincipal)
             {
                 print("discovered door locjed");
@@ -37,6 +42,8 @@ public class Interaction_Door : DoubleAction
         {
             base.FirstAction();
             AudioManager.Instance.ReproduceSound(m_doorOpen);
+            //LineaFMOD: puerta abierta.
+
             m_doorInteract = 2;
             m_animator.SetInteger("Abrir", m_doorInteract);
             if (m_isCatDoor)
@@ -93,6 +100,7 @@ public class Interaction_Door : DoubleAction
         if (m_doorInteract == 1)
         {
             AudioManager.Instance.ReproduceSound(m_doorClose);
+            //LineaFMOD: puerta cerrada.
         }
     }
 }
