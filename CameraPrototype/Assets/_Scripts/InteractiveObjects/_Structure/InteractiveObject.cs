@@ -11,6 +11,9 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     [SerializeField] float m_interactionAngle;
     public Transform m_interactionPivot;
 
+    //Integración FMOD
+    [SerializeField] private string m_rutaEventoFMODInteraccion; //cambiable en editor para cada objeto. Es el sonido que hace al cogerlo usarlo etc.
+                                                                 //Sonidos custimizados en cada script (ej en puerta)
     private void Start()
     {
         m_interactionScript = GetComponent<InteractionScript>();
@@ -31,6 +34,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
         if (m_interactSound != null)
         {
             AudioManager.Instance.ReproduceSound(m_interactSound);
+            //LíneaFMOD
         }
 
     }

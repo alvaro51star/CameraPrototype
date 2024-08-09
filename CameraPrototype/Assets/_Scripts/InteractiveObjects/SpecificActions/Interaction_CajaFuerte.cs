@@ -16,6 +16,10 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     private bool m_isOpen = false;
     private string m_actualCode = "";
 
+    //Integración FMOD
+    [SerializeField] private string m_rutaEventoFMOD; //Hace falta sonidos paralas teclas, un sonido de codigo incorrecto, otro de codigo correcto, sonido de desbloquear caja fuerte
+                                                      // y sonido de la puerta abriendose
+
     protected override void FirstAction()
     {
         if (!m_isOpen)
@@ -40,6 +44,8 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     {
         AudioClip clip = m_keySounds[Random.Range(0, m_keySounds.Length)];
         AudioManager.Instance.ReproduceSound(clip);
+
+        //LineaFMOD para las teclas
     }
 
     public void DeleteActualCode()
@@ -56,9 +62,12 @@ public class Interaction_CajaFuerte : AffectsIndirectly
         {
             m_isOpen = true;
             UIManager.instance.ShowLight(true, false);
+
             AudioManager.Instance.ReproduceSound(m_rightSound);
             AudioManager.Instance.ReproduceSound(m_safeUnlockSound);
             AudioManager.Instance.ReproduceSound(m_safeOpen);
+            //Lineas de FMOD para codigo correcto, desbloquear y abrir, aunque la de abrir se podría aparte pa hacerla con animación
+
             ChangeActiveMode(m_targetObject, true);
             GetComponent<InteractiveObject>().enabled = false;
             anim.SetInteger("Abrir", 1);
@@ -67,6 +76,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
         {
             UIManager.instance.ShowLight(true, true);
             AudioManager.Instance.ReproduceSound(m_wrongSound);
+            //Linea FMOD de sonido de codigo incorrecto
         }
     }
 }

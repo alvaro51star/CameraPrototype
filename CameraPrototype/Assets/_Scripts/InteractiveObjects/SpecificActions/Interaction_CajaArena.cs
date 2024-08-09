@@ -9,6 +9,8 @@ public class Interaction_CajaArena : AffectsIndirectly
     [SerializeField] private bool m_figurePicked;
     [SerializeField] private GameObject m_figure;
     [SerializeField] private AudioClip m_arenaSound;
+    //Integración FMOD
+    [SerializeField] private string m_rutaEventoFMODArena;
 
     public override void Action(GameObject player)
     {
@@ -23,6 +25,8 @@ public class Interaction_CajaArena : AffectsIndirectly
         if (m_figurePicked)
         {
             AudioManager.Instance.ReproduceSound(m_arenaSound);
+            //LineaFMOD
+
             ChangeActiveMode(m_targetObject, m_appears);
             ChangeActiveMode(m_figure, true);
             SetFigurePicked(false);
