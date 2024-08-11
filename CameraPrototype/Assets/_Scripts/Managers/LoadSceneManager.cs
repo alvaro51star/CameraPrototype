@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class LoadSceneManager : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] private GameObject loadingIcon;
     [SerializeField] private GameObject levelReadyText;
     [SerializeField] private DOTweenAnimation fillImage;
+
+    [SerializeField] private TextMeshProUGUI tipText;
+    [SerializeField] private DOTweenAnimation tipTextFade;
+    
+    [SerializeField] private List<string> tipList;
+    private int _tipCount;
+    
     
 
 
@@ -51,6 +59,8 @@ public class LoadSceneManager : MonoBehaviour
         loadingIcon.SetActive(true);
         levelReadyText.SetActive(false);
         loadingSlider.gameObject.SetActive(true);
+
+        StartCoroutine(GenerateTip());
     }
 
     IEnumerator LoadLevelASync(int levelToLoad)
@@ -69,6 +79,8 @@ public class LoadSceneManager : MonoBehaviour
             yield return null;
         }
 
+        //TODO hay que poner un sonido cuando se completa la carga
+        
         loadingSlider.value = loadingSlider.maxValue;
         fillImage.DOPlay();
         
@@ -85,6 +97,35 @@ public class LoadSceneManager : MonoBehaviour
 
         loadOperation.allowSceneActivation = true;
 
+        yield return null;
+    }
+
+    IEnumerator GenerateTip()
+    {
+        _tipCount = Random.Range(0, tipList.Count);
+        tipText.text = tipList[_tipCount];
+
+        yield return new WaitForEndOfFrame();
+        
+        while (loadingScreen.activeInHierarchy)
+        {
+            yield return new WaitForSeconds(3f);
+
+            tipTextFade.DOPlayForward();
+            yield return new WaitForSeconds(tipTextFade.duration);
+
+            _tipCount++;
+            if (_tipCount >= tipList.Count)
+            {
+                _tipCount = 0;
+            }
+
+            tipText.text = tipList[_tipCount];
+
+            tipTextFade.DOPlayBackwards();
+
+        }
+        
         yield return null;
     }
 }
