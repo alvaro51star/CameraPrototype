@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] private GameObject loadingLevelText;
     [SerializeField] private GameObject loadingIcon;
     [SerializeField] private GameObject levelReadyText;
+    [SerializeField] private DOTweenAnimation fillImage;
+    
 
 
     public void LoadLevel(int levelToLoad)
@@ -67,6 +70,7 @@ public class LoadSceneManager : MonoBehaviour
         }
 
         loadingSlider.value = loadingSlider.maxValue;
+        fillImage.DOPlay();
         
         loadingLevelText.SetActive(false);
         loadingIcon.SetActive(false);
