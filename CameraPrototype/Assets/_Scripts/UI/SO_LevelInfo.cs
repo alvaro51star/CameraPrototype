@@ -8,5 +8,9 @@ public class SO_LevelInfo : ScriptableObject
     public Sprite backgroundImage;
 
     public string levelName;
+    [Space]
+    [TextArea(5, 10)]
     public string levelDescription;
+    [Space]
+    public List<string> tipsForTheLevel;
 }

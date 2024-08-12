@@ -15,3 +15,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 21300000, guid: 55f32d6bee56eef4e8a17e65878dcf0f, type: 3}
   levelName: Level 1
   levelDescription: Pues este es el nivel 1 pringao
+  tipsForTheLevel:
+  - Hola este es el nivel 1
+  - Intenta que no te vea anda
+  - Usa la camara en entornos poco iluminados para guiarte

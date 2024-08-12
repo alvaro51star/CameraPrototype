@@ -54,6 +54,7 @@ public class LoadSceneManager : MonoBehaviour
         levelName.text = levelInfo.levelName;
         levelDescription.text = levelInfo.levelDescription;
         levelImage.sprite = levelInfo.backgroundImage;
+        tipList = levelInfo.tipsForTheLevel;
         
         loadingLevelText.SetActive(true);
         loadingIcon.SetActive(true);
