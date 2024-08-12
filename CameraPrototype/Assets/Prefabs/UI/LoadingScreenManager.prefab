@@ -562,7 +562,7 @@ MonoBehaviour:
   id: 
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 1
   autoGenerate: 1
   isActive: 1
@@ -880,7 +880,7 @@ MonoBehaviour:
   id: 
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 0
   autoGenerate: 1
   isActive: 1
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   id: 
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 1
   autoGenerate: 1
   isActive: 1
@@ -1273,6 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelInfos:
   - {fileID: 11400000, guid: 77c29af0a966ea44e8828f2fb151b0fb, type: 2}
+  - {fileID: 11400000, guid: 77c29af0a966ea44e8828f2fb151b0fb, type: 2}
   - {fileID: 11400000, guid: 26bf928513bce9448a5f89eead305605, type: 2}
   loadingScreen: {fileID: 7253430275901514687}
   mainMenu: {fileID: 0}
@@ -1286,6 +1287,7 @@ MonoBehaviour:
   fillImage: {fileID: 5404721510133073257}
   tipText: {fileID: 4212021205262464440}
   tipTextFade: {fileID: 708132692742060151}
+  timeToChangeTip: 3
   tipList: []
 --- !u!1 &5501377010319899429
 GameObject:
@@ -1634,7 +1636,7 @@ MonoBehaviour:
   id: 
   isRelative: 0
   isFrom: 1
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 1
   autoGenerate: 1
   isActive: 1
@@ -1899,7 +1901,7 @@ MonoBehaviour:
   id: 
   isRelative: 0
   isFrom: 0
-  isIndependentUpdate: 0
+  isIndependentUpdate: 1
   autoKill: 1
   autoGenerate: 1
   isActive: 1

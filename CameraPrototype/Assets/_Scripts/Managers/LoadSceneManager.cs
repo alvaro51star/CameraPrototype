@@ -36,10 +36,17 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] private float timeToChangeTip = 3f;
     [SerializeField] private List<string> tipList;
     private int _tipCount;
-    
-    
-    
 
+    private void Awake()
+    {
+        if (!ScenesManager.Instance)
+        {
+            Debug.LogError("No hay ScenesManager");
+            return;
+        }
+        
+        LoadLevel(ScenesManager.Instance.sceneToLoad);
+    }
 
     public void LoadLevel(int levelToLoad)
     {
@@ -140,6 +147,6 @@ public class LoadSceneManager : MonoBehaviour
 public enum Levels
 {
     Menu,
-    Level1,
-    Lobby
+    Lobby,
+    Level1
 }

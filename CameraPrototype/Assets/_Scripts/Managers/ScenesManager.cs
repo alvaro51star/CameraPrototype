@@ -6,6 +6,8 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager Instance;
 
+    public int sceneToLoad;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -15,6 +17,7 @@ public class ScenesManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(Instance);
         }
     }
 
@@ -26,5 +29,15 @@ public class ScenesManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ChangeSceneToLoad(int sceneIndex)
+    {
+        sceneToLoad = sceneIndex;
+    }
+
+    public void StartLoadScreen()
+    {
+        SceneManager.LoadScene(1);
     }
 }
