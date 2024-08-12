@@ -11,26 +11,32 @@ using Random = UnityEngine.Random;
 public class LoadSceneManager : MonoBehaviour
 {
     [SerializeField] private List<SO_LevelInfo> levelInfos;
-
+    
+    [Space]
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject mainMenu;
-
     [SerializeField] private Slider loadingSlider;
-
+    
+    [Space]
     [SerializeField] private TextMeshProUGUI levelName;
     [SerializeField] private TextMeshProUGUI levelDescription;
     [SerializeField] private Image levelImage;
 
+    [Space]
     [SerializeField] private GameObject loadingLevelText;
     [SerializeField] private GameObject loadingIcon;
     [SerializeField] private GameObject levelReadyText;
     [SerializeField] private DOTweenAnimation fillImage;
 
+    [Space]
     [SerializeField] private TextMeshProUGUI tipText;
     [SerializeField] private DOTweenAnimation tipTextFade;
     
+    [Space]
+    [SerializeField] private float timeToChangeTip = 3f;
     [SerializeField] private List<string> tipList;
     private int _tipCount;
+    
     
     
 
@@ -110,10 +116,10 @@ public class LoadSceneManager : MonoBehaviour
         
         while (loadingScreen.activeInHierarchy)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSecondsRealtime(timeToChangeTip);
 
             tipTextFade.DOPlayForward();
-            yield return new WaitForSeconds(tipTextFade.duration);
+            yield return new WaitForSecondsRealtime(tipTextFade.duration);
 
             _tipCount++;
             if (_tipCount >= tipList.Count)
