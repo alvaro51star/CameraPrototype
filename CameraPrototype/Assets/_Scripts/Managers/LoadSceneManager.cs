@@ -10,11 +10,11 @@ using Random = UnityEngine.Random;
 
 public class LoadSceneManager : MonoBehaviour
 {
+    [SerializeField] private float timeToChangeTip = 3f;
     [SerializeField] private List<SO_LevelInfo> levelInfos;
     
     [Space]
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private GameObject mainMenu;
     [SerializeField] private Slider loadingSlider;
     
     [Space]
@@ -33,7 +33,6 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] private DOTweenAnimation tipTextFade;
     
     [Space]
-    [SerializeField] private float timeToChangeTip = 3f;
     [SerializeField] private List<string> tipList;
     private int _tipCount;
 
@@ -51,7 +50,6 @@ public class LoadSceneManager : MonoBehaviour
     public void LoadLevel(int levelToLoad)
     {
         SetUpLevelInfo(levelToLoad);
-        //mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
 
         StartCoroutine(LoadLevelASync(levelToLoad));
