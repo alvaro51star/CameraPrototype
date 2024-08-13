@@ -61,23 +61,25 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 1
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
-  - 46fbfdf3fc43db0458918377fd40293e
-  - 2fea114e74ecf3c4f920e1d5cc1c4c40
   - 52eb9df5db46521439908db3a29a1bbb
-  - b7716510a1f36934c87976f3a81dbf3d
-  - de700ef3f37a49b58a57ae3addf01ad9
-  - 0f8eb3f400726694eb47beb1a9f94ce8
-  - fd7c55dab0fce234b8c25f6ffca523c1
-  - c88d16e5272a4e241b0ef0ac2e53b73d
   - e7a046c753c3c3d4aacc91f6597f310d
+  - fd7c55dab0fce234b8c25f6ffca523c1
+  - 0f8eb3f400726694eb47beb1a9f94ce8
+  - de700ef3f37a49b58a57ae3addf01ad9
+  - 2fea114e74ecf3c4f920e1d5cc1c4c40
   - 2c5177b11d81d824dbb064f9ac8527da
+  - b7716510a1f36934c87976f3a81dbf3d
+  - c88d16e5272a4e241b0ef0ac2e53b73d
+  - 46fbfdf3fc43db0458918377fd40293e
   codecChannels:
     Value: []
     HasValue: 0
@@ -142,7 +144,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -213,7 +217,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -284,7 +290,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -355,7 +363,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -426,7 +436,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -497,7 +509,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -520,10 +534,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: FMOD/Music&SFX.fspro
-  sourceBankPath: FMOD/Build
+  sourceBankPath: FMOD/Build/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -544,7 +558,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -558,21 +573,21 @@ MonoBehaviour:
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131619
-  HideSetupWizard: 0
+  HideSetupWizard: 1
   LastEventReferenceScanVersion: 131619
   Platforms:
-  - {fileID: -3754758747689024199}
   - {fileID: -8077182585009042528}
-  - {fileID: 8710490727073330462}
-  - {fileID: 2500579207259552192}
   - {fileID: -7509182615697958341}
-  - {fileID: 4811452681086567612}
-  - {fileID: -2921288416723980356}
-  - {fileID: -5379766606261304757}
-  - {fileID: -6069028496047745564}
-  - {fileID: 6677413168367259733}
   - {fileID: -7282191832734641494}
+  - {fileID: -6069028496047745564}
+  - {fileID: -5379766606261304757}
+  - {fileID: -3754758747689024199}
+  - {fileID: -2921288416723980356}
+  - {fileID: 2500579207259552192}
   - {fileID: 3745134924941242814}
+  - {fileID: 4811452681086567612}
+  - {fileID: 6677413168367259733}
+  - {fileID: 8710490727073330462}
   MigratedPlatforms: 080000001200000006000000050000000b000000000000000a000000090000000c000000150000000200000001000000
 --- !u!114 &2500579207259552192
 MonoBehaviour:
@@ -635,7 +650,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -706,7 +723,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -777,7 +796,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -848,7 +869,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -919,7 +942,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
