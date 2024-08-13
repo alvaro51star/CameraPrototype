@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{326c66c0-a93c-4c75-9cf7-ced2cb66d9d7}">
+		<property name="name">
+			<value>SafeBoxButtons</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b552566a-3a3e-4d55-9127-6bea98519d4a}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{a045b270-7670-4435-8688-415b9337e3a2}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{a045b270-7670-4435-8688-415b9337e3a2}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

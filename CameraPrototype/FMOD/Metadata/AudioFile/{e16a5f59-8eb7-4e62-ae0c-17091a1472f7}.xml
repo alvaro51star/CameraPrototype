@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e16a5f59-8eb7-4e62-ae0c-17091a1472f7}">
+		<property name="assetPath">
+			<value>Ally/Cat/SFX_meow.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.8757596371882086</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{aa4864f0-4fe3-4c7c-ac04-657508757332}</destination>
+		</relationship>
+	</object>
+</objects>
