@@ -39,7 +39,7 @@ public class StalkState : State
     public override void Enter()
     {
         animator.enabled = true;
-        audioSource.Play(); //Sonido de idle 
+        //audioSource.Play(); //Sonido de idle 
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
@@ -72,7 +72,7 @@ public class StalkState : State
 
     public override void Exit()
     {
-        audioSource.Stop(); //Parar sonido
+        //audioSource.Stop(); //Parar sonido
         isComplete = false;
         hasBeenVisible = false;
         _navMeshAgent.isStopped = false;

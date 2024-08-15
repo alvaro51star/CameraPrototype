@@ -19,17 +19,23 @@ public class CatSounds : MonoBehaviour
 
     private void OnCatPetted()
     {
+        /*
         if(!meowAudioSource.isPlaying)
         {
-            meowAudioSource.Play();
+            // meowAudioSource.Play();
+            Debug.Log("audio source play cat meow");
         }
+        */
     }
 
     public void CatGrowl()
     {
+        /*
         if (!growlAudioSource.isPlaying)
         {
-            growlAudioSource.Play();
+            // growlAudioSource.Play();
         }
+        */
     }
+
 }

@@ -26,7 +26,7 @@ public class GrowlState : State
 
         animator.Play("Growl");
 
-        audioSource.Play(); //Sonido de aullido
+        // audioSource.Play(); //Sonido de aullido
 
         navMeshAgent.isStopped = true;
     }
@@ -43,7 +43,7 @@ public class GrowlState : State
 
     public override void Exit()
     {
-        audioSource.Stop(); //Para el sonido
+        // audioSource.Stop(); //Para el sonido
         currentTime = 0f;
         isComplete = false;
         stalkerBehaviour.isGrowling = false;

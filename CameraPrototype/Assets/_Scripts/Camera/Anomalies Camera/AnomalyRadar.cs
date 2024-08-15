@@ -28,7 +28,8 @@ public class AnomalyRadar : MonoBehaviour
     {
         if(other.gameObject.GetComponent<AnomaliesData>() && other.gameObject.GetComponent<AnomaliesData>().enabled)
         {
-            audioSource.Play();
+            // audioSource.Play();
+            Debug.Log("audio source play anomalia");
             anomalyRadarUI.SetActive(true);
         }
     }

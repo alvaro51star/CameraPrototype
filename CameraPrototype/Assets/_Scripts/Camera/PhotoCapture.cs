@@ -134,8 +134,9 @@ public class PhotoCapture : MonoBehaviour
 
     private IEnumerator CameraFlashEffect()
     {
-        cameraAudio.clip = cameraClickClip;
-        cameraAudio.Play();
+        //cameraAudio.clip = cameraClickClip;
+        //cameraAudio.Play();
+        Debug.Log("camera audio click");
         cameraFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
