@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     //gravity
     [SerializeField] private float m_gravity = 9.8f;
-    [SerializeField] private float m_terminalVelocity;
-    private float m_verticalVelocity;
+    [SerializeField] private float m_terminalVelocity = 10;
+    [SerializeField] private float m_verticalVelocity;
 
 
     private void OnEnable()
@@ -42,10 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!m_charController.isGrounded)
-        {
-            ApplyGravity();
-        }
+        ApplyGravity();
+
         if (m_canWalk)
         {
             Movement();
@@ -94,12 +92,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        //Vector3 movement = new Vector3(m_movementInputValue.x, 0, m_movementInputValue.y);
         Vector3 movement = transform.right * m_movementInputValue.x + transform.forward * m_movementInputValue.y;
 
         movement.Normalize();
 
-        m_charController.Move(movement *(m_speed * Time.deltaTime) + Vector3.up * (m_verticalVelocity * Time.deltaTime));
+        //boorrar luego
+        Vector3 upVector = Vector3.up * (m_verticalVelocity * Time.deltaTime);
+        print(upVector);
+
+        m_charController.Move(movement *(m_speed * Time.deltaTime) + upVector);
     }
     
     private void Rotation()
@@ -130,10 +131,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        m_verticalVelocity -= m_gravity * Time.deltaTime;
-        if (m_verticalVelocity <= -m_terminalVelocity)
+        if (!m_charController.isGrounded)
         {
-            m_verticalVelocity = -m_terminalVelocity;
+            if (m_verticalVelocity <= -m_terminalVelocity)
+            {
+                m_verticalVelocity = -m_terminalVelocity;
+            }
+            else
+            {
+                m_verticalVelocity -= m_gravity * Time.deltaTime;
+            }
+        }
+        else
+        {
+            m_verticalVelocity = 0;
         }
     }
 }
