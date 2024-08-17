@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 
-[RequireComponent(typeof(AudioSource), typeof(AudioSource))]
+// [RequireComponent(typeof(AudioSource), typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] private AudioSource audioSourceSFX;
-    [SerializeField] private AudioSource audioSourceMusic;
+    // [SerializeField] private AudioSource audioSourceSFX;
+    // [SerializeField] private AudioSource audioSourceMusic;
     
 
     private void Awake()
@@ -23,6 +24,11 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void PlayOneShot (EventReference sound /*, Vector3 worldPos */)
+    {
+        RuntimeManager.PlayOneShot(sound /*, worldPos */);
     }
 
     public void ReproduceSound(AudioClip audioClip)
