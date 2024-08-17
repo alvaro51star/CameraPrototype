@@ -3,7 +3,6 @@ using UnityEngine;
 public class AnomalyRadar : MonoBehaviour
 {
     [SerializeField] private GameObject anomalyRadarUI;
-    [SerializeField] private AudioSource audioSource;
     private Collider _collider;
 
     private void OnEnable()
@@ -28,7 +27,7 @@ public class AnomalyRadar : MonoBehaviour
     {
         if(other.gameObject.GetComponent<AnomaliesData>() && other.gameObject.GetComponent<AnomaliesData>().enabled)
         {
-            audioSource.Play();
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.anomalyDetected /*, this.transform.position */);
             anomalyRadarUI.SetActive(true);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using FMOD.Studio;
 
 
 
@@ -30,16 +31,26 @@ public class StalkState : State
 
     bool firstTimeEntered = false;
 
-    [SerializeField] private AudioSource audioSource;
-
     [SerializeField] private Transform rayPoint;
     private bool growlCalled = false;
 
+    // AUDIO
+    private EventInstance stalkerBreathing;
+
+    private void Start()
+    {
+        stalkerBreathing = AudioManager.Instance.CreateEventInstance(FMODEvents.instance.stalkerBreathingSound);
+    }
 
     public override void Enter()
     {
         animator.enabled = true;
-        audioSource.Play(); //Sonido de idle 
+
+        PLAYBACK_STATE playbackState;
+        stalkerBreathing.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            stalkerBreathing.start();
+
         stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(stateName);
 
@@ -72,7 +83,8 @@ public class StalkState : State
 
     public override void Exit()
     {
-        audioSource.Stop(); //Parar sonido
+        stalkerBreathing.stop(STOP_MODE.ALLOWFADEOUT);
+
         isComplete = false;
         hasBeenVisible = false;
         _navMeshAgent.isStopped = false;

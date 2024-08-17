@@ -9,11 +9,7 @@ public class PlayerCatchState : State
     private GameObject player;
     private GameObject enemy;
 
-    [SerializeField] private AudioClip jumpScareSound;
-
     [SerializeField] private UIManager uiManager;
-
-    
 
     public override void Enter()
     {
@@ -24,8 +20,8 @@ public class PlayerCatchState : State
         animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
 
-        AudioManager.Instance.ReproduceSound(jumpScareSound); //Sonido Jumpscare
-        
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.caught /*, this.transform.position */);
+
         StartCoroutine(CatchPlayer(player));
     }
 

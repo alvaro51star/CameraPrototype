@@ -1,5 +1,182 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2676545465142205687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6859718513496493169}
+  - component: {fileID: 5366154653821049061}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6859718513496493169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676545465142205687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7007409971161378728}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5366154653821049061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676545465142205687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b976a9b4c77cbac43a620fcc0fdd02f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ambience>k__BackingField:
+    Guid:
+      Data1: -828006719
+      Data2: 1216175520
+      Data3: 1810194591
+      Data4: 440914721
+    Path: event:/Ambient&Music/AmbientBackground
+  <anomalyDetected>k__BackingField:
+    Guid:
+      Data1: -1493290268
+      Data2: 1129010885
+      Data3: 868137390
+      Data4: -1656174451
+    Path: event:/Player/AnomalyDetected
+  <cameraClickClip>k__BackingField:
+    Guid:
+      Data1: -1832739072
+      Data2: 1298043454
+      Data3: -1136585808
+      Data4: -1195806904
+    Path: event:/Player/TakePhoto
+  <noPhotosClip>k__BackingField:
+    Guid:
+      Data1: 1966869579
+      Data2: 1133144624
+      Data3: -426892112
+      Data4: -1631291850
+    Path: event:/Player/CantTakePhoto
+  <openDoor>k__BackingField:
+    Guid:
+      Data1: 161799370
+      Data2: 1189058917
+      Data3: 442991797
+      Data4: -1147451603
+    Path: event:/Door/OpenDoor
+  <closeDoor>k__BackingField:
+    Guid:
+      Data1: 184760226
+      Data2: 1164775783
+      Data3: -563436391
+      Data4: 1658835286
+    Path: event:/Door/CloseDoor
+  <doorLocked>k__BackingField:
+    Guid:
+      Data1: -1208320310
+      Data2: 1086780928
+      Data3: 926034057
+      Data4: 271857419
+    Path: event:/Door/LockedDoor
+  <key>k__BackingField:
+    Guid:
+      Data1: -534369509
+      Data2: 1176135653
+      Data3: 1548205474
+      Data4: 984845397
+    Path: event:/Door/Key
+  <paper>k__BackingField:
+    Guid:
+      Data1: 85725188
+      Data2: 1129675185
+      Data3: -2132206704
+      Data4: 1474238163
+    Path: event:/Paper/PaperSound
+  <safeboxButtons>k__BackingField:
+    Guid:
+      Data1: -1453009274
+      Data2: 1104639177
+      Data3: -1351175026
+      Data4: 242245021
+    Path: event:/SafeBox/SafeBoxButtons
+  <sandBox>k__BackingField:
+    Guid:
+      Data1: -508403798
+      Data2: 1243748032
+      Data3: 1536408733
+      Data4: 488251139
+    Path: event:/Sandbox/SandboxInteraction
+  <rightCode>k__BackingField:
+    Guid:
+      Data1: -348566587
+      Data2: 1256348230
+      Data3: 1423868545
+      Data4: -1676875687
+    Path: event:/SafeBox/CorrectCode
+  <wrongCode>k__BackingField:
+    Guid:
+      Data1: 1158087735
+      Data2: 1157785441
+      Data3: 1360932489
+      Data4: 789627674
+    Path: event:/SafeBox/WrongCode
+  <unlockSafe>k__BackingField:
+    Guid:
+      Data1: -2044420069
+      Data2: 1231873613
+      Data3: -1099193173
+      Data4: -1327205513
+    Path: event:/SafeBox/UnlockSafeBox
+  <openSafe>k__BackingField:
+    Guid:
+      Data1: -63625795
+      Data2: 1183959213
+      Data3: -13880149
+      Data4: -908176892
+    Path: event:/SafeBox/OpenSafeBox
+  <stalkerBreathingSound>k__BackingField:
+    Guid:
+      Data1: -1111759013
+      Data2: 1154904038
+      Data3: -1158541180
+      Data4: 279013418
+    Path: event:/EnemyStalker/Breath
+  <jumpScare>k__BackingField:
+    Guid:
+      Data1: -1641157693
+      Data2: 1285092137
+      Data3: 1105255358
+      Data4: 1647167878
+    Path: event:/EnemyStalker/JumpScare
+  <meow>k__BackingField:
+    Guid:
+      Data1: 1088022631
+      Data2: 1200254776
+      Data3: -1561863251
+      Data4: -69492197
+    Path: event:/AllyCat/Meow
+  <growl>k__BackingField:
+    Guid:
+      Data1: -1616760720
+      Data2: 1084580665
+      Data3: -692626801
+      Data4: 406663652
+    Path: event:/AllyCat/Growl
 --- !u!1 &5465876573755242321
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +187,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7007409971161378728}
   - component: {fileID: 4972474626431753415}
-  - component: {fileID: 6073942417778078961}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -30,7 +206,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6859718513496493169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4972474626431753415
@@ -45,101 +222,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244a77896a6c2aa41836446a390f2599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourceSFX: {fileID: 0}
-  audioSourceMusic: {fileID: 6073942417778078961}
---- !u!82 &6073942417778078961
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5465876573755242321}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.113
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

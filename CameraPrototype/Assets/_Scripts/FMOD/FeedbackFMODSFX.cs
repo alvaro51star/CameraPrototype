@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Feedbacks;
+using FMODUnity;
 
-public class Feel_Sonido : MonoBehaviour
+public class FeedbackFMODSFX : MonoBehaviour
 {
-    public MMFeedbacks ruidoFeedback;
+    [SerializeField] private EventReference AmbienceSFX;
     public GameObject gORuidoFeedback;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            ruidoFeedback?.PlayFeedbacks();
+            AudioManager.Instance.PlayOneShot(AmbienceSFX /*, this.transform.position*/);
         }
     }
 

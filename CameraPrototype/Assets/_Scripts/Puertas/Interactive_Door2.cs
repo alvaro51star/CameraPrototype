@@ -6,9 +6,6 @@ public class Interactive_Door2 : DoubleAction
 {
     [SerializeField] private Animator m_animator;
     [SerializeField] private bool m_isLocked;
-    [SerializeField] private AudioClip m_doorOpen;
-    [SerializeField] private AudioClip m_doorClose;
-    [SerializeField] private AudioClip m_doorLocked;
     [SerializeField] private bool m_doorInteract = false;
 
 
@@ -20,13 +17,13 @@ public class Interactive_Door2 : DoubleAction
     {
         if (m_isLocked)
         {
-            AudioManager.Instance.ReproduceSound(m_doorLocked);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.doorLocked /*, this.transform.position */);
         }
 
         else
         {
             base.FirstAction();
-            AudioManager.Instance.ReproduceSound(m_doorOpen);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.openDoor /*, this.transform.position */);
             m_doorInteract = true;
             m_animator.SetBool("AbrirPuerta", m_doorInteract);
         }
@@ -35,7 +32,7 @@ public class Interactive_Door2 : DoubleAction
     protected override void SecondActon()
     {
         base.SecondActon();
-        AudioManager.Instance.ReproduceSound(m_doorClose);
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.closeDoor /*, this.transform.position */);
         m_doorInteract = false;
         m_animator.SetBool("AbrirPuerta", m_doorInteract);
     }

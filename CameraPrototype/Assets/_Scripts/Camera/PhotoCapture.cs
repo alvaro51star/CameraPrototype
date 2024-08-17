@@ -24,11 +24,6 @@ public class PhotoCapture : MonoBehaviour
     [Header("Photo Fader Effect")]
     [SerializeField] private Animator fadingAnimation;
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource cameraAudio;
-    [SerializeField] private AudioClip cameraClickClip;
-    [SerializeField] private AudioClip noPhotosClip;
-
     [Header("Scripts")]
     [SerializeField] private SavePhoto savePhoto;
 
@@ -67,8 +62,7 @@ public class PhotoCapture : MonoBehaviour
             {
 
                 m_tookFirstPhoto = false;
-                cameraAudio.clip = noPhotosClip;
-                cameraAudio.Play();
+                AudioManager.Instance.PlayOneShot(FMODEvents.instance.noPhotosClip /*, this.transform.position */);
             }
         }
 
@@ -134,8 +128,8 @@ public class PhotoCapture : MonoBehaviour
 
     private IEnumerator CameraFlashEffect()
     {
-        cameraAudio.clip = cameraClickClip;
-        cameraAudio.Play();
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.cameraClickClip /*, this.transform.position */);
+        Debug.Log("camera audio click");
         cameraFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);

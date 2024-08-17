@@ -8,8 +8,6 @@ public class GrowlState : State
     [SerializeField] private GameObject enemy;
     [SerializeField] private NavMeshAgent navMeshAgent;
     
-
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AnimationClip growlAnimation;
 
     private float animationLenght, currentTime = 0f;
@@ -26,7 +24,7 @@ public class GrowlState : State
 
         animator.Play("Growl");
 
-        audioSource.Play(); //Sonido de aullido
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.stalkerGrowling /*, this.transform.position */);
 
         navMeshAgent.isStopped = true;
     }
@@ -43,7 +41,6 @@ public class GrowlState : State
 
     public override void Exit()
     {
-        audioSource.Stop(); //Para el sonido
         currentTime = 0f;
         isComplete = false;
         stalkerBehaviour.isGrowling = false;
