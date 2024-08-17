@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 
 // [RequireComponent(typeof(AudioSource), typeof(AudioSource))]
@@ -35,5 +36,11 @@ public class AudioManager : MonoBehaviour
     {
         //audioSourceSFX.PlayOneShot(audioClip);
         Debug.Log("play one shot");
+    }
+
+    public EventInstance CreateEventInstance (EventReference eventReference)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        return eventInstance;
     }
 }
