@@ -27,6 +27,78 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8822633085828088430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638595163532622286
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-7824873922160717619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient&Music/Light
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient&Music/Light
+  Guid:
+    Data1: -610874711
+    Data2: 1153606499
+    Data3: 366881696
+    Data4: -417628412
+  Banks:
+  - {fileID: -8822633085828088430}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7230705857551051739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient&Music/Plate
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient&Music/Plate
+  Guid:
+    Data1: -1975361139
+    Data2: 1326246743
+    Data3: 211600559
+    Data4: 527982890
+  Banks:
+  - {fileID: -8822633085828088430}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7227427342392359496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,17 +140,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SafeBox/SafeBoxButtons
   Guid:
-    Data1: -2086441138
-    Data2: 1225787862
-    Data3: 1075707574
-    Data4: 1700579653
+    Data1: -1453009274
+    Data2: 1104639177
+    Data3: -1351175026
+    Data4: 242245021
   Banks:
   - {fileID: 8860701133771608717}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters:
-  - {fileID: -3720626209807191077}
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6107924933035654587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient&Music/CreepyResonance
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient&Music/CreepyResonance
+  Guid:
+    Data1: 1292498530
+    Data2: 1107143858
+    Data3: 103323779
+    Data4: -1152251323
+  Banks:
+  - {fileID: -8822633085828088430}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -109,30 +207,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-3720626209807191077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/SafeBoxButtons/SafeBoxButtons
-  m_EditorClassIdentifier: 
-  Name: SafeBoxButtons
-  StudioPath: 
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 3905803765
-    data2: 2115320985
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-2628545307236811845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +276,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638594984417754121
+  lastModified: 638595177172019382
   FileSizes: []
   Exists: 1
 --- !u!114 &-199523858356505363
@@ -303,6 +377,7 @@ MonoBehaviour:
   - {fileID: -511866319317530405}
   - {fileID: 6618364182738036377}
   - {fileID: 8860701133771608717}
+  - {fileID: -8822633085828088430}
   EditorEvents:
   - {fileID: 5392430249219542575}
   - {fileID: 8355901982974181805}
@@ -328,12 +403,16 @@ MonoBehaviour:
   - {fileID: -2628545307236811845}
   - {fileID: -2069503698843520465}
   - {fileID: 903215598131158255}
+  - {fileID: -6107924933035654587}
+  - {fileID: -7230705857551051739}
+  - {fileID: -7824873922160717619}
+  - {fileID: 4274309720949355730}
   EditorParameters: []
   MasterBanks:
   - {fileID: -511866319317530405}
   StringsBanks:
   - {fileID: 7854548601284177869}
-  cacheTime: 638594991744413256
+  cacheTime: 638595177173053137
   cacheVersion: 131619
 --- !u!114 &240145536732487822
 MonoBehaviour:
@@ -578,6 +657,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4274309720949355730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient&Music/AmbientBackground
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient&Music/AmbientBackground
+  Guid:
+    Data1: -828006719
+    Data2: 1216175520
+    Data3: 1810194591
+    Data4: 440914721
+  Banks:
+  - {fileID: -8822633085828088430}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 601051
 --- !u!114 &5392430249219542575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,10 +798,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638594984417790425
+  lastModified: 638595177172040498
   FileSizes:
   - Name: 
-    Value: 2006
+    Value: 2192
   Exists: 1
 --- !u!114 &8355901982974181805
 MonoBehaviour:
@@ -766,7 +872,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638594984418202139
+  lastModified: 638595177173053137
   FileSizes: []
   Exists: 1
 --- !u!114 &9105127802190861747

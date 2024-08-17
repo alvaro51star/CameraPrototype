@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Feedbacks;
+//using MoreMountains.Feedbacks;
+using FMODUnity;
 
 public class EV_Luz : MonoBehaviour
 {
+    [SerializeField] private EventReference AmbienceSFX;
     public GameObject lightFlickering;
-    public MMFeedbacks luzSonidoFeedback;
+    //public MMFeedbacks luzSonidoFeedback;
     private bool isFlickering = false;
     private bool canFlick = false;
     private float timeDelay;
@@ -38,7 +40,8 @@ public class EV_Luz : MonoBehaviour
         if (other.tag == "Player")
         {
             canFlick = true;
-            luzSonidoFeedback?.PlayFeedbacks();
+            AudioManager.Instance.PlayOneShot(AmbienceSFX /*, this.transform.position*/);
+            //luzSonidoFeedback?.PlayFeedbacks();
         }
     }
     public void Deactivated()

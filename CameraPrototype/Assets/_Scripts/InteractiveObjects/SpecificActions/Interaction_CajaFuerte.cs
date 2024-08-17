@@ -7,11 +7,6 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     //Variables 
     [SerializeField] private string m_correctCode;
     [SerializeField] private int m_maxCodeNumber;
-    [SerializeField] private AudioClip[] m_keySounds;
-    [SerializeField] private AudioClip m_wrongSound;
-    [SerializeField] private AudioClip m_rightSound;
-    [SerializeField] private AudioClip m_safeUnlockSound;
-    [SerializeField] private AudioClip m_safeOpen;
     [SerializeField] private Animator anim;
     private bool m_isOpen = false;
     private string m_actualCode = "";
@@ -42,10 +37,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
 
     public void ReproduceKeySound()
     {
-        AudioClip clip = m_keySounds[Random.Range(0, m_keySounds.Length)];
-        AudioManager.Instance.ReproduceSound(clip);
-
-        //LineaFMOD para las teclas
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.safeboxButtons /*, this.transform.position */);
     }
 
     public void DeleteActualCode()
@@ -63,9 +55,9 @@ public class Interaction_CajaFuerte : AffectsIndirectly
             m_isOpen = true;
             UIManager.instance.ShowLight(true, false);
 
-            AudioManager.Instance.ReproduceSound(m_rightSound);
-            AudioManager.Instance.ReproduceSound(m_safeUnlockSound);
-            AudioManager.Instance.ReproduceSound(m_safeOpen);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.rightCode /*, this.transform.position */);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.unlockSafe /*, this.transform.position */);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.openSafe /*, this.transform.position */);
             //Lineas de FMOD para codigo correcto, desbloquear y abrir, aunque la de abrir se podría aparte pa hacerla con animación
 
             ChangeActiveMode(m_targetObject, true);
@@ -75,7 +67,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
         else
         {
             UIManager.instance.ShowLight(true, true);
-            AudioManager.Instance.ReproduceSound(m_wrongSound);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.wrongCode /*, this.transform.position */);
             //Linea FMOD de sonido de codigo incorrecto
         }
     }

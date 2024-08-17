@@ -7,9 +7,6 @@ public class Interaction_Door : DoubleAction
     //Variables 
     [SerializeField] private Animator m_animator;
     [SerializeField] private bool m_isLocked; 
-    [SerializeField] private AudioClip m_doorOpen;
-    [SerializeField] private AudioClip m_doorClose;
-    [SerializeField] private AudioClip m_doorLocked;
     [SerializeField] private bool m_isPuertaPrincipal;
     [SerializeField] private Collider m_collider;
     [SerializeField] private bool m_isCatDoor;
@@ -28,8 +25,7 @@ public class Interaction_Door : DoubleAction
     {
         if (m_isLocked)
         {
-            AudioManager.Instance.ReproduceSound(m_doorLocked);
-            //LineaFMOD: puerta bloqueada.
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.doorLocked /*, this.transform.position */);
 
             if (!m_discoveredLocked && !m_isPuertaPrincipal)
             {
@@ -41,8 +37,7 @@ public class Interaction_Door : DoubleAction
         else
         {
             base.FirstAction();
-            AudioManager.Instance.ReproduceSound(m_doorOpen);
-            //LineaFMOD: puerta abierta.
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.openDoor /*, this.transform.position */);
 
             m_doorInteract = 2;
             m_animator.SetInteger("Abrir", m_doorInteract);
@@ -99,7 +94,7 @@ public class Interaction_Door : DoubleAction
     {
         if (m_doorInteract == 1)
         {
-            AudioManager.Instance.ReproduceSound(m_doorClose);
+            AudioManager.Instance.PlayOneShot(FMODEvents.instance.closeDoor /*, this.transform.position */);
             //LineaFMOD: puerta cerrada.
         }
     }

@@ -5,15 +5,13 @@ using FMODUnity;
 using FMOD.Studio;
 
 
-// [RequireComponent(typeof(AudioSource), typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    private List<EventInstance> eventInstances;
+
+    private EventInstance ambienceEventInstance;
 
     public static AudioManager Instance { get; private set; }
-
-    // [SerializeField] private AudioSource audioSourceSFX;
-    // [SerializeField] private AudioSource audioSourceMusic;
-    
 
     private void Awake()
     {
@@ -25,6 +23,19 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        eventInstances = new List<EventInstance>();
+    }
+
+    private void Start()
+    {
+        InitializeAmbience(FMODEvents.instance.ambience);
+    }
+
+    private void InitializeAmbience(EventReference ambienceEventReference)
+    {
+        ambienceEventInstance = CreateEventInstance(ambienceEventReference);
+        ambienceEventInstance.start();
     }
 
     public void PlayOneShot (EventReference sound /*, Vector3 worldPos */)
@@ -32,15 +43,25 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound /*, worldPos */);
     }
 
-    public void ReproduceSound(AudioClip audioClip)
-    {
-        //audioSourceSFX.PlayOneShot(audioClip);
-        Debug.Log("play one shot");
-    }
-
     public EventInstance CreateEventInstance (EventReference eventReference)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
         return eventInstance;
+    }
+
+    public void CleanUp()
+    {
+        // para y lanza las instancias creadas
+        foreach (EventInstance eventInstance in eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CleanUp();
     }
 }

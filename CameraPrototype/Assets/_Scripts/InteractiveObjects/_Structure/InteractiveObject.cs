@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class InteractiveObject : MonoBehaviour, I_InteractableObjects
 {
     //Variables
     [SerializeField] private bool m_needsButton;
     [SerializeField] private InteractionScript m_interactionScript;
-    [SerializeField] private AudioClip m_interactSound;
+    [SerializeField] private EventReference interactiveObject;
     [SerializeField] float m_interactionAngle;
     public Transform m_interactionPivot;
 
@@ -31,12 +32,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     public void Interact(GameObject player)
     {
         m_interactionScript.Action(player);
-        if (m_interactSound != null)
-        {
-            AudioManager.Instance.ReproduceSound(m_interactSound);
-            //LíneaFMOD
-        }
-
+        AudioManager.Instance.PlayOneShot(interactiveObject /*, this.transform.position */);
     }
 
     public InteractionScript GetInteractionScript()

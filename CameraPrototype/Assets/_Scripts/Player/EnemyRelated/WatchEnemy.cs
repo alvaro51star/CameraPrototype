@@ -17,7 +17,6 @@ public class WatchEnemy : MonoBehaviour
     [Header("Jumpscare variables")]
     [SerializeField] private float maxAngleVisionJumpScare = 30f;
     [SerializeField] private float timeForNewJumpScare = 10f;
-    [SerializeField] private AudioClip jumpScareSoundEffect;
 
     [Space]
     [Header("Feel Variables")]
@@ -81,7 +80,7 @@ public class WatchEnemy : MonoBehaviour
     private IEnumerator JumpScareCD()
     {
         jumpScareOnCD = true;
-        AudioManager.Instance.ReproduceSound(jumpScareSoundEffect);
+        AudioManager.Instance.PlayOneShot(FMODEvents.instance.jumpScare /*, this.transform.position */);
         yield return new WaitForSeconds(timeForNewJumpScare);
         jumpScareOnCD = false;
     }
