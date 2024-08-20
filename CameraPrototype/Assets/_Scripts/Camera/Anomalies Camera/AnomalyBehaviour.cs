@@ -1,5 +1,6 @@
 using MoreMountains.Tools;
 using UnityEngine;
+
 [RequireComponent(typeof(AnomaliesData))]
 public class AnomalyBehaviour : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AnomalyBehaviour : MonoBehaviour
     private Llave _llave;
     private AnomaliesLink _anomaliesLink;
     [HideInInspector] public bool isInPlayersTrigger;
+
     private void OnEnable()
     {
         EventManager.OnTakingPhoto += OnTakingPhoto;
@@ -20,7 +22,13 @@ public class AnomalyBehaviour : MonoBehaviour
         EventManager.OnUsingCamera -= OnTakingPhoto;
     }
 
-    private void Start()
+    private void Awake()
+    {
+        _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
+        //can't find this reference on start because camera disables on start (AnomalyCameraManager)
+    }
+
+    protected void Start()
     {
         _anomaliesData = GetComponent<AnomaliesData>();
         _renderer = gameObject.GetComponent<Renderer>();
@@ -28,9 +36,9 @@ public class AnomalyBehaviour : MonoBehaviour
         _llave = GetComponent<Llave>();
     }
 
-    private void OnTakingPhoto()//checks conditions to reveal the anomaly
+    private void OnTakingPhoto() //checks conditions to reveal the anomaly
     {
-        if(!isInPlayersTrigger)
+        if (!isInPlayersTrigger) //value changed by player's trigger (AnomalyCamTrigger)
             return;
 
         if (!_anomaliesData)
@@ -42,20 +50,27 @@ public class AnomalyBehaviour : MonoBehaviour
 
         if (!_anomalyCamera)
         {
-            _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();//take the reference the first time
+            _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
+            //in case it loses the reference
         }
+
         if (!_anomalyCamera.isActiveAndEnabled)
             return;
 
-        if (!MeshIsVisibleToCamera(_anomalyCamera, _renderer))
+        //if (!MeshIsVisibleToCamera(_anomalyCamera, _renderer))
+        if (!_renderer.isVisible)
             return;
-
-        RevealAnomaly();
+        PhotoAction();
     }
-   
-    public void RevealAnomaly()
+
+    protected virtual void PhotoAction()
     {
-        if (_anomaliesData.revealType)
+        RevealAnomaly(_anomaliesData);
+    }
+
+    public void RevealAnomaly(AnomaliesData anomalyToReveal)
+    {
+        if (anomalyToReveal.revealType)
         {
             if (_stalkerBehaviour)
             {
@@ -64,13 +79,13 @@ public class AnomalyBehaviour : MonoBehaviour
                 EventManager.OnEnemyRevealed?.Invoke();
             }
 
-            gameObject.layer = LayerMask.NameToLayer("Default");
-            transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
-            for (int i = 0; i < transform.childCount; i++)
+            //gameObject.layer = LayerMask.NameToLayer("Default");
+            anomalyToReveal.transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
+            /*for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Default");
-            }
-            
+            }*/
+
             if (_llave)
             {
                 _llave.enabled = true;
@@ -78,21 +93,15 @@ public class AnomalyBehaviour : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            anomalyToReveal.gameObject.SetActive(false);
         }
         
-        if (_anomaliesLink)
-        {
-            _anomaliesLink.RevealOtherAnomaly();
-        }
-
         _anomaliesData.enabled = false;
         this.enabled = false;
-
     }
-    
 
-    private bool MeshIsVisibleToCamera(Camera camera, Renderer renderer)
+
+    /*private bool MeshIsVisibleToCamera(Camera camera, Renderer renderer)
     {
         // easy part first. if the renderer's pivot is in view we should be ok
         if (IsVisible(renderer.transform.position))
@@ -130,6 +139,5 @@ public class AnomalyBehaviour : MonoBehaviour
                 bounds.center.y + (bounds.extents.y * yDir),
                 bounds.center.z + (bounds.extents.z * zDir));
         }
-    }
-
+    }*/
 }

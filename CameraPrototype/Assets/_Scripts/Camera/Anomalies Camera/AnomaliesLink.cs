@@ -1,15 +1,26 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnomaliesLink : MonoBehaviour
+[RequireComponent(typeof(AnomaliesData))]
+
+public class AnomaliesLink : AnomalyBehaviour
 {
-    [SerializeField] private GameObject anomalyToReveal;
-    public void RevealOtherAnomaly()
+     [SerializeField] private List<AnomaliesData> anomaliesToReveal;//these anomalies don't need AnomalyBehaviour
+
+    protected override void PhotoAction()
     {
-        if(!anomalyToReveal.GetComponent<AnomalyBehaviour>().isActiveAndEnabled)
-            return;
-        anomalyToReveal.GetComponent<AnomalyBehaviour>().RevealAnomaly();
+        RevealOtherAnomaly();
+        base.PhotoAction();
+    }
+    private void RevealOtherAnomaly()
+    {
+        foreach (AnomaliesData anomaliesData in anomaliesToReveal)
+        {
+            if(!anomaliesData.isActiveAndEnabled)//if it is already revealed
+                return;
+            base.RevealAnomaly(anomaliesData);
+            anomaliesData.enabled = false;
+        }
         this.enabled = false;
     }
 }

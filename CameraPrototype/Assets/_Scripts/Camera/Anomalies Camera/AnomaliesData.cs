@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using MoreMountains.Tools;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnomaliesData : MonoBehaviour
@@ -12,13 +9,13 @@ public class AnomaliesData : MonoBehaviour
     {
         if (revealType)
         {
-            gameObject.layer = LayerMask.NameToLayer("Anomalies");
+            //gameObject.layer = LayerMask.NameToLayer("Anomalies");
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Anomalies"));
-            //Para hacer todos los hijos
-             for (int i = 0; i < transform.childCount; i++)
+            //Para cambiar tb todos los hijos
+             /*for (int i = 0; i < transform.childCount; i++)
              {
                  transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies");
-             }
+             }*/
 
             if (GetComponent<StalkerBehaviour>())
             {
@@ -31,12 +28,12 @@ public class AnomaliesData : MonoBehaviour
         }
         else
         {
-            gameObject.layer = LayerMask.NameToLayer("Anomalies2");
+            //gameObject.layer = LayerMask.NameToLayer("Anomalies2");
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Anomalies2"));
-             for (int i = 0; i < transform.childCount; i++)
+             /*for (int i = 0; i < transform.childCount; i++)
              {
                  transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("Anomalies2");
-             }
+             }*/
         }
     }
 }
