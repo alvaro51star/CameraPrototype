@@ -42,11 +42,17 @@ public class EV_Luz : MonoBehaviour
             canFlick = true;
             AudioManager.Instance.PlayOneShot(AmbienceSFX /*, this.transform.position*/);
             //luzSonidoFeedback?.PlayFeedbacks();
+            StartCoroutine(TurnOff());
         }
     }
     public void Deactivated()
     {
         lightFlickering.SetActive(false);
-        Debug.Log("desactiva");
+    }
+
+    private IEnumerator TurnOff()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Deactivated();
     }
 }

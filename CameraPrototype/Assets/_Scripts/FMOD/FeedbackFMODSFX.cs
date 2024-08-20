@@ -16,8 +16,17 @@ public class FeedbackFMODSFX : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Deactivate();
+        }
+    }
+
     public void Deactivate()
     {
         gORuidoFeedback.SetActive(false);
+        Debug.Log("desactivado");
     }
 }
