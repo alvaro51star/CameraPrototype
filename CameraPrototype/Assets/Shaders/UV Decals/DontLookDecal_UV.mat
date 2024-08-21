@@ -49,7 +49,7 @@ Material:
     - _Layer: 1
     m_Colors:
     - _Color: {r: 0.7764706, g: 0.33725488, b: 1, a: 0}
-    - _Emission: {r: 0, g: 1.1334226, b: 1.4884707, a: 0}
+    - _Emission: {r: 0.7109667, g: 0, b: 5.176868, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &773389181498038100
 MonoBehaviour:
