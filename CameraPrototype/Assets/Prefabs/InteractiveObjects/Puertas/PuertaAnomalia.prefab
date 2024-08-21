@@ -253,7 +253,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1048197468116743267}
   - component: {fileID: 5366889033498306649}
-  - component: {fileID: 2898187557333515870}
   m_Layer: 0
   m_Name: MarcoPuerta_01
   m_TagString: Untagged
@@ -292,19 +291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealType: 1
---- !u!114 &2898187557333515870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4839056474684116495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eab1c9b1bca2f448868edfb8801d0c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInPlayersTrigger: 0
 --- !u!1 &5470470785011641010
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,10 +599,10 @@ GameObject:
   - component: {fileID: 3583927373493026273}
   - component: {fileID: 543911062808644835}
   - component: {fileID: 910499082495339735}
-  - component: {fileID: 719662176351354727}
   - component: {fileID: 2485912231538081292}
   - component: {fileID: 14743006148556809}
   - component: {fileID: 2513679952400585369}
+  - component: {fileID: 3320504719589985958}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -706,6 +692,7 @@ MonoBehaviour:
   m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
   m_interactionAngle: 10
   m_interactionPivot: {fileID: 1480582029814918697}
+  m_rutaEventoFMODInteraccion: 
 --- !u!114 &3583927373493026273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +716,7 @@ MonoBehaviour:
   m_isPuertaPrincipal: 0
   m_collider: {fileID: 473124850742332585}
   m_isCatDoor: 0
+  m_rutaEventoFMOD: 
 --- !u!95 &543911062808644835
 Animator:
   serializedVersion: 5
@@ -763,19 +751,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealType: 1
---- !u!114 &719662176351354727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8163153020225591871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eab1c9b1bca2f448868edfb8801d0c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInPlayersTrigger: 0
 --- !u!208 &2485912231538081292
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -846,4 +821,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64a97ad9099f4d42b6c2d1a8e68b18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalyToReveal: {fileID: 4839056474684116495}
+  anomalyRenderer: {fileID: 0}
+  isInPlayersTrigger: 0
+  anomaliesToReveal:
+  - {fileID: 5366889033498306649}
+--- !u!41 &3320504719589985958
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163153020225591871}
+  m_Open: 0
+  m_Center: {x: 0, y: 0.4280276, z: 0.7623315}
+  m_Size: {x: 1, y: 0.9284311, z: 1.850851}
