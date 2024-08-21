@@ -7,8 +7,6 @@ public class AnomalyBehaviour : MonoBehaviour
     private Camera _anomalyCamera;
     private AnomaliesData _anomaliesData;
     [SerializeField] private Renderer anomalyRenderer;
-    //private StalkerBehaviour _stalkerBehaviour;
-    //private AnomaliesLink _anomaliesLink;
     [HideInInspector] public bool isInPlayersTrigger;
 
     private void OnEnable()
@@ -27,7 +25,7 @@ public class AnomalyBehaviour : MonoBehaviour
         //can't find this reference on start because camera disables on start (AnomalyCameraManager)
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         _anomaliesData = GetComponent<AnomaliesData>();
         
@@ -65,7 +63,7 @@ public class AnomalyBehaviour : MonoBehaviour
         PhotoAction();
     }
 
-    protected virtual void PhotoAction()
+    public virtual void PhotoAction()
     {
         RevealAnomaly(_anomaliesData);
     }
@@ -75,6 +73,7 @@ public class AnomalyBehaviour : MonoBehaviour
         if (anomalyToReveal.revealType)
         {
             anomalyToReveal.transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
+            anomalyToReveal.anomalyCollider.enabled = true;
         }
         
         else

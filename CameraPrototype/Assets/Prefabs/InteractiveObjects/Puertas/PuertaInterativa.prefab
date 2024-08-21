@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5436261081058750397}
   - component: {fileID: 2139234111964426148}
   - component: {fileID: 8641642053996296878}
-  - component: {fileID: 6467222587879167187}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -103,7 +102,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsButton: 1
   m_interactionScript: {fileID: 6240631938174568748}
-  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 10
   m_interactionPivot: {fileID: 7796724164049083011}
   m_rutaEventoFMODInteraccion: 
@@ -124,9 +129,6 @@ MonoBehaviour:
   m_secondMessage: Close Door
   m_animator: {fileID: 0}
   m_isLocked: 0
-  m_doorOpen: {fileID: 8300000, guid: dd33ebfa73217674580798aa6fa44fdc, type: 3}
-  m_doorClose: {fileID: 8300000, guid: 9c00be4baaef0ab48896f686472d8a23, type: 3}
-  m_doorLocked: {fileID: 8300000, guid: d3a946b09ee87ec40aa50981994ad0b3, type: 3}
   m_isPuertaPrincipal: 0
   m_collider: {fileID: 4819155054347006577}
   m_isCatDoor: 0
@@ -210,16 +212,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!41 &6467222587879167187
-OcclusionPortal:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292897283591136968}
-  m_Open: 0
-  m_Center: {x: 0, y: 0.44711635, z: 0.75235283}
-  m_Size: {x: 1, y: 0.89486605, z: 1.8031628}
 --- !u!1 &1370300294325488610
 GameObject:
   m_ObjectHideFlags: 0

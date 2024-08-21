@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class AnomalyInteractiveObject : AnomalyBehaviour
 {
-    [SerializeField] private InteractiveObject interactiveObject;
+    private InteractiveObject _interactiveObject;
 
-    protected override void PhotoAction()
+    protected override void Start()
     {
-        interactiveObject.enabled = true;
+        base.Start();
+        _interactiveObject = GetComponent<InteractiveObject>();
+        _interactiveObject.enabled = false;
+    }
+
+    public override void PhotoAction()
+    {
+        _interactiveObject.enabled = true;
         
         base.PhotoAction();
     }

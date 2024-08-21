@@ -133,8 +133,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6554146641333162930}
-  - component: {fileID: 2465613645565607978}
-  - component: {fileID: 7728619579183819350}
   - component: {fileID: 3691916542636007125}
   - component: {fileID: 1659365039449232602}
   - component: {fileID: 6983790418231038236}
@@ -142,7 +140,7 @@ GameObject:
   - component: {fileID: 1645945226976980357}
   - component: {fileID: 5344141134764701389}
   - component: {fileID: 8324941161663551707}
-  - component: {fileID: 8290354243992740257}
+  - component: {fileID: 4640992961310686859}
   m_Layer: 6
   m_Name: Stalker
   m_TagString: Enemy
@@ -174,56 +172,6 @@ Transform:
   - {fileID: 1542756136221663496}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2465613645565607978
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829624780751140221}
-  m_Mesh: {fileID: 0}
---- !u!23 &7728619579183819350
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829624780751140221}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &3691916542636007125
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -281,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
-  objectMesh: {fileID: 7728619579183819350}
+  objectMesh: {fileID: 177154655652746072}
   player: {fileID: 0}
   animator: {fileID: 8324941161663551707}
   pointToLook: {fileID: 1542756136221663496}
@@ -343,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealType: 1
+  anomalyCollider: {fileID: 3691916542636007125}
 --- !u!54 &5344141134764701389
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -391,7 +340,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8290354243992740257
+--- !u!114 &4640992961310686859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,9 +349,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1829624780751140221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eab1c9b1bca2f448868edfb8801d0c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a17a50f59fd93b44a625e84764aa50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anomalyRenderer: {fileID: 177154655652746072}
   isInPlayersTrigger: 0
 --- !u!1 &1872875658123291825
 GameObject:
@@ -502,7 +452,6 @@ MonoBehaviour:
   animator: {fileID: 8324941161663551707}
   enemy: {fileID: 1829624780751140221}
   navMeshAgent: {fileID: 0}
-  audioSource: {fileID: 0}
   growlAnimation: {fileID: -203655887218126122, guid: aff1aa8ce4b9789408a45eac7e1dad40,
     type: 3}
 --- !u!1 &2583848469770610721
@@ -982,7 +931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8324941161663551707}
   enemy: {fileID: 1829624780751140221}
-  objectMesh: {fileID: 7728619579183819350}
+  objectMesh: {fileID: 0}
   _navMeshAgent: {fileID: 0}
   currentTime: 0
   timeBeforeChangingPoint: 5
@@ -990,7 +939,6 @@ MonoBehaviour:
   timeToCompleteStalk_Level1: 10
   timeToCompleteStalk_Level2: 5
   maxDistanceToGrowlState: 1.25
-  audioSource: {fileID: 0}
   rayPoint: {fileID: 3142997469726501096}
 --- !u!1 &5601495986734323875
 GameObject:
@@ -1037,7 +985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8324941161663551707}
-  jumpScareSound: {fileID: 8300000, guid: 71e32182202e41746a903e6c2524ac4e, type: 3}
   uiManager: {fileID: 0}
 --- !u!1 &7391612708222366937
 GameObject:
@@ -1637,6 +1584,12 @@ PrefabInstance:
 --- !u!4 &168651901734518255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 404ec55418a75ab42a050d73f9ca2581,
+    type: 3}
+  m_PrefabInstance: {fileID: 422658315607677444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &177154655652746072 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 551959540859668828, guid: 404ec55418a75ab42a050d73f9ca2581,
     type: 3}
   m_PrefabInstance: {fileID: 422658315607677444}
   m_PrefabAsset: {fileID: 0}

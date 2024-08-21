@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AnomaliesData))]
@@ -6,8 +7,8 @@ using UnityEngine;
 public class AnomaliesLink : AnomalyBehaviour
 {
      [SerializeField] private List<AnomaliesData> anomaliesToReveal;//these anomalies don't need AnomalyBehaviour
-
-    protected override void PhotoAction()
+    
+    public override void PhotoAction()
     {
         RevealOtherAnomaly();
         base.PhotoAction();
@@ -18,7 +19,15 @@ public class AnomaliesLink : AnomalyBehaviour
         {
             if(!anomaliesData.isActiveAndEnabled)//if it is already revealed
                 return;
-            base.RevealAnomaly(anomaliesData);
+            var anomalyBehaviour = anomaliesData.GetComponent<AnomalyBehaviour>();
+            if (anomalyBehaviour)
+            {
+                anomalyBehaviour.PhotoAction();
+            }
+            else
+            {
+                base.RevealAnomaly(anomaliesData);
+            }
             anomaliesData.enabled = false;
         }
         this.enabled = false;
