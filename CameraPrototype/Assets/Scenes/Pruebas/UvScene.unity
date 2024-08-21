@@ -152,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: -876546973899608171, guid: b6097347ed1901f4e9132d1e7040820c,
-    type: 3}
+  m_Material: {fileID: 2100000, guid: 5496e1ef43766714d99adb5d0c3737a8, type: 2}
   m_DrawDistance: 1000
   m_FadeScale: 0.9
   m_StartAngleFade: 180
@@ -651,13 +650,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974008865}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.016920673, y: -0.09483014, z: 0.011498185, w: 0.9952833}
+  m_LocalRotation: {x: -0.017727088, y: -0.020729197, z: 0.010211161, w: 0.99957585}
   m_LocalPosition: {x: 1.95, y: 1.94, z: -7.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -1.805, y: -10.909, z: 1.496}
+  m_LocalEulerAnglesHint: {x: -2.007, y: -2.397, z: 1.213}
 --- !u!1 &2145451969
 GameObject:
   m_ObjectHideFlags: 0
