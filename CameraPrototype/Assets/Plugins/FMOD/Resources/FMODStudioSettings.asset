@@ -559,11 +559,11 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
+  - Desktop/Master
   Banks:
-  - Ambience
-  - Enemy
-  - SFX
+  - Desktop/Ambience
+  - Desktop/Enemy
+  - Desktop/SFX
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
