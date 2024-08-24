@@ -1,16 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    [Header("Cameras")]
+    [Header("Photo Cameras")]
     [SerializeField] private Camera anomaliesCamera;
-
+    [SerializeField] private Camera pastCamera;
+    
     [Header("Photo Taker")]
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
@@ -27,30 +25,43 @@ public class PhotoCapture : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private SavePhoto savePhoto;
 
-    private Texture2D screenCapture;
-    private bool viewingPhoto;
-    private bool m_tookFirstPhoto; //solucion a que el input no vaya muy bien
+    private Texture2D _screenCapture;
+    private bool _viewingPhoto;
+    private bool _tookFirstPhoto; //solucion a que el input no vaya muy bien
     public bool canTakePhoto = true;
     public bool hasCameraEquiped; //solucion input
 
-    private RenderTexture m_renderTexture;
+    private RenderTexture _anomalyRenderTexture;
+    private RenderTexture _pastRenderTexture;
 
-    private Sprite m_photoSprite;
+    //private Sprite _photoSprite;
 
     private void Start()
     {
-        m_renderTexture = new RenderTexture(Screen.width, Screen.height, anomaliesCamera.targetTexture.depth);
-        m_renderTexture.Create(); //creando la textura al principio ha empezado a funcionar bien CapturePhoto()
+        if (anomaliesCamera)
+        {
+            _anomalyRenderTexture = new RenderTexture(Screen.width, Screen.height, anomaliesCamera.targetTexture.depth);
+        
+            _anomalyRenderTexture.Create(); //needs to be done on start for CapturePhoto() to work properly
 
-        anomaliesCamera.targetTexture = m_renderTexture;
+            anomaliesCamera.targetTexture = _anomalyRenderTexture;
+        }
 
-        screenCapture = new Texture2D(m_renderTexture.width, m_renderTexture.height, m_renderTexture.graphicsFormat,
-                              UnityEngine.Experimental.Rendering.TextureCreationFlags.None);
+        if (pastCamera)
+        {
+            _pastRenderTexture = new RenderTexture(Screen.width, Screen.height, pastCamera.targetTexture.depth);
+        
+            _pastRenderTexture.Create(); //needs to be done on start for CapturePhoto() to work properly
+
+            pastCamera.targetTexture = _pastRenderTexture;
+        }
+        _screenCapture = new Texture2D(_anomalyRenderTexture.width, _anomalyRenderTexture.height, _anomalyRenderTexture.graphicsFormat,
+            UnityEngine.Experimental.Rendering.TextureCreationFlags.None);//can stay like this if both cameras have same depth
     }
     public void TakePhoto()
     {
-        m_tookFirstPhoto = true;
-        if (!viewingPhoto && hasCameraEquiped)
+        _tookFirstPhoto = true;
+        if (!_viewingPhoto && hasCameraEquiped)
         {            
             if (canTakePhoto)
             {
@@ -61,7 +72,7 @@ public class PhotoCapture : MonoBehaviour
             else
             {
 
-                m_tookFirstPhoto = false;
+                _tookFirstPhoto = false;
                 AudioManager.Instance.PlayOneShot(FMODEvents.instance.noPhotosClip /*, this.transform.position */);
             }
         }
@@ -75,7 +86,7 @@ public class PhotoCapture : MonoBehaviour
 
     public bool GetFirstPhotoTaken()
     {
-        return m_tookFirstPhoto;
+        return _tookFirstPhoto;
     }
 
     public void SetHasCameraEquiped(bool mode)
@@ -85,21 +96,33 @@ public class PhotoCapture : MonoBehaviour
 
     private void CapturePhoto()//needs to create the textures in start
     {
-        m_tookFirstPhoto = false;
+        _tookFirstPhoto = false;
 
         cameraUI.SetActive(false);
-        viewingPhoto = true;
+        _viewingPhoto = true;
 
-        StartCoroutine(SaveRenderTextureInTexture());        
+        if (anomaliesCamera.isActiveAndEnabled)
+        {
+            StartCoroutine(SaveRenderTextureInTexture(_anomalyRenderTexture)); 
+            Debug.Log("Foto de " + anomaliesCamera);
+        }
+
+        if(!pastCamera)
+            return;
+        if (pastCamera.isActiveAndEnabled)
+        {
+            StartCoroutine(SaveRenderTextureInTexture(_pastRenderTexture));     
+            Debug.Log("Foto de " + pastCamera);
+        }
     }
 
-    private IEnumerator SaveRenderTextureInTexture()
+    private IEnumerator SaveRenderTextureInTexture(RenderTexture renderTexture)
     {
         yield return new WaitForEndOfFrame();//para que flash este renderizado
-        AsyncGPUReadback.Request(m_renderTexture, 0, (AsyncGPUReadbackRequest action) =>
+        AsyncGPUReadback.Request(renderTexture, 0, (AsyncGPUReadbackRequest action) =>
         {
-            screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
-            screenCapture.Apply();
+            _screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
+            _screenCapture.Apply();
 
             Time.timeScale = 0f;
             EventManager.OnTakingPhoto?.Invoke();
@@ -112,10 +135,10 @@ public class PhotoCapture : MonoBehaviour
     {
 
         UIManager.instance.SetPointersActive(false);
-        Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0, 0, screenCapture.width, screenCapture.height),
+        Sprite photoSprite = Sprite.Create(_screenCapture, new Rect(0, 0, _screenCapture.width, _screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
-        m_photoSprite = photoSprite;
+        //_photoSprite = photoSprite;
 
         //savePhoto.PhotoSave(screenCapture);
 
@@ -138,12 +161,12 @@ public class PhotoCapture : MonoBehaviour
 
     private void RemovePhoto()
     {
-        viewingPhoto = false;
+        _viewingPhoto = false;
         photoFrame.SetActive(false);
         cameraUI.SetActive(true);
 
         EventManager.OnRemovePhoto?.Invoke();
-        m_tookFirstPhoto = false;
+        _tookFirstPhoto = false;
         Time.timeScale = 1f;
 
         UIManager.instance.SetPointersActive(true);
@@ -153,7 +176,7 @@ public class PhotoCapture : MonoBehaviour
     private IEnumerator AutoRemovePhoto()
     {
         yield return new WaitForSecondsRealtime(timeShowingPhoto);
-        if (viewingPhoto)
+        if (_viewingPhoto)
         {
             RemovePhoto();
         }
@@ -161,6 +184,6 @@ public class PhotoCapture : MonoBehaviour
 
     public bool GetViewingPhoto()
     {
-        return viewingPhoto;
+        return _viewingPhoto;
     }
 }

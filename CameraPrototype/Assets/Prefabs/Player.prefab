@@ -265,7 +265,6 @@ GameObject:
   - component: {fileID: 8100681784569480217}
   - component: {fileID: 2592600347508512828}
   - component: {fileID: 8894318954006076969}
-  - component: {fileID: 7436156349101976439}
   - component: {fileID: 586381003278203724}
   - component: {fileID: 4387893766438552301}
   - component: {fileID: 8485402160083179917}
@@ -307,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomaliesCamera: {fileID: 950392395326506303}
+  pastCamera: {fileID: 0}
   photoDisplayArea: {fileID: 0}
   photoFrame: {fileID: 0}
   cameraUI: {fileID: 0}
@@ -314,9 +314,6 @@ MonoBehaviour:
   cameraFlash: {fileID: 3966516001980533802}
   flashTime: 0.2
   fadingAnimation: {fileID: 0}
-  cameraAudio: {fileID: 0}
-  cameraClickClip: {fileID: 8300000, guid: 28e18d83fc42ea3489bd6009b4da77b5, type: 3}
-  noPhotosClip: {fileID: 8300000, guid: fb72d84014e753a43b2b75c0a4ee2f07, type: 3}
   savePhoto: {fileID: 586381003278203724}
   canTakePhoto: 1
   hasCameraEquiped: 0
@@ -338,19 +335,6 @@ MonoBehaviour:
   maxPhotos: 10
   availablePhotosTMP: {fileID: 0}
   maxPhotosTMP: {fileID: 0}
---- !u!114 &7436156349101976439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304275377204725996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880d3d5aefaece34ca5ad26ad1e43578, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anomaliesCameraGO: {fileID: 2605687872625625690}
 --- !u!114 &586381003278203724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,8 +359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a877032003705b74da5b826f77b205a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_photoCapture: {fileID: 2592600347508512828}
-  CameraUI: {fileID: 0}
+  anomaliesCameraGO: {fileID: 2605687872625625690}
+  pastCameraGO: {fileID: 0}
+  _photoCapture: {fileID: 2592600347508512828}
+  _cameraUI: {fileID: 0}
 --- !u!114 &8485402160083179917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1096,8 +1082,6 @@ MonoBehaviour:
   maxAngleVision: 15
   maxAngleVisionJumpScare: 30
   timeForNewJumpScare: 20
-  jumpScareSoundEffect: {fileID: 8300000, guid: ba36c124fb792e94fb9c6b8bfda44470,
-    type: 3}
   feedbackVigneteEnemy: {fileID: 7971972700491910351}
   enemyCatchTp: {fileID: 1446436902641835883}
 --- !u!65 &7761437460544118505
@@ -1180,7 +1164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyRadarUI: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!65 &8636441088171959244
 BoxCollider:
   m_ObjectHideFlags: 0
