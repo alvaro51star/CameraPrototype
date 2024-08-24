@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private PhotoCapture m_photoCapture;
-    [SerializeField] private GameObject CameraUI;
+    [Header("Cameras")]
+    [SerializeField] private GameObject anomaliesCameraGO;
+    [SerializeField] private GameObject pastCameraGO;
+
+    [FormerlySerializedAs("m_photoCapture")] [SerializeField] private PhotoCapture _photoCapture;
+    [FormerlySerializedAs("CameraUI")] [SerializeField] private GameObject _cameraUI;
     private void OnEnable()
     {
         EventManager.OnUsingCamera += OnUsingCamera;
@@ -17,21 +20,53 @@ public class CameraManager : MonoBehaviour
         EventManager.OnUsingCamera -= OnUsingCamera;
         EventManager.OnNotUsingCamera -= OnNotUsingCamera;
     }
+    
+    private void Start()
+    {
+        anomaliesCameraGO.SetActive(false);
+        if(!pastCameraGO)
+            return;
+        pastCameraGO.SetActive(false);
+    }
 
     private void OnUsingCamera()
     {
-        m_photoCapture.SetHasCameraEquiped(true);
-        CameraUI.SetActive(true);
+        //camera feedback
+        _photoCapture.SetHasCameraEquiped(true);
+        _cameraUI.SetActive(true);
         UIManager.instance.SetPointersActive(false);
+        
+        //camera management
+        if (!anomaliesCameraGO)
+        {
+            anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");//in case it loses the reference
+        }
+        if (anomaliesCameraGO && !anomaliesCameraGO.activeSelf)
+        {
+            anomaliesCameraGO.SetActive(true);
+        }
+
     }
 
     private void OnNotUsingCamera()
     {
-        m_photoCapture.SetHasCameraEquiped(false);
-        CameraUI.SetActive(false);
+        //camera feedback
+        _photoCapture.SetHasCameraEquiped(false);
+        _cameraUI.SetActive(false);
         if (!UIManager.instance.GetIsReading())
         {
             UIManager.instance.SetPointersActive(true);
         }
+        
+        //camera management
+        if (!anomaliesCameraGO)
+        {
+            anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");
+        }
+        if (anomaliesCameraGO && !anomaliesCameraGO.activeSelf)
+        {
+            anomaliesCameraGO.SetActive(false);
+        }
     }
+    
 }
