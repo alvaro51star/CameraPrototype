@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using TMPro;
 public class NoCameraRollEventController : MonoBehaviour
@@ -13,9 +14,13 @@ public class NoCameraRollEventController : MonoBehaviour
 
     private float timeLeft;
 
+    [SerializeField] private DOTweenAnimation changeTextAnimation;
+    
+    
     private void Start()
     {
         timeLeft = timeToGetRoll;
+        UpdateTimer(timeLeft);
     }
 
 
@@ -45,8 +50,8 @@ public class NoCameraRollEventController : MonoBehaviour
     {
         if(!isEventActive)
             return;
-        
-        
+
+        isEventActive = false;
         //StopAllCoroutines();
     }
 
@@ -54,6 +59,8 @@ public class NoCameraRollEventController : MonoBehaviour
     {
         if (isEventActive)
         {
+            timerGameObject.SetActive(true);
+            
             if (timeLeft > 0)
             {
                 timeLeft -= Time.deltaTime;
@@ -63,8 +70,12 @@ public class NoCameraRollEventController : MonoBehaviour
             {
                 Debug.Log("Time is up!");
                 timeLeft = 0;
-                
+                //TODO aqui se activa el evento
             }
+        }
+        else
+        {
+            timerGameObject.SetActive(false);
         }
     }
 
@@ -74,7 +85,10 @@ public class NoCameraRollEventController : MonoBehaviour
 
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
-
+        
         timerText.text = $"{minutes:00} : {seconds:00}";
+        
+        // changeTextAnimation.endValueString = $"{minutes:00} : {seconds:00}";
+        // changeTextAnimation.DOPlay();
     }
 }
