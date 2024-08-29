@@ -59,6 +59,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image m_closeUpPhoto;
     private int m_albumPage = -1; //empieza en -1
 
+    //Brillo
+    public Slider slider;
+    public float sliderValue;
+    public Image BrightnessPanel;
+
 
     private void Awake()
     {
@@ -79,6 +84,10 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
+
+        BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
     }
 
     //pause menu
@@ -537,5 +546,12 @@ public class UIManager : MonoBehaviour
     public void CloseCloseUpPhoto()
     {
         m_CloseUpImagePanel.SetActive(false);
+    }
+
+    public void BrightnessSlider(float valor)
+    {
+        sliderValue = valor;
+        PlayerPrefs.SetFloat("brillo", sliderValue);
+        BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
     }
 }
