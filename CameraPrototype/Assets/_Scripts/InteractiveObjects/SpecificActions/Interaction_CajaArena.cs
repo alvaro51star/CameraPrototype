@@ -8,15 +8,13 @@ public class Interaction_CajaArena : AffectsIndirectly
     [SerializeField] protected bool m_appears;
     [SerializeField] private bool m_figurePicked;
     [SerializeField] private GameObject m_figure;
-    //Integración FMOD
+    
     [SerializeField] private string m_rutaEventoFMODArena;
 
     public override void Action(GameObject player)
     {
-        if (m_figurePicked)
-        {
-            base.Action(player);
-        }
+        if (!m_figurePicked) return;
+        base.Action(player);
     }
 
     protected override void FirstAction()
