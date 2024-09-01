@@ -96,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
 
         //boorrar luego
         Vector3 upVector = Vector3.up * (m_verticalVelocity * Time.deltaTime);
-        print(upVector);
 
         m_charController.Move(movement *(m_speed * Time.deltaTime) + upVector);
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -51,9 +52,24 @@ public class InputController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+        print("control = " + context.control.name);
+        switch (context.control.name)
         {
-            m_playerBehaviour.InputInteraction();
+            case "e":
+                m_playerBehaviour.InputInteraction();
+                break;
+            case "leftButton":
+            {
+                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.hasCameraEquiped || m_photoCapture.GetViewingPhoto() != true)
+                {
+                    print("input con ratón" );
+                    m_playerBehaviour.InputInteraction();
+                    
+                }
+
+                break;
+            }
         }
     }
 
