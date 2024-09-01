@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public List<string> timesInPlaytest;
+    
+    public bool isEnemyActive = false;
 
     private void Awake()
     {

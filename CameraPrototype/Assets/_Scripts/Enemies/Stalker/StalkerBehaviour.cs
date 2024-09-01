@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StalkerBehaviour : MonoBehaviour
+public class StalkerBehaviour : Enemy
 {
     #region Variables
 
@@ -56,7 +56,7 @@ public class StalkerBehaviour : MonoBehaviour
     public bool isInPersecution = false;
 
     #endregion
-
+    
 
     private void Awake()
     {
@@ -188,8 +188,11 @@ public class StalkerBehaviour : MonoBehaviour
     //Funcion que se encarga de cambiar de estados
     public void EnterState(State state)
     {
-        currentState.Exit();
-        lastState = currentState;
+        if (currentState)
+        {
+            currentState.Exit();
+            lastState = currentState;
+        }
         currentState = state;
         currentState.Enter();
     }
@@ -221,4 +224,9 @@ public class StalkerBehaviour : MonoBehaviour
     #endregion
 
 
+    public override void KillPlayer()
+    {
+        base.KillPlayer();
+        EnterState(playerCatchState);
+    }
 }
