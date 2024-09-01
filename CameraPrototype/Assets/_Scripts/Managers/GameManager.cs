@@ -26,6 +26,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnEnemyRevealed += SetTrueEnemyActive;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnEnemyRevealed -= SetTrueEnemyActive;
+    }
+
     public void AddTimeToList(String time)
     {
         timesInPlaytest.Add(time);
@@ -51,6 +61,11 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         CopyTimeToClipboard();
+    }
+
+    private void SetTrueEnemyActive()
+    {
+        isEnemyActive = true;
     }
     
 }

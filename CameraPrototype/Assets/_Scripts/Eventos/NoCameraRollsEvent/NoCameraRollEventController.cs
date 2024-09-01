@@ -17,16 +17,14 @@ public class NoCameraRollEventController : MonoBehaviour
     [SerializeField] private DOTweenAnimation changeTextAnimation;
     
     private Enemy _enemy;
-    private bool isKilling = false;
+    private bool _isKilling = false;
     
     
     private void Start()
     {
         timeLeft = timeToGetRoll;
         UpdateTimer(timeLeft);
-        //_enemy = FindObjectOfType<StalkerBehaviour>().GetComponent<IEnemy>();
         _enemy = FindObjectOfType<Enemy>();
-        //GameObject.FindFirstObjectByType(IEnemy);
     }
 
 
@@ -48,7 +46,7 @@ public class NoCameraRollEventController : MonoBehaviour
             return;
 
         isEventActive = true;
-        //StartTimer
+        //Aqui irian los efectos
         
     }
 
@@ -58,7 +56,7 @@ public class NoCameraRollEventController : MonoBehaviour
             return;
 
         isEventActive = false;
-        //StopAllCoroutines();
+        //Aqui se paran los efectos
     }
 
     private void Update()
@@ -72,12 +70,12 @@ public class NoCameraRollEventController : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 UpdateTimer(timeLeft);
             }
-            else if(!isKilling)
+            else if(!_isKilling)
             {
                 Debug.Log("Time is up!");
                 timeLeft = 0;
                 _enemy.KillPlayer();
-                isKilling = true;
+                _isKilling = true;
             }
         }
         else
