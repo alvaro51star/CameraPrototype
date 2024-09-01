@@ -80,9 +80,13 @@ public class StalkerBehaviour : Enemy
             Debug.LogError("No player found, please check if there is a player in scene");
         }
 
-        navMesh.speed = enemySpeed;
-        currentState = stalkState;
-        currentState.Enter();
+        if (!playerCatched)
+        {
+            navMesh.speed = enemySpeed;
+            currentState = stalkState;
+            currentState.Enter();
+        }
+        
 
         transform.LookAt(player.transform);
     }
@@ -227,6 +231,10 @@ public class StalkerBehaviour : Enemy
     public override void KillPlayer()
     {
         base.KillPlayer();
+        playerCatched = true;
         EnterState(playerCatchState);
+        gameObject.GetComponent<AnomalyEnemy>().PhotoAction();
+        //Activar enemigo
+        
     }
 }
