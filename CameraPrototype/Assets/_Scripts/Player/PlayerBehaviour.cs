@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerBehaviour : MonoBehaviour
@@ -37,9 +38,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if(m_actualInputInteractiveObject is null)
+                print("actualInteractiveObject is null");
+            else
+            {
+                print("actualInteractiveObject: " + m_actualInputInteractiveObject.gameObject.name);
+            }
+        }
         if (m_interactiveObjects.Count == 0) return;
-        CheckActualInputInteractiveObject();
         CheckObjectListNull();
+        CheckActualInputInteractiveObject();
     }
 
     private void NotUsingCamera()
@@ -82,6 +92,7 @@ public class PlayerBehaviour : MonoBehaviour
         var interactiveObject = other.GetComponent<InteractiveObject>();
         if (interactiveObject is null || interactiveObject.enabled != true) return;
         if (interactiveObject.gameObject.layer is 6 or 7) return;
+        interactiveObject.SwitchIsInArea(true);
         if (interactiveObject.GetNeedsButton())
         {
             m_interactiveObjects.Add(interactiveObject);
@@ -127,15 +138,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        print("Nombre del objeto: " + other.gameObject.name);
         var interactiveObject = other.GetComponent<InteractiveObject>();
         if (interactiveObject is null || !m_interactiveObjects.Contains(interactiveObject)) return;
+        interactiveObject.SwitchIsInArea(false);
         m_interactiveObjects.RemoveAt(m_interactiveObjects.IndexOf(interactiveObject));
 
         if (m_actualInputInteractiveObject == interactiveObject)
         {
             m_actualInputInteractiveObject = null;
+            StopInteracting();
         }
-        StopInteracting();
+        CheckObjectListNull();
     }
 
     private void StopInteracting()
@@ -219,14 +233,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         for (int i = 0; i < m_interactiveObjects.Count; i++)
         {
-            if (m_interactiveObjects[i] is null || m_interactiveObjects[i].gameObject.activeSelf == false)
+            if (m_interactiveObjects[i] is null || m_interactiveObjects[i].gameObject.activeSelf == false || !m_interactiveObjects[i].GetIsInArea())
             {
                 m_interactiveObjects.RemoveAt(i);
             }
         }
 
-        if ((m_actualInputInteractiveObject is null || m_actualInputInteractiveObject.gameObject.activeSelf ) &&
-            (m_actualInputInteractiveObject is null || m_actualInputInteractiveObject.enabled )) return;
+        if (m_actualInputInteractiveObject is null || m_actualInputInteractiveObject.gameObject.activeSelf 
+            || m_actualInputInteractiveObject.enabled || m_actualInputInteractiveObject.GetIsInArea()) return;
         m_actualInputInteractiveObject = null;
         StopInteracting();
     }

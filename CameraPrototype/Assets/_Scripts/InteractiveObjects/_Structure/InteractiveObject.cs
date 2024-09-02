@@ -11,6 +11,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     [SerializeField] private EventReference interactiveObject;
     [SerializeField] float m_interactionAngle;
     public Transform m_interactionPivot;
+    private bool m_isInArea;
 
     [SerializeField] private string m_rutaEventoFMODInteraccion; //cambiable en editor para cada objeto. Es el sonido que hace al cogerlo usarlo etc.
                                                                  //Sonidos custimizados en cada script (ej en puerta)
@@ -43,4 +44,15 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     {
         return m_interactionAngle;
     }
+
+    public void SwitchIsInArea(bool mode)
+    {
+        m_isInArea = mode;
+    }
+
+    public bool GetIsInArea()
+    {
+        return m_isInArea;
+    }
+    
 }
