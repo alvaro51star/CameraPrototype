@@ -56,6 +56,7 @@ public class NoCameraRollEventController : MonoBehaviour
             return;
 
         isEventActive = false;
+        timeLeft = timeToGetRoll;
         //Aqui se paran los efectos
     }
 
