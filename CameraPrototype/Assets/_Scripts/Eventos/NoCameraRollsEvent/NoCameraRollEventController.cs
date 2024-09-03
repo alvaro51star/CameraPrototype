@@ -6,12 +6,14 @@ using UnityEngine;
 using TMPro;
 public class NoCameraRollEventController : MonoBehaviour
 {
-    [SerializeField] private bool isEventActive = false;
-
+    [Header("Variables modificables")]
     [SerializeField] private float timeToGetRoll = 15f;
+    [Space]
+    [Header("Referencias")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject timerGameObject;
 
+    private bool isEventActive = false;
     private float timeLeft;
 
     [SerializeField] private DOTweenAnimation changeTextAnimation;
