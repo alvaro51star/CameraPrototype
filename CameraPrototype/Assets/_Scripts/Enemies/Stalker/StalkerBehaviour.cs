@@ -140,12 +140,19 @@ public class StalkerBehaviour : Enemy
     //Solo sirve para cuando le estan persiguiendo que haga lo de que le pille
     private void OnTriggerEnter(Collider other)
     {
+        Vector3 direction = player.transform.position - pointToLook.position;
+
         if (other.gameObject.CompareTag("Player") && currentState == chaseState)
         {
-            currentState.Exit();
-            playerCatched = true;
-            currentState = playerCatchState;
-            currentState.Enter();
+            if (Physics.Raycast(pointToLook.position, direction, out RaycastHit hitInfo))
+            {
+                Debug.Log(hitInfo.transform.name);
+                if (hitInfo.transform.CompareTag("Player") == false)
+                    return;
+
+                EnterState(playerCatchState);
+                playerCatched = true;
+            }
         }
     }
 
