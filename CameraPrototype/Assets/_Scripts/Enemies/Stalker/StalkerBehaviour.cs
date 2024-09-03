@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StalkerBehaviour : MonoBehaviour
+public class StalkerBehaviour : Enemy
 {
     #region Variables
 
@@ -56,7 +56,7 @@ public class StalkerBehaviour : MonoBehaviour
     public bool isInPersecution = false;
 
     #endregion
-
+    
 
     private void Awake()
     {
@@ -80,9 +80,13 @@ public class StalkerBehaviour : MonoBehaviour
             Debug.LogError("No player found, please check if there is a player in scene");
         }
 
-        navMesh.speed = enemySpeed;
-        currentState = stalkState;
-        currentState.Enter();
+        if (!playerCatched)
+        {
+            navMesh.speed = enemySpeed;
+            currentState = stalkState;
+            currentState.Enter();
+        }
+        
 
         transform.LookAt(player.transform);
     }
@@ -136,12 +140,19 @@ public class StalkerBehaviour : MonoBehaviour
     //Solo sirve para cuando le estan persiguiendo que haga lo de que le pille
     private void OnTriggerEnter(Collider other)
     {
+        Vector3 direction = player.transform.position - pointToLook.position;
+
         if (other.gameObject.CompareTag("Player") && currentState == chaseState)
         {
-            currentState.Exit();
-            playerCatched = true;
-            currentState = playerCatchState;
-            currentState.Enter();
+            if (Physics.Raycast(pointToLook.position, direction, out RaycastHit hitInfo))
+            {
+                Debug.Log(hitInfo.transform.name);
+                if (hitInfo.transform.CompareTag("Player") == false)
+                    return;
+
+                EnterState(playerCatchState);
+                playerCatched = true;
+            }
         }
     }
 
@@ -188,8 +199,11 @@ public class StalkerBehaviour : MonoBehaviour
     //Funcion que se encarga de cambiar de estados
     public void EnterState(State state)
     {
-        currentState.Exit();
-        lastState = currentState;
+        if (currentState)
+        {
+            currentState.Exit();
+            lastState = currentState;
+        }
         currentState = state;
         currentState.Enter();
     }
@@ -221,4 +235,13 @@ public class StalkerBehaviour : MonoBehaviour
     #endregion
 
 
+    public override void KillPlayer()
+    {
+        base.KillPlayer();
+        playerCatched = true;
+        EnterState(playerCatchState);
+        gameObject.GetComponent<AnomalyEnemy>().PhotoAction();
+        //Activar enemigo
+        
+    }
 }

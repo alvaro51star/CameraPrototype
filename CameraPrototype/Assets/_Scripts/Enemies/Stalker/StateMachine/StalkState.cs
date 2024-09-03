@@ -220,6 +220,9 @@ public class StalkState : State
     //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl
     private void CheckDistance()
     {
+        if(stalkerBehaviour.playerCatched)
+            return;
+        
         Vector3 dir = stalkerBehaviour.player.transform.position - transform.position;
         Debug.DrawRay(transform.position, dir * maxDistanceToGrowlState, Color.red);
         if (Physics.Raycast(rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))

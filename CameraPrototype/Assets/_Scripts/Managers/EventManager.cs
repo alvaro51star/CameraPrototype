@@ -29,4 +29,5 @@ public static class EventManager
 
     //Level
     public static Action<int> OnLevelIntensityChange;
+    public static Action OnRollFinished;
 }
