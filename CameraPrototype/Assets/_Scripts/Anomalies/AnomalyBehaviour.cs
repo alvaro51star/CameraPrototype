@@ -7,6 +7,7 @@ public class AnomalyBehaviour : MonoBehaviour
     private Camera _anomalyCamera;
     private AnomaliesData _anomaliesData;
     [SerializeField] private Renderer anomalyRenderer;
+    [SerializeField] private AnomalyCullingGroup anomalyCullingGroup;
     [HideInInspector] public bool isInPlayersTrigger;
 
     private void OnEnable()
@@ -22,7 +23,7 @@ public class AnomalyBehaviour : MonoBehaviour
     private void Awake()
     {
         _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
-        //can't find this reference on start because camera disables on start (AnomalyCameraManager)
+        //can't find this reference on start because this camera is disabled on start (AnomalyCameraManager)
     }
 
     protected virtual void Start()
@@ -39,11 +40,9 @@ public class AnomalyBehaviour : MonoBehaviour
 
     private void OnTakingPhoto() //checks conditions to reveal the anomaly
     {
-        if (!isInPlayersTrigger) //value changed by player's trigger (AnomalyCamTrigger)
-            return;
-
-        if (!_anomaliesData)
-            return;
+        //if (!isInPlayersTrigger) //value changed by player's trigger (AnomalyCamTrigger)
+           // return;
+           
 
         if (!_anomaliesData.isActiveAndEnabled)
             return;
@@ -57,9 +56,19 @@ public class AnomalyBehaviour : MonoBehaviour
 
         if (!_anomalyCamera.isActiveAndEnabled)
             return;
+          
+        //if(!anomalyRenderer.isVisible)
+         //   return;
 
-        if (!MeshIsVisibleToCamera(_anomalyCamera, anomalyRenderer))//works better than Renderer.isVisible
+        Debug.Log( gameObject + " "+ IsMeshVisibleToCamera(_anomalyCamera, anomalyRenderer));
+        if (!IsMeshVisibleToCamera(_anomalyCamera, anomalyRenderer))
             return;
+          
+        //if(!_anomaliesData.cullingIsVisible)
+          //   return;
+        
+        
+        Debug.Log(gameObject + " is visible");
         PhotoAction();
     }
 
@@ -86,10 +95,23 @@ public class AnomalyBehaviour : MonoBehaviour
     }
 
 
-    private bool MeshIsVisibleToCamera(Camera anomalyCamera, Renderer anomalyRender)
+    /*private bool IsVisible()//check if collider is in viewport
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_anomalyCamera);
+
+        if (GeometryUtility.TestPlanesAABB(planes , _anomaliesData.anomalyCollider.bounds))
+            return true;
+        else
+            return false;
+    }*/
+    
+    ///<summary>
+    /// Checks if mesh is in viewport
+    /// </summary>
+    private bool IsMeshVisibleToCamera(Camera anomalyCamera, Renderer anomalyRender)
     {
         // easy part first. if the renderer's pivot is in view we should be ok
-        if (IsVisible(anomalyRender.transform.position))
+        if (IsVisible(anomalyRender.transform.position) /*&& !IsOccluded(anomalyRender.transform.position)*/)
             return true;
 
         // now the more tricky part. if the pivot is not in view,
@@ -97,7 +119,10 @@ public class AnomalyBehaviour : MonoBehaviour
         // let's check each of the 8 points and see if one is visible
         for (var i = 0; i < 8; i++)
             if (IsVisible(GetPointFromBits(i)))
-                return true;
+            {
+                /*if(!IsOccluded(GetPointFromBits(i)))*/
+                    return true;
+            }
 
         // no points are visible
         return false;
@@ -113,7 +138,7 @@ public class AnomalyBehaviour : MonoBehaviour
         bool IsVisible(Vector3 point)
         {
             var viewPos = anomalyCamera.WorldToViewportPoint(point);
-            return (viewPos.x >= 0f && viewPos.y >= 0f && viewPos.x <= 1f && viewPos.y <= 1f);
+            return (viewPos is { x: >= 0f, y: >= 0f } && viewPos.x <= 1f && viewPos.y <= 1f);
         }
         // Just a simple helper to get the point that I want
         Vector3 GetPoint(int xDir, int yDir, int zDir)
@@ -124,5 +149,10 @@ public class AnomalyBehaviour : MonoBehaviour
                 bounds.center.y + (bounds.extents.y * yDir),
                 bounds.center.z + (bounds.extents.z * zDir));
         }
+
+        /*bool IsOccluded(Vector3 point)
+        {
+            return Physics.Raycast(anomalyCamera.transform.position, point, anomalyCamera.farClipPlane);
+        }*/
     }
 }

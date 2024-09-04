@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnomalyEnemy : AnomalyBehaviour
@@ -18,7 +16,6 @@ public class AnomalyEnemy : AnomalyBehaviour
     public override void PhotoAction()
     {
         _stalkerBehaviour.enabled = true;
-        Debug.Log(_stalkerBehaviour);
         _stalkerBehaviour.ActivateCollision();
         EventManager.OnEnemyRevealed?.Invoke();
         

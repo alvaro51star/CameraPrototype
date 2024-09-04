@@ -5,6 +5,7 @@ public class AnomaliesData : MonoBehaviour
 {
     public bool revealType;//hay 2 tipos de anomalia, las que revelas objetos y las que quitas objetos
     public Collider anomalyCollider;
+    public bool cullingIsVisible;//for culling group
     private void Start()
     {
         if (revealType)

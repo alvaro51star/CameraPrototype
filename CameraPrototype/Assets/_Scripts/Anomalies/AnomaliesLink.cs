@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AnomaliesData))]
@@ -7,7 +6,7 @@ using UnityEngine;
 public class AnomaliesLink : AnomalyBehaviour
 {
      [SerializeField] private List<AnomaliesData> anomaliesToReveal;//these anomalies don't need AnomalyBehaviour
-    
+     
     public override void PhotoAction()
     {
         RevealOtherAnomaly();
@@ -17,6 +16,8 @@ public class AnomaliesLink : AnomalyBehaviour
     {
         foreach (AnomaliesData anomaliesData in anomaliesToReveal)
         {
+            if(!anomaliesData)
+                Debug.LogError(gameObject + " anomaliesToReveal is null");
             if(!anomaliesData.isActiveAndEnabled)//if it is already revealed
                 return;
             var anomalyBehaviour = anomaliesData.GetComponent<AnomalyBehaviour>();

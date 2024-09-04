@@ -41,10 +41,10 @@ public class AnomalyCamTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AnomalyBehaviour anomalyBehaviour = other.GetComponent<AnomalyBehaviour>();
+        /*AnomalyBehaviour anomalyBehaviour = other.GetComponent<AnomalyBehaviour>();
         if (!anomalyBehaviour)
             return;
-        anomalyBehaviour.isInPlayersTrigger = true;
+        anomalyBehaviour.isInPlayersTrigger = true;*/
 
         StalkerBehaviour stalkerBehaviour = other.GetComponent<StalkerBehaviour>();
         if (!stalkerBehaviour)
