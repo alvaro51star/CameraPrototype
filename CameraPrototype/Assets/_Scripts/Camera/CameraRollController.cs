@@ -42,6 +42,7 @@ public class CameraRollController : MonoBehaviour
         {
             availablePhotosTMP.color = Color.red;
             photoCapture.canTakePhoto = false;
+            EventManager.OnRollFinished?.Invoke();
             textForDialogue.StartDialogue();
         }
     }

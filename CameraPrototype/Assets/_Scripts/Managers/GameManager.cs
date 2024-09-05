@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public List<string> timesInPlaytest;
+    
+    public bool isEnemyActive = false;
 
     private void Awake()
     {
@@ -22,6 +24,16 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance);
         }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.OnEnemyRevealed += SetTrueEnemyActive;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnEnemyRevealed -= SetTrueEnemyActive;
     }
 
     public void AddTimeToList(String time)
@@ -49,6 +61,11 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         CopyTimeToClipboard();
+    }
+
+    private void SetTrueEnemyActive()
+    {
+        isEnemyActive = true;
     }
     
 }

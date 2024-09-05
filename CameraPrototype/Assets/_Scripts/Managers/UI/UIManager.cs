@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject diaryPanel;
     [SerializeField] private GameObject storyBookPanel;
+    [SerializeField] private GameObject optionsMenu;
 
     private bool m_isGamePaused = false;
     private bool m_canPause = true;
@@ -25,6 +26,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject m_cameraUI;
     [SerializeField] private GameObject m_controls;
+
+    //Audio
+    [SerializeField] private GameObject audioOptionsMenu;
+
     //Notes
     [SerializeField] private GameObject m_notePanel;
     [SerializeField] private TextMeshProUGUI m_noteText;
@@ -60,6 +65,11 @@ public class UIManager : MonoBehaviour
     private int m_albumPage = -1; //empieza en -1
 
 
+    //Brillo
+    public Slider slider;
+    public float sliderValue;
+    public Image BrightnessPanel;
+
     private void Awake()
     {
         if (instance == null)
@@ -79,6 +89,11 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
+
+        BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
+
     }
 
     //pause menu
@@ -165,6 +180,34 @@ public class UIManager : MonoBehaviour
             SetPointersActive(true);
             EventManager.OnStopReading?.Invoke();
             m_isReading = false;
+        }
+    }
+
+    public void OptionsMenu()
+    {
+        if (!optionsMenu.activeSelf)
+        {
+            optionsMenu.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            optionsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    public void AudioOptionsMenu()
+    {
+        if (!audioOptionsMenu.activeSelf)
+        {
+            audioOptionsMenu.SetActive(true);
+            optionsMenu.SetActive(false);
+        }
+        else
+        {
+            audioOptionsMenu.SetActive(false);
+            optionsMenu.SetActive(true);
         }
     }
 
@@ -537,5 +580,12 @@ public class UIManager : MonoBehaviour
     public void CloseCloseUpPhoto()
     {
         m_CloseUpImagePanel.SetActive(false);
+    }
+
+    public void BrightnessSlider(float valor)
+    {
+        sliderValue = valor;
+        PlayerPrefs.SetFloat("brillo", sliderValue);
+        BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
     }
 }
