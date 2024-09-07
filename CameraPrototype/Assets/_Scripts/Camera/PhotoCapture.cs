@@ -33,9 +33,9 @@ public class PhotoCapture : MonoBehaviour
 
     private RenderTexture _anomalyRenderTexture;
     private RenderTexture _pastRenderTexture;
-
-    //private Sprite _photoSprite;
-
+    private Coroutine _autoRemovePhoto;//needs to be in a var for StopCoroutine to work
+    
+    
     private void Start()
     {
         if (anomaliesCamera)
@@ -58,7 +58,8 @@ public class PhotoCapture : MonoBehaviour
         _screenCapture = new Texture2D(_anomalyRenderTexture.width, _anomalyRenderTexture.height, _anomalyRenderTexture.graphicsFormat,
             UnityEngine.Experimental.Rendering.TextureCreationFlags.None);//can stay like this if both cameras have same depth
     }
-    public void TakePhoto()
+    
+    public void TakePhoto()//called by Input
     {
         _tookFirstPhoto = true;
         if (!_viewingPhoto && hasCameraEquiped)
@@ -71,7 +72,6 @@ public class PhotoCapture : MonoBehaviour
             }
             else
             {
-
                 _tookFirstPhoto = false;
                 AudioManager.Instance.PlayOneShot(FMODEvents.instance.noPhotosClip /*, this.transform.position */);
             }
@@ -79,20 +79,11 @@ public class PhotoCapture : MonoBehaviour
 
         else
         {
-            RemovePhoto();            
+            StopCoroutine(_autoRemovePhoto);
+
+            RemovePhoto();  
         }
     }
-
-
-    public bool GetFirstPhotoTaken()
-    {
-        return _tookFirstPhoto;
-    }
-
-    public void SetHasCameraEquiped(bool mode)
-    {
-        hasCameraEquiped = mode;
-    }        
 
     private void CapturePhoto()//needs to create the textures in start
     {
@@ -104,7 +95,7 @@ public class PhotoCapture : MonoBehaviour
         if (anomaliesCamera.isActiveAndEnabled)
         {
             StartCoroutine(SaveRenderTextureInTexture(_anomalyRenderTexture)); 
-            Debug.Log("Foto de " + anomaliesCamera);
+            //Debug.Log("Foto de " + anomaliesCamera);
         }
 
         if(!pastCamera)
@@ -112,13 +103,13 @@ public class PhotoCapture : MonoBehaviour
         if (pastCamera.isActiveAndEnabled)
         {
             StartCoroutine(SaveRenderTextureInTexture(_pastRenderTexture));     
-            Debug.Log("Foto de " + pastCamera);
+            //Debug.Log("Foto de " + pastCamera);
         }
     }
 
     private IEnumerator SaveRenderTextureInTexture(RenderTexture renderTexture)
     {
-        yield return new WaitForEndOfFrame();//para que flash este renderizado
+        yield return new WaitForEndOfFrame();//so flash is rendered
         AsyncGPUReadback.Request(renderTexture, 0, (AsyncGPUReadbackRequest action) =>
         {
             _screenCapture.SetPixelData(action.GetData<byte>(), 0);//sets the raw data of an entire mipmap level directly in CPU memory
@@ -131,32 +122,33 @@ public class PhotoCapture : MonoBehaviour
     }
 
 
-    private void ShowPhoto()//turns texture into sprite, puts it in UI and saves it calling PhotoSave
+    /// <summary>
+    /// Turns the photo's texture into a sprite, saves it and shows it in the UI
+    /// </summary>
+    private void ShowPhoto()
     {
-
+        //save texture in sprite
         UIManager.instance.SetPointersActive(false);
         Sprite photoSprite = Sprite.Create(_screenCapture, new Rect(0, 0, _screenCapture.width, _screenCapture.height),
                                            new Vector2(0.5f, 0.5f), 100);
         photoDisplayArea.sprite = photoSprite;
-        //_photoSprite = photoSprite;
-
-        //savePhoto.PhotoSave(screenCapture);
 
         AlbumManager.instance.AddPhoto(photoSprite);
 
+        //UI
         photoFrame.SetActive(true);        
         fadingAnimation.Play("PhotoFade");
-        StartCoroutine(AutoRemovePhoto());
+        _autoRemovePhoto = StartCoroutine(AutoRemovePhoto());
+
     }
 
     private IEnumerator CameraFlashEffect()
     {
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.cameraClickClip /*, this.transform.position */);
-        Debug.Log("camera audio click");
+
         cameraFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
-
     }
 
     private void RemovePhoto()
@@ -170,7 +162,6 @@ public class PhotoCapture : MonoBehaviour
         Time.timeScale = 1f;
 
         UIManager.instance.SetPointersActive(true);
-
     }
 
     private IEnumerator AutoRemovePhoto()
@@ -181,9 +172,20 @@ public class PhotoCapture : MonoBehaviour
             RemovePhoto();
         }
     }
+    
+    public bool GetFirstPhotoTaken()
+    {
+        return _tookFirstPhoto;
+    }
+
+    public void SetHasCameraEquiped(bool mode)
+    {
+        hasCameraEquiped = mode;
+    }  
 
     public bool GetViewingPhoto()
     {
         return _viewingPhoto;
     }
+    
 }
