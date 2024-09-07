@@ -63,7 +63,7 @@ public class CameraManager : MonoBehaviour
         {
             anomaliesCameraGO = GameObject.FindGameObjectWithTag("AnomalyCamera");
         }
-        if (anomaliesCameraGO && !anomaliesCameraGO.activeSelf)
+        if (anomaliesCameraGO && anomaliesCameraGO.activeSelf)
         {
             anomaliesCameraGO.SetActive(false);
         }
