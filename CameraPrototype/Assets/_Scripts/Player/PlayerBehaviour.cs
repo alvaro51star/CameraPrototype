@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class PlayerBehaviour : MonoBehaviour
@@ -38,15 +35,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if(m_actualInputInteractiveObject is null)
-                print("actualInteractiveObject is null");
-            else
-            {
-                print("actualInteractiveObject: " + m_actualInputInteractiveObject.gameObject.name);
-            }
-        }
         if (m_interactiveObjects.Count == 0) return;
         CheckObjectListNull();
         CheckActualInputInteractiveObject();
@@ -138,7 +126,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        print("Nombre del objeto: " + other.gameObject.name);
         var interactiveObject = other.GetComponent<InteractiveObject>();
         if (interactiveObject is null || !m_interactiveObjects.Contains(interactiveObject)) return;
         interactiveObject.SwitchIsInArea(false);
@@ -197,6 +184,8 @@ public class PlayerBehaviour : MonoBehaviour
             nearestInteractiveObject = m_interactiveObjects[i];
             nearestAngle = actualAngle;
         }
+
+        if (!nearestInteractiveObject.isActiveAndEnabled || nearestInteractiveObject is null) return;
 
         if (nearestAngle <= nearestInteractiveObject.GetInteractionAngle())
         {
