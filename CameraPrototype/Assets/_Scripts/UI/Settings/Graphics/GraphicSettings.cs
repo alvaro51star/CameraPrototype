@@ -40,6 +40,7 @@ public class GraphicSettings : MonoBehaviour
     private void SetOptions()
     {
         SetResolutionOptions(resolutionDropdown);
+        SetFPSOptions(fpsDropdown);
     }
 
     public void SetResolutionOptions(TMP_Dropdown dropdown)
@@ -108,10 +109,19 @@ public class GraphicSettings : MonoBehaviour
     //TODO hacer esta funcion para que ponga los fps a los que va tu monitor
     private void SetFPSOptions(TMP_Dropdown dropdown)
     {
-        int index;
+        int index = -1;
         for (int i = 0; i < fpsValues.Length; i++)
         {
-            
+            if (Screen.currentResolution.refreshRate == fpsValues[i])
+            {
+                index = i;
+            }
+        }
+
+        if (index >= 0 && index < dropdown.options.Count )
+        {
+            dropdown.value = index;
+            dropdown.RefreshShownValue();
         }
     }
 
