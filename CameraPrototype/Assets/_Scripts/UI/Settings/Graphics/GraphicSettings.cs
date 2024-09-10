@@ -9,10 +9,15 @@ using UnityEngine.UI;
 public class GraphicSettings : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown fpsDropdown;
+    
+    [SerializeField] private int[] fpsValues = new []{30, 60, 120, 144, 165, 240};
+    
 
 
     private int currentRefreshRate;
     private int currentResolutionIndex;
+    private int currentFPSIndex;
 
     private List<Resolution> filteredResolutions;
 
@@ -41,7 +46,7 @@ public class GraphicSettings : MonoBehaviour
     {
         List<Resolution> resolutions = Screen.resolutions.ToList();
         filteredResolutions = new List<Resolution>();
-        
+
         resolutionDropdown.ClearOptions();
         currentRefreshRate = Screen.currentResolution.refreshRate;
 
@@ -74,16 +79,86 @@ public class GraphicSettings : MonoBehaviour
     public void SetResolution(int index)
     {
         Resolution resolution = filteredResolutions[index];
-        
-        Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen);
+
+        if (PlayerPrefs.HasKey("FullScreen Mode"))
+        {
+            int screenModeIndex = PlayerPrefs.GetInt("FullScreen Mode");
+            switch (screenModeIndex)
+            {
+                case 0:
+                    Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen);
+                    break;
+                case 1:
+                    Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.FullScreenWindow);
+                    break;
+                case 2:
+                    Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.Windowed);
+                    break;
+                default:
+                    Debug.LogError($"Index out of bounds {screenModeIndex}");
+                    break;
+            }
+        }
+        else
+        {
+            Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen);
+        }
     }
 
-    public void SetScreenFrames()
+    //TODO hacer esta funcion para que ponga los fps a los que va tu monitor
+    private void SetFPSOptions(TMP_Dropdown dropdown)
     {
+        int index;
+        for (int i = 0; i < fpsValues.Length; i++)
+        {
+            
+        }
+    }
+
+    public void SetScreenFrames(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                Application.targetFrameRate = 30;
+                break;
+            case 1:
+                Application.targetFrameRate = 60;
+                break;
+            case 2:
+                Application.targetFrameRate = 120;
+                break;
+            case 3:
+                Application.targetFrameRate = 144;
+                break;
+            case 4:
+                Application.targetFrameRate = 165;
+                break;
+            case 5:
+                Application.targetFrameRate = 240;
+                break;
+            
+        }
     }
 
     public void SetScreenMode(int index)
     {
-        
+        switch (index)
+        {
+            case 0:
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            case 1:
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 2:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+            default:
+                Debug.LogError($"Index out of bounds {index}");
+                break;
+        }
+
+        PlayerPrefs.SetInt("FullScreen Mode", index);
     }
 }
