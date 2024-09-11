@@ -105,8 +105,7 @@ public class GraphicSettings : MonoBehaviour
             Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen);
         }
     }
-
-    //TODO hacer esta funcion para que ponga los fps a los que va tu monitor
+    
     private void SetFPSOptions(TMP_Dropdown dropdown)
     {
         int index = -1;
@@ -170,5 +169,17 @@ public class GraphicSettings : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("FullScreen Mode", index);
+    }
+
+    public void ToggleVsync(bool value)
+    {
+        if (value)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
     }
 }
