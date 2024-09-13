@@ -94,4 +94,13 @@ public class InputController : MonoBehaviour
             EventManager.OnAddRoll?.Invoke(100);
         }
     }
+
+    public void OnChangeLens(InputAction.CallbackContext context)
+    {
+        if(!UIManager.instance.GetIsGamePaused())
+            return;
+        if(context.ReadValue<float>() == 0f)
+            return;
+        EventManager.OnChangeLens?.Invoke(context.ReadValue<float>());
+    }
 }
