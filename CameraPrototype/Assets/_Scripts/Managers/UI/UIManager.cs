@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
@@ -10,17 +8,17 @@ public class UIManager : MonoBehaviour
     //Variables
     public static UIManager instance;
 
-    [SerializeField] private PhotoCapture playerPhotoCapture;
-    [Header("Testing:")]
-    [SerializeField] private bool mouseLimited;
+    //[SerializeField] private PhotoCapture playerPhotoCapture;
+    //[Header("Testing:")]
+    //[SerializeField] private bool mouseLimited;
 
     [Header("UI Gameobjects:")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject diaryPanel;
     [SerializeField] private GameObject storyBookPanel;
-    [SerializeField] private GameObject optionsMenu;
+    //[SerializeField] private GameObject optionsMenu;
 
-    private bool m_isGamePaused = false;
+    //private bool m_isGamePaused = false;
     private bool m_canPause = true;
     [SerializeField] private GameObject loseMenu;
     [SerializeField] private GameObject winMenu;
@@ -33,7 +31,7 @@ public class UIManager : MonoBehaviour
     //Notes
     [SerializeField] private GameObject m_notePanel;
     [SerializeField] private TextMeshProUGUI m_noteText;
-    private bool m_isReading;
+    public bool m_isReading;
     //Interaction
     [SerializeField] private GameObject m_interactInputImage;
     [SerializeField] private GameObject m_punteroInteraction;
@@ -82,7 +80,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    /*private void Start()
     {
         if(mouseLimited)
         {
@@ -94,12 +92,16 @@ public class UIManager : MonoBehaviour
 
         BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
 
-    }
+    }*/
 
-    //pause menu
-    public void Resume()
+    #region OldPauseMenu
+
+    //no borro estas funciones todavia para no dar errores y por si acaso se me olvida algo
+    
+    public void Resume()//no puedo borrar esta funcion porque sino tendria que tocar el input controller
+        //y todavia no he acabado la rama de la lente del pasado
     {
-        m_cameraUI.SetActive(true);
+        /*m_cameraUI.SetActive(true);
         pauseMenu.SetActive(false);
         ShowAlbum(false);
         playerPhotoCapture.enabled = true;
@@ -121,33 +123,80 @@ public class UIManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
-        EventManager.OnNotUsingCamera?.Invoke();
+        EventManager.OnNotUsingCamera?.Invoke();*/
+        MenuButtons.instance.Resume();
     }
-    public void Exit()
+    /*public void Exit()
     {
         Application.Quit();
-    }
+    }*/
     public void PauseMenu()
     {
         if (m_canPause)
         {
-            pauseMenu.SetActive(true);
+            //pauseMenu.SetActive(true);
             m_cameraUI.SetActive(false);
             SetPointersActive(false);
             SetInteractionText(false, "");
-            m_isGamePaused = true;
-            playerPhotoCapture.enabled = false;
-            Time.timeScale = 0f;
-
-            if (mouseLimited)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }            
+            //m_isGamePaused = true;
+            //playerPhotoCapture.enabled = false;
+            
+            MenuButtons.instance.ActivatePauseMenu();
         }
     }
+    
+    /*public void Controls() //no era necesario, el juego ya esta pausado en el menu de pausa
+                             //y para desactivar/activar cosas mejor hacerlas por el editor
+{
+    m_controls.SetActive(true);
+    m_cameraUI.SetActive(false);
+    playerPhotoCapture.enabled = false;
+    pauseMenu.SetActive(false);
 
-    public void Diary()
+    if (mouseLimited)
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+}*/
+    /*public void LoadSceneMainMenu()
+{
+    SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
+}
+
+public void Restart()
+{
+    SceneManager.LoadScene(1);
+}*/
+
+    /*public void OptionsMenu()
+{
+    if (!optionsMenu.activeSelf)
+    {
+        optionsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+    else
+    {
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+}
+
+public void AudioOptionsMenu()
+{
+    if (!audioOptionsMenu.activeSelf)
+    {
+        audioOptionsMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+    }
+    else
+    {
+        audioOptionsMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+}*/
+    /*public void Diary()//al igual que los controles, creo que es mejor hacer esto por editor para no tener tantas funciones
     {
         if(!diaryPanel.activeSelf)
         {
@@ -159,7 +208,10 @@ public class UIManager : MonoBehaviour
             diaryPanel.SetActive(false);
             pauseMenu.SetActive(true);
         }
-    }
+    }*/
+    #endregion
+    
+    
 
     public void StoryBook()
     {
@@ -183,43 +235,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OptionsMenu()
+
+
+    public bool GetIsGamePaused()//no borro esta funcion de aqui para no generar cambios en InputController
     {
-        if (!optionsMenu.activeSelf)
-        {
-            optionsMenu.SetActive(true);
-            pauseMenu.SetActive(false);
-        }
-        else
-        {
-            optionsMenu.SetActive(false);
-            pauseMenu.SetActive(true);
-        }
+        //return m_isGamePaused;
+        return MenuButtons.instance.GetIsGamePaused();
     }
 
-    public void AudioOptionsMenu()
-    {
-        if (!audioOptionsMenu.activeSelf)
-        {
-            audioOptionsMenu.SetActive(true);
-            optionsMenu.SetActive(false);
-        }
-        else
-        {
-            audioOptionsMenu.SetActive(false);
-            optionsMenu.SetActive(true);
-        }
-    }
-
-    public bool GetIsGamePaused()
-    {
-        return m_isGamePaused;
-    }
-
-    public void SetIsGamePaused(bool mode)
+    /*public void SetIsGamePaused(bool mode)//no borro esta funcion de aqui para no generar cambios en InputController
     {
         m_isGamePaused = mode;
-    }
+    }*/
 
     public bool GetIsPauseMenuActive()
     {
@@ -240,38 +267,42 @@ public class UIManager : MonoBehaviour
 
     public void ActivateLoseMenu()
     {
-        if (mouseLimited)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
+
         m_canPause = false;
-        m_isGamePaused = true;
+        //m_isGamePaused = true;
         m_cameraUI.SetActive(false);
         loseMenu.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
-        playerPhotoCapture.enabled = false;
+        /*playerPhotoCapture.enabled = false;
         Time.timeScale = 0f;
+        
+        if(!MenuButtons.instance.mouseLimited)
+            return;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;*/
+        MenuButtons.instance.GameMode(GameModes.UI);
     }
 
     
 
     public void ActivateWinMenu()
     {
-        if (mouseLimited)
+        MenuButtons.instance.GameMode(GameModes.UI);
+        
+        /*if (mouseLimited)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
         m_canPause = false;
-        m_isGamePaused = true;
+        m_isGamePaused = true;*/
         m_cameraUI.SetActive(false);
         winMenu.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
-        playerPhotoCapture.enabled = false;
-        Time.timeScale = 0f;
+        //playerPhotoCapture.enabled = false;
+        //Time.timeScale = 0f;
     }
 
     //notes
@@ -284,7 +315,8 @@ public class UIManager : MonoBehaviour
         EventManager.OnIsReading?.Invoke();
         m_isReading = true;
 
-        m_isGamePaused = true;
+        //m_isGamePaused = true; //no entiendo esto, entonces al abrir una nota no se para el tiempo y tal??
+        MenuButtons.instance.SetIsGamePaused(true);
     }
     public void DeactivateNote()
     {
@@ -294,9 +326,11 @@ public class UIManager : MonoBehaviour
         SetPointersActive(true);
         m_isReading = false;
 
-        m_isGamePaused = false;
+        //m_isGamePaused = false;
+        MenuButtons.instance.SetIsGamePaused(false);
     }
 
+    #region InteractiveObjectsHUD
     //Interaction
     public void ShowInput(bool mode)
     {
@@ -353,7 +387,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void InteractionAvialable(bool mode, bool isLockedDoor, bool isCat)
+    public void InteractionAvialable(bool mode, bool isLockedDoor, bool isCat)//me da miedo cambiar el nombre por si toco otros scripts
     {
         if (isLockedDoor && !isCat)
         {
@@ -385,34 +419,13 @@ public class UIManager : MonoBehaviour
             ShowInput(false);
         }
     }
+    #endregion
+    
 
-    public void Controls()
-    {
-        m_controls.SetActive(true);
-        m_cameraUI.SetActive(false);
-        playerPhotoCapture.enabled = false;
-        pauseMenu.SetActive(false);
-
-        if (mouseLimited)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
-    }
-
-    public void LoadSceneMainMenu()
-    {
-        SceneManager.LoadScene(0);//funcionara solo si esta en la scene 0
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(1);
-    }
-
+    #region InteractiveObjectsUI
     //puzles
     //Caja fuerte
-
+    
     public void ShowSafe(bool mode)
     {
         m_safePanel.SetActive(mode);
@@ -423,7 +436,8 @@ public class UIManager : MonoBehaviour
             SetInteractionText(false, "");
             m_isReading = false;
 
-            m_isGamePaused = false;
+            //m_isGamePaused = false;
+            MenuButtons.instance.SetIsGamePaused(false);
         }
         else
         {
@@ -431,7 +445,8 @@ public class UIManager : MonoBehaviour
             SetPointersActive(false);
             m_isReading = true;
 
-            m_isGamePaused = true;
+            //m_isGamePaused = true;
+            MenuButtons.instance.SetIsGamePaused(true);
         }
     }
 
@@ -461,9 +476,11 @@ public class UIManager : MonoBehaviour
     {
         m_safeNumberText.text = num;
     }
+    #endregion
 
 
-    //Album
+    #region Album
+
     public void ShowAlbum(bool mode)
     {
         if (mode)
@@ -582,7 +599,10 @@ public class UIManager : MonoBehaviour
         m_CloseUpImagePanel.SetActive(false);
     }
 
-    public void BrightnessSlider(float valor)
+
+    #endregion
+    
+    public void BrightnessSlider(float valor)//borrar despues, esta en MenuButtons
     {
         sliderValue = valor;
         PlayerPrefs.SetFloat("brillo", sliderValue);

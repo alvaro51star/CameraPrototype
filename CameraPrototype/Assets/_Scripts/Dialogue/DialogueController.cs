@@ -39,7 +39,7 @@ public class DialogueController : MonoBehaviour
         EventManager.OnIsReading?.Invoke();      
 
         UIManager.instance.dialoguePanel.SetActive(true);
-        UIManager.instance.SetIsGamePaused(true);
+        MenuButtons.instance.SetIsGamePaused(true);
         UIManager.instance.SetPointersActive(false);
         UIManager.instance.SetInteractionText(false, "");
         UIManager.instance.SetIsReading(true);
@@ -56,7 +56,7 @@ public class DialogueController : MonoBehaviour
         didDialogueStart = false;
 
         UIManager.instance.dialoguePanel.SetActive(false);
-        UIManager.instance.SetIsGamePaused(false);
+        MenuButtons.instance.SetIsGamePaused(false);
         UIManager.instance.SetPointersActive(true);
         UIManager.instance.SetIsReading(false);
         UIManager.instance.m_isInDialogue = false;
@@ -93,7 +93,7 @@ public class DialogueController : MonoBehaviour
         if(dialogueText.text == string.Empty)
             return; 
 
-        if (dialogueText.text == dialogueLines[lineIndex]) //si enseña la linea completa
+        if (dialogueText.text == dialogueLines[lineIndex]) //si enseï¿½a la linea completa
         {
             lineIndex++;
             if (lineIndex < dialogueLines.Length)
