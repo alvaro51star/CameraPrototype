@@ -23,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnNotUsingCamera += NotUsingCamera;
         EventManager.OnIsReading += IsReading;
         EventManager.OnStopReading += StopReading;
+        EventManager.OnInteractiveObjectDisabled += CheckObjectListNull;
     }
 
     private void OnDisable()
@@ -31,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnNotUsingCamera -= NotUsingCamera;
         EventManager.OnIsReading -= IsReading;
         EventManager.OnStopReading -= StopReading;
+        EventManager.OnInteractiveObjectDisabled -= CheckObjectListNull;
     }
 
     private void Update()
@@ -168,6 +170,8 @@ public class PlayerBehaviour : MonoBehaviour
         float nearestAngle = 100;
         var i = 0;
 
+        if (m_interactiveObjects.Count == 0) return;
+
         for (i = 0; i < m_interactiveObjects.Count; i++)
         {
             if (i == 0)
@@ -227,10 +231,12 @@ public class PlayerBehaviour : MonoBehaviour
                 m_interactiveObjects.RemoveAt(i);
             }
         }
-
-        if (m_actualInputInteractiveObject is null || m_actualInputInteractiveObject.gameObject.activeSelf 
-            || m_actualInputInteractiveObject.enabled || m_actualInputInteractiveObject.GetIsInArea()) return;
-        m_actualInputInteractiveObject = null;
-        StopInteracting();
+        
+        if (m_actualInputInteractiveObject is null || !m_actualInputInteractiveObject.gameObject.activeSelf || 
+            !m_actualInputInteractiveObject.enabled || !m_actualInputInteractiveObject.GetIsInArea())
+        {    
+            m_actualInputInteractiveObject = null;
+            StopInteracting();
+        }
     }
 }
