@@ -21,6 +21,7 @@ public static class EventManager
     public static Action OnIsReading;
     public static Action OnStopReading;
     public static Action<int> OnAddRoll;
+    public static Action OnInteractiveObjectDisabled;
 
     //Enemies
     public static Action<float, float> OnTimeAdded;
