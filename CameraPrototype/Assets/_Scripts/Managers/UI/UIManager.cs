@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
             Cursor.visible = false;
         }
 
-        slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
+        //slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
 
         BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
 
