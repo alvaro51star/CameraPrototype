@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Variables
-    [SerializeField] private float m_speed, m_rotationSpeedX, m_rotationSpeedY;
+    [SerializeField] public float m_speed, m_rotationSpeedX, m_rotationSpeedY;
     private CharacterController m_charController;
     private Vector2 m_movementInputValue, m_playerRotateInputValue;
     private float m_cameraRotateInputVaue;
