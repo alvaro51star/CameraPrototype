@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 using UnityEngine.UI;
 using TMPro;
+using Directory = System.IO.Directory;
+using File = System.IO.File;
+
 //using static UnityEngine.Windows.File;
 
 public class AlbumManager : MonoBehaviour
@@ -39,6 +42,7 @@ public class AlbumManager : MonoBehaviour
     private void Start()
     {
         texto.text = Application.persistentDataPath;
+        CreateDirectory();
     }
 
     public void AddPhoto(Sprite newPhoto)
@@ -55,15 +59,10 @@ public class AlbumManager : MonoBehaviour
         //m_photos.Add(sprite);
         
         byte[] byteArray = texture.EncodeToPNG();
-        filePath = Application.persistentDataPath + "/Photo" + SceneManager.GetActiveScene().name + m_numPhotosTaken + ".png";
+        //filePath = Application.persistentDataPath + "/Photo" + SceneManager.GetActiveScene().name + m_numPhotosTaken + ".png";
         //filePath = Application.persistentDataPath+ "/Resources/" + "Fotos" + SceneManager.GetActiveScene().name + "/Photo" + m_numPhotosTaken + ".png";
-        print("filepath: " + filePath);
-        System.IO.File.WriteAllBytes(filePath, byteArray);
+        File.WriteAllBytes(filePath + "/Photo" + m_numPhotosTaken + ".png", byteArray);
         m_numPhotosTaken++;
-        //using (FileStream fs = new FileStream(filePath, FileMode.Create))
-        //{
-        //    fs.
-        //}
     }
 
     public List<Sprite>  GetTandaPhoto(int pageIndex, int maxPhotoPerPage)
@@ -71,7 +70,6 @@ public class AlbumManager : MonoBehaviour
         List<Sprite> sprites = new List<Sprite>();
         int photoIndex = pageIndex * maxPhotoPerPage;
         
-        //print("photopermpage" + maxPhotoPerPage);
         for (int i = 0; i < maxPhotoPerPage && photoIndex < m_photos.Count; i++)
         {
             print("photo index: " + photoIndex);
@@ -84,5 +82,12 @@ public class AlbumManager : MonoBehaviour
     public int GetPhotoCount()
     {
         return m_photos.Count;
+    }
+
+    [ContextMenu("Create Directory")]
+    public void CreateDirectory()
+    {
+        filePath = Application.persistentDataPath + "/Resources/" + "Fotos" + SceneManager.GetActiveScene().name;
+        Directory.CreateDirectory(filePath);
     }
 }
