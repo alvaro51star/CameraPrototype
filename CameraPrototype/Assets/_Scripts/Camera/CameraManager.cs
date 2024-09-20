@@ -50,7 +50,7 @@ public class CameraManager : MonoBehaviour
     private void OnUsingCamera()
     {
         //camera feedback
-        photoCapture.SetHasCameraEquiped(true);
+        photoCapture.SetHasCameraEquipped(true);
         cameraUI.SetActive(true);
         UIManager.instance.SetPointersActive(false);
         
@@ -69,7 +69,7 @@ public class CameraManager : MonoBehaviour
     private void OnNotUsingCamera()
     {
         //camera feedback
-        photoCapture.SetHasCameraEquiped(false);
+        photoCapture.SetHasCameraEquipped(false);
         cameraUI.SetActive(false);
         if (!UIManager.instance.GetIsReading())
         {
