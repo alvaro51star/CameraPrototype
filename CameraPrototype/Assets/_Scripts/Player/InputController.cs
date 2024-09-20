@@ -97,7 +97,7 @@ public class InputController : MonoBehaviour
 
     public void OnChangeLens(InputAction.CallbackContext context)
     {
-        if(!UIManager.instance.GetIsGamePaused())
+        if(UIManager.instance.GetIsGamePaused())
             return;
         if(context.ReadValue<float>() == 0f)
             return;

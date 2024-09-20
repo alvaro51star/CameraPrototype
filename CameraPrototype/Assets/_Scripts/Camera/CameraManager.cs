@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
 
     [Header("Camera lens")]
     [SerializeField] private List<Camera> cameras;
-    private float _selectedCamera;
+    private int _selectedCamera;
     private void OnEnable()
     {
         EventManager.OnUsingCamera += OnUsingCamera;
@@ -35,6 +35,7 @@ public class CameraManager : MonoBehaviour
         if(!pastCameraGO)
             return;
         pastCameraGO.SetActive(false);*/
+        
         int i = 0;
         foreach (var camera1 in cameras)
         {
@@ -95,7 +96,7 @@ public class CameraManager : MonoBehaviour
             if (i == _selectedCamera)
             {
                 camera1.gameObject.SetActive(true);
-                print(camera1);
+                print(camera1 + " activated");
             }
             else
                 camera1.gameObject.SetActive(false);
@@ -133,21 +134,16 @@ public class CameraManager : MonoBehaviour
             else
                 _selectedCamera--;
         }
-        ChangeLens();
     }
 
-    public GameObject GetActiveCamera()
+    public int GetActiveCameraIndex()
     {
-        int i = 0;
-        foreach (var camera1 in cameras)
-        {
-            if (i == _selectedCamera)
-            {
-                return camera1.gameObject;
-            }
-            i++;
-        }
-        return null;
+        return _selectedCamera;
+    }
+
+    public List<Camera> GetPhotoCameras()
+    {
+        return cameras;
     }
     
 }
