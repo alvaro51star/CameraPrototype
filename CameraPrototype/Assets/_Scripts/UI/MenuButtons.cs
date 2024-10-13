@@ -1,38 +1,84 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 
-public class MenuButtons : MonoBehaviour
+public class MenuButtons : MonoBehaviour//en este script estaran las funcionalidades de los botones basicos de los menus
+                                        //NO ESTA ACABADO, SIGUE SIENDO UN CAOS
 {
     public static MenuButtons instance;
     
-    [SerializeField] private PhotoCapture playerPhotoCapture;
+    [FormerlySerializedAs("playerPhotoCapture")] [SerializeField] private PhotoCapture m_playerPhotoCapture;
     
-    [Header("Testing:")]
-    public bool mouseLimited;
+    [FormerlySerializedAs("mouseLimited")] [Header("Testing:")]
+    public bool iMouseLimited;
     
     [Header("UI Game objects:")]
-    [SerializeField] private GameObject pauseMenu;
-    //[SerializeField] private GameObject diaryPanel;
-    //[SerializeField] private GameObject storyBookPanel;
-    [SerializeField] private GameObject optionsMenu;
-
-    private bool _isGamePaused;
-    //private bool _canPause = true;
-    [SerializeField] private GameObject loseMenu;
-    [SerializeField] private GameObject winMenu;
-    [SerializeField] private GameObject m_cameraUI;
-    [SerializeField] private GameObject m_controls;
-    [SerializeField] private GameObject _diary;
-
-    //Audio
-    [SerializeField] private GameObject audioOptionsMenu;
-
-
+    [Header ("Menus")]
+    [FormerlySerializedAs("pauseMenu")] [SerializeField] private GameObject m_go_pauseMenu;
+    [FormerlySerializedAs("optionsMenu")] [SerializeField] private GameObject m_go_optionsMenu;
+    [FormerlySerializedAs("loseMenu")] [SerializeField] private GameObject m_go_loseMenu;
+    [FormerlySerializedAs("winMenu")] [SerializeField] private GameObject m_go_winMenu;
+    [FormerlySerializedAs("audioOptionsMenu")] [SerializeField] private GameObject m_go_audioOptionsMenu;
+    [FormerlySerializedAs("m_controls")] [SerializeField] private GameObject m_go_controls;
+    
     [Header("Brightness")] public Slider slider;
     public float sliderValue;
     public Image brightnessPanel;
+    
+    [Header("Temporary here")]
+    [FormerlySerializedAs("m_cameraUI")] [SerializeField] private GameObject m_go_cameraUI;//en futuro en vez de desactivarse con este script debería haber un evento
+    [FormerlySerializedAs("_diary")] [SerializeField] private GameObject m_go_diary;
+    
+    private bool m_isGamePaused;
+
+    #region Getters&Setters
+
+    public void SetGameMode(GameModes gameMode)
+    {
+        if (gameMode == GameModes.InGame)
+        {
+            Time.timeScale = 1f;
+            m_isGamePaused = false;
+            
+            m_playerPhotoCapture.enabled = true;//para reactivar el input (a futuro se quita esto)
+            //poner mapa de controles de en juego
+
+            if (iMouseLimited)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            m_isGamePaused = true;
+            
+            m_playerPhotoCapture.enabled = false;//para desactivar el input (a futuro se quita esto)
+            //poner mapa de controles de menus
+            
+            if(!iMouseLimited)
+                return;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+    
+    public bool GetIsGamePaused()
+    {
+        return m_isGamePaused;
+    }
+
+    public void SetIsGamePaused(bool mode)
+    {
+        m_isGamePaused = mode;
+    }
+
+
+    #endregion
+    
 
     private void Awake()
     {
@@ -49,9 +95,9 @@ public class MenuButtons : MonoBehaviour
     private void Start()
     {
         if(SceneManager.GetActiveScene().buildIndex == (int)Scenes.Level1)
-            GameMode(GameModes.InGame);
+            SetGameMode(GameModes.InGame);
         else
-            GameMode(GameModes.UI);
+            SetGameMode(GameModes.UI);
         
         
         if(!slider)//para que no de error en las escenas de prueba que no lo tienen (arreglo provisional)
@@ -67,8 +113,8 @@ public class MenuButtons : MonoBehaviour
     
     public void Resume()
     {
-        m_cameraUI.SetActive(true);
-        pauseMenu.SetActive(false);
+        m_go_cameraUI.SetActive(true);
+        m_go_pauseMenu.SetActive(false);
         UIManager.instance.ShowAlbum(false);
         
         if (!UIManager.instance.m_isReading)
@@ -84,7 +130,7 @@ public class MenuButtons : MonoBehaviour
         
         EventManager.OnNotUsingCamera?.Invoke();
         
-        GameMode(GameModes.InGame);
+        SetGameMode(GameModes.InGame);
     }
 
     public void ExitGame()
@@ -94,9 +140,9 @@ public class MenuButtons : MonoBehaviour
 
     public void ActivatePauseMenu()
     {
-        pauseMenu.SetActive(true);
+        m_go_pauseMenu.SetActive(true);
         
-        GameMode(GameModes.UI);
+        SetGameMode(GameModes.UI);
     }
     
     public void LoadSceneMainMenu()
@@ -114,13 +160,13 @@ public class MenuButtons : MonoBehaviour
     {
         if (activate)
         {
-            m_controls.SetActive(true);
-            pauseMenu.SetActive(false);
+            m_go_controls.SetActive(true);
+            m_go_pauseMenu.SetActive(false);
         }
         else
         {
-            pauseMenu.SetActive(true);
-            m_controls.SetActive(false);
+            m_go_pauseMenu.SetActive(true);
+            m_go_controls.SetActive(false);
         }
     }
     
@@ -128,13 +174,13 @@ public class MenuButtons : MonoBehaviour
     {
         if (activate)
         {
-            _diary.SetActive(true);
-            pauseMenu.SetActive(false);
+            m_go_diary.SetActive(true);
+            m_go_pauseMenu.SetActive(false);
         }
         else
         {
-            pauseMenu.SetActive(true);
-            _diary.SetActive(false);
+            m_go_pauseMenu.SetActive(true);
+            m_go_diary.SetActive(false);
         }
     }
     
@@ -145,29 +191,29 @@ public class MenuButtons : MonoBehaviour
 
     public void ActivateOptionsMenu()
     {
-        if (!optionsMenu.activeSelf)
+        if (!m_go_optionsMenu.activeSelf)
         {
-            optionsMenu.SetActive(true);
-            pauseMenu.SetActive(false);
+            m_go_optionsMenu.SetActive(true);
+            m_go_pauseMenu.SetActive(false);
         }
         else
         {
-            optionsMenu.SetActive(false);
-            pauseMenu.SetActive(true);
+            m_go_optionsMenu.SetActive(false);
+            m_go_pauseMenu.SetActive(true);
         }
     }
 
     public void AudioOptionsMenu()
     {
-        if (!audioOptionsMenu.activeSelf)
+        if (!m_go_audioOptionsMenu.activeSelf)
         {
-            audioOptionsMenu.SetActive(true);
-            optionsMenu.SetActive(false);
+            m_go_audioOptionsMenu.SetActive(true);
+            m_go_optionsMenu.SetActive(false);
         }
         else
         {
-            audioOptionsMenu.SetActive(false);
-            optionsMenu.SetActive(true);
+            m_go_audioOptionsMenu.SetActive(false);
+            m_go_optionsMenu.SetActive(true);
         }
     }
     
@@ -181,45 +227,5 @@ public class MenuButtons : MonoBehaviour
 
     #endregion
 
-    public void GameMode(GameModes gameMode)
-    {
-        if (gameMode == GameModes.InGame)
-        {
-            Time.timeScale = 1f;
-            _isGamePaused = false;
-            
-            playerPhotoCapture.enabled = true;//para reactivar el input (a futuro se quita esto)
-            //poner mapa de controles de en juego
-
-            if (mouseLimited)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-        }
-        else
-        {
-            Time.timeScale = 0f;
-            _isGamePaused = true;
-            
-            playerPhotoCapture.enabled = false;//para desactivar el input (a futuro se quita esto)
-            //poner mapa de controles de menus
-            
-            if(!mouseLimited)
-                return;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-    }
-    
-    public bool GetIsGamePaused()
-    {
-        return _isGamePaused;
-    }
-
-    public void SetIsGamePaused(bool mode)
-    {
-        _isGamePaused = mode;
-    }
-
+   
 }

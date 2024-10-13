@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour //NO ESTA ACABADO, SIGUE SIENDO UN CAOS
 {
     //Variables
     public static UIManager instance;
@@ -11,62 +12,65 @@ public class UIManager : MonoBehaviour
     //[SerializeField] private PhotoCapture playerPhotoCapture;
     //[Header("Testing:")]
     //[SerializeField] private bool mouseLimited;
-
-    [Header("UI Gameobjects:")]
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject diaryPanel;
-    [SerializeField] private GameObject storyBookPanel;
+    
+    [Header("UI Game Objects:")]
+    [FormerlySerializedAs("pauseMenu")][SerializeField] private GameObject m_go_pauseMenu;//provisionalmente se queda, a la larga no deberia estar
+    [FormerlySerializedAs("diaryPanel")] [SerializeField] private GameObject m_go_diaryPanel;
+    [FormerlySerializedAs("storyBookPanel")] [SerializeField] private GameObject m_go_storyBookPanel;
     //[SerializeField] private GameObject optionsMenu;
 
     //private bool m_isGamePaused = false;
-    private bool m_canPause = true;
-    [SerializeField] private GameObject loseMenu;
-    [SerializeField] private GameObject winMenu;
-    [SerializeField] private GameObject m_cameraUI;
-    [SerializeField] private GameObject m_controls;
+    [FormerlySerializedAs("loseMenu")] [SerializeField] private GameObject m_go_loseMenu;
+    [FormerlySerializedAs("winMenu")] [SerializeField] private GameObject m_go_winMenu;
+    [FormerlySerializedAs("m_cameraUI")] [SerializeField] private GameObject m_go_cameraUI;
+    [FormerlySerializedAs("m_controls")] [SerializeField] private GameObject m_go_controls;
 
     //Audio
-    [SerializeField] private GameObject audioOptionsMenu;
+    [FormerlySerializedAs("audioOptionsMenu")] [SerializeField] private GameObject m_go_audioOptionsMenu;
 
-    //Notes
-    [SerializeField] private GameObject m_notePanel;
-    [SerializeField] private TextMeshProUGUI m_noteText;
+    [Header("Notes UI")]
+    [FormerlySerializedAs("m_notePanel")] [SerializeField] private GameObject m_go_notePanel;
+    [FormerlySerializedAs("m_noteText")] [SerializeField] private TextMeshProUGUI m_txtMPUGUI_note;
     public bool m_isReading;
-    //Interaction
-    [SerializeField] private GameObject m_interactInputImage;
-    [SerializeField] private GameObject m_punteroInteraction;
-    [SerializeField] private GameObject m_punteros;
-    [SerializeField] private TextMeshProUGUI m_interactionText;
-    [SerializeField] private GameObject m_lockImage;
-    [SerializeField] private GameObject m_petImage;
+
+    [Header("Interaction")]
+    [FormerlySerializedAs("m_interactInputImage")] [SerializeField] private GameObject m_GO_interactInputImage;
+    [FormerlySerializedAs("m_punteroInteraction")] [SerializeField] private GameObject m_GO_punteroInteraction;
+    [FormerlySerializedAs("m_punteros")] [SerializeField] private GameObject m_GO_punteros;
+    [FormerlySerializedAs("m_interactionText")] [SerializeField] private TextMeshProUGUI m_TxtMPUGUI_interaction;
+    [FormerlySerializedAs("m_lockImage")] [SerializeField] private GameObject m_GO_lockImage;
+    [FormerlySerializedAs("m_petImage")] [SerializeField] private GameObject m_GO_petImage;
     private bool m_isLockedDoor;
     private bool m_isPetCat;
-    //Dialogue
-    public GameObject dialoguePanel;
+    
+    [Header("Dialogue (temporary)")]
+    [FormerlySerializedAs("dialoguePanel")] public GameObject iGODialoguePanel;
     public bool m_isInDialogue;
-    //puzles
-    //CajaFuerte
-    [SerializeField] private GameObject m_safePanel;
-    [SerializeField] private GameObject m_redLight;
-    [SerializeField] private GameObject m_greenLight;
-    [SerializeField] private TextMeshProUGUI m_safeNumberText;
+    
+    [Header("Vault UI")]//caja fuerte, si ponemos safe no se entiende xd
+    [FormerlySerializedAs("m_safePanel")] [SerializeField] private GameObject m_GO_safePanel;
+    [FormerlySerializedAs("m_redLight")] [SerializeField] private GameObject m_GO_redLight;
+    [FormerlySerializedAs("m_greenLight")] [SerializeField] private GameObject m_GO_greenLight;
+    [FormerlySerializedAs("m_safeNumberText")] [SerializeField] private TextMeshProUGUI m_TxtMPUGUI_safeNumber;
 
 
-    //Album
-    [SerializeField] private GameObject m_albumPanel;
-    [SerializeField] private GameObject m_CloseUpImagePanel;
-    [SerializeField] private GameObject m_prevAlbumButtom;
-    [SerializeField] private GameObject m_nextAlbumButtom;
-    [SerializeField] private GameObject[] m_albumPhotos;
-    [SerializeField] private Image[] m_albumPhotosSprites;
-    [SerializeField] private Image m_closeUpPhoto;
+    [Header("Album")]
+    [FormerlySerializedAs("m_albumPanel")] [SerializeField] private GameObject m_GO_albumPanel;
+    [FormerlySerializedAs("m_CloseUpImagePanel")] [SerializeField] private GameObject m_GO_CloseUpImagePanel;
+    [FormerlySerializedAs("m_prevAlbumButtom")] [SerializeField] private GameObject m_GO_prevAlbumButtom;
+    [FormerlySerializedAs("m_nextAlbumButtom")] [SerializeField] private GameObject m_GO_nextAlbumButtom;
+    [FormerlySerializedAs("m_albumPhotos")] [SerializeField] private GameObject[] m_GO_albumPhotos;
+    [FormerlySerializedAs("m_albumPhotosSprites")] [SerializeField] private Image[] m_im_albumPhotosSprites;
+    [FormerlySerializedAs("m_closeUpPhoto")] [SerializeField] private Image m_im_closeUpPhoto;
     private int m_albumPage = -1; //empieza en -1
 
 
     //Brillo
-    public Slider slider;
-    public float sliderValue;
-    public Image BrightnessPanel;
+    //public Slider slider;
+    //public float sliderValue;
+    //public Image BrightnessPanel;
+    private bool m_canPause = true;
+
 
     private void Awake()
     {
@@ -135,7 +139,7 @@ public class UIManager : MonoBehaviour
         if (m_canPause)
         {
             //pauseMenu.SetActive(true);
-            m_cameraUI.SetActive(false);
+            m_go_cameraUI.SetActive(false);
             SetPointersActive(false);
             SetInteractionText(false, "");
             //m_isGamePaused = true;
@@ -215,10 +219,10 @@ public void AudioOptionsMenu()
 
     public void StoryBook()
     {
-        if (!storyBookPanel.activeSelf)
+        if (!m_go_storyBookPanel.activeSelf)
         {
-            storyBookPanel.SetActive(true);
-            pauseMenu.SetActive(false);
+            m_go_storyBookPanel.SetActive(true);
+            m_go_pauseMenu.SetActive(false);
 
             SetPointersActive(false);
             EventManager.OnIsReading?.Invoke();
@@ -227,7 +231,7 @@ public void AudioOptionsMenu()
         }
         else
         {
-            storyBookPanel.SetActive(false);
+            m_go_storyBookPanel.SetActive(false);
 
             SetPointersActive(true);
             EventManager.OnStopReading?.Invoke();
@@ -250,7 +254,7 @@ public void AudioOptionsMenu()
 
     public bool GetIsPauseMenuActive()
     {
-        return pauseMenu.activeSelf;
+        return m_go_pauseMenu.activeSelf;
     }
 
     public bool GetIsReading()
@@ -270,8 +274,8 @@ public void AudioOptionsMenu()
 
         m_canPause = false;
         //m_isGamePaused = true;
-        m_cameraUI.SetActive(false);
-        loseMenu.SetActive(true);
+        m_go_cameraUI.SetActive(false);
+        m_go_loseMenu.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
         /*playerPhotoCapture.enabled = false;
@@ -281,14 +285,14 @@ public void AudioOptionsMenu()
             return;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;*/
-        MenuButtons.instance.GameMode(GameModes.UI);
+        MenuButtons.instance.SetGameMode(GameModes.UI);
     }
 
     
 
     public void ActivateWinMenu()
     {
-        MenuButtons.instance.GameMode(GameModes.UI);
+        MenuButtons.instance.SetGameMode(GameModes.UI);
         
         /*if (mouseLimited)
         {
@@ -297,8 +301,8 @@ public void AudioOptionsMenu()
         }
         m_canPause = false;
         m_isGamePaused = true;*/
-        m_cameraUI.SetActive(false);
-        winMenu.SetActive(true);
+        m_go_cameraUI.SetActive(false);
+        m_go_winMenu.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
         //playerPhotoCapture.enabled = false;
@@ -308,8 +312,8 @@ public void AudioOptionsMenu()
     //notes
     public void ActivateNote(string noteText)
     {
-        m_noteText.text = noteText;
-        m_notePanel.SetActive(true);
+        m_txtMPUGUI_note.text = noteText;
+        m_go_notePanel.SetActive(true);
         SetPointersActive(false);
         SetInteractionText(false, "");
         EventManager.OnIsReading?.Invoke();
@@ -320,8 +324,8 @@ public void AudioOptionsMenu()
     }
     public void DeactivateNote()
     {
-        m_noteText.text = " ";
-        m_notePanel.SetActive(false);
+        m_txtMPUGUI_note.text = " ";
+        m_go_notePanel.SetActive(false);
         EventManager.OnStopReading?.Invoke();
         SetPointersActive(true);
         m_isReading = false;
@@ -334,19 +338,19 @@ public void AudioOptionsMenu()
     //Interaction
     public void ShowInput(bool mode)
     {
-        m_interactInputImage.SetActive(mode);
+        m_GO_interactInputImage.SetActive(mode);
     }
 
     public void ChangeInteractionPointer(bool mode)
     {
         if (mode)
         {
-            m_punteroInteraction.SetActive(true);
+            m_GO_punteroInteraction.SetActive(true);
             ShowInput(true);
         }
         else
         {
-            m_punteroInteraction.SetActive(false);
+            m_GO_punteroInteraction.SetActive(false);
             ShowInput(false);
         }
     }
@@ -355,34 +359,34 @@ public void AudioOptionsMenu()
     {
         if (mode)
         {
-            m_interactionText.gameObject.SetActive(true);
-            m_interactionText.text = text;
+            m_TxtMPUGUI_interaction.gameObject.SetActive(true);
+            m_TxtMPUGUI_interaction.text = text;
         }
         else
         {
-            m_interactionText.text = "";
-            m_interactionText.gameObject.SetActive(false);
+            m_TxtMPUGUI_interaction.text = "";
+            m_TxtMPUGUI_interaction.gameObject.SetActive(false);
         }
     }
 
     public void ChangeDoorLock(bool mode)
     {
-        if (m_lockImage.activeSelf != mode)
+        if (m_GO_lockImage.activeSelf != mode)
         {
-            m_punteros.SetActive(!mode);
+            m_GO_punteros.SetActive(!mode);
             ShowInput(!mode);
-            m_lockImage.SetActive(mode);
+            m_GO_lockImage.SetActive(mode);
             m_isLockedDoor = mode;
         }
     }
 
     public void ChangePetCat(bool mode)
     {
-        if (m_petImage.activeSelf != mode)
+        if (m_GO_petImage.activeSelf != mode)
         {
-            m_punteros.SetActive(!mode);
+            m_GO_punteros.SetActive(!mode);
             ShowInput(!mode);
-            m_petImage.SetActive(mode);
+            m_GO_petImage.SetActive(mode);
             m_isPetCat= mode;
         }
     }
@@ -411,9 +415,9 @@ public void AudioOptionsMenu()
 
     public void SetPointersActive(bool mode)
     {
-        m_punteros.SetActive(mode);
-        m_lockImage.SetActive(m_isLockedDoor);
-        m_petImage.SetActive(m_isPetCat);
+        m_GO_punteros.SetActive(mode);
+        m_GO_lockImage.SetActive(m_isLockedDoor);
+        m_GO_petImage.SetActive(m_isPetCat);
         if (!mode)
         {
             ShowInput(false);
@@ -428,7 +432,7 @@ public void AudioOptionsMenu()
     
     public void ShowSafe(bool mode)
     {
-        m_safePanel.SetActive(mode);
+        m_GO_safePanel.SetActive(mode);
         if (!mode)
         {
             EventManager.OnStopReading?.Invoke();
@@ -456,25 +460,25 @@ public void AudioOptionsMenu()
         {
             if (redLight)
             {
-                m_redLight.SetActive(true);
-                m_greenLight.SetActive(false);
+                m_GO_redLight.SetActive(true);
+                m_GO_greenLight.SetActive(false);
             }
             else
             {
-                m_redLight.SetActive(false);
-                m_greenLight.SetActive(true);
+                m_GO_redLight.SetActive(false);
+                m_GO_greenLight.SetActive(true);
             }
         }
         else
         {
-            m_redLight.SetActive(false);
-            m_greenLight.SetActive(false);
+            m_GO_redLight.SetActive(false);
+            m_GO_greenLight.SetActive(false);
         }
     }
 
     public void ChangeCodeDisplay(string num)
     {
-        m_safeNumberText.text = num;
+        m_TxtMPUGUI_safeNumber.text = num;
     }
     #endregion
 
@@ -485,13 +489,13 @@ public void AudioOptionsMenu()
     {
         if (mode)
         {
-            m_albumPanel.SetActive(true);
+            m_GO_albumPanel.SetActive(true);
             AdvanceAlbumPage();
         }
         else
         {
-            m_CloseUpImagePanel.SetActive(false);
-            m_albumPanel.SetActive(false);
+            m_GO_CloseUpImagePanel.SetActive(false);
+            m_GO_albumPanel.SetActive(false);
             m_albumPage = -1;
         }
     }
@@ -499,44 +503,44 @@ public void AudioOptionsMenu()
     public void AdvanceAlbumPage()
     {
         m_albumPage++;
-        List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+        List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_im_albumPhotosSprites.Length);
         bool showButtons = false;
-        for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
+        for (int i = 0; i < m_GO_albumPhotos.Length; i++) //cambiar a lista
         {
             if (i < sprites.Count)
             {
-                m_albumPhotos[i].SetActive(true);
-                m_albumPhotosSprites[i].sprite = sprites[i];
+                m_GO_albumPhotos[i].SetActive(true);
+                m_im_albumPhotosSprites[i].sprite = sprites[i];
                 showButtons = true;
             }
             else
             {
-                m_albumPhotos[i].gameObject.SetActive(false);
+                m_GO_albumPhotos[i].gameObject.SetActive(false);
             }
         }
         if (showButtons == false)
         {
-            m_prevAlbumButtom.SetActive(false);
-            m_nextAlbumButtom.SetActive(false);
+            m_GO_prevAlbumButtom.SetActive(false);
+            m_GO_nextAlbumButtom.SetActive(false);
         }
         else
         {
             if (m_albumPage != 0)
             {
-                m_prevAlbumButtom.SetActive(true);
+                m_GO_prevAlbumButtom.SetActive(true);
             }
             else
             {
-                m_prevAlbumButtom.SetActive(false);
+                m_GO_prevAlbumButtom.SetActive(false);
             }
 
-            if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+            if (m_albumPage * m_im_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
             {
-                m_nextAlbumButtom.SetActive(true);
+                m_GO_nextAlbumButtom.SetActive(true);
             }
             else
             {
-                m_nextAlbumButtom.SetActive(false);
+                m_GO_nextAlbumButtom.SetActive(false);
             }
         }
     }
@@ -546,66 +550,66 @@ public void AudioOptionsMenu()
         if (m_albumPage > 0)
         {
             m_albumPage--;
-            List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_albumPhotosSprites.Length);
+            List<Sprite> sprites = AlbumManager.instance.GetTandaPhoto(m_albumPage, m_im_albumPhotosSprites.Length);
             bool showButtons = false;
-            for (int i = 0; i < m_albumPhotos.Length; i++) //cambiar a lista
+            for (int i = 0; i < m_GO_albumPhotos.Length; i++) //cambiar a lista
             {
                 if (i < sprites.Count)
                 {
-                    m_albumPhotos[i].SetActive(true);
-                    m_albumPhotosSprites[i].sprite = sprites[i];
+                    m_GO_albumPhotos[i].SetActive(true);
+                    m_im_albumPhotosSprites[i].sprite = sprites[i];
                     showButtons = true;
                 }
                 else
                 {
-                    m_albumPhotos[i].gameObject.SetActive(false);
+                    m_GO_albumPhotos[i].gameObject.SetActive(false);
                 }
             }
             if (showButtons == false)
             {
-                m_prevAlbumButtom.SetActive(false);
-                m_nextAlbumButtom.SetActive(false);
+                m_GO_prevAlbumButtom.SetActive(false);
+                m_GO_nextAlbumButtom.SetActive(false);
             }
             else
             {
                 if (m_albumPage != 0)
                 {
-                    m_prevAlbumButtom.SetActive(true);
+                    m_GO_prevAlbumButtom.SetActive(true);
                 }
-                if (m_albumPage * m_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
+                if (m_albumPage * m_im_albumPhotosSprites.Length + sprites.Count < AlbumManager.instance.GetPhotoCount())
                 {
-                    m_nextAlbumButtom.SetActive(true);
+                    m_GO_nextAlbumButtom.SetActive(true);
                 }
                 else
                 {
-                    m_nextAlbumButtom.SetActive(false);
+                    m_GO_nextAlbumButtom.SetActive(false);
                 }
             }
         }
         if (m_albumPage == 0)
         {
-            m_prevAlbumButtom.SetActive(false);
+            m_GO_prevAlbumButtom.SetActive(false);
         }
     }
 
     public void ShowCloseUpPhoto(Image photo)
     {
-        m_CloseUpImagePanel.SetActive(true);
-        m_closeUpPhoto.sprite = photo.sprite;
+        m_GO_CloseUpImagePanel.SetActive(true);
+        m_im_closeUpPhoto.sprite = photo.sprite;
     }
 
     public void CloseCloseUpPhoto()
     {
-        m_CloseUpImagePanel.SetActive(false);
+        m_GO_CloseUpImagePanel.SetActive(false);
     }
 
 
     #endregion
     
-    public void BrightnessSlider(float valor)//borrar despues, esta en MenuButtons
+    /*public void BrightnessSlider(float valor)//borrar despues, esta en MenuButtons
     {
         sliderValue = valor;
         PlayerPrefs.SetFloat("brillo", sliderValue);
         BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
-    }
+    }*/
 }

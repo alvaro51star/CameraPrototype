@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class DialogueController : MonoBehaviour
 {
     //[SerializeField] private AudioSource audioSource;
     [Header("Text variables")]
-    [SerializeField] private TMP_Text dialogueText;
-    [SerializeField] private float typingTime; //con 0.05s son 20 char/s
-    [SerializeField] private float nexLineTime;
+    [FormerlySerializedAs("dialogueText")] [SerializeField] private TMP_Text m_TMPTxt_dialogueText;
+    [FormerlySerializedAs("typingTime")] [SerializeField] private float m_typingTime; //con 0.05s son 20 char/s
+    [FormerlySerializedAs("nexLineTime")] [SerializeField] private float m_nexLineTime;
     [Header("Tutorial")]
-    [SerializeField] private Animator elevatorAnimator;
-    [SerializeField] private Animator elevatorAnimator2;
-    [SerializeField] private GameObject controlsGO;
+    [FormerlySerializedAs("elevatorAnimator")] [SerializeField] private Animator m_Animtr_elevatorAnimator;
+    [FormerlySerializedAs("elevatorAnimator2")] [SerializeField] private Animator m_Animtr_elevatorAnimator2;
+    [FormerlySerializedAs("controlsGO")] [SerializeField] private GameObject m_GO_controls;
 
     public static DialogueController instance;
-    public GameObject dialogueGameObject;
-    public bool didDialogueStart;
+    //public GameObject dialogueGameObject;
+    [FormerlySerializedAs("didDialogueStart")] public bool iDidDialogueStart;
    
-    private int lineIndex;
-    private string[] dialogueLines;
+    private int m_lineIndex;
+    private string[] m_str_dialogueLines;
     //private GameObject activeTrigger;
     private void Awake()
     {
@@ -38,51 +39,51 @@ public class DialogueController : MonoBehaviour
     {
         EventManager.OnIsReading?.Invoke();      
 
-        UIManager.instance.dialoguePanel.SetActive(true);
+        UIManager.instance.iGODialoguePanel.SetActive(true);
         MenuButtons.instance.SetIsGamePaused(true);
         UIManager.instance.SetPointersActive(false);
         UIManager.instance.SetInteractionText(false, "");
         UIManager.instance.SetIsReading(true);
         UIManager.instance.m_isInDialogue = true;
 
-        didDialogueStart = true;
-        dialogueLines = textLines;
-        lineIndex = 0;
+        iDidDialogueStart = true;
+        m_str_dialogueLines = textLines;
+        m_lineIndex = 0;
         StartCoroutine(ShowLine());
     }
 
     public void EndDialogue()
     {
-        didDialogueStart = false;
+        iDidDialogueStart = false;
 
-        UIManager.instance.dialoguePanel.SetActive(false);
+        UIManager.instance.iGODialoguePanel.SetActive(false);
         MenuButtons.instance.SetIsGamePaused(false);
         UIManager.instance.SetPointersActive(true);
         UIManager.instance.SetIsReading(false);
         UIManager.instance.m_isInDialogue = false;
 
         EventManager.OnStopReading?.Invoke();
-        if (!elevatorAnimator.isActiveAndEnabled)
+        if (!m_Animtr_elevatorAnimator.isActiveAndEnabled)
         {
-            elevatorAnimator.enabled = true;
-            elevatorAnimator2.enabled = true;
+            m_Animtr_elevatorAnimator.enabled = true;
+            m_Animtr_elevatorAnimator2.enabled = true;
 
-            if(controlsGO.activeSelf)
-                controlsGO.SetActive(false);
+            if(m_GO_controls.activeSelf)
+                m_GO_controls.SetActive(false);
         }
         //this.enabled = false;
     }
 
     private IEnumerator ShowLine()
     {
-        dialogueText.text = string.Empty;
-        foreach (char ch in dialogueLines[lineIndex])
+        m_TMPTxt_dialogueText.text = string.Empty;
+        foreach (char ch in m_str_dialogueLines[m_lineIndex])
         {
-            dialogueText.text += ch;
-            yield return new WaitForSecondsRealtime(typingTime);
+            m_TMPTxt_dialogueText.text += ch;
+            yield return new WaitForSecondsRealtime(m_typingTime);
         }
 
-        yield return new WaitForSecondsRealtime(nexLineTime);
+        yield return new WaitForSecondsRealtime(m_nexLineTime);
         //NextDialogueLine();
     }
 
@@ -90,13 +91,13 @@ public class DialogueController : MonoBehaviour
     {
         //SoundManager.instance.ReproduceSound(AudioClipsNames.Click, audioSource);
 
-        if(dialogueText.text == string.Empty)
+        if(m_TMPTxt_dialogueText.text == string.Empty)
             return; 
 
-        if (dialogueText.text == dialogueLines[lineIndex]) //si ense�a la linea completa
+        if (m_TMPTxt_dialogueText.text == m_str_dialogueLines[m_lineIndex]) //si ense�a la linea completa
         {
-            lineIndex++;
-            if (lineIndex < dialogueLines.Length)
+            m_lineIndex++;
+            if (m_lineIndex < m_str_dialogueLines.Length)
             {
                 StartCoroutine(ShowLine());
             }
@@ -107,7 +108,7 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
-            if (lineIndex > dialogueLines.Length)
+            if (m_lineIndex > m_str_dialogueLines.Length)
             {
                 EndDialogue();
                 return;
@@ -119,6 +120,6 @@ public class DialogueController : MonoBehaviour
     private void EndLineFast()
     {
         StopAllCoroutines();
-        dialogueText.text = dialogueLines[lineIndex];
+        m_TMPTxt_dialogueText.text = m_str_dialogueLines[m_lineIndex];
     }
 }
