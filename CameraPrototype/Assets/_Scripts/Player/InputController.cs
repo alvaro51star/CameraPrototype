@@ -42,7 +42,7 @@ public class InputController : MonoBehaviour
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.hasCameraEquipped) &&
+        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.iHasCameraEquipped) &&
             (UIManager.instance.GetIsGamePaused() || m_photoCapture.GetViewingPhoto() != true)) return;
         if (m_photoCapture.GetFirstPhotoTaken() == false)
         {
@@ -60,7 +60,7 @@ public class InputController : MonoBehaviour
                 break;
             case "leftButton":
             {
-                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.hasCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
+                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.iHasCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
                     m_playerBehaviour.InputInteraction();
                 break;
             }
@@ -95,7 +95,7 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void OnChangeLens(InputAction.CallbackContext context)
+    public void OnChangeLens(InputAction.CallbackContext context)//lo dejo por si acaso metemos mas lentes
     {
         if(UIManager.instance.GetIsGamePaused())
             return;

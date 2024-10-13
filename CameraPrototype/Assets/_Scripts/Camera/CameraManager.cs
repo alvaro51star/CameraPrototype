@@ -4,17 +4,15 @@ using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-    [FormerlySerializedAs("_photoCapture")]
-    [Header("Cameras")]
     //[SerializeField] private GameObject anomaliesCameraGO;
     //[SerializeField] private GameObject pastCameraGO;
 
-    [FormerlySerializedAs("m_photoCapture")] [SerializeField] private PhotoCapture photoCapture;
-    [FormerlySerializedAs("_cameraUI")] [FormerlySerializedAs("CameraUI")] [SerializeField] private GameObject cameraUI;
+    [SerializeField] private PhotoCapture m_photoCapture;
+    [FormerlySerializedAs("cameraUI")] [SerializeField] private GameObject m_GO_cameraUI;
 
     [Header("Camera lens")]
-    [SerializeField] private List<Camera> cameras;
-    private int _selectedCamera;
+    [SerializeField] private List<Camera> m_list_cameras;
+    private int m_selectedCamera;
     private void OnEnable()
     {
         EventManager.OnUsingCamera += OnUsingCamera;
@@ -37,9 +35,9 @@ public class CameraManager : MonoBehaviour
         pastCameraGO.SetActive(false);*/
         
         int i = 0;
-        foreach (var camera1 in cameras)
+        foreach (var camera1 in m_list_cameras)
         {
-            if (i == _selectedCamera)
+            if (i == m_selectedCamera)
             {
                 camera1.gameObject.SetActive(false);
             }
@@ -50,8 +48,8 @@ public class CameraManager : MonoBehaviour
     private void OnUsingCamera()
     {
         //camera feedback
-        photoCapture.SetHasCameraEquipped(true);
-        cameraUI.SetActive(true);
+        m_photoCapture.SetHasCameraEquipped(true);
+        m_GO_cameraUI.SetActive(true);
         UIManager.instance.SetPointersActive(false);
         
         //camera management
@@ -69,8 +67,8 @@ public class CameraManager : MonoBehaviour
     private void OnNotUsingCamera()
     {
         //camera feedback
-        photoCapture.SetHasCameraEquipped(false);
-        cameraUI.SetActive(false);
+        m_photoCapture.SetHasCameraEquipped(false);
+        m_GO_cameraUI.SetActive(false);
         if (!UIManager.instance.GetIsReading())
         {
             UIManager.instance.SetPointersActive(true);
@@ -91,9 +89,9 @@ public class CameraManager : MonoBehaviour
     private void ChangeLens()
     {
         int i = 0;
-        foreach (var camera1 in cameras)
+        foreach (var camera1 in m_list_cameras)
         {
-            if (i == _selectedCamera)
+            if (i == m_selectedCamera)
             {
                 camera1.gameObject.SetActive(true);
                 print(camera1 + " activated");
@@ -107,9 +105,9 @@ public class CameraManager : MonoBehaviour
     private void DisableSelectedLens()
     {
         int i = 0;
-        foreach (var camera1 in cameras)
+        foreach (var camera1 in m_list_cameras)
         {
-            if (i == _selectedCamera)
+            if (i == m_selectedCamera)
             {
                 camera1.gameObject.SetActive(false);
                 return;
@@ -122,28 +120,28 @@ public class CameraManager : MonoBehaviour
     {
         if (inputValue > 0)
         {
-            if (_selectedCamera == cameras.Count - 1)
-                _selectedCamera = 0;
+            if (m_selectedCamera == m_list_cameras.Count - 1)
+                m_selectedCamera = 0;
             else
-                _selectedCamera++;
+                m_selectedCamera++;
         }
         else if(inputValue < 0)
         {
-            if (_selectedCamera == 0)
-                _selectedCamera = cameras.Count - 1;
+            if (m_selectedCamera == 0)
+                m_selectedCamera = m_list_cameras.Count - 1;
             else
-                _selectedCamera--;
+                m_selectedCamera--;
         }
     }
 
     public int GetActiveCameraIndex()
     {
-        return _selectedCamera;
+        return m_selectedCamera;
     }
 
     public List<Camera> GetPhotoCameras()
     {
-        return cameras;
+        return m_list_cameras;
     }
     
 }
