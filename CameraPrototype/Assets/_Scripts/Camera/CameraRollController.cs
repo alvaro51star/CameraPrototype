@@ -41,7 +41,7 @@ public class CameraRollController : MonoBehaviour
         if(availablePhotos <= 0)
         {
             availablePhotosTMP.color = Color.red;
-            photoCapture.canTakePhoto = false;
+            photoCapture.iCanTakePhoto = false;
             EventManager.OnRollFinished?.Invoke();
             textForDialogue.StartDialogue();
         }
@@ -52,7 +52,7 @@ public class CameraRollController : MonoBehaviour
         print("roll + " + cameraRoll);
         if(availablePhotos <= 0)
         {
-            photoCapture.canTakePhoto = true;
+            photoCapture.iCanTakePhoto = true;
             availablePhotosTMP.color = Color.white;
         }
         availablePhotos += cameraRoll;
