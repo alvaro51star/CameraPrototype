@@ -94,7 +94,7 @@ public class CameraManager : MonoBehaviour
             if (i == m_selectedCamera)
             {
                 camera1.gameObject.SetActive(true);
-                print(camera1 + " activated");
+                //print(camera1 + " activated");
             }
             else
                 camera1.gameObject.SetActive(false);
