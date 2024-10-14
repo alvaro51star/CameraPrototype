@@ -14,8 +14,38 @@ public class Interaction_Door : DoubleAction
     [SerializeField] private TextForDialogue textForDialogue;
     private int m_doorInteract = 0;
     private bool m_discoveredLocked = false;
+    
+    public bool GetDiscoveredLocked()
+    {
+        return m_discoveredLocked;
+    }
 
-    [SerializeField] private string m_rutaEventoFMOD; 
+    public void SetCollisionFalse()
+    {
+        m_collider.enabled = false;
+    }
+
+    public void SetCollisionTrue()
+    {
+        m_collider.enabled = true;
+    }
+    
+    public void SetlockDoor(bool mode)
+    {
+        if (!mode)
+        {
+            if (!m_isPuertaPrincipal)
+            {
+                m_discoveredLocked = false;
+            }
+            m_isLocked = false;
+        }
+        else
+        {
+            SecondActon();
+            m_isLocked = true;
+        }
+    }
     
     protected override void Start()
     {
@@ -64,38 +94,6 @@ public class Interaction_Door : DoubleAction
         //m_animator.SetTrigger("Cerrar");
         m_doorInteract = 1;
         m_animator.SetInteger("Abrir", m_doorInteract);
-    }
-
-    public void SetlockDoor(bool mode)
-    {
-        if (!mode)
-        {
-            if (!m_isPuertaPrincipal)
-            {
-                m_discoveredLocked = false;
-            }
-            m_isLocked = false;
-        }
-        else
-        {
-            SecondActon();
-            m_isLocked = true;
-        }
-    }
-
-    public bool GetDiscoveredLocked()
-    {
-        return m_discoveredLocked;
-    }
-
-    public void SetCollisionFalse()
-    {
-        m_collider.enabled = false;
-    }
-
-    public void SetCollisionTrue()
-    {
-        m_collider.enabled = true;
     }
 
     public void PlayCloseSound()

@@ -6,7 +6,7 @@ using System.IO;
 public class SavePhoto : MonoBehaviour
 {
     private int m_numPhotosTaken = 1;
-    private string filePath;
+    private string m_filePath;
    
     public void PhotoSave (Texture2D textureToSave)
     {
@@ -16,8 +16,8 @@ public class SavePhoto : MonoBehaviour
         textureToSave.Apply();        
 
         byte[] byteArray = textureToSave.EncodeToPNG();
-        filePath = Application.dataPath + "/Resources/" + "Fotos" + SceneManager.GetActiveScene().name;
-        System.IO.File.WriteAllBytes(filePath + "/Photo" + m_numPhotosTaken + ".png", byteArray);
+        m_filePath = Application.dataPath + "/Resources/" + "Fotos" + SceneManager.GetActiveScene().name;
+        System.IO.File.WriteAllBytes(m_filePath + "/Photo" + m_numPhotosTaken + ".png", byteArray);
         m_numPhotosTaken++;
     }   
 
