@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AffectsIndirectly : DoubleAction, I_ActivateDeactivate
 {
     //Variables
-    [SerializeField] protected GameObject m_targetObject;
-    [SerializeField] protected bool m_dissapears;
-    [SerializeField] protected bool m_affectsPositive;
+    [SerializeField] protected GameObject m_GO_targetObject;
+    [SerializeField] protected bool m_isDissapears, m_isAffectsPositive;
+    
+    //Interaces
+    public void IChangeActiveMode(GameObject gameObjectToDeactivate, bool mode)
+    {
+        gameObjectToDeactivate.SetActive(mode);
+    }
+    
+    //Custom
     public override void Action(GameObject player)
     {
-        if (m_dissapears)
+        if (m_isDissapears)
         {
             JustOnce();
         }
@@ -29,12 +37,6 @@ public class AffectsIndirectly : DoubleAction, I_ActivateDeactivate
     protected virtual void Disappear()
     {
         EventManager.OnInteractiveObjectDisabled?.Invoke();
-        ChangeActiveMode(gameObject, false);
-    }
-
-
-    public void ChangeActiveMode(GameObject gameObjectToDeactivate, bool mode)
-    {
-        gameObjectToDeactivate.SetActive(mode);
+        IChangeActiveMode(gameObject, false);
     }
 }

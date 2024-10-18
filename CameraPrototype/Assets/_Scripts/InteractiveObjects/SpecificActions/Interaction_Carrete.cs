@@ -10,6 +10,6 @@ public class Interaction_Carrete : AffectsIndirectly
     protected override void FirstAction()
     {
         EventManager.OnAddRoll?.Invoke(m_rollAdded);
-        ChangeActiveMode(gameObject, false);
+        IChangeActiveMode(gameObject, false);
     }
 }

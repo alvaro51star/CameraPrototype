@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DoubleAction : InteractionScript
 {
     //Variables
+    [SerializeField] protected string m_str_firstMessage, m_str_secondMessage;
     protected bool m_firstAction = true;
-    [SerializeField] protected string m_firstMessage;
-    [SerializeField] protected string m_secondMessage;
+    
     protected virtual void Start()
     {
-        m_interactText = m_firstMessage;
+        m_str_interactText = m_str_firstMessage;
     }
 
+    //Custom
     public override void Action(GameObject player)
     {
         if (m_firstAction)
@@ -29,15 +31,15 @@ public class DoubleAction : InteractionScript
     protected virtual void FirstAction()
     {
         m_firstAction = false;
-        if (m_secondMessage != "")
+        if (m_str_secondMessage != "")
         {
-            m_interactText = m_secondMessage;
+            m_str_interactText = m_str_secondMessage;
         }
     }
 
     protected virtual void SecondActon()
     {
         m_firstAction = true;
-        m_interactText = m_firstMessage;
+        m_str_interactText = m_str_firstMessage;
     }
 }
