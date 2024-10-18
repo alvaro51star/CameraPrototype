@@ -23,38 +23,58 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private CameraManager m_cameraManager;
 
     [Header("Input solutions")]
-    public bool iCanTakePhoto = true;
-    public bool iHasCameraEquipped; 
-    private bool m_viewingPhoto;
-    private bool m_tookFirstPhoto; 
+    public bool isAbleToTakePhoto = true;
+    public bool isCameraEquipped; 
+    private bool m_isViewingPhoto;
+    private bool m_isFirstPhotoTaken; 
     
     private Texture2D m_Tex2D_screenCapture;
-    private List<RenderTexture> m_list_renderTextures;
-    private Coroutine m_cortn_autoRemovePhoto;//needs to be in a var for StopCoroutine to work
-    
+    private List<RenderTexture> m_rtext_camerasRText;
+    private Coroutine m_crt_autoRemovePhoto;//needs to be in a var for StopCoroutine to work
+
+    #region Getters&Setters
+
+    public bool GetFirstPhotoTaken()
+    {
+        return m_isFirstPhotoTaken;
+    }
+
+    public void SetHasCameraEquipped(bool mode)
+    {
+        isCameraEquipped = mode;
+    }  
+
+    public bool GetViewingPhoto()
+    {
+        return m_isViewingPhoto;
+    }
+
+    #endregion
+
     
     private void Start()
     {
-        m_list_renderTextures = new List<RenderTexture>(m_cameraManager.GetPhotoCameras().Count);
+        m_rtext_camerasRText = new List<RenderTexture>(m_cameraManager.GetPhotoCameras().Count);
         
         //create render textures for all photo lenses (cameras). Must be done on Start to work properly.
         foreach (var cameraComp in m_cameraManager.GetPhotoCameras())
         {
-            m_list_renderTextures.Add(new RenderTexture(Screen.width, Screen.height, cameraComp.targetTexture.depth));
-            m_list_renderTextures[m_cameraManager.GetPhotoCameras().IndexOf(cameraComp)].Create();
-            cameraComp.targetTexture = m_list_renderTextures[m_cameraManager.GetPhotoCameras().IndexOf(cameraComp)];
+            m_rtext_camerasRText.Add(new RenderTexture(Screen.width, Screen.height, cameraComp.targetTexture.depth));
+            m_rtext_camerasRText[m_cameraManager.GetPhotoCameras().IndexOf(cameraComp)].Create();
+            cameraComp.targetTexture = m_rtext_camerasRText[m_cameraManager.GetPhotoCameras().IndexOf(cameraComp)];
         }
         
-        m_Tex2D_screenCapture = new Texture2D(m_list_renderTextures[0].width, m_list_renderTextures[0].height, m_list_renderTextures[0].graphicsFormat,
+        m_Tex2D_screenCapture = new Texture2D(m_rtext_camerasRText[0].width, m_rtext_camerasRText[0].height, m_rtext_camerasRText[0].graphicsFormat,
             UnityEngine.Experimental.Rendering.TextureCreationFlags.None);//can stay like this if all cameras have same depth
     }
     
+    
     public void TakePhoto()//called by Input
     {
-        m_tookFirstPhoto = true;
-        if (!m_viewingPhoto && iHasCameraEquipped)
+        m_isFirstPhotoTaken = true;
+        if (!m_isViewingPhoto && isCameraEquipped)
         {            
-            if (iCanTakePhoto)
+            if (isAbleToTakePhoto)
             {
                 StartCoroutine(CameraFlashEffect());
                 CapturePhoto();
@@ -62,14 +82,14 @@ public class PhotoCapture : MonoBehaviour
             }
             else
             {
-                m_tookFirstPhoto = false;
+                m_isFirstPhotoTaken = false;
                 AudioManager.Instance.PlayOneShot(FMODEvents.instance.noPhotosClip /*, this.transform.position */);
             }
         }
 
         else
         {
-            StopCoroutine(m_cortn_autoRemovePhoto);
+            StopCoroutine(m_crt_autoRemovePhoto);
 
             RemovePhoto();  
         }
@@ -77,13 +97,13 @@ public class PhotoCapture : MonoBehaviour
 
     private void CapturePhoto()//needs to create the textures in start
     {
-        m_tookFirstPhoto = false;
+        m_isFirstPhotoTaken = false;
 
         m_GO_cameraUI.SetActive(false);
-        m_viewingPhoto = true;
+        m_isViewingPhoto = true;
 
 
-        StartCoroutine(SaveRenderTextureInTexture(m_list_renderTextures[m_cameraManager.GetActiveCameraIndex()]));
+        StartCoroutine(SaveRenderTextureInTexture(m_rtext_camerasRText[m_cameraManager.GetActiveCameraIndex()]));
     }
 
     private IEnumerator SaveRenderTextureInTexture(RenderTexture renderTexture)
@@ -102,7 +122,7 @@ public class PhotoCapture : MonoBehaviour
 
 
     /// <summary>
-    /// Turns the photo's texture into a sprite, saves it and shows it in the UI
+    /// Turns the photo's texture into a sprite, adds it to the album and shows it in the UI
     /// </summary>
     private void ShowPhoto()
     {
@@ -117,7 +137,7 @@ public class PhotoCapture : MonoBehaviour
         //UI
         m_GO_photoFrame.SetActive(true);        
         m_animtr_fadingAnimation.Play("PhotoFade");
-        m_cortn_autoRemovePhoto = StartCoroutine(AutoRemovePhoto());
+        m_crt_autoRemovePhoto = StartCoroutine(AutoRemovePhoto());
 
     }
 
@@ -135,12 +155,12 @@ public class PhotoCapture : MonoBehaviour
     /// </summary>
     private void RemovePhoto()
     {
-        m_viewingPhoto = false;
+        m_isViewingPhoto = false;
         m_GO_photoFrame.SetActive(false);
         m_GO_cameraUI.SetActive(true);
 
         EventManager.OnRemovePhoto?.Invoke();
-        m_tookFirstPhoto = false;
+        m_isFirstPhotoTaken = false;
         Time.timeScale = 1f;
 
         UIManager.instance.SetPointersActive(true);
@@ -149,25 +169,11 @@ public class PhotoCapture : MonoBehaviour
     private IEnumerator AutoRemovePhoto()
     {
         yield return new WaitForSecondsRealtime(m_timeShowingPhoto);
-        if (m_viewingPhoto)
+        if (m_isViewingPhoto)
         {
             RemovePhoto();
         }
     }
     
-    public bool GetFirstPhotoTaken()
-    {
-        return m_tookFirstPhoto;
-    }
-
-    public void SetHasCameraEquipped(bool mode)
-    {
-        iHasCameraEquipped = mode;
-    }  
-
-    public bool GetViewingPhoto()
-    {
-        return m_viewingPhoto;
-    }
     
 }

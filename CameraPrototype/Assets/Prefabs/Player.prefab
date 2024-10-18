@@ -265,7 +265,6 @@ GameObject:
   - component: {fileID: 8100681784569480217}
   - component: {fileID: 2592600347508512828}
   - component: {fileID: 8894318954006076969}
-  - component: {fileID: 586381003278203724}
   - component: {fileID: 4387893766438552301}
   - component: {fileID: 8485402160083179917}
   - component: {fileID: 5560301477075761429}
@@ -312,10 +311,9 @@ MonoBehaviour:
   m_GO_cameraFlash: {fileID: 3966516001980533802}
   m_flashTime: 0.2
   m_animtr_fadingAnimation: {fileID: 0}
-  m_savePhoto: {fileID: 586381003278203724}
   m_cameraManager: {fileID: 4387893766438552301}
-  iCanTakePhoto: 1
-  iHasCameraEquipped: 0
+  isAbleToTakePhoto: 1
+  isCameraEquipped: 0
 --- !u!114 &8894318954006076969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,24 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photoCapture: {fileID: 2592600347508512828}
-  textForDialogue: {fileID: 8485402160083179917}
+  m_photoCapture: {fileID: 2592600347508512828}
+  m_textForDialogue: {fileID: 8485402160083179917}
   availablePhotos: 0
-  maxPhotos: 10
-  availablePhotosTMP: {fileID: 0}
-  maxPhotosTMP: {fileID: 0}
---- !u!114 &586381003278203724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304275377204725996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195075f305266ee4397460a82630bc48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_maxPhotos: 10
+  m_TMPtxt_availablePhotos: {fileID: 0}
+  m_TMPtxt_maxPhotos: {fileID: 0}
 --- !u!114 &4387893766438552301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_photoCapture: {fileID: 2592600347508512828}
   m_GO_cameraUI: {fileID: 0}
-  m_list_cameras:
+  m_camL_photoCams:
   - {fileID: 950392395326506303}
 --- !u!114 &8485402160083179917
 MonoBehaviour:
