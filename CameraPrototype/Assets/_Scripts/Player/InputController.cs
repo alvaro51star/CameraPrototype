@@ -42,7 +42,7 @@ public class InputController : MonoBehaviour
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.iHasCameraEquipped) &&
+        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.isCameraEquipped) &&
             (UIManager.instance.GetIsGamePaused() || m_photoCapture.GetViewingPhoto() != true)) return;
         if (m_photoCapture.GetFirstPhotoTaken() == false)
         {
@@ -60,7 +60,7 @@ public class InputController : MonoBehaviour
                 break;
             case "leftButton":
             {
-                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.iHasCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
+                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.isCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
                     m_playerBehaviour.InputInteraction();
                 break;
             }
