@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
     //Variables
-    [SerializeField] public float m_speed, m_rotationSpeedX, m_rotationSpeedY;
     [SerializeField] private float m_upDownRange;
     [SerializeField] private Transform m_tf_camera;
     private CharacterController m_cc;
     private Vector2 m_v2_movementInputValue, m_v2_playerRotateInputValue;
     private float m_cameraRotateInputVaue;
+    public float m_speed, m_rotationSpeedX, m_rotationSpeedY;
     public bool m_isCanWalk = true;
 
         //gravity
@@ -19,20 +16,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_terminalVelocity = 10;
     [SerializeField] private float m_verticalVelocity;
 
-    public void SetMovementInputValue(Vector2 inputValue)
-    {
-        m_v2_movementInputValue = inputValue;
-    }
-
-    public void SetCameraRotateInputValue(float cameraInputValue)
-    {
-        m_cameraRotateInputVaue = cameraInputValue;
-    }
-    
-    public void SetPlayerRotateInputValue(Vector2 playerInputValue)
-    {
-        m_v2_playerRotateInputValue = playerInputValue;
-    }
+    #region Setters
+        public void SetMovementInputValue(Vector2 inputValue)
+        {
+            m_v2_movementInputValue = inputValue;
+        }
+        
+        public void SetCameraRotateInputValue(float cameraInputValue)
+        {
+            m_cameraRotateInputVaue = cameraInputValue;
+        }
+        
+        public void SetPlayerRotateInputValue(Vector2 playerInputValue)
+        {
+            m_v2_playerRotateInputValue = playerInputValue;
+        }
+    #endregion
     
     private void OnEnable()
     {

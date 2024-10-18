@@ -8,14 +8,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] Camera m_cam;
     private bool m_isCanInteract = false;
     private List<InteractiveObject> m_L_interactiveObjects = new List<InteractiveObject>();
-    private InteractiveObject m_actualSimpleInteractiveObject;
-    private InteractiveObject m_actualInputInteractiveObject;
-    private bool m_isCameraEquiped = false;
-    private bool m_isReading;
-    private bool m_isDoor;
-    private bool m_isLockedDoor;
-    private bool m_isCat;
-    private bool m_isRedBeard;
+    private InteractiveObject m_actualInputInteractiveObject, m_actualSimpleInteractiveObject;
+    private bool m_isCameraEquiped, m_isReading, m_isDoor, m_isLockedDoor, m_isCat, m_isRedBeard;
 
     private void OnEnable()
     {
@@ -148,14 +142,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void SimpleInteraction()
     {
-        m_actualSimpleInteractiveObject.Interact(this.gameObject);
+        m_actualSimpleInteractiveObject.I_Interact(this.gameObject);
         m_actualSimpleInteractiveObject = null;
     }
 
     public void InputInteraction()
     {
         if (!m_isCanInteract || m_actualInputInteractiveObject is null || m_isReading) return;
-        m_actualInputInteractiveObject.Interact(gameObject);
+        m_actualInputInteractiveObject.I_Interact(gameObject);
     }
 
     private void CheckActualInputInteractiveObject()
@@ -174,7 +168,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
 
             var priorVectorDirector = nearestInteractiveObject.transform.position - m_cam.transform.position;
-            var actualVectorDirector = m_L_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
+            var actualVectorDirector = m_L_interactiveObjects[i].tf_interactionPivot.transform.position - m_cam.transform.position;
             var priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
             var actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
 
