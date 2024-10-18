@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,24 +41,29 @@ public class InputController : MonoBehaviour
 
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.iHasCameraEquipped) &&
+            (UIManager.instance.GetIsGamePaused() || m_photoCapture.GetViewingPhoto() != true)) return;
+        if (m_photoCapture.GetFirstPhotoTaken() == false)
         {
-            if (!UIManager.instance.GetIsGamePaused() && m_photoCapture.hasCameraEquiped|| !UIManager.instance.GetIsGamePaused() && m_photoCapture.GetViewingPhoto() == true)
-            {
-                print("funciona");
-                if (m_photoCapture.GetFirstPhotoTaken() == false)
-                {
-                    m_photoCapture.TakePhoto();
-                }
-            }
+            m_photoCapture.TakePhoto();
         }
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+        switch (context.control.name)
         {
-            m_playerBehaviour.InputInteraction();
+            case "e":
+                m_playerBehaviour.InputInteraction();
+                break;
+            case "leftButton":
+            {
+                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.iHasCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
+                    m_playerBehaviour.InputInteraction();
+                break;
+            }
         }
     }
 
@@ -89,5 +93,14 @@ public class InputController : MonoBehaviour
         {
             EventManager.OnAddRoll?.Invoke(100);
         }
+    }
+
+    public void OnChangeLens(InputAction.CallbackContext context)//lo dejo por si acaso metemos mas lentes
+    {
+        if(UIManager.instance.GetIsGamePaused())
+            return;
+        if(context.ReadValue<float>() == 0f)
+            return;
+        EventManager.OnChangeLens?.Invoke(context.ReadValue<float>());
     }
 }

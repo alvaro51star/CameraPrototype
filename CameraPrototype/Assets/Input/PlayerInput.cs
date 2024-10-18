@@ -116,6 +116,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeLense"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""650d52a9-3728-4776-b56b-fc223289e58b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -233,6 +242,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""46039bbd-a374-49d9-9aad-5b7c9e985c63"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccb78e83-d661-4ca2-9665-7a6d62a7c4ba"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -371,6 +391,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CameraRollCheat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7a26106-2415-41b8-8733-f2c4a3458471"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLense"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -417,6 +448,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CameraPlayer_FocusCamera = m_CameraPlayer.FindAction("FocusCamera", throwIfNotFound: true);
         m_CameraPlayer_SkipText = m_CameraPlayer.FindAction("SkipText", throwIfNotFound: true);
         m_CameraPlayer_CameraRollCheat = m_CameraPlayer.FindAction("CameraRollCheat", throwIfNotFound: true);
+        m_CameraPlayer_ChangeLense = m_CameraPlayer.FindAction("ChangeLense", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -488,6 +520,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraPlayer_FocusCamera;
     private readonly InputAction m_CameraPlayer_SkipText;
     private readonly InputAction m_CameraPlayer_CameraRollCheat;
+    private readonly InputAction m_CameraPlayer_ChangeLense;
     public struct CameraPlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -502,6 +535,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @FocusCamera => m_Wrapper.m_CameraPlayer_FocusCamera;
         public InputAction @SkipText => m_Wrapper.m_CameraPlayer_SkipText;
         public InputAction @CameraRollCheat => m_Wrapper.m_CameraPlayer_CameraRollCheat;
+        public InputAction @ChangeLense => m_Wrapper.m_CameraPlayer_ChangeLense;
         public InputActionMap Get() { return m_Wrapper.m_CameraPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -541,6 +575,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CameraRollCheat.started += instance.OnCameraRollCheat;
             @CameraRollCheat.performed += instance.OnCameraRollCheat;
             @CameraRollCheat.canceled += instance.OnCameraRollCheat;
+            @ChangeLense.started += instance.OnChangeLense;
+            @ChangeLense.performed += instance.OnChangeLense;
+            @ChangeLense.canceled += instance.OnChangeLense;
         }
 
         private void UnregisterCallbacks(ICameraPlayerActions instance)
@@ -575,6 +612,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CameraRollCheat.started -= instance.OnCameraRollCheat;
             @CameraRollCheat.performed -= instance.OnCameraRollCheat;
             @CameraRollCheat.canceled -= instance.OnCameraRollCheat;
+            @ChangeLense.started -= instance.OnChangeLense;
+            @ChangeLense.performed -= instance.OnChangeLense;
+            @ChangeLense.canceled -= instance.OnChangeLense;
         }
 
         public void RemoveCallbacks(ICameraPlayerActions instance)
@@ -622,5 +662,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnFocusCamera(InputAction.CallbackContext context);
         void OnSkipText(InputAction.CallbackContext context);
         void OnCameraRollCheat(InputAction.CallbackContext context);
+        void OnChangeLense(InputAction.CallbackContext context);
     }
 }

@@ -7,9 +7,7 @@ public static class EventManager
     public static Action OnNotUsingCamera;
     public static Action OnTakingPhoto;
     public static Action OnRemovePhoto;
-
-    //Gato
-    public static Action OnCatPetted;
+    public static Action<float> OnChangeLens;
 
     //Puerta
     public static Action OnDoorLocked;
@@ -21,6 +19,7 @@ public static class EventManager
     public static Action OnIsReading;
     public static Action OnStopReading;
     public static Action<int> OnAddRoll;
+    public static Action OnInteractiveObjectDisabled;
 
     //Enemies
     public static Action<float, float> OnTimeAdded;
@@ -29,4 +28,5 @@ public static class EventManager
 
     //Level
     public static Action<int> OnLevelIntensityChange;
+    public static Action OnRollFinished;
 }

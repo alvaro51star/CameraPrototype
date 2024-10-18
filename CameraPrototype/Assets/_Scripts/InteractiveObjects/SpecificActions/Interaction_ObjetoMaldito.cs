@@ -23,7 +23,7 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
     {
         Interaction_Door door = m_targetObject.GetComponent<Interaction_Door>();
         door?.SetlockDoor(m_affectsPositive);
-        m_finalTrigger.SetActive(true);
+        m_finalTrigger!.SetActive(true);
 
         textForDialogue.StartDialogue();//provisional
         //Time.timeScale = 0;

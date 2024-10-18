@@ -265,7 +265,6 @@ GameObject:
   - component: {fileID: 8100681784569480217}
   - component: {fileID: 2592600347508512828}
   - component: {fileID: 8894318954006076969}
-  - component: {fileID: 586381003278203724}
   - component: {fileID: 4387893766438552301}
   - component: {fileID: 8485402160083179917}
   - component: {fileID: 5560301477075761429}
@@ -305,18 +304,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b8291c4fcfd8498d244be5cb16fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomaliesCamera: {fileID: 950392395326506303}
-  pastCamera: {fileID: 0}
-  photoDisplayArea: {fileID: 0}
-  photoFrame: {fileID: 0}
-  cameraUI: {fileID: 0}
-  timeShowingPhoto: 2
-  cameraFlash: {fileID: 3966516001980533802}
-  flashTime: 0.2
-  fadingAnimation: {fileID: 0}
-  savePhoto: {fileID: 586381003278203724}
-  canTakePhoto: 1
-  hasCameraEquiped: 0
+  m_img_photoDisplayArea: {fileID: 0}
+  m_GO_photoFrame: {fileID: 0}
+  m_GO_cameraUI: {fileID: 0}
+  m_timeShowingPhoto: 2
+  m_GO_cameraFlash: {fileID: 3966516001980533802}
+  m_flashTime: 0.2
+  m_animtr_fadingAnimation: {fileID: 0}
+  m_cameraManager: {fileID: 4387893766438552301}
+  isAbleToTakePhoto: 1
+  isCameraEquipped: 0
 --- !u!114 &8894318954006076969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,24 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c12dc87b1aee74bad2a10aa05d7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photoCapture: {fileID: 2592600347508512828}
-  textForDialogue: {fileID: 8485402160083179917}
+  m_photoCapture: {fileID: 2592600347508512828}
+  m_textForDialogue: {fileID: 8485402160083179917}
   availablePhotos: 0
-  maxPhotos: 10
-  availablePhotosTMP: {fileID: 0}
-  maxPhotosTMP: {fileID: 0}
---- !u!114 &586381003278203724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304275377204725996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195075f305266ee4397460a82630bc48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_maxPhotos: 10
+  m_TMPtxt_availablePhotos: {fileID: 0}
+  m_TMPtxt_maxPhotos: {fileID: 0}
 --- !u!114 &4387893766438552301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,10 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a877032003705b74da5b826f77b205a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomaliesCameraGO: {fileID: 2605687872625625690}
-  pastCameraGO: {fileID: 0}
-  _photoCapture: {fileID: 2592600347508512828}
-  _cameraUI: {fileID: 0}
+  m_photoCapture: {fileID: 2592600347508512828}
+  m_GO_cameraUI: {fileID: 0}
+  m_camL_photoCams:
+  - {fileID: 950392395326506303}
 --- !u!114 &8485402160083179917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1009,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5b5555ed-f4ff-49d3-a235-db9bf3d591b7
     m_ActionName: CameraPlayer/CameraRollCheat[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7021817640465769526}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnChangeLens
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 650d52a9-3728-4776-b56b-fc223289e58b
+    m_ActionName: CameraPlayer/ChangeLense[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CameraPlayer

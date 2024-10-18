@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Variables
-    [SerializeField] private float m_speed, m_rotationSpeedX, m_rotationSpeedY;
+    [SerializeField] public float m_speed, m_rotationSpeedX, m_rotationSpeedY;
     private CharacterController m_charController;
     private Vector2 m_movementInputValue, m_playerRotateInputValue;
     private float m_cameraRotateInputVaue;
@@ -44,33 +44,31 @@ public class PlayerMovement : MonoBehaviour
     {
         ApplyGravity();
 
-        if (m_canWalk)
-        {
-            Movement();
-            Rotation();
-        }
+        if (!m_canWalk) return;
+        Movement();
+        Rotation();
     }
 
-    public void IsReading()
+    private void IsReading()
     {
         CanWalkFalse();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
 
-    public void StopReading()
+    private void StopReading()
     {
         CanWalkTrue();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    public void CanWalkFalse()
+    private void CanWalkFalse()
     {
         m_canWalk = false;
     }
 
-    public void CanWalkTrue()
+    private void CanWalkTrue()
     {
         m_canWalk = true;
     }
@@ -98,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
 
         //boorrar luego
         Vector3 upVector = Vector3.up * (m_verticalVelocity * Time.deltaTime);
-        print(upVector);
 
         m_charController.Move(movement *(m_speed * Time.deltaTime) + upVector);
     }
@@ -120,11 +117,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraRotation = new Vector3(-m_playerRotateInputValue.y , 0, 0) * (m_rotationSpeedY * Time.deltaTime);
         m_camera.Rotate(cameraRotation);
 
-        float angleTransfomation = (m_camera.localEulerAngles.x > 180)
+        float angleTransformation = (m_camera.localEulerAngles.x > 180)
             ? m_camera.localEulerAngles.x - 360
             : m_camera.localEulerAngles.x;
 
-        cameraRotation = new Vector3(Mathf.Clamp(angleTransfomation, -m_upDownRange, m_upDownRange), 0, 0);
+        cameraRotation = new Vector3(Mathf.Clamp(angleTransformation, -m_upDownRange, m_upDownRange), 0, 0);
 
         m_camera.localEulerAngles = cameraRotation;
     }

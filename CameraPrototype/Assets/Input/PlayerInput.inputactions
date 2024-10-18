@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeLense",
+                    "type": "PassThrough",
+                    "id": "650d52a9-3728-4776-b56b-fc223289e58b",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -211,6 +220,17 @@
                     "name": "",
                     "id": "46039bbd-a374-49d9-9aad-5b7c9e985c63",
                     "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ccb78e83-d661-4ca2-9665-7a6d62a7c4ba",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -347,6 +367,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "CameraRollCheat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7a26106-2415-41b8-8733-f2c4a3458471",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeLense",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

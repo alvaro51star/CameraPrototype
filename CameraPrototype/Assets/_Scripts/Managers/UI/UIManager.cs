@@ -70,6 +70,13 @@ public class UIManager : MonoBehaviour
     public float sliderValue;
     public Image BrightnessPanel;
 
+    //sensibilidad
+    public Slider sliderSensibilidadX;
+    public Slider sliderSensibilidadY;
+    public float SensValueX;
+    public float SensValueY;
+    public PlayerMovement m_playerMovement;
+
     private void Awake()
     {
         if (instance == null)
@@ -90,9 +97,10 @@ public class UIManager : MonoBehaviour
             Cursor.visible = false;
         }
 
-        slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
+        //slider.value = PlayerPrefs.GetFloat("brillo", 0.5f);
 
         BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
+
 
     }
 
@@ -587,5 +595,17 @@ public class UIManager : MonoBehaviour
         sliderValue = valor;
         PlayerPrefs.SetFloat("brillo", sliderValue);
         BrightnessPanel.color = new Color(BrightnessPanel.color.r, BrightnessPanel.color.g, BrightnessPanel.color.b, sliderValue);
+    }
+
+    public void SensibilitySliderX(float X)
+    {
+        SensValueX = X;
+        m_playerMovement.m_rotationSpeedX = SensValueX;
+    }
+
+    public void SensibilitySliderY(float Y)
+    {
+        SensValueY = Y;
+        m_playerMovement.m_rotationSpeedY = SensValueY;
     }
 }

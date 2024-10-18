@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnNotUsingCamera += NotUsingCamera;
         EventManager.OnIsReading += IsReading;
         EventManager.OnStopReading += StopReading;
+        EventManager.OnInteractiveObjectDisabled += CheckObjectListNull;
     }
 
     private void OnDisable()
@@ -33,15 +32,14 @@ public class PlayerBehaviour : MonoBehaviour
         EventManager.OnNotUsingCamera -= NotUsingCamera;
         EventManager.OnIsReading -= IsReading;
         EventManager.OnStopReading -= StopReading;
+        EventManager.OnInteractiveObjectDisabled -= CheckObjectListNull;
     }
 
     private void Update()
     {
-        if (m_interactiveObjects.Count != 0)
-        {
-            CheckActualInputInteractiveObject();
-            CheckObjectListNull();
-        }
+        if (m_interactiveObjects.Count == 0) return;
+        CheckObjectListNull();
+        CheckActualInputInteractiveObject();
     }
 
     private void NotUsingCamera()
@@ -81,71 +79,66 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject != null && interactiveObject.enabled == true)
+        var interactiveObject = other.GetComponent<InteractiveObject>();
+        if (interactiveObject is null || interactiveObject.enabled != true) return;
+        if (interactiveObject.gameObject.layer is 6 or 7) return;
+        interactiveObject.SwitchIsInArea(true);
+        if (interactiveObject.GetNeedsButton())
         {
-            if (interactiveObject.gameObject.layer != 6 && interactiveObject.gameObject.layer != 7)
-            {
-                if (interactiveObject.GetNeedsButton())
-                {
-                    m_interactiveObjects.Add(interactiveObject);
-                }
-                else
-                {
-                    m_actualSimpleInteractiveObject = interactiveObject;
-                    SimpleInteraction();
-                }
-            }
+            m_interactiveObjects.Add(interactiveObject);
+        }
+        else
+        {
+            m_actualSimpleInteractiveObject = interactiveObject;
+            SimpleInteraction();
         }
     }
 
     private void IsBesideInteractableObject()
     {
         m_canInteract = true;
-        if (!UIManager.instance.GetIsGamePaused() && !m_isReading)
+        if (UIManager.instance.GetIsGamePaused() || m_isReading) return;
+        UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
+        if (m_isDoor)
         {
-            UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
-            if (m_isDoor)
+            if (m_isLockedDoor)
             {
-                if (m_isLockedDoor)
-                {
-                    UIManager.instance.InteractionAvialable(true, true, false);
-                }
-                else
-                {
-                    UIManager.instance.InteractionAvialable(true, false, false);
-                }
-
+                UIManager.instance.InteractionAvialable(true, true, false);
             }
-            else if (!m_isDoor && m_isCat)
-            {
-                UIManager.instance.InteractionAvialable(true, false, true);
-
-            }
-            else if (!m_isDoor && !m_isCat)
+            else
             {
                 UIManager.instance.InteractionAvialable(true, false, false);
-                if (m_isRedBeard)
-                {
-                    UIManager.instance.ShowInput(false);
-                }
+            }
+
+        }
+        else if (!m_isDoor && m_isCat)
+        {
+            UIManager.instance.InteractionAvialable(true, false, true);
+
+        }
+        else if (!m_isDoor && !m_isCat)
+        {
+            UIManager.instance.InteractionAvialable(true, false, false);
+            if (m_isRedBeard)
+            {
+                UIManager.instance.ShowInput(false);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        InteractiveObject interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject != null && m_interactiveObjects.Contains(interactiveObject))
-        {
-            m_interactiveObjects.RemoveAt(m_interactiveObjects.IndexOf(interactiveObject));
+        var interactiveObject = other.GetComponent<InteractiveObject>();
+        if (interactiveObject is null || !m_interactiveObjects.Contains(interactiveObject)) return;
+        interactiveObject.SwitchIsInArea(false);
+        m_interactiveObjects.RemoveAt(m_interactiveObjects.IndexOf(interactiveObject));
 
-            if (m_actualInputInteractiveObject == interactiveObject)
-            {
-                m_actualInputInteractiveObject = null;
-            }
+        if (m_actualInputInteractiveObject == interactiveObject)
+        {
+            m_actualInputInteractiveObject = null;
             StopInteracting();
         }
+        CheckObjectListNull();
     }
 
     private void StopInteracting()
@@ -159,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
         UIManager.instance.SetInteractionText(false, "");
     }
 
-    public void SimpleInteraction()
+    private void SimpleInteraction()
     {
         m_actualSimpleInteractiveObject.Interact(this.gameObject);
         m_actualSimpleInteractiveObject = null;
@@ -167,67 +160,57 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void InputInteraction()
     {
-        if (m_canInteract && m_actualInputInteractiveObject != null && !m_isReading)
-        {
-            print("interacts");
-            m_actualInputInteractiveObject.Interact(this.gameObject);
-        }
+        if (!m_canInteract || m_actualInputInteractiveObject is null || m_isReading) return;
+        m_actualInputInteractiveObject.Interact(gameObject);
     }
 
-    public void CheckActualInputInteractiveObject()
+    private void CheckActualInputInteractiveObject()
     {
-        InteractiveObject nearestIteractiveObject = null;
+        InteractiveObject nearestInteractiveObject = null;
         float nearestAngle = 100;
-        int i = 0;
+        var i = 0;
+
+        if (m_interactiveObjects.Count == 0) return;
 
         for (i = 0; i < m_interactiveObjects.Count; i++)
         {
             if (i == 0)
             {
-                nearestIteractiveObject = m_interactiveObjects[0];
+                nearestInteractiveObject = m_interactiveObjects[0];
             }
 
-            Vector3 priorVectorDirector = nearestIteractiveObject.transform.position - m_cam.transform.position;
-            Vector3 actualVectorDirector = m_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
-            float priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
-            float actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
+            var priorVectorDirector = nearestInteractiveObject.transform.position - m_cam.transform.position;
+            var actualVectorDirector = m_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
+            var priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
+            var actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
 
-            if (actualAngle <= priorAngle)
-            {
-                nearestIteractiveObject = m_interactiveObjects[i];
-                nearestAngle = actualAngle;
-            }
+            if (!(actualAngle <= priorAngle)) continue;
+            nearestInteractiveObject = m_interactiveObjects[i];
+            nearestAngle = actualAngle;
         }
 
-        if (nearestAngle <= nearestIteractiveObject.GetInteractionAngle())
-        {
-            m_actualInputInteractiveObject = nearestIteractiveObject;
-            
+        if (!nearestInteractiveObject.isActiveAndEnabled || nearestInteractiveObject is null) return;
 
-            if (!m_hasCameraEquiped && !m_isReading)
+        if (nearestAngle <= nearestInteractiveObject.GetInteractionAngle())
+        {
+            m_actualInputInteractiveObject = nearestInteractiveObject;
+
+
+            if (m_hasCameraEquiped || m_isReading) return;
+            if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>() is not null)
             {
-                if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>() != null)
-                {
-                    m_isDoor = true;
-                    if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>().GetDiscoveredLocked())
-                    {
-                        m_isLockedDoor = true;
-                    }
-                    else
-                    {
-                        m_isLockedDoor = false;
-                    }
-                }
-                if (m_actualInputInteractiveObject.GetComponent<Interaction_Cat>() != null)
-                {
-                    m_isCat = true;
-                }
-                if (m_actualInputInteractiveObject.GetComponent<Interaction_RedBeard>() != null)
-                {
-                    m_isRedBeard = true;
-                }
-                IsBesideInteractableObject();
+                m_isDoor = true;
+                m_isLockedDoor = m_actualInputInteractiveObject.GetComponent<Interaction_Door>().GetDiscoveredLocked();
             }
+            if (m_actualInputInteractiveObject.GetComponent<Interaction_Cat>() is not null)
+            {
+                m_isCat = true;
+            }
+            if (m_actualInputInteractiveObject.GetComponent<Interaction_RedBeard>() is not null)
+            {
+                m_isRedBeard = true;
+            }
+            IsBesideInteractableObject();
         }
 
         else
@@ -243,13 +226,15 @@ public class PlayerBehaviour : MonoBehaviour
     {
         for (int i = 0; i < m_interactiveObjects.Count; i++)
         {
-            if (m_interactiveObjects[i] == null || m_interactiveObjects[i].gameObject.activeSelf == false)
+            if (m_interactiveObjects[i] is null || m_interactiveObjects[i].gameObject.activeSelf == false || !m_interactiveObjects[i].GetIsInArea())
             {
                 m_interactiveObjects.RemoveAt(i);
             }
         }
-        if (m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.gameObject.activeSelf == false || m_actualInputInteractiveObject != null && m_actualInputInteractiveObject.enabled == false)
-        {
+        
+        if (m_actualInputInteractiveObject is null || !m_actualInputInteractiveObject.gameObject.activeSelf || 
+            !m_actualInputInteractiveObject.enabled || !m_actualInputInteractiveObject.GetIsInArea())
+        {    
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
