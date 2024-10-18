@@ -39,12 +39,12 @@ public class DialogueController : MonoBehaviour
     {
         EventManager.OnIsReading?.Invoke();      
 
-        UIManager.instance.iGODialoguePanel.SetActive(true);
+        UIManager.instance.go_DialoguePanel.SetActive(true);
         MenuButtons.instance.SetIsGamePaused(true);
         UIManager.instance.SetPointersActive(false);
         UIManager.instance.SetInteractionText(false, "");
         UIManager.instance.SetIsReading(true);
-        UIManager.instance.m_isInDialogue = true;
+        UIManager.instance.isInDialogue = true;
 
         iDidDialogueStart = true;
         m_str_dialogueLines = textLines;
@@ -56,11 +56,11 @@ public class DialogueController : MonoBehaviour
     {
         iDidDialogueStart = false;
 
-        UIManager.instance.iGODialoguePanel.SetActive(false);
+        UIManager.instance.go_DialoguePanel.SetActive(false);
         MenuButtons.instance.SetIsGamePaused(false);
         UIManager.instance.SetPointersActive(true);
         UIManager.instance.SetIsReading(false);
-        UIManager.instance.m_isInDialogue = false;
+        UIManager.instance.isInDialogue = false;
 
         EventManager.OnStopReading?.Invoke();
         if (!m_Animtr_elevatorAnimator.isActiveAndEnabled)

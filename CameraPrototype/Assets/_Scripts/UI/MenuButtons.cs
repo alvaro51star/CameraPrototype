@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 
 public class MenuButtons : MonoBehaviour//en este script estaran las funcionalidades de los botones basicos de los menus
@@ -9,32 +8,41 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
 {
     public static MenuButtons instance;
     
-    [FormerlySerializedAs("playerPhotoCapture")] [SerializeField] private PhotoCapture m_playerPhotoCapture;
-    
-    [FormerlySerializedAs("mouseLimited")] [Header("Testing:")]
-    public bool iMouseLimited;
+    [Header("Testing:")]
+    public bool isMouseLimited;
     
     [Header("UI Game objects:")]
     [Header ("Menus")]
-    [FormerlySerializedAs("pauseMenu")] [SerializeField] private GameObject m_go_pauseMenu;
-    [FormerlySerializedAs("optionsMenu")] [SerializeField] private GameObject m_go_optionsMenu;
-    [FormerlySerializedAs("loseMenu")] [SerializeField] private GameObject m_go_loseMenu;
-    [FormerlySerializedAs("winMenu")] [SerializeField] private GameObject m_go_winMenu;
-    [FormerlySerializedAs("audioOptionsMenu")] [SerializeField] private GameObject m_go_audioOptionsMenu;
-    [FormerlySerializedAs("m_controls")] [SerializeField] private GameObject m_go_controls;
+    [SerializeField] private GameObject m_go_pauseMenu;
+    [SerializeField] private GameObject m_go_optionsMenu;
+    [SerializeField] private GameObject m_go_loseMenu;
+    [SerializeField] private GameObject m_go_winMenu;
+    [SerializeField] private GameObject m_go_audioOptionsMenu;
+    [SerializeField] private GameObject m_go_controls;
     
     [Header("Brightness")] public Slider slider;
     public float sliderValue;
     public Image brightnessPanel;
     
+    [Header("Mouse sensibility")]
+    public Slider sliderSensibilidadX;
+    public Slider sliderSensibilidadY;
+    public float SensValueX;
+    public float SensValueY;
+    public PlayerMovement m_playerMovement;
+    
     [Header("Temporary here")]
-    [FormerlySerializedAs("m_cameraUI")] [SerializeField] private GameObject m_go_cameraUI;//en futuro en vez de desactivarse con este script debería haber un evento
-    [FormerlySerializedAs("_diary")] [SerializeField] private GameObject m_go_diary;
+    [SerializeField] private GameObject m_go_cameraUI;//en futuro en vez de desactivarse con este script debería haber un evento
+    [SerializeField] private PhotoCapture m_playerPhotoCapture;
     
     private bool m_isGamePaused;
 
     #region Getters&Setters
 
+    /// <summary>
+    /// Changes timeScale and mouse limitation depending on the game mode
+    /// </summary>
+    /// <param name="gameMode"></param>
     public void SetGameMode(GameModes gameMode)
     {
         if (gameMode == GameModes.InGame)
@@ -45,13 +53,13 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
             m_playerPhotoCapture.enabled = true;//para reactivar el input (a futuro se quita esto)
             //poner mapa de controles de en juego
 
-            if (iMouseLimited)
+            if (isMouseLimited)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
         }
-        else
+        else //GameModes.UI
         {
             Time.timeScale = 0f;
             m_isGamePaused = true;
@@ -59,7 +67,7 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
             m_playerPhotoCapture.enabled = false;//para desactivar el input (a futuro se quita esto)
             //poner mapa de controles de menus
             
-            if(!iMouseLimited)
+            if(!isMouseLimited)
                 return;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -75,7 +83,15 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
     {
         m_isGamePaused = mode;
     }
+    public bool GetIsPauseMenuActive()
+    {
+        return m_go_pauseMenu.activeSelf;
+    }
 
+    public void SetPauseMenu(bool active)
+    {
+        m_go_pauseMenu.SetActive(active);
+    }
 
     #endregion
     
@@ -119,7 +135,7 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
         
         if (!UIManager.instance.m_isReading)
         {
-            //_isGamePaused = false;
+            m_isGamePaused = false;
             UIManager.instance.SetPointersActive(true);
             EventManager.OnStopReading?.Invoke();
         }
@@ -128,24 +144,16 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
             EventManager.OnIsReading?.Invoke();
         }
         
-        EventManager.OnNotUsingCamera?.Invoke();
-        
         SetGameMode(GameModes.InGame);
+        EventManager.OnNotUsingCamera?.Invoke();
     }
 
     public void ExitGame()
     {
         Application.Quit();
     }
-
-    public void ActivatePauseMenu()
-    {
-        m_go_pauseMenu.SetActive(true);
-        
-        SetGameMode(GameModes.UI);
-    }
     
-    public void LoadSceneMainMenu()
+    public void LoadMainMenuScene()
     {
         SceneManager.LoadScene((int)Scenes.MainMenu);//funcionara solo si las escenas estan ordenadas como el enum
     }
@@ -169,27 +177,7 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
             m_go_controls.SetActive(false);
         }
     }
-    
-    public void DiaryButton(bool activate)
-    {
-        if (activate)
-        {
-            m_go_diary.SetActive(true);
-            m_go_pauseMenu.SetActive(false);
-        }
-        else
-        {
-            m_go_pauseMenu.SetActive(true);
-            m_go_diary.SetActive(false);
-        }
-    }
-    
-
-    #endregion
-
-    #region Settings
-
-    public void ActivateOptionsMenu()
+    public void OptionsMenuButton()
     {
         if (!m_go_optionsMenu.activeSelf)
         {
@@ -202,6 +190,10 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
             m_go_pauseMenu.SetActive(true);
         }
     }
+
+    #endregion
+
+    #region Settings
 
     public void AudioOptionsMenu()
     {
@@ -223,6 +215,19 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
         sliderValue = valor;
         PlayerPrefs.SetFloat("brillo", sliderValue);
         brightnessPanel.color = new Color(brightnessPanel.color.r, brightnessPanel.color.g, brightnessPanel.color.b, sliderValue);
+    }
+    
+    //Mouse sensibility
+    public void SensibilitySliderX(float X)
+    {
+        SensValueX = X;
+        m_playerMovement.m_rotationSpeedX = SensValueX;
+    }
+
+    public void SensibilitySliderY(float Y)
+    {
+        SensValueY = Y;
+        m_playerMovement.m_rotationSpeedY = SensValueY;
     }
 
     #endregion
