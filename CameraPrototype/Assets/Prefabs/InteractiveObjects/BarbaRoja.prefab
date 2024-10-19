@@ -96,11 +96,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 0}
+  m_isNeedsButton: 1
+  m_interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 15
-  m_interactionPivot: {fileID: 0}
+  m_interactionScript: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 0}
 --- !u!114 &2790733976271118019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4632c31dae7b58c4b86f949fe39965be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: RedBeard
+  m_str_interactText: RedBeard
 --- !u!1 &5070085005642418289
 GameObject:
   m_ObjectHideFlags: 0

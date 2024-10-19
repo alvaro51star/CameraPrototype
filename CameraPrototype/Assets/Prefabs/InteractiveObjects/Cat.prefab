@@ -122,8 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4811becd59dcf47ba94f14e7d7c839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meowAudioSource: {fileID: 0}
-  growlAudioSource: {fileID: 0}
 --- !u!114 &4381624779055132406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,12 +134,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 8300000, guid: cc3f3313f8ae0a043ae9b7e0d83b7794, type: 3}
+  m_isNeedsButton: 1
+  m_interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 15
-  m_interactionPivot: {fileID: 4046824652726361374}
-  m_rutaEventoFMODInteraccion: 
+  m_interactionScript: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 4046824652726361374}
 --- !u!114 &7405290046500708042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e233ab1ee9d8f4cb886fc29a209209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Pet cat
+  m_str_interactText: Pet cat
 --- !u!65 &6811086140298975362
 BoxCollider:
   m_ObjectHideFlags: 0

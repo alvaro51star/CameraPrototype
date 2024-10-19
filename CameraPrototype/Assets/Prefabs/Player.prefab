@@ -1056,12 +1056,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d825d26b30bb32142af7df70de476a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 3.5
-  m_rotationSpeedX: 5
-  m_rotationSpeedY: 2
   m_upDownRange: 60
-  m_camera: {fileID: 1932318058781030498}
-  m_canWalk: 1
+  m_tf_camera: {fileID: 1932318058781030498}
+  m_isCanWalk: 1
+  speed: 3.5
+  rotationSpeedX: 5
+  rotationSpeedY: 2
   m_gravity: 9.8
   m_terminalVelocity: 10
   m_verticalVelocity: 0
