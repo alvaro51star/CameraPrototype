@@ -100,9 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 6240631938174568748}
-  interactiveObject:
+  m_isNeedsButton: 1
+  m_interactiveObject:
     Guid:
       Data1: 0
       Data2: 0
@@ -110,8 +109,8 @@ MonoBehaviour:
       Data4: 0
     Path: 
   m_interactionAngle: 10
-  m_interactionPivot: {fileID: 7796724164049083011}
-  m_rutaEventoFMODInteraccion: 
+  m_interactionScript: {fileID: 6240631938174568748}
+  m_tf_interactionPivot: {fileID: 7796724164049083011}
 --- !u!114 &6240631938174568748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +131,8 @@ MonoBehaviour:
   m_isPuertaPrincipal: 0
   m_collider: {fileID: 4819155054347006577}
   m_isCatDoor: 0
+  m_needsDialogue: 0
+  textForDialogue: {fileID: 0}
   m_rutaEventoFMOD: 
 --- !u!95 &5436261081058750397
 Animator:

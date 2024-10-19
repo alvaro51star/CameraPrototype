@@ -7,11 +7,11 @@ using UnityEngine.Serialization;
 public class InteractiveObject : MonoBehaviour, I_InteractableObjects
 {
     //Variables
-    [FormerlySerializedAs("m_needsButton")] [SerializeField] private bool m_isNeedsButton;
+    [SerializeField] private bool m_isNeedsButton;
+    [SerializeField] private EventReference m_interactiveObject;
+    [SerializeField] private float m_interactionAngle;
     [SerializeField] private InteractionScript m_interactionScript;
-    [FormerlySerializedAs("interactiveObject")] [SerializeField] private EventReference m_interactiveObject;
-    [SerializeField] float m_interactionAngle;
-    [FormerlySerializedAs("m_interactionPivot")] public Transform m_tf_interactionPivot;
+    public Transform m_tf_interactionPivot;
     private bool m_isInArea;
 
     #region Getters and Setters

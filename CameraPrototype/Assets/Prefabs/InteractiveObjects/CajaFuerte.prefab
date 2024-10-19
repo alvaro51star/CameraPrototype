@@ -98,11 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 8300000, guid: f67ade7e5959b114db23668381c9609c, type: 3}
+  m_isNeedsButton: 0
+  m_interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 10
-  m_interactionPivot: {fileID: 7514851762259983675}
+  m_interactionScript: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 0}
 --- !u!114 &5036124179987220680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,16 +129,8 @@ MonoBehaviour:
   m_affectsPositive: 0
   m_correctCode: 6339
   m_maxCodeNumber: 4
-  m_keySounds:
-  - {fileID: 8300000, guid: 7b05344d8619f704695ea1db426386e4, type: 3}
-  - {fileID: 8300000, guid: 59c00c0da836a9e419b0631e6917e739, type: 3}
-  - {fileID: 8300000, guid: 6fe7b58317f836b4da7eb8312b8a7a99, type: 3}
-  - {fileID: 8300000, guid: 1bcab01a3f95c9a42998d2a9de0a8ea7, type: 3}
-  m_wrongSound: {fileID: 8300000, guid: 0e1dfd5c125c16e4681f96f446b58a85, type: 3}
-  m_rightSound: {fileID: 8300000, guid: 5b191748bb8399147a339d72dfc47279, type: 3}
-  m_safeUnlockSound: {fileID: 8300000, guid: 84c8dd9ea89fa6e46b5a553f9b37de87, type: 3}
-  m_safeOpen: {fileID: 8300000, guid: 7c65671da5ffbf24eaa73ac3ffeff016, type: 3}
   anim: {fileID: 3415558527878844370}
+  m_rutaEventoFMOD: 
 --- !u!1 &8253035414361023315
 GameObject:
   m_ObjectHideFlags: 0

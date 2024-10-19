@@ -96,11 +96,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_isNeedsButton: 0
+  m_interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 15
-  m_interactionPivot: {fileID: 0}
+  m_interactionScript: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 0}
 --- !u!114 &30234085996035484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactText: Take story book
-  m_paperSound: {fileID: 8300000, guid: 31430d8c607b6e147a54bcab00f45e1a, type: 3}
+  m_rutaEventoFMOD: 
 --- !u!1001 &3113157661504706078
 PrefabInstance:
   m_ObjectHideFlags: 0
