@@ -180,7 +180,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
 
             var priorVectorDirector = nearestInteractiveObject.transform.position - m_cam.transform.position;
-            var actualVectorDirector = m_L_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
+            var actualVectorDirector = m_L_interactiveObjects[i].m_tf_interactionPivot.transform.position - m_cam.transform.position;
             var priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
             var actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
 

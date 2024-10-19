@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class InteractionScript : MonoBehaviour
 {
-
     [SerializeField] protected string m_interactText;
     public abstract void Action(GameObject player);
 
