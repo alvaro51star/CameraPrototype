@@ -154,14 +154,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void SimpleInteraction()
     {
-        m_actualSimpleInteractiveObject.Interact(this.gameObject);
+        m_actualSimpleInteractiveObject.I_Interact(this.gameObject);
         m_actualSimpleInteractiveObject = null;
     }
 
     public void InputInteraction()
     {
         if (!m_isCanInteract || m_actualInputInteractiveObject is null || m_isReading) return;
-        m_actualInputInteractiveObject.Interact(gameObject);
+        m_actualInputInteractiveObject.I_Interact(gameObject);
     }
 
     private void CheckActualInputInteractiveObject()

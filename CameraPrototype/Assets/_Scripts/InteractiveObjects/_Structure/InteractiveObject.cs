@@ -46,7 +46,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     }
 
     //Custom
-    public void Interact(GameObject player)
+    public void I_Interact(GameObject player)
     {
         m_interactionScript.Action(player);
         AudioManager.Instance.PlayOneShot(m_interactiveObject /*, this.transform.position */);

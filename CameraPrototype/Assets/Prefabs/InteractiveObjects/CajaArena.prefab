@@ -122,12 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37de282b26ef824ab7dca4847525741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Put figurine
-  m_firstMessage: Put figurine
-  m_secondMessage: 
-  m_targetObject: {fileID: 4610608307435983090}
-  m_dissapears: 0
-  m_affectsPositive: 0
+  m_str_interactText: Put figurine
+  m_str_firstMessage: Put figurine
+  m_str_secondMessage: 
+  m_isDissapears: 0
+  m_isAffectsPositive: 0
+  m_go_targetObject: {fileID: 4610608307435983090}
   m_appears: 1
   m_figurePicked: 0
   m_figure: {fileID: 6603425139992696760}
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4632c31dae7b58c4b86f949fe39965be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: GreenBeard
+  m_str_interactText: GreenBeard
 --- !u!1001 &5325515178255417586
 PrefabInstance:
   m_ObjectHideFlags: 0

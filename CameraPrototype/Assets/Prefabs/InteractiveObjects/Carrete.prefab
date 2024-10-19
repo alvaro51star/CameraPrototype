@@ -119,12 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d30bd213ecc574cbb9ee3bc7c17e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Take camera roll
-  m_firstMessage: Take camera roll
-  m_secondMessage: 
-  m_targetObject: {fileID: 0}
-  m_dissapears: 1
-  m_affectsPositive: 0
+  m_str_interactText: Take camera roll
+  m_str_firstMessage: Take camera roll
+  m_str_secondMessage: 
+  m_isDissapears: 1
+  m_isAffectsPositive: 0
+  m_go_targetObject: {fileID: 0}
   m_rollAdded: 2
 --- !u!1001 &3004644437173311422
 PrefabInstance:

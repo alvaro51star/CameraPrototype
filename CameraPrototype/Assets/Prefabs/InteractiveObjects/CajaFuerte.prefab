@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3705075844989974742
 Transform:
   m_ObjectHideFlags: 0
@@ -121,12 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf52942a12de0ff4cac41b0efda079cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Put code
-  m_firstMessage: Put code
-  m_secondMessage: 
-  m_targetObject: {fileID: 2207561933780244472}
-  m_dissapears: 0
-  m_affectsPositive: 0
+  m_str_interactText: Put code
+  m_str_firstMessage: Put code
+  m_str_secondMessage: 
+  m_isDissapears: 0
+  m_isAffectsPositive: 0
+  m_go_targetObject: {fileID: 2207561933780244472}
   m_correctCode: 6339
   m_maxCodeNumber: 4
   anim: {fileID: 3415558527878844370}

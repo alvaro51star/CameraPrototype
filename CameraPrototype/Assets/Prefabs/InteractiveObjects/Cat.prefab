@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e233ab1ee9d8f4cb886fc29a209209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Pet cat
+  m_str_interactText: Pet cat
 --- !u!65 &6811086140298975362
 BoxCollider:
   m_ObjectHideFlags: 0

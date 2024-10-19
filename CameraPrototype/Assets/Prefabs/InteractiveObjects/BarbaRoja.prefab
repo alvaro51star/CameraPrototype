@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4632c31dae7b58c4b86f949fe39965be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: RedBeard
+  m_str_interactText: RedBeard
 --- !u!1 &5070085005642418289
 GameObject:
   m_ObjectHideFlags: 0

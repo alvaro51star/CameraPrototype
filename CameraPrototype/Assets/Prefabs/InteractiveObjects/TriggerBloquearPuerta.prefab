@@ -91,12 +91,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df6f66434a6ead48a0b6709a6a5306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: 
-  m_firstMessage: 
-  m_secondMessage: 
-  m_targetObject: {fileID: 0}
-  m_dissapears: 1
-  m_affectsPositive: 1
+  m_str_interactText: 
+  m_str_firstMessage: 
+  m_str_secondMessage: 
+  m_isDissapears: 1
+  m_isAffectsPositive: 1
+  m_go_targetObject: {fileID: 0}
 --- !u!54 &1174839447823106770
 Rigidbody:
   m_ObjectHideFlags: 0

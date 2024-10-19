@@ -21,8 +21,8 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
 
     protected override void FirstAction()
     {
-        Interaction_Door door = m_targetObject.GetComponent<Interaction_Door>();
-        door?.SetlockDoor(m_affectsPositive);
+        Interaction_Door door = m_go_targetObject.GetComponent<Interaction_Door>();
+        door?.SetlockDoor(m_isAffectsPositive);
         m_finalTrigger!.SetActive(true);
 
         textForDialogue.StartDialogue();//provisional

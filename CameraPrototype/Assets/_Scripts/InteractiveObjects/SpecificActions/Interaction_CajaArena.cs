@@ -23,8 +23,8 @@ public class Interaction_CajaArena : AffectsIndirectly
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.instance.sandBox /*, this.transform.position */);
 
-            ChangeActiveMode(m_targetObject, m_appears);
-            ChangeActiveMode(m_figure, true);
+            IChangeActiveMode(m_go_targetObject, m_appears);
+            IChangeActiveMode(m_figure, true);
             SetFigurePicked(false);
             GetComponent<InteractiveObject>().enabled = false;
 

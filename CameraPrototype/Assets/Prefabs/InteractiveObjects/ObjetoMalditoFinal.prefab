@@ -8720,12 +8720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4375f7bc090e484c963eed7f69cc1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Take cursed object
-  m_firstMessage: Take cursed object
-  m_secondMessage: 
-  m_targetObject: {fileID: 0}
-  m_dissapears: 1
-  m_affectsPositive: 0
+  m_str_interactText: Take cursed object
+  m_str_firstMessage: Take cursed object
+  m_str_secondMessage: 
+  m_isDissapears: 1
+  m_isAffectsPositive: 0
+  m_go_targetObject: {fileID: 0}
   textForDialogue: {fileID: 0}
   m_finalTrigger: {fileID: 0}
   enemy: {fileID: 0}

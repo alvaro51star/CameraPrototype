@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8915604b195f0fb4db83fa4bb6c6a418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Take story book
+  m_str_interactText: Take story book
   m_rutaEventoFMOD: 
 --- !u!1001 &3113157661504706078
 PrefabInstance:

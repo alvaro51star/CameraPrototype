@@ -7,6 +7,6 @@ public class InteractivePickUp : AffectsIndirectly
     //Variables
     public override void Action(GameObject player)
     {
-        ChangeActiveMode(gameObject, false);
+        IChangeActiveMode(gameObject, false);
     }
 }
