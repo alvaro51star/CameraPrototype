@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isNeedsButton: 0
+  m_isNeedsButton: 1
   m_interactiveObject:
     Guid:
       Data1: 0

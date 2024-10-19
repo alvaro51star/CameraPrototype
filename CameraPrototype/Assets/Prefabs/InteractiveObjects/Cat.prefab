@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isNeedsButton: 0
+  m_isNeedsButton: 1
   m_interactiveObject:
     Guid:
       Data1: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
     Path: 
   m_interactionAngle: 15
   m_interactionScript: {fileID: 0}
-  m_tf_interactionPivot: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 4046824652726361374}
 --- !u!114 &7405290046500708042
 MonoBehaviour:
   m_ObjectHideFlags: 0
