@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(BoxCollider))]
 
 public class TriggerForDialogue : MonoBehaviour
 {
-    [SerializeField] private DialogueController dialogueController;
+    [FormerlySerializedAs("dialogueController")] [SerializeField] private DialogueController m_dialogueController;
 
     [TextArea(2, 4)] public string[] textLines;// 2 = minNumLineas, 6 = maxNumLineas
 
@@ -14,9 +15,9 @@ public class TriggerForDialogue : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!dialogueController.didDialogueStart)
+            if (!m_dialogueController.iDidDialogueStart)
             {
-                dialogueController.StartDialogue(textLines);                
+                m_dialogueController.StartDialogue(textLines);                
             }
         }
     }
