@@ -1058,10 +1058,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_upDownRange: 60
   m_tf_camera: {fileID: 1932318058781030498}
+  m_isCanWalk: 1
   speed: 3.5
   rotationSpeedX: 5
   rotationSpeedY: 2
-  m_isCanWalk: 1
   m_gravity: 9.8
   m_terminalVelocity: 10
   m_verticalVelocity: 0
