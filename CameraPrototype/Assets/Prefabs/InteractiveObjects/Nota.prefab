@@ -121,8 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_str_interactText: Read note
-  m_noteText: Prueba de texto
-  m_rutaEventoFMOD: 
+  m_str_noteText: 
 --- !u!1 &2721949071048622559
 GameObject:
   m_ObjectHideFlags: 0

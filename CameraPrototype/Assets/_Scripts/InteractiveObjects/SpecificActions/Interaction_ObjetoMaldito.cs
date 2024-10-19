@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Interaction_ObjetoMaldito : AffectsIndirectly
 {
-    [SerializeField] private TextForDialogue textForDialogue;//provisional
-    [SerializeField] private GameObject m_finalTrigger;
-
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject m_go_enemy;
+    [SerializeField] private GameObject m_go_finalTrigger;
+    [SerializeField] private TextForDialogue m_textForDialogue;//provisional
 
     private void OnEnable()
     {
@@ -19,18 +18,25 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
         EventManager.OnStopReading -= TimeScaleNormal;
     }
 
+    //Custom
     protected override void FirstAction()
     {
         Interaction_Door door = m_go_targetObject.GetComponent<Interaction_Door>();
         door?.SetlockDoor(m_isAffectsPositive);
-        m_finalTrigger!.SetActive(true);
+        m_go_finalTrigger!.SetActive(true);
 
-        textForDialogue.StartDialogue();//provisional
+        m_textForDialogue.StartDialogue();//provisional
         //Time.timeScale = 0;
-        enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+        m_go_enemy.GetComponent<StalkerBehaviour>().EventPersecution();
         //StartCoroutine(EnemyEvent());
     }
 
+    IEnumerator EnemyEvent()
+    {
+        yield return new WaitForSeconds(0.1f);
+        m_go_enemy.GetComponent<StalkerBehaviour>().EventPersecution();
+    }
+    
     public void TimeScaleNormal()
     {
         Time.timeScale = 1;
@@ -39,11 +45,5 @@ public class Interaction_ObjetoMaldito : AffectsIndirectly
     public void TimeScaleStopped()
     {
         Time.timeScale = 0;
-    }
-
-    IEnumerator EnemyEvent()
-    {
-        yield return new WaitForSeconds(0.1f);
-        enemy.GetComponent<StalkerBehaviour>().EventPersecution();
     }
 }

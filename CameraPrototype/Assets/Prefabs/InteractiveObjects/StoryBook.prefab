@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_str_interactText: Take story book
-  m_rutaEventoFMOD: 
 --- !u!1001 &3113157661504706078
 PrefabInstance:
   m_ObjectHideFlags: 0

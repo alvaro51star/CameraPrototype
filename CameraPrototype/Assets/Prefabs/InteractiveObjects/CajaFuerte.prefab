@@ -127,10 +127,9 @@ MonoBehaviour:
   m_isDissapears: 0
   m_isAffectsPositive: 0
   m_go_targetObject: {fileID: 2207561933780244472}
-  m_correctCode: 6339
+  m_animatr: {fileID: 3415558527878844370}
   m_maxCodeNumber: 4
-  anim: {fileID: 3415558527878844370}
-  m_rutaEventoFMOD: 
+  m_str_correctCode: 6339
 --- !u!1 &8253035414361023315
 GameObject:
   m_ObjectHideFlags: 0

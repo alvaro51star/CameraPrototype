@@ -8726,6 +8726,6 @@ MonoBehaviour:
   m_isDissapears: 1
   m_isAffectsPositive: 0
   m_go_targetObject: {fileID: 0}
-  textForDialogue: {fileID: 0}
-  m_finalTrigger: {fileID: 0}
-  enemy: {fileID: 0}
+  m_go_enemy: {fileID: 0}
+  m_go_finalTrigger: {fileID: 0}
+  m_textForDialogue: {fileID: 0}

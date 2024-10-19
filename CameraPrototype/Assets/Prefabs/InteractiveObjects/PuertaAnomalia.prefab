@@ -714,11 +714,10 @@ MonoBehaviour:
   m_animator: {fileID: 0}
   m_isLocked: 0
   m_isPuertaPrincipal: 0
-  m_collider: {fileID: 473124850742332585}
   m_isCatDoor: 0
-  m_needsDialogue: 0
-  textForDialogue: {fileID: 0}
-  m_rutaEventoFMOD: 
+  m_isNeedsDialogue: 0
+  m_collider: {fileID: 473124850742332585}
+  m_textForDialogue: {fileID: 0}
 --- !u!95 &543911062808644835
 Animator:
   serializedVersion: 5

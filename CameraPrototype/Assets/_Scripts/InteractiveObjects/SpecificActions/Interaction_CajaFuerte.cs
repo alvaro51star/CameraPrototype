@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Interaction_CajaFuerte : AffectsIndirectly
 {
     //Variables 
-    [SerializeField] private string m_correctCode;
+    [SerializeField] private Animator m_animatr;
     [SerializeField] private int m_maxCodeNumber;
-    [SerializeField] private Animator anim;
+    [SerializeField] private string m_str_correctCode;
     private bool m_isOpen = false;
-    private string m_actualCode = "";
+    private string m_str_actualCode = "";
 
-    //Integraci�n FMOD
-    [SerializeField] private string m_rutaEventoFMOD; //Hace falta sonidos paralas teclas, un sonido de codigo incorrecto, otro de codigo correcto, sonido de desbloquear caja fuerte
-                                                      // y sonido de la puerta abriendose
-
+    //Custom
     protected override void FirstAction()
     {
         if (!m_isOpen)
@@ -27,11 +23,11 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     public void AddActualCode(GameObject button)
     {
         ReproduceKeySound();
-        if (m_actualCode.Length < m_maxCodeNumber)
+        if (m_str_actualCode.Length < m_maxCodeNumber)
         {
-            m_actualCode += button.name;
+            m_str_actualCode += button.name;
         }
-        UIManager.instance.ChangeCodeDisplay(m_actualCode);
+        UIManager.instance.ChangeCodeDisplay(m_str_actualCode);
         UIManager.instance.ShowLight(false, true);
     }
 
@@ -43,14 +39,14 @@ public class Interaction_CajaFuerte : AffectsIndirectly
     public void DeleteActualCode()
     {
         ReproduceKeySound();
-        m_actualCode = "";
-        UIManager.instance.ChangeCodeDisplay(m_actualCode);
+        m_str_actualCode = "";
+        UIManager.instance.ChangeCodeDisplay(m_str_actualCode);
     }
 
     public void CheckCode()
     {
         ReproduceKeySound();
-        if (m_actualCode == m_correctCode)
+        if (m_str_actualCode == m_str_correctCode)
         {
             m_isOpen = true;
             UIManager.instance.ShowLight(true, false);
@@ -62,7 +58,7 @@ public class Interaction_CajaFuerte : AffectsIndirectly
 
             IChangeActiveMode(m_go_targetObject, true);
             GetComponent<InteractiveObject>().enabled = false;
-            anim.SetInteger("Abrir", 1);
+            m_animatr.SetInteger("Abrir", 1);
         }
         else
         {
