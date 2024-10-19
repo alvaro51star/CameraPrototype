@@ -6,17 +6,24 @@ public class PlayerBehaviour : MonoBehaviour
 {
     //Variables
     [SerializeField] Camera m_cam;
-    private bool m_canInteract = false;
-    private List<InteractiveObject> m_interactiveObjects = new List<InteractiveObject>();
+    private bool m_isCanInteract = false;
+    private List<InteractiveObject> m_L_interactiveObjects = new List<InteractiveObject>();
     private InteractiveObject m_actualSimpleInteractiveObject;
     private InteractiveObject m_actualInputInteractiveObject;
-    private bool m_hasCameraEquiped = false;
-    private bool m_isReading;
-    private bool m_isDoor;
-    private bool m_isLockedDoor;
-    private bool m_isCat;
-    private bool m_isRedBeard;
+    private bool m_isCameraEquiped, m_isReading, m_isDoor, m_isLockedDoor, m_isCat, m_isRedBeard;
 
+    #region Getters and Setters
+        public bool GetIsReading()
+        {
+            return m_isReading;
+        }
+        
+        public bool GetCanTakePicture()
+        {
+            return m_isCameraEquiped;
+        }
+    #endregion
+    
     private void OnEnable()
     {
         EventManager.OnUsingCamera += UsingCamera;
@@ -37,45 +44,37 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (m_interactiveObjects.Count == 0) return;
+        if (m_L_interactiveObjects.Count == 0) return;
         CheckObjectListNull();
         CheckActualInputInteractiveObject();
     }
 
-    private void NotUsingCamera()
-    {
-        m_hasCameraEquiped = false;
-    }
-
-    private void UsingCamera()
-    {
-        m_hasCameraEquiped = true;
-        StopInteracting();
-    }
-
-    private void IsReading()
-    {
-        m_isReading = true;
-        EventManager.OnIsReading -= IsReading;
-        EventManager.OnStopReading += StopReading;
-    }
-
-    private void StopReading()
-    {
-        m_isReading = false;
-        EventManager.OnStopReading -= StopReading;
-        EventManager.OnIsReading += IsReading;
-    }
-
-    public bool GetIsReading()
-    {
-        return m_isReading;
-    }
-
-    public bool GetCanTakePicture()
-    {
-        return m_hasCameraEquiped;
-    }
+    #region Event Methods
+        private void NotUsingCamera()
+        {
+            m_isCameraEquiped = false;
+        }
+        
+        private void UsingCamera()
+        {
+            m_isCameraEquiped = true;
+            StopInteracting();
+        }
+        
+        private void IsReading()
+        {
+            m_isReading = true;
+            EventManager.OnIsReading -= IsReading;
+            EventManager.OnStopReading += StopReading;
+        }
+        
+        private void StopReading()
+        {
+            m_isReading = false;
+            EventManager.OnStopReading -= StopReading;
+            EventManager.OnIsReading += IsReading;
+        }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
@@ -85,7 +84,7 @@ public class PlayerBehaviour : MonoBehaviour
         interactiveObject.SwitchIsInArea(true);
         if (interactiveObject.GetNeedsButton())
         {
-            m_interactiveObjects.Add(interactiveObject);
+            m_L_interactiveObjects.Add(interactiveObject);
         }
         else
         {
@@ -93,10 +92,26 @@ public class PlayerBehaviour : MonoBehaviour
             SimpleInteraction();
         }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        var interactiveObject = other.GetComponent<InteractiveObject>();
+        if (interactiveObject is null || !m_L_interactiveObjects.Contains(interactiveObject)) return;
+        interactiveObject.SwitchIsInArea(false);
+        m_L_interactiveObjects.RemoveAt(m_L_interactiveObjects.IndexOf(interactiveObject));
 
+        if (m_actualInputInteractiveObject == interactiveObject)
+        {
+            m_actualInputInteractiveObject = null;
+            StopInteracting();
+        }
+        CheckObjectListNull();
+    }
+
+    //Custom
     private void IsBesideInteractableObject()
     {
-        m_canInteract = true;
+        m_isCanInteract = true;
         if (UIManager.instance.GetIsGamePaused() || m_isReading) return;
         UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
         if (m_isDoor)
@@ -126,24 +141,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        var interactiveObject = other.GetComponent<InteractiveObject>();
-        if (interactiveObject is null || !m_interactiveObjects.Contains(interactiveObject)) return;
-        interactiveObject.SwitchIsInArea(false);
-        m_interactiveObjects.RemoveAt(m_interactiveObjects.IndexOf(interactiveObject));
-
-        if (m_actualInputInteractiveObject == interactiveObject)
-        {
-            m_actualInputInteractiveObject = null;
-            StopInteracting();
-        }
-        CheckObjectListNull();
-    }
-
     private void StopInteracting()
     {
-        m_canInteract = false;
+        m_isCanInteract = false;
         m_isLockedDoor = false;
         m_isDoor = false;
         m_isCat = false;
@@ -154,14 +154,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void SimpleInteraction()
     {
-        m_actualSimpleInteractiveObject.Interact(this.gameObject);
+        m_actualSimpleInteractiveObject.I_Interact(this.gameObject);
         m_actualSimpleInteractiveObject = null;
     }
 
     public void InputInteraction()
     {
-        if (!m_canInteract || m_actualInputInteractiveObject is null || m_isReading) return;
-        m_actualInputInteractiveObject.Interact(gameObject);
+        if (!m_isCanInteract || m_actualInputInteractiveObject is null || m_isReading) return;
+        m_actualInputInteractiveObject.I_Interact(gameObject);
     }
 
     private void CheckActualInputInteractiveObject()
@@ -170,22 +170,22 @@ public class PlayerBehaviour : MonoBehaviour
         float nearestAngle = 100;
         var i = 0;
 
-        if (m_interactiveObjects.Count == 0) return;
+        if (m_L_interactiveObjects.Count == 0) return;
 
-        for (i = 0; i < m_interactiveObjects.Count; i++)
+        for (i = 0; i < m_L_interactiveObjects.Count; i++)
         {
             if (i == 0)
             {
-                nearestInteractiveObject = m_interactiveObjects[0];
+                nearestInteractiveObject = m_L_interactiveObjects[0];
             }
 
             var priorVectorDirector = nearestInteractiveObject.transform.position - m_cam.transform.position;
-            var actualVectorDirector = m_interactiveObjects[i].m_interactionPivot.transform.position - m_cam.transform.position;
+            var actualVectorDirector = m_L_interactiveObjects[i].m_tf_interactionPivot.transform.position - m_cam.transform.position;
             var priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
             var actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
 
             if (!(actualAngle <= priorAngle)) continue;
-            nearestInteractiveObject = m_interactiveObjects[i];
+            nearestInteractiveObject = m_L_interactiveObjects[i];
             nearestAngle = actualAngle;
         }
 
@@ -196,7 +196,7 @@ public class PlayerBehaviour : MonoBehaviour
             m_actualInputInteractiveObject = nearestInteractiveObject;
 
 
-            if (m_hasCameraEquiped || m_isReading) return;
+            if (m_isCameraEquiped || m_isReading) return;
             if (m_actualInputInteractiveObject.GetComponent<Interaction_Door>() is not null)
             {
                 m_isDoor = true;
@@ -224,11 +224,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void CheckObjectListNull()
     {
-        for (int i = 0; i < m_interactiveObjects.Count; i++)
+        for (int i = 0; i < m_L_interactiveObjects.Count; i++)
         {
-            if (m_interactiveObjects[i] is null || m_interactiveObjects[i].gameObject.activeSelf == false || !m_interactiveObjects[i].GetIsInArea())
+            if (m_L_interactiveObjects[i] is null || m_L_interactiveObjects[i].gameObject.activeSelf == false || !m_L_interactiveObjects[i].GetIsInArea())
             {
-                m_interactiveObjects.RemoveAt(i);
+                m_L_interactiveObjects.RemoveAt(i);
             }
         }
         

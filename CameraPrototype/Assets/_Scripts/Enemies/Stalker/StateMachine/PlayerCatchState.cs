@@ -16,7 +16,7 @@ public class PlayerCatchState : State
         animator.enabled = true;
         animator = stalkerBehaviour.animator;
         navMesh.enabled = false;
-        player.GetComponent<PlayerMovement>().m_canWalk = false;
+        player.GetComponent<PlayerMovement>().m_isCanWalk = false;
         animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
 

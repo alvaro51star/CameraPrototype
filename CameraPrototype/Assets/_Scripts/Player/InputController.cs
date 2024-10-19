@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     //Variables
-    private PlayerMovement m_playerMovement;
-    private PlayerBehaviour m_playerBehaviour;
     [SerializeField] private PhotoCapture m_photoCapture;
     [SerializeField] private DialogueController m_dialogueController;
+    private PlayerMovement m_playerMovement;
+    private PlayerBehaviour m_playerBehaviour;
 
     private void Start()
     {
@@ -16,6 +16,7 @@ public class InputController : MonoBehaviour
         m_dialogueController = UIManager.instance.GetComponent<DialogueController>();
     }
 
+    //Custom
     public void OnMovement(InputAction.CallbackContext context)
     {
         m_playerMovement.SetMovementInputValue(context.ReadValue<Vector2>());

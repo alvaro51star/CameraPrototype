@@ -221,13 +221,13 @@ public class MenuButtons : MonoBehaviour//en este script estaran las funcionalid
     public void SensibilitySliderX(float X)
     {
         SensValueX = X;
-        m_playerMovement.m_rotationSpeedX = SensValueX;
+        m_playerMovement.rotationSpeedX = SensValueX;
     }
 
     public void SensibilitySliderY(float Y)
     {
         SensValueY = Y;
-        m_playerMovement.m_rotationSpeedY = SensValueY;
+        m_playerMovement.rotationSpeedY = SensValueY;
     }
 
     #endregion
