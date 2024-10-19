@@ -7,14 +7,12 @@ public class PlayerMovement : MonoBehaviour
 {
     //Variables
     [SerializeField] private float m_upDownRange;
-    [FormerlySerializedAs("m_camera")] [SerializeField] private Transform m_tf_camera;
+    [SerializeField] private Transform m_tf_camera;
     private CharacterController m_cc;
-    private Vector2 m_v2_movementInputValue, m_v2_playerRotateInputValue;
     private float m_cameraRotateInputVaue;
-    [FormerlySerializedAs("m_speed")] public float speed;
-    [FormerlySerializedAs("m_rotationSpeedX")] public float rotationSpeedX;
-    [FormerlySerializedAs("m_rotationSpeedY")] public float rotationSpeedY;
-    [FormerlySerializedAs("m_canWalk")] public bool m_isCanWalk = true;
+    private Vector2 m_v2_movementInputValue, m_v2_playerRotateInputValue;
+    public bool m_isCanWalk = true;
+    public float speed, rotationSpeedX, rotationSpeedY;
 
         //gravity
     [SerializeField] private float m_gravity = 9.8f;
@@ -102,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
 
         movement.Normalize();
 
-        //boorrar luego
         Vector3 upVector = Vector3.up * (m_verticalVelocity * Time.deltaTime);
 
         m_cc.Move(movement *(speed * Time.deltaTime) + upVector);
