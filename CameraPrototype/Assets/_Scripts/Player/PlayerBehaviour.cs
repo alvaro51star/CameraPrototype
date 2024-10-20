@@ -13,17 +13,19 @@ public class PlayerBehaviour : MonoBehaviour
     private bool m_isCameraEquiped, m_isReading, m_isDoor, m_isLockedDoor, m_isCat, m_isRedBeard;
 
     #region Getters and Setters
-        public bool GetIsReading()
-        {
-            return m_isReading;
-        }
-        
-        public bool GetCanTakePicture()
-        {
-            return m_isCameraEquiped;
-        }
+
+    public bool GetIsReading()
+    {
+        return m_isReading;
+    }
+
+    public bool GetCanTakePicture()
+    {
+        return m_isCameraEquiped;
+    }
+
     #endregion
-    
+
     private void OnEnable()
     {
         EventManager.OnUsingCamera += UsingCamera;
@@ -50,30 +52,32 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     #region Event Methods
-        private void NotUsingCamera()
-        {
-            m_isCameraEquiped = false;
-        }
-        
-        private void UsingCamera()
-        {
-            m_isCameraEquiped = true;
-            StopInteracting();
-        }
-        
-        private void IsReading()
-        {
-            m_isReading = true;
-            EventManager.OnIsReading -= IsReading;
-            EventManager.OnStopReading += StopReading;
-        }
-        
-        private void StopReading()
-        {
-            m_isReading = false;
-            EventManager.OnStopReading -= StopReading;
-            EventManager.OnIsReading += IsReading;
-        }
+
+    private void NotUsingCamera()
+    {
+        m_isCameraEquiped = false;
+    }
+
+    private void UsingCamera()
+    {
+        m_isCameraEquiped = true;
+        StopInteracting();
+    }
+
+    private void IsReading()
+    {
+        m_isReading = true;
+        EventManager.OnIsReading -= IsReading;
+        EventManager.OnStopReading += StopReading;
+    }
+
+    private void StopReading()
+    {
+        m_isReading = false;
+        EventManager.OnStopReading -= StopReading;
+        EventManager.OnIsReading += IsReading;
+    }
+
     #endregion
 
     private void OnTriggerEnter(Collider other)
@@ -92,7 +96,7 @@ public class PlayerBehaviour : MonoBehaviour
             SimpleInteraction();
         }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         var interactiveObject = other.GetComponent<InteractiveObject>();
@@ -106,10 +110,11 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 m_actualInputInteractiveObject.outlineComponent.enabled = false;
             }
-            
+
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
+
         CheckObjectListNull();
     }
 
@@ -118,10 +123,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         m_isCanInteract = true;
         if (UIManager.instance.GetIsGamePaused() || m_isReading) return;
-        UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
-        
-        
-        
+        UIManager.instance.SetInteractionText(true,
+            m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
+
+
         if (m_isDoor)
         {
             if (m_isLockedDoor)
@@ -132,24 +137,21 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 UIManager.instance.InteractionAvialable(true, false, false);
             }
-
         }
         else if (!m_isDoor && m_isCat)
         {
             UIManager.instance.InteractionAvialable(true, false, true);
-
         }
         else if (!m_isDoor && !m_isCat)
         {
             UIManager.instance.InteractionAvialable(true, false, false);
-            
+
             if (m_isRedBeard)
             {
                 UIManager.instance.ShowInput(false);
             }
-            
         }
-        
+
         //Outline
         if (m_actualInputInteractiveObject.outlineComponent)
         {
@@ -166,7 +168,6 @@ public class PlayerBehaviour : MonoBehaviour
         m_isRedBeard = false;
         UIManager.instance.InteractionAvialable(false, false, false);
         UIManager.instance.SetInteractionText(false, "");
-        
     }
 
     private void SimpleInteraction()
@@ -197,7 +198,8 @@ public class PlayerBehaviour : MonoBehaviour
             }
 
             var priorVectorDirector = nearestInteractiveObject.transform.position - m_cam.transform.position;
-            var actualVectorDirector = m_L_interactiveObjects[i].m_tf_interactionPivot.transform.position - m_cam.transform.position;
+            var actualVectorDirector = m_L_interactiveObjects[i].m_tf_interactionPivot.transform.position -
+                                       m_cam.transform.position;
             var priorAngle = Vector3.Angle(m_cam.transform.forward, priorVectorDirector);
             var actualAngle = Vector3.Angle(m_cam.transform.forward, actualVectorDirector);
 
@@ -219,48 +221,47 @@ public class PlayerBehaviour : MonoBehaviour
                 m_isDoor = true;
                 m_isLockedDoor = m_actualInputInteractiveObject.GetComponent<Interaction_Door>().GetDiscoveredLocked();
             }
+
             if (m_actualInputInteractiveObject.GetComponent<Interaction_Cat>() is not null)
             {
                 m_isCat = true;
             }
+
             if (m_actualInputInteractiveObject.GetComponent<Interaction_RedBeard>() is not null)
             {
                 m_isRedBeard = true;
             }
+
             IsBesideInteractableObject();
         }
 
         else
         {
             //Outline
-            if (m_actualInputInteractiveObject)
+            if (m_actualInputInteractiveObject && m_actualInputInteractiveObject.outlineComponent)
             {
-                if (m_actualInputInteractiveObject.outlineComponent)
-                {
-                    m_actualInputInteractiveObject.outlineComponent.enabled = false;
-                }
+                m_actualInputInteractiveObject.outlineComponent.enabled = false;
             }
-            
+
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
-
-
     }
 
     private void CheckObjectListNull()
     {
         for (int i = 0; i < m_L_interactiveObjects.Count; i++)
         {
-            if (m_L_interactiveObjects[i] is null || m_L_interactiveObjects[i].gameObject.activeSelf == false || !m_L_interactiveObjects[i].GetIsInArea())
+            if (m_L_interactiveObjects[i] is null || m_L_interactiveObjects[i].gameObject.activeSelf == false ||
+                !m_L_interactiveObjects[i].GetIsInArea())
             {
                 m_L_interactiveObjects.RemoveAt(i);
             }
         }
-        
-        if (m_actualInputInteractiveObject is null || !m_actualInputInteractiveObject.gameObject.activeSelf || 
+
+        if (m_actualInputInteractiveObject is null || !m_actualInputInteractiveObject.gameObject.activeSelf ||
             !m_actualInputInteractiveObject.enabled || !m_actualInputInteractiveObject.GetIsInArea())
-        {    
+        {
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
