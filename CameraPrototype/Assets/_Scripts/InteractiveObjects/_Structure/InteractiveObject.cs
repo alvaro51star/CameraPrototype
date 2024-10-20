@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 public class InteractiveObject : MonoBehaviour, I_InteractableObjects
 {
     //Variables
+    public OutlineFx.OutlineFx outlineComponent;
     [SerializeField] private bool m_isNeedsButton;
     [SerializeField] private EventReference m_interactiveObject;
     [SerializeField] private float m_interactionAngle;
@@ -14,7 +15,7 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     public Transform m_tf_interactionPivot;
     private bool m_isInArea;
 
-    public OutlineFx.OutlineFx outlineComponent;
+    
 
     #region Getters and Setters
         public bool GetNeedsButton()

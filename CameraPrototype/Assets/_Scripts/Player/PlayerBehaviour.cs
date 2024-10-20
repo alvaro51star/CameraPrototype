@@ -150,7 +150,7 @@ public class PlayerBehaviour : MonoBehaviour
             
         }
         
-        //!PRueba
+        //Outline
         if (m_actualInputInteractiveObject.outlineComponent)
         {
             m_actualInputInteractiveObject.outlineComponent.enabled = true;
@@ -232,7 +232,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         else
         {
-            //!prueba 
+            //Outline
             if (m_actualInputInteractiveObject)
             {
                 if (m_actualInputInteractiveObject.outlineComponent)
