@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StalkPointBehaviour : MonoBehaviour
 {
-    [SerializeField] private Transform position;
-    public bool isActive = false;
+    [FormerlySerializedAs("position")] [SerializeField] private Transform m_Tf_Position;
+    [FormerlySerializedAs("isActive")] public bool iIsActive = false;
 
     private void Start()
     {
-        position.gameObject.SetActive(isActive);
+        m_Tf_Position.gameObject.SetActive(iIsActive);
     }
 
     public void TogglePosition(bool active)
     {
-        isActive = active;
-        position.gameObject.SetActive(isActive);
+        iIsActive = active;
+        m_Tf_Position.gameObject.SetActive(iIsActive);
     }
 }

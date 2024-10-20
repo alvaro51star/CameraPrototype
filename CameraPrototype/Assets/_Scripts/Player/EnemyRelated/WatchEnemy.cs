@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class WatchEnemy : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private Transform cameraTransform;
+    [FormerlySerializedAs("enemy")] [SerializeField] private GameObject m_go_enemy;
+    [FormerlySerializedAs("cameraTransform")] [SerializeField] private Transform m_tf_cameraTransform;
+    [FormerlySerializedAs("maxDistance")]
     [Space]
     [Header("Angle of vision variables")]
-    [SerializeField] private float maxDistance = 5f;
-    [SerializeField] private float maxAngleVision = 20f;
+    [SerializeField] private float m_maxDistance = 5f;
+    [FormerlySerializedAs("maxAngleVision")] [SerializeField] private float m_maxAngleVision = 20f;
 
+    [FormerlySerializedAs("maxAngleVisionJumpScare")]
     [Space]
     [Header("Jumpscare variables")]
-    [SerializeField] private float maxAngleVisionJumpScare = 30f;
-    [SerializeField] private float timeForNewJumpScare = 10f;
+    [SerializeField] private float m_maxAngleVisionJumpScare = 30f;
+    [FormerlySerializedAs("timeForNewJumpScare")] [SerializeField] private float m_timeForNewJumpScare = 10f;
 
+    [FormerlySerializedAs("feedbackVigneteEnemy")]
     [Space]
     [Header("Feel Variables")]
-    [SerializeField] private MMFeedbacks feedbackVigneteEnemy;
+    [SerializeField] private MMFeedbacks m_mmf_feedbackVigneteEnemy;
 
-    private bool jumpScareOnCD = false;
+    private bool isJumpScareOnCD = false;
 
-    public Transform enemyCatchTp;
+    [FormerlySerializedAs("enemyCatchTp")] public Transform tf_enemyCatchTp;
 
     private void Update()
     {
@@ -34,20 +38,20 @@ public class WatchEnemy : MonoBehaviour
 
     private void CanSeeEnemy()
     {
-        if (enemy.layer != default)
+        if (m_go_enemy.layer != default)
         {
             return;
         }
 
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
+        Vector3 rayDirection = m_go_enemy.GetComponent<StalkerBehaviour>().tf_pointToLook.position - m_tf_cameraTransform.position;
+        if (Physics.Raycast(m_tf_cameraTransform.position, m_tf_cameraTransform.forward, out RaycastHit hit, m_maxDistance))
         {
-            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
-            float angle = Vector3.Angle(cameraTransform.forward, rayDirection);
+            Debug.DrawRay(m_tf_cameraTransform.position, m_tf_cameraTransform.forward * m_maxDistance, Color.red);
+            float angle = Vector3.Angle(m_tf_cameraTransform.forward, rayDirection);
 
-            if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVision)
+            if (hit.transform.CompareTag("Enemy") && angle <= m_maxAngleVision)
             {
-                Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.green);
+                Debug.DrawRay(m_tf_cameraTransform.position, m_tf_cameraTransform.forward * m_maxDistance, Color.green);
                 hit.transform.GetComponent<StalkerBehaviour>().AddVision(Time.deltaTime);
             }
         }
@@ -55,20 +59,20 @@ public class WatchEnemy : MonoBehaviour
 
     private void JumpScareStalker()
     {
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
-        float distance = Vector3.Distance(transform.position, enemy.transform.position);
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
+        Vector3 rayDirection = m_go_enemy.GetComponent<StalkerBehaviour>().tf_pointToLook.position - m_tf_cameraTransform.position;
+        float distance = Vector3.Distance(transform.position, m_go_enemy.transform.position);
+        if (Physics.Raycast(m_tf_cameraTransform.position, m_tf_cameraTransform.forward, out RaycastHit hit, m_maxDistance))
         {
             float angle = Vector3.Angle(rayDirection, transform.forward);
-            if (hit.transform.CompareTag("Enemy") && angle <= maxAngleVisionJumpScare)
+            if (hit.transform.CompareTag("Enemy") && angle <= m_maxAngleVisionJumpScare)
             {
-                if (distance <= 5f && !jumpScareOnCD)
+                if (distance <= 5f && !isJumpScareOnCD)
                 {
                     StartCoroutine(JumpScareCD());
                 }
                 else
                 {
-                    if (Random.Range(1, 6) < 3 && !jumpScareOnCD)
+                    if (Random.Range(1, 6) < 3 && !isJumpScareOnCD)
                     {
                         StartCoroutine(JumpScareCD());
                     }
@@ -79,19 +83,19 @@ public class WatchEnemy : MonoBehaviour
 
     private IEnumerator JumpScareCD()
     {
-        jumpScareOnCD = true;
+        isJumpScareOnCD = true;
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.jumpScare /*, this.transform.position */);
-        yield return new WaitForSeconds(timeForNewJumpScare);
-        jumpScareOnCD = false;
+        yield return new WaitForSeconds(m_timeForNewJumpScare);
+        isJumpScareOnCD = false;
     }
 
     public void ActivateFeedbacks()
     {
-        feedbackVigneteEnemy?.PlayFeedbacks();
+        m_mmf_feedbackVigneteEnemy?.PlayFeedbacks();
     }
 
     public void DesactivateFeedback()
     {
-        feedbackVigneteEnemy?.StopFeedbacks();
+        m_mmf_feedbackVigneteEnemy?.StopFeedbacks();
     }
 }

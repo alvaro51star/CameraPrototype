@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ToggleStalkPoints : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
+    [FormerlySerializedAs("playerTransform")] [SerializeField] private Transform m_tf_playerTransform;
 
     private void Start()
     {
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
-        if (!playerTransform)
+        m_tf_playerTransform = FindObjectOfType<PlayerMovement>().transform;
+        if (!m_tf_playerTransform)
         {
             Debug.LogError("Jugador no encontrado, asegurese de que hay un jugador en la escena");
         }
@@ -17,8 +18,8 @@ public class ToggleStalkPoints : MonoBehaviour
 
     private void Update()
     {
-        if(playerTransform){
-            transform.position = playerTransform.position;
+        if(m_tf_playerTransform){
+            transform.position = m_tf_playerTransform.position;
         }
     }
 

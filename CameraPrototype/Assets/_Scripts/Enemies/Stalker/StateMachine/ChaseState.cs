@@ -2,39 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class ChaseState : State
 {
 
-    [SerializeField] private NavMeshAgent navMesh;
-    [SerializeField] private GameObject player;
+    [FormerlySerializedAs("navMesh")] [SerializeField] private NavMeshAgent m_NavMAg_navMesh;
+    [FormerlySerializedAs("player")] [SerializeField] private GameObject m_go_player;
 
-    public bool enteredAnimation = false;
+    [FormerlySerializedAs("enteredAnimation")] public bool isHasEnteredAnimation = false;
 
 
 
     public override void Enter()
     {
-        animator.enabled = true;
-        stateName = "Chase";
-        EventManager.OnStatusChange?.Invoke(stateName);
-        navMesh.enabled = true;
-        navMesh.speed = stalkerBehaviour.enemySpeed;
-        navMesh.isStopped = false;
+        animtr_animator.enabled = true;
+        m_stateName = "Chase";
+        EventManager.OnStatusChange?.Invoke(m_stateName);
+        m_NavMAg_navMesh.enabled = true;
+        m_NavMAg_navMesh.speed = m_stalkerBehaviour.enemySpeed;
+        m_NavMAg_navMesh.isStopped = false;
 
         isComplete = false;
 
-        animator.Play("Run");
-        enteredAnimation = true;
+        animtr_animator.Play("Run");
+        isHasEnteredAnimation = true;
 
-        stalkerBehaviour.ActivateCollision();
+        m_stalkerBehaviour.ActivateCollision();
     }
 
     public override void Exit()
     {
-        enteredAnimation = false;
+        isHasEnteredAnimation = false;
         isComplete = false;
-        stalkerBehaviour.lastState = stalkerBehaviour.chaseState;
+        m_stalkerBehaviour.lastState = m_stalkerBehaviour.chaseState;
     }
 
     public override void Do()
@@ -44,17 +45,17 @@ public class ChaseState : State
 
     public void SetUp(NavMeshAgent navMeshAgent, GameObject player, Animator animator, StalkerBehaviour stalkerBehaviour)
     {
-        navMesh = navMeshAgent;
-        this.player = player;
-        this.animator = animator;
-        this.stalkerBehaviour = stalkerBehaviour;
+        m_NavMAg_navMesh = navMeshAgent;
+        this.m_go_player = player;
+        this.animtr_animator = animator;
+        this.m_stalkerBehaviour = stalkerBehaviour;
     }
 
     private void Chase()
     {
-        if (navMesh.isActiveAndEnabled)
+        if (m_NavMAg_navMesh.isActiveAndEnabled)
         {
-            navMesh.SetDestination(player.transform.position);
+            m_NavMAg_navMesh.SetDestination(m_go_player.transform.position);
         }
     }
 }
