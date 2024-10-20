@@ -2,17 +2,18 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class StalkerBehaviour : Enemy
 {
     #region Variables
 
     [SerializeField] private UIManager uiManager;
-    public Renderer objectMesh;
-    public GameObject player;
-    public Animator animator;
+    [FormerlySerializedAs("objectMesh")] public Renderer rdr_objectMesh;
+    [FormerlySerializedAs("player")] public GameObject go_player;
+    [FormerlySerializedAs("animator")] public Animator animtr_animator;
 
-    public Transform pointToLook;
+    [FormerlySerializedAs("pointToLook")] public Transform tf_pointToLook;
     [Space]
     [Header("States")]
     public State currentState;
@@ -29,16 +30,19 @@ public class StalkerBehaviour : Enemy
     [Header("Public variables")]
     public bool isVisible = false;
     public bool isStunned = false;
-    public bool chasePlayer = false;
+    [FormerlySerializedAs("chasePlayer")] public bool isChasingPlayer = false;
     public bool isGrowling = false;
+    [Range(0.5f, 10f)]
     public float enemySpeed = 3.5f;
 
+    [FormerlySerializedAs("navMAg_navMeshAgent")]
+    [FormerlySerializedAs("navMesh")]
     [Space]
     [Header("Collision related variables")]
-    [SerializeField] private NavMeshAgent navMesh;
-    [SerializeField] private Collider collision;
-    [SerializeField] private Collider triggerCollision;
-    public bool playerCatched = false;
+    [SerializeField] private NavMeshAgent m_navMAg_navMeshAgent;
+    [FormerlySerializedAs("coll_collision")] [FormerlySerializedAs("collision")] [SerializeField] private Collider m_coll_collision;
+    [FormerlySerializedAs("triggerCollision")] [SerializeField] private Collider m_coll_triggerCollision;
+    [FormerlySerializedAs("playerCatched")] public bool isPlayerCatched = false;
 
 
 
@@ -48,11 +52,12 @@ public class StalkerBehaviour : Enemy
     public float currentTimeLooked = 0;
 
 
+    [FormerlySerializedAs("finalTpPoint")]
     [Space]
     [Header("Persecution Variables")]
-    [SerializeField] private Transform finalTpPoint;
-    [SerializeField] private float triggerRadius = 1f;
-    [SerializeField] private float enemyPersecutionSpeed = 2f;
+    [SerializeField] private Transform m_tf_finalTpPoint;
+    [FormerlySerializedAs("triggerRadius")] [SerializeField] private float m_triggerRadius = 1f;
+    [FormerlySerializedAs("enemyPersecutionSpeed")] [SerializeField] private float m_enemyPersecutionSpeed = 2f;
     public bool isInPersecution = false;
 
     #endregion
@@ -60,43 +65,43 @@ public class StalkerBehaviour : Enemy
 
     private void Awake()
     {
-        navMesh = GetComponent<NavMeshAgent>();
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        m_navMAg_navMeshAgent = GetComponent<NavMeshAgent>();
+        go_player = FindObjectOfType<PlayerMovement>().gameObject;
         uiManager = FindObjectOfType<UIManager>();
 
         //Set ups de los estados
-        stalkState.SetUp(gameObject, objectMesh, animator, this, navMesh);
-        stunnedState.SetUp(navMesh, animator, this);
-        chaseState.SetUp(navMesh, player, animator, this);
-        playerCatchState.SetUp(navMesh, player, uiManager, animator, gameObject, this);
-        outOfSightState.SetUp(gameObject, this, navMesh);
-        growlState.SetUp(gameObject, this, navMesh);
+        stalkState.SetUp(gameObject, rdr_objectMesh, animtr_animator, this, m_navMAg_navMeshAgent);
+        stunnedState.SetUp(m_navMAg_navMeshAgent, animtr_animator, this);
+        chaseState.SetUp(m_navMAg_navMeshAgent, go_player, animtr_animator, this);
+        playerCatchState.SetUp(m_navMAg_navMeshAgent, go_player, uiManager, animtr_animator, gameObject, this);
+        outOfSightState.SetUp(gameObject, this, m_navMAg_navMeshAgent);
+        growlState.SetUp(gameObject, this, m_navMAg_navMeshAgent);
     }
 
     void Start()
     {
-        if (!player)
+        if (!go_player)
         {
             Debug.LogError("No player found, please check if there is a player in scene");
         }
 
-        if (!playerCatched)
+        if (!isPlayerCatched)
         {
-            navMesh.speed = enemySpeed;
+            m_navMAg_navMeshAgent.speed = enemySpeed;
             currentState = stalkState;
             currentState.Enter();
         }
         
 
-        transform.LookAt(player.transform);
+        transform.LookAt(go_player.transform);
     }
 
 
     void Update()
     {
-        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+        transform.LookAt(new Vector3(go_player.transform.position.x, transform.position.y, go_player.transform.position.z));
 
-        if (objectMesh.isVisible)
+        if (rdr_objectMesh.isVisible)
         {
             isVisible = true;
         }
@@ -105,7 +110,7 @@ public class StalkerBehaviour : Enemy
             isVisible = false;
         }
 
-        if (playerCatched == false)
+        if (isPlayerCatched == false)
         {
             if (currentState.isComplete)
             {
@@ -120,7 +125,7 @@ public class StalkerBehaviour : Enemy
     {
         currentState.Exit();
 
-        if (currentTimeLooked >= maxTimeLooked || chasePlayer || isInPersecution)
+        if (currentTimeLooked >= maxTimeLooked || isChasingPlayer || isInPersecution)
         {
             currentState = chaseState;
         }
@@ -129,7 +134,7 @@ public class StalkerBehaviour : Enemy
             currentState = stalkState;
         }
 
-        if (playerCatched == true)
+        if (isPlayerCatched == true)
         {
             currentState = playerCatchState;
         }
@@ -140,18 +145,18 @@ public class StalkerBehaviour : Enemy
     //Solo sirve para cuando le estan persiguiendo que haga lo de que le pille
     private void OnTriggerEnter(Collider other)
     {
-        Vector3 direction = player.transform.position - pointToLook.position;
+        Vector3 direction = go_player.transform.position - tf_pointToLook.position;
 
         if (other.gameObject.CompareTag("Player") && currentState == chaseState)
         {
-            if (Physics.Raycast(pointToLook.position, direction, out RaycastHit hitInfo))
+            if (Physics.Raycast(tf_pointToLook.position, direction, out RaycastHit hitInfo))
             {
                 Debug.Log(hitInfo.transform.name);
                 if (hitInfo.transform.CompareTag("Player") == false)
                     return;
 
                 EnterState(playerCatchState);
-                playerCatched = true;
+                isPlayerCatched = true;
             }
         }
     }
@@ -162,13 +167,13 @@ public class StalkerBehaviour : Enemy
     //Anade vision al enemigo
     public void AddVision(float deltaTime)
     {
-        if (isStunned || playerCatched == true || isGrowling)
+        if (isStunned || isPlayerCatched == true || isGrowling)
         {
-            player.GetComponent<WatchEnemy>().DesactivateFeedback();
+            go_player.GetComponent<WatchEnemy>().DesactivateFeedback();
             return;
         }
 
-        player.GetComponent<WatchEnemy>().ActivateFeedbacks();
+        go_player.GetComponent<WatchEnemy>().ActivateFeedbacks();
 
         currentTimeLooked += deltaTime;
 
@@ -186,8 +191,8 @@ public class StalkerBehaviour : Enemy
 
     public void ActivateCollision()
     {
-        collision.isTrigger = false;
-        triggerCollision.enabled = true;
+        m_coll_collision.isTrigger = false;
+        m_coll_triggerCollision.enabled = true;
     }
 
     public void StunEnemy()
@@ -220,15 +225,15 @@ public class StalkerBehaviour : Enemy
 
     public void EventPersecution()
     {
-        navMesh.enabled = false;
-        transform.position = finalTpPoint.position;
-        navMesh.enabled = true;
+        m_navMAg_navMeshAgent.enabled = false;
+        transform.position = m_tf_finalTpPoint.position;
+        m_navMAg_navMeshAgent.enabled = true;
         isInPersecution = true;
         EnterState(growlState);
 
         //Valores para la persecución
-        (triggerCollision as SphereCollider).radius = triggerRadius;
-        navMesh.speed = enemyPersecutionSpeed;
+        (m_coll_triggerCollision as SphereCollider).radius = m_triggerRadius;
+        m_navMAg_navMeshAgent.speed = m_enemyPersecutionSpeed;
     }
 
 
@@ -238,7 +243,7 @@ public class StalkerBehaviour : Enemy
     public override void KillPlayer()
     {
         base.KillPlayer();
-        playerCatched = true;
+        isPlayerCatched = true;
         EnterState(playerCatchState);
         gameObject.GetComponent<AnomalyEnemy>().PhotoAction();
         //Activar enemigo

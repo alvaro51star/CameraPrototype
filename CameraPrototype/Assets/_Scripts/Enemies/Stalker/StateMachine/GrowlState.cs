@@ -44,7 +44,7 @@ public class GrowlState : State
         currentTime = 0f;
         isComplete = false;
         stalkerBehaviour.isGrowling = false;
-        stalkerBehaviour.chasePlayer = true;
+        stalkerBehaviour.isChasingPlayer = true;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
