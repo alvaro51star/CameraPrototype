@@ -14,6 +14,8 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     public Transform m_tf_interactionPivot;
     private bool m_isInArea;
 
+    public OutlineFx.OutlineFx outlineComponent;
+
     #region Getters and Setters
         public bool GetNeedsButton()
         {
@@ -38,6 +40,8 @@ public class InteractiveObject : MonoBehaviour, I_InteractableObjects
     
     private void Start()
     {
+        outlineComponent = GetComponentInChildren<OutlineFx.OutlineFx>(true);
+        
         m_interactionScript = GetComponent<InteractionScript>();
         if (m_tf_interactionPivot == null)
         {
