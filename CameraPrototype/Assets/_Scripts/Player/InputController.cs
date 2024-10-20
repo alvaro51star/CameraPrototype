@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
     //Variables
-    private PlayerMovement m_playerMovement;
-    private PlayerBehaviour m_playerBehaviour;
     [SerializeField] private PhotoCapture m_photoCapture;
     [SerializeField] private DialogueController m_dialogueController;
+    private PlayerMovement m_playerMovement;
+    private PlayerBehaviour m_playerBehaviour;
 
     private void Start()
     {
@@ -17,6 +16,7 @@ public class InputController : MonoBehaviour
         m_dialogueController = UIManager.instance.GetComponent<DialogueController>();
     }
 
+    //Custom
     public void OnMovement(InputAction.CallbackContext context)
     {
         m_playerMovement.SetMovementInputValue(context.ReadValue<Vector2>());
@@ -29,9 +29,9 @@ public class InputController : MonoBehaviour
 
     public void OnPauseMenu(InputAction.CallbackContext context)
     {
-        if (UIManager.instance.GetIsPauseMenuActive())
+        if (MenuButtons.instance.GetIsPauseMenuActive())
         {
-            UIManager.instance.Resume();
+            MenuButtons.instance.Resume();
         }
         else
         {
@@ -42,8 +42,8 @@ public class InputController : MonoBehaviour
     public void OnTakePhoto(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        if ((UIManager.instance.GetIsGamePaused() || !m_photoCapture.hasCameraEquiped) &&
-            (UIManager.instance.GetIsGamePaused() || m_photoCapture.GetViewingPhoto() != true)) return;
+        if ((MenuButtons.instance.GetIsGamePaused() || !m_photoCapture.isCameraEquipped) &&
+            (MenuButtons.instance.GetIsGamePaused() || m_photoCapture.GetViewingPhoto() != true)) return;
         if (m_photoCapture.GetFirstPhotoTaken() == false)
         {
             m_photoCapture.TakePhoto();
@@ -60,7 +60,7 @@ public class InputController : MonoBehaviour
                 break;
             case "leftButton":
             {
-                if (UIManager.instance.GetIsGamePaused() is false || !m_photoCapture.hasCameraEquiped || m_photoCapture.GetViewingPhoto() != true)
+                if (MenuButtons.instance.GetIsGamePaused() is false || !m_photoCapture.isCameraEquipped || m_photoCapture.GetViewingPhoto() != true)
                     m_playerBehaviour.InputInteraction();
                 break;
             }
@@ -69,7 +69,7 @@ public class InputController : MonoBehaviour
 
     public void OnFocusCamera(InputAction.CallbackContext context)
     {
-        if (context.started && !UIManager.instance.GetIsGamePaused())
+        if (context.started && !MenuButtons.instance.GetIsGamePaused())
         {
             EventManager.OnUsingCamera?.Invoke();
         }
@@ -81,7 +81,7 @@ public class InputController : MonoBehaviour
 
     public void OnSkipText(InputAction.CallbackContext context)
     {
-        if (context.performed && UIManager.instance.m_isInDialogue)
+        if (context.performed && UIManager.instance.isInDialogue)
         {
             m_dialogueController.NextDialogueLine();
         }
@@ -93,5 +93,14 @@ public class InputController : MonoBehaviour
         {
             EventManager.OnAddRoll?.Invoke(100);
         }
+    }
+
+    public void OnChangeLens(InputAction.CallbackContext context)//lo dejo por si acaso metemos mas lentes
+    {
+        if(MenuButtons.instance.GetIsGamePaused())
+            return;
+        if(context.ReadValue<float>() == 0f)
+            return;
+        EventManager.OnChangeLens?.Invoke(context.ReadValue<float>());
     }
 }

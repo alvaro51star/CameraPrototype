@@ -96,11 +96,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needsButton: 1
-  m_interactionScript: {fileID: 0}
-  m_interactSound: {fileID: 8300000, guid: 43faa7beeaa98814bb63adbc6cce4baa, type: 3}
+  m_isNeedsButton: 1
+  m_interactiveObject:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   m_interactionAngle: 15
-  m_interactionPivot: {fileID: 0}
+  m_interactionScript: {fileID: 0}
+  m_tf_interactionPivot: {fileID: 0}
 --- !u!114 &8056918256493050061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d30bd213ecc574cbb9ee3bc7c17e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactText: Take camera roll
-  m_firstMessage: Take camera roll
-  m_secondMessage: 
-  m_targetObject: {fileID: 0}
-  m_dissapears: 1
-  m_affectsPositive: 0
+  m_str_interactText: Take camera roll
+  m_str_firstMessage: Take camera roll
+  m_str_secondMessage: 
+  m_isDissapears: 1
+  m_isAffectsPositive: 0
+  m_go_targetObject: {fileID: 0}
   m_rollAdded: 2
 --- !u!1001 &3004644437173311422
 PrefabInstance:

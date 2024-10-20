@@ -77,7 +77,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: -3590641969719069725}
-  m_RendererFeatureMap: adc0de57c6d2eee5e333490f277a2bce
+  - {fileID: 5188787184961022247}
+  m_RendererFeatureMap: adc0de57c6d2eee5e333490f277a2bce2769b30e74460248
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -120,3 +121,32 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &5188787184961022247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177ddeadd26a80641ad757c51fb7f5d1, type: 3}
+  m_Name: OutlineFxFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _event: 600
+  _solid: 0
+  _thickness: 0.195
+  _alphaCutout: 0.5
+  _mode: 1
+  _filter: 1
+  _attachDepth: 1
+  _output:
+    enabled: 0
+    value: _globalTex
+  _solidMask:
+    _enabled: 0
+    _pattern: {fileID: 2800000, guid: 41acea03acbaebe4a9dc26dd8264449e, type: 3}
+    _scale: 50
+    _velocity: {x: 0, y: 0}
+  _shader: {fileID: 4800000, guid: 9a902e6d68fe8344890c5926c684e820, type: 3}

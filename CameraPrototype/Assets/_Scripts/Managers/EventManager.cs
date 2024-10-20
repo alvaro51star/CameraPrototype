@@ -7,9 +7,7 @@ public static class EventManager
     public static Action OnNotUsingCamera;
     public static Action OnTakingPhoto;
     public static Action OnRemovePhoto;
-
-    //Gato
-    public static Action OnCatPetted;
+    public static Action<float> OnChangeLens;
 
     //Puerta
     public static Action OnDoorLocked;

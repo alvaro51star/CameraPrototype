@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Interaction_Cat : InteractionScript
@@ -7,6 +5,6 @@ public class Interaction_Cat : InteractionScript
     //Variable
     public override void Action(GameObject player)
     {
-        EventManager.OnCatPetted?.Invoke();
+        //EventManager.OnCatPetted?.Invoke(); //ya no es necesario con los cambios de FMOD
     }
 }
