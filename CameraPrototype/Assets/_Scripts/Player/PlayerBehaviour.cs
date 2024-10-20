@@ -102,6 +102,11 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (m_actualInputInteractiveObject == interactiveObject)
         {
+            if (m_actualInputInteractiveObject.outlineComponent)
+            {
+                m_actualInputInteractiveObject.outlineComponent.enabled = false;
+            }
+            
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
@@ -114,6 +119,9 @@ public class PlayerBehaviour : MonoBehaviour
         m_isCanInteract = true;
         if (UIManager.instance.GetIsGamePaused() || m_isReading) return;
         UIManager.instance.SetInteractionText(true, m_actualInputInteractiveObject.GetInteractionScript().GetInteractionText());
+        
+        
+        
         if (m_isDoor)
         {
             if (m_isLockedDoor)
@@ -134,10 +142,18 @@ public class PlayerBehaviour : MonoBehaviour
         else if (!m_isDoor && !m_isCat)
         {
             UIManager.instance.InteractionAvialable(true, false, false);
+            
             if (m_isRedBeard)
             {
                 UIManager.instance.ShowInput(false);
             }
+            
+        }
+        
+        //Outline
+        if (m_actualInputInteractiveObject.outlineComponent)
+        {
+            m_actualInputInteractiveObject.outlineComponent.enabled = true;
         }
     }
 
@@ -150,6 +166,7 @@ public class PlayerBehaviour : MonoBehaviour
         m_isRedBeard = false;
         UIManager.instance.InteractionAvialable(false, false, false);
         UIManager.instance.SetInteractionText(false, "");
+        
     }
 
     private void SimpleInteraction()
@@ -215,6 +232,15 @@ public class PlayerBehaviour : MonoBehaviour
 
         else
         {
+            //Outline
+            if (m_actualInputInteractiveObject)
+            {
+                if (m_actualInputInteractiveObject.outlineComponent)
+                {
+                    m_actualInputInteractiveObject.outlineComponent.enabled = false;
+                }
+            }
+            
             m_actualInputInteractiveObject = null;
             StopInteracting();
         }
