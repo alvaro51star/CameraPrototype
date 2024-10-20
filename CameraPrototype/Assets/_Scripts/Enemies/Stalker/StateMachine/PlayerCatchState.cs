@@ -19,7 +19,7 @@ public class PlayerCatchState : State
         m_NavMAg_navMeshAgent.enabled = false;
         m_Go_player.GetComponent<PlayerMovement>().m_isCanWalk = false;
         animtr_animator.Play("Kill");
-        m_Go_enemy.transform.position = m_Go_player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        m_Go_enemy.transform.position = m_Go_player.GetComponent<WatchEnemy>().tf_enemyCatchTp.position;
 
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.caught /*, this.transform.position */);
 
