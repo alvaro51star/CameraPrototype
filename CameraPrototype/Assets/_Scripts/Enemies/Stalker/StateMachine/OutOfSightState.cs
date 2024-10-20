@@ -6,18 +6,18 @@ using UnityEngine.Serialization;
 
 public class OutOfSightState : State
 {
-    private float currentTime = 0;
+    private float m_currentTime = 0;
 
-    [FormerlySerializedAs("enemy")] [SerializeField] private GameObject _enemy;
+    [FormerlySerializedAs("_enemy")] [FormerlySerializedAs("enemy")] [SerializeField] private GameObject m_go_enemy;
 
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [FormerlySerializedAs("_navMeshAgent")] [SerializeField] private NavMeshAgent m_NavMAg_navMeshAgent;
     
 
-    [SerializeField] private Transform tpPoint;
+    [FormerlySerializedAs("tpPoint")] [SerializeField] private Transform m_tf_tpPoint;
 
-    [SerializeField] private float timeToBeOutInLevel0 = 30f;
-    [SerializeField] private float timeToBeOutInLevel1 = 20f;
-    [SerializeField] private float timeToBeOutInLevel2 = 10f;
+    [FormerlySerializedAs("timeToBeOutInLevel0")] [SerializeField] private float m_timeToBeOutInLevel0 = 30f;
+    [FormerlySerializedAs("timeToBeOutInLevel1")] [SerializeField] private float m_timeToBeOutInLevel1 = 20f;
+    [FormerlySerializedAs("timeToBeOutInLevel2")] [SerializeField] private float m_timeToBeOutInLevel2 = 10f;
 
 
     public override void Enter()
@@ -26,23 +26,23 @@ public class OutOfSightState : State
         m_stalkerBehaviour.isChasingPlayer = false;
         m_stateName = "OutOfSight";
         EventManager.OnStatusChange?.Invoke(m_stateName);
-        _navMeshAgent.isStopped = true;
-        _navMeshAgent.speed = 0f;
+        m_NavMAg_navMeshAgent.isStopped = true;
+        m_NavMAg_navMeshAgent.speed = 0f;
 
         isComplete = false;
-        currentTime = 0;
-        _navMeshAgent.enabled = false;
-        _enemy.transform.position = tpPoint.position;
+        m_currentTime = 0;
+        m_NavMAg_navMeshAgent.enabled = false;
+        m_go_enemy.transform.position = m_tf_tpPoint.position;
 
     }
 
     public override void Do()
     {
-        currentTime += Time.deltaTime;
+        m_currentTime += Time.deltaTime;
 
         if (LevelManager.instance.intensityLevel == 0)
         {
-            if (currentTime < timeToBeOutInLevel0)
+            if (m_currentTime < m_timeToBeOutInLevel0)
             {
                 return;
             }
@@ -51,7 +51,7 @@ public class OutOfSightState : State
         }
         else if (LevelManager.instance.intensityLevel == 1)
         {
-            if (currentTime < timeToBeOutInLevel1)
+            if (m_currentTime < m_timeToBeOutInLevel1)
             {
                 return;
             }
@@ -59,7 +59,7 @@ public class OutOfSightState : State
         }
         else if (LevelManager.instance.intensityLevel == 2)
         {
-            if (currentTime < timeToBeOutInLevel2)
+            if (m_currentTime < m_timeToBeOutInLevel2)
             {
                 return;
             }
@@ -73,17 +73,17 @@ public class OutOfSightState : State
 
     public override void Exit()
     {
-        currentTime = 0;
-        _navMeshAgent.enabled = true;
-        _navMeshAgent.speed = m_stalkerBehaviour.enemySpeed;
-        _navMeshAgent.isStopped = false;
+        m_currentTime = 0;
+        m_NavMAg_navMeshAgent.enabled = true;
+        m_NavMAg_navMeshAgent.speed = m_stalkerBehaviour.enemySpeed;
+        m_NavMAg_navMeshAgent.isStopped = false;
         m_stalkerBehaviour.lastState = m_stalkerBehaviour.outOfSightState;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
-        this._enemy = enemy;
+        this.m_go_enemy = enemy;
         this.m_stalkerBehaviour = stalkerBehaviour;
-        _navMeshAgent = navMeshAgent;
+        m_NavMAg_navMeshAgent = navMeshAgent;
     }
 }
