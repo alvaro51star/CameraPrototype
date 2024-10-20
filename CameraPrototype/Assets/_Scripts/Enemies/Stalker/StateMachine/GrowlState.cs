@@ -15,14 +15,14 @@ public class GrowlState : State
 
     public override void Enter()
     {
-        stalkerBehaviour.isGrowling = true;
-        animator.enabled = true;
+        m_stalkerBehaviour.isGrowling = true;
+        animtr_animator.enabled = true;
         animationLenght = growlAnimation.length;
 
-        stateName = "Growl";
-        EventManager.OnStatusChange?.Invoke(stateName);
+        m_stateName = "Growl";
+        EventManager.OnStatusChange?.Invoke(m_stateName);
 
-        animator.Play("Growl");
+        animtr_animator.Play("Growl");
 
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.stalkerGrowling /*, this.transform.position */);
 
@@ -43,14 +43,14 @@ public class GrowlState : State
     {
         currentTime = 0f;
         isComplete = false;
-        stalkerBehaviour.isGrowling = false;
-        stalkerBehaviour.isChasingPlayer = true;
+        m_stalkerBehaviour.isGrowling = false;
+        m_stalkerBehaviour.isChasingPlayer = true;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
         this.enemy = enemy;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.m_stalkerBehaviour = stalkerBehaviour;
         this.navMeshAgent = navMeshAgent;
     }
 }

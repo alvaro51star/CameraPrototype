@@ -44,31 +44,31 @@ public class StalkState : State
 
     public override void Enter()
     {
-        animator.enabled = true;
+        animtr_animator.enabled = true;
 
         PLAYBACK_STATE playbackState;
         stalkerBreathing.getPlaybackState(out playbackState);
         if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
             stalkerBreathing.start();
 
-        stateName = "Stalk";
-        EventManager.OnStatusChange?.Invoke(stateName);
+        m_stateName = "Stalk";
+        EventManager.OnStatusChange?.Invoke(m_stateName);
 
         _navMeshAgent.destination = enemy.transform.position;
         _navMeshAgent.isStopped = true;
 
         currentTime = 0f;
-        animator.Play("Idle");
+        animtr_animator.Play("Idle");
         isComplete = false;
         hasBeenVisible = false;
 
         if (firstTimeEntered)
         {
-            if (stalkerBehaviour.lastState == stalkerBehaviour.outOfSightState)
+            if (m_stalkerBehaviour.lastState == m_stalkerBehaviour.outOfSightState)
             {
                 TPToNextPosition();
             }
-            if (stalkerBehaviour.lastState != null && stalkerBehaviour.currentState != stalkerBehaviour.stunnedState && stalkerBehaviour.currentState != stalkerBehaviour.stalkState)
+            if (m_stalkerBehaviour.lastState != null && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stunnedState && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stalkState)
                 TPToNextPosition();
         }
 
@@ -88,14 +88,14 @@ public class StalkState : State
         isComplete = false;
         hasBeenVisible = false;
         _navMeshAgent.isStopped = false;
-        stalkerBehaviour.lastState = stalkerBehaviour.stalkState;
+        m_stalkerBehaviour.lastState = m_stalkerBehaviour.stalkState;
         growlCalled = false;
     }
 
     public override void Do()
     {
 
-        if (!growlCalled && !stalkerBehaviour.isStunned)
+        if (!growlCalled && !m_stalkerBehaviour.isStunned)
         {
             CheckDistance();
         }
@@ -118,7 +118,7 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
+                m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -127,7 +127,7 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
+                m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -136,7 +136,7 @@ public class StalkState : State
         {
             if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
             {
-                stalkerBehaviour.EnterState(stalkerBehaviour.outOfSightState);
+                m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
                 isComplete = true;
             }
@@ -177,8 +177,8 @@ public class StalkState : State
             closestPosition = stalkPointsReachable[0];
             foreach (var stalkPoint in stalkPointsReachable)
             {
-                if (Vector3.Distance(stalkPoint.position, stalkerBehaviour.go_player.transform.position)
-                    <= Vector3.Distance(closestPosition.position, stalkerBehaviour.go_player.transform.position))
+                if (Vector3.Distance(stalkPoint.position, m_stalkerBehaviour.go_player.transform.position)
+                    <= Vector3.Distance(closestPosition.position, m_stalkerBehaviour.go_player.transform.position))
                 {
                     closestPosition = stalkPoint;
                 }
@@ -212,18 +212,18 @@ public class StalkState : State
     {
         this.enemy = enemy;
         this.objectMesh = objectMesh;
-        this.animator = animator;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.animtr_animator = animator;
+        this.m_stalkerBehaviour = stalkerBehaviour;
         _navMeshAgent = navMeshAgent;
     }
 
     //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl
     private void CheckDistance()
     {
-        if(stalkerBehaviour.isPlayerCatched)
+        if(m_stalkerBehaviour.isPlayerCatched)
             return;
         
-        Vector3 dir = stalkerBehaviour.go_player.transform.position - transform.position;
+        Vector3 dir = m_stalkerBehaviour.go_player.transform.position - transform.position;
         Debug.DrawRay(transform.position, dir * maxDistanceToGrowlState, Color.red);
         if (Physics.Raycast(rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))
         {
@@ -231,7 +231,7 @@ public class StalkState : State
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 growlCalled = true;
-                stalkerBehaviour.EnterState(stalkerBehaviour.growlState);
+                m_stalkerBehaviour.EnterState(m_stalkerBehaviour.growlState);
             }
         }
     }

@@ -22,10 +22,10 @@ public class OutOfSightState : State
 
     public override void Enter()
     {
-        animator.enabled = false;
-        stalkerBehaviour.isChasingPlayer = false;
-        stateName = "OutOfSight";
-        EventManager.OnStatusChange?.Invoke(stateName);
+        animtr_animator.enabled = false;
+        m_stalkerBehaviour.isChasingPlayer = false;
+        m_stateName = "OutOfSight";
+        EventManager.OnStatusChange?.Invoke(m_stateName);
         _navMeshAgent.isStopped = true;
         _navMeshAgent.speed = 0f;
 
@@ -75,15 +75,15 @@ public class OutOfSightState : State
     {
         currentTime = 0;
         _navMeshAgent.enabled = true;
-        _navMeshAgent.speed = stalkerBehaviour.enemySpeed;
+        _navMeshAgent.speed = m_stalkerBehaviour.enemySpeed;
         _navMeshAgent.isStopped = false;
-        stalkerBehaviour.lastState = stalkerBehaviour.outOfSightState;
+        m_stalkerBehaviour.lastState = m_stalkerBehaviour.outOfSightState;
     }
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
         this._enemy = enemy;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.m_stalkerBehaviour = stalkerBehaviour;
         _navMeshAgent = navMeshAgent;
     }
 }

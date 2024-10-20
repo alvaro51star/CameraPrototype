@@ -13,11 +13,11 @@ public class PlayerCatchState : State
 
     public override void Enter()
     {
-        animator.enabled = true;
-        animator = stalkerBehaviour.animtr_animator;
+        animtr_animator.enabled = true;
+        animtr_animator = m_stalkerBehaviour.animtr_animator;
         navMesh.enabled = false;
         player.GetComponent<PlayerMovement>().m_isCanWalk = false;
-        animator.Play("Kill");
+        animtr_animator.Play("Kill");
         enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
 
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.caught /*, this.transform.position */);
@@ -40,9 +40,9 @@ public class PlayerCatchState : State
         this.navMesh = navMeshAgent;
         this.player = player;
         this.uiManager = uiManager;
-        this.animator = animator;
+        this.animtr_animator = animator;
         this.enemy = enemy;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.m_stalkerBehaviour = stalkerBehaviour;
     }
 
     private IEnumerator CatchPlayer(GameObject player)

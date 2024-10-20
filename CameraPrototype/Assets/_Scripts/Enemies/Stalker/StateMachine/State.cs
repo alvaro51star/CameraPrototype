@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public abstract class State : MonoBehaviour
 {
     public bool isComplete  { get; set; } = false;
 
-    protected float startTime;
+    protected float m_startTime;
 
-    public float time => Time.time - startTime;
+    public float time => Time.time - m_startTime;
 
-    public Animator animator;
+    [FormerlySerializedAs("animator")] public Animator animtr_animator;
 
-    protected string stateName;
+    protected string m_stateName;
 
-    protected StalkerBehaviour stalkerBehaviour;
+    protected StalkerBehaviour m_stalkerBehaviour;
 
     public virtual void Enter() { }
 

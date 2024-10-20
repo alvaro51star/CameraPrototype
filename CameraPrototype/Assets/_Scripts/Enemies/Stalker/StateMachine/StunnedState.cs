@@ -16,20 +16,20 @@ public class StunnedState : State
 
     public override void Enter()
     {
-        animator.enabled = true;
-        stalkerBehaviour.isChasingPlayer = false;
-        stateName = "Stunned";
-        EventManager.OnStatusChange?.Invoke(stateName);
+        animtr_animator.enabled = true;
+        m_stalkerBehaviour.isChasingPlayer = false;
+        m_stateName = "Stunned";
+        EventManager.OnStatusChange?.Invoke(m_stateName);
 
         navMesh.enabled = true;
         
-        if (stalkerBehaviour.currentTimeLooked >= stalkerBehaviour.maxTimeLooked)
+        if (m_stalkerBehaviour.currentTimeLooked >= m_stalkerBehaviour.maxTimeLooked)
         {
             AddSecondsToEnemyBar();
         }
         
         isComplete = false;
-        animator.Play("Stun");
+        animtr_animator.Play("Stun");
         currentTime = 0f;
         navMesh.speed = 0f;
         navMesh.isStopped = true;
@@ -49,21 +49,21 @@ public class StunnedState : State
         navMesh.speed = 3.5f;
         navMesh.isStopped = false;
         isComplete = false;
-        stalkerBehaviour.isStunned = false;
-        stalkerBehaviour.lastState = stalkerBehaviour.stunnedState;
+        m_stalkerBehaviour.isStunned = false;
+        m_stalkerBehaviour.lastState = m_stalkerBehaviour.stunnedState;
     }
 
 
     public void SetUp(NavMeshAgent navMesh, Animator animator, StalkerBehaviour stalkerBehaviour)
     {
         this.navMesh = navMesh;
-        this.animator = animator;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.animtr_animator = animator;
+        this.m_stalkerBehaviour = stalkerBehaviour;
     }
 
     private void AddSecondsToEnemyBar()
     {
-        stalkerBehaviour.currentTimeLooked = stalkerBehaviour.maxTimeLooked - secondsToAdd;
-        EventManager.OnTimeAdded?.Invoke(stalkerBehaviour.currentTimeLooked, stalkerBehaviour.maxTimeLooked);
+        m_stalkerBehaviour.currentTimeLooked = m_stalkerBehaviour.maxTimeLooked - secondsToAdd;
+        EventManager.OnTimeAdded?.Invoke(m_stalkerBehaviour.currentTimeLooked, m_stalkerBehaviour.maxTimeLooked);
     }
 }
