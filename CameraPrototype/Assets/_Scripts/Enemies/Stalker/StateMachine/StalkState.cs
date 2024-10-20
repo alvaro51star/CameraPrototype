@@ -4,42 +4,42 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using FMOD.Studio;
-
+using UnityEngine.Serialization;
 
 
 public class StalkState : State
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private Renderer objectMesh;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [FormerlySerializedAs("enemy")] [SerializeField] private GameObject m_go_enemy;
+    [FormerlySerializedAs("objectMesh")] [SerializeField] private Renderer m_rdr_objectMesh;
+    [FormerlySerializedAs("_navMeshAgent")] [SerializeField] private NavMeshAgent m_NavMAg_navMeshAgent;
     
 
     public float currentTime;
-    [SerializeField] private float timeBeforeChangingPoint = 5f;
+    [FormerlySerializedAs("timeBeforeChangingPoint")] [SerializeField] private float m_timeBeforeChangingPoint = 5f;
 
-    [SerializeField] private float timeToCompleteStalk_Level0 = 20f;
-    [SerializeField] private float timeToCompleteStalk_Level1 = 10f;
-    [SerializeField] private float timeToCompleteStalk_Level2 = 5f;
+    [FormerlySerializedAs("timeToCompleteStalk_Level0")] [SerializeField] private float m_timeToCompleteStalk_Level0 = 20f;
+    [FormerlySerializedAs("timeToCompleteStalk_Level1")] [SerializeField] private float m_timeToCompleteStalk_Level1 = 10f;
+    [FormerlySerializedAs("timeToCompleteStalk_Level2")] [SerializeField] private float m_timeToCompleteStalk_Level2 = 5f;
 
-    private const float timeLevel0 = 15f;
-    private const float timeLevel1 = 7.5f;
-    private const float timeLevel2 = 3f;
+    private const float TIMELEVEL0 = 15f;
+    private const float TIMELEVEL1 = 7.5f;
+    private const float TIMELEVEL2 = 3f;
 
     public float maxDistanceToGrowlState = 2f;
 
-    private bool hasBeenVisible = false;
+    private bool m_isHasBeenVisible = false;
 
-    bool firstTimeEntered = false;
+    bool m_isFirstTimeEntered = false;
 
-    [SerializeField] private Transform rayPoint;
+    [FormerlySerializedAs("rayPoint")] [SerializeField] private Transform m_tf_rayPoint;
     private bool growlCalled = false;
 
     // AUDIO
-    private EventInstance stalkerBreathing;
+    private EventInstance m_FM_stalkerBreathing;
 
     private void Start()
     {
-        stalkerBreathing = AudioManager.Instance.CreateEventInstance(FMODEvents.instance.stalkerBreathingSound);
+        m_FM_stalkerBreathing = AudioManager.Instance.CreateEventInstance(FMODEvents.instance.stalkerBreathingSound);
     }
 
     public override void Enter()
@@ -47,28 +47,28 @@ public class StalkState : State
         animtr_animator.enabled = true;
 
         PLAYBACK_STATE playbackState;
-        stalkerBreathing.getPlaybackState(out playbackState);
+        m_FM_stalkerBreathing.getPlaybackState(out playbackState);
         if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-            stalkerBreathing.start();
+            m_FM_stalkerBreathing.start();
 
         m_stateName = "Stalk";
         EventManager.OnStatusChange?.Invoke(m_stateName);
 
-        _navMeshAgent.destination = enemy.transform.position;
-        _navMeshAgent.isStopped = true;
+        m_NavMAg_navMeshAgent.destination = m_go_enemy.transform.position;
+        m_NavMAg_navMeshAgent.isStopped = true;
 
         currentTime = 0f;
         animtr_animator.Play("Idle");
         isComplete = false;
-        hasBeenVisible = false;
+        m_isHasBeenVisible = false;
 
-        if (firstTimeEntered)
+        if (m_isFirstTimeEntered)
         {
             if (m_stalkerBehaviour.lastState == m_stalkerBehaviour.outOfSightState)
             {
                 TPToNextPosition();
             }
-            if (m_stalkerBehaviour.lastState != null && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stunnedState && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stalkState)
+            if (m_stalkerBehaviour.lastState && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stunnedState && m_stalkerBehaviour.currentState != m_stalkerBehaviour.stalkState)
                 TPToNextPosition();
         }
 
@@ -76,18 +76,18 @@ public class StalkState : State
 
         ResetTimer();
         CalculateTimes();
-        firstTimeEntered = true;
+        m_isFirstTimeEntered = true;
     }
 
 
 
     public override void Exit()
     {
-        stalkerBreathing.stop(STOP_MODE.ALLOWFADEOUT);
+        m_FM_stalkerBreathing.stop(STOP_MODE.ALLOWFADEOUT);
 
         isComplete = false;
-        hasBeenVisible = false;
-        _navMeshAgent.isStopped = false;
+        m_isHasBeenVisible = false;
+        m_NavMAg_navMeshAgent.isStopped = false;
         m_stalkerBehaviour.lastState = m_stalkerBehaviour.stalkState;
         growlCalled = false;
     }
@@ -100,23 +100,23 @@ public class StalkState : State
             CheckDistance();
         }
 
-        if (objectMesh.isVisible)
+        if (m_rdr_objectMesh.isVisible)
         {
-            hasBeenVisible = true;
+            m_isHasBeenVisible = true;
         }
         Stalk();
     }
 
     private void Stalk()
     {
-        if (hasBeenVisible)
+        if (m_isHasBeenVisible)
         {
             currentTime += Time.deltaTime;
         }
 
         if (LevelManager.instance.intensityLevel == 0)
         {
-            if (currentTime >= timeToCompleteStalk_Level0 && !objectMesh.isVisible)
+            if (currentTime >= m_timeToCompleteStalk_Level0 && !m_rdr_objectMesh.isVisible)
             {
                 m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
@@ -125,7 +125,7 @@ public class StalkState : State
         }
         else if (LevelManager.instance.intensityLevel == 1)
         {
-            if (currentTime >= timeToCompleteStalk_Level1 && !objectMesh.isVisible)
+            if (currentTime >= m_timeToCompleteStalk_Level1 && !m_rdr_objectMesh.isVisible)
             {
                 m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
@@ -134,7 +134,7 @@ public class StalkState : State
         }
         else if (LevelManager.instance.intensityLevel == 2)
         {
-            if (currentTime >= timeToCompleteStalk_Level2 && !objectMesh.isVisible)
+            if (currentTime >= m_timeToCompleteStalk_Level2 && !m_rdr_objectMesh.isVisible)
             {
                 m_stalkerBehaviour.EnterState(m_stalkerBehaviour.outOfSightState);
                 ResetTimer();
@@ -143,7 +143,7 @@ public class StalkState : State
         }
         else if (LevelManager.instance.intensityLevel == 3)
         {
-            if (currentTime >= timeBeforeChangingPoint && !objectMesh.isVisible)
+            if (currentTime >= m_timeBeforeChangingPoint && !m_rdr_objectMesh.isVisible)
             {
                 if (TPToNextPosition())
                     ResetTimer();
@@ -165,7 +165,7 @@ public class StalkState : State
         foreach (var stalkPoint in StalkPointsManager.instance.activeStalkPoints)
         {
             NavMeshPath path = new();
-            if (_navMeshAgent.CalculatePath(stalkPoint.transform.position, path))
+            if (m_NavMAg_navMeshAgent.CalculatePath(stalkPoint.transform.position, path))
             {
                 stalkPointsReachable.Add(stalkPoint.transform);
             }
@@ -189,9 +189,9 @@ public class StalkState : State
             closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
         }
 
-        _navMeshAgent.enabled = false;
-        enemy.transform.position = closestPosition.position;
-        _navMeshAgent.enabled = true;
+        m_NavMAg_navMeshAgent.enabled = false;
+        m_go_enemy.transform.position = closestPosition.position;
+        m_NavMAg_navMeshAgent.enabled = true;
         return true;
     }
 
@@ -203,18 +203,18 @@ public class StalkState : State
     //Calcular tiempo segun los niveles de intensidad y el tiempo maximo
     private void CalculateTimes()
     {
-        timeToCompleteStalk_Level0 = Random.Range(timeLevel0 - timeLevel0 * 0.25f, timeLevel0 + timeLevel0 * 0.25f);
-        timeToCompleteStalk_Level1 = Random.Range(timeLevel1 - timeLevel1 * 0.25f, timeLevel1 + timeLevel1 * 0.25f);
-        timeToCompleteStalk_Level2 = Random.Range(timeLevel2 - timeLevel2 * 0.25f, timeLevel2 + timeLevel2 * 0.25f);
+        m_timeToCompleteStalk_Level0 = Random.Range(TIMELEVEL0 - TIMELEVEL0 * 0.25f, TIMELEVEL0 + TIMELEVEL0 * 0.25f);
+        m_timeToCompleteStalk_Level1 = Random.Range(TIMELEVEL1 - TIMELEVEL1 * 0.25f, TIMELEVEL1 + TIMELEVEL1 * 0.25f);
+        m_timeToCompleteStalk_Level2 = Random.Range(TIMELEVEL2 - TIMELEVEL2 * 0.25f, TIMELEVEL2 + TIMELEVEL2 * 0.25f);
     }
 
     public void SetUp(GameObject enemy, Renderer objectMesh, Animator animator, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
-        this.enemy = enemy;
-        this.objectMesh = objectMesh;
+        this.m_go_enemy = enemy;
+        this.m_rdr_objectMesh = objectMesh;
         this.animtr_animator = animator;
         this.m_stalkerBehaviour = stalkerBehaviour;
-        _navMeshAgent = navMeshAgent;
+        m_NavMAg_navMeshAgent = navMeshAgent;
     }
 
     //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl
@@ -225,7 +225,7 @@ public class StalkState : State
         
         Vector3 dir = m_stalkerBehaviour.go_player.transform.position - transform.position;
         Debug.DrawRay(transform.position, dir * maxDistanceToGrowlState, Color.red);
-        if (Physics.Raycast(rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))
+        if (Physics.Raycast(m_tf_rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))
         {
 
             if (hit.transform.gameObject.CompareTag("Player"))
