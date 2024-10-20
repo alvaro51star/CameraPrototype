@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public List<string> timesInPlaytest;
+    [FormerlySerializedAs("timesInPlaytest")] public List<string> strL_timesInPlaytest;
     
     public bool isEnemyActive = false;
 
@@ -38,14 +39,14 @@ public class GameManager : MonoBehaviour
 
     public void AddTimeToList(String time)
     {
-        timesInPlaytest.Add(time);
+        strL_timesInPlaytest.Add(time);
     }
 
     public void CopyTimeToClipboard()
     {
         System.Text.StringBuilder times = new();
 
-        foreach (var time in timesInPlaytest)
+        foreach (var time in strL_timesInPlaytest)
         {
             times.AppendLine(time);
         }
