@@ -177,8 +177,8 @@ public class StalkState : State
             closestPosition = stalkPointsReachable[0];
             foreach (var stalkPoint in stalkPointsReachable)
             {
-                if (Vector3.Distance(stalkPoint.position, stalkerBehaviour.player.transform.position)
-                    <= Vector3.Distance(closestPosition.position, stalkerBehaviour.player.transform.position))
+                if (Vector3.Distance(stalkPoint.position, stalkerBehaviour.go_player.transform.position)
+                    <= Vector3.Distance(closestPosition.position, stalkerBehaviour.go_player.transform.position))
                 {
                     closestPosition = stalkPoint;
                 }
@@ -220,10 +220,10 @@ public class StalkState : State
     //Se encarga de comparar las distancias por si se acerca demasiado pasa al estado de Growl
     private void CheckDistance()
     {
-        if(stalkerBehaviour.playerCatched)
+        if(stalkerBehaviour.isPlayerCatched)
             return;
         
-        Vector3 dir = stalkerBehaviour.player.transform.position - transform.position;
+        Vector3 dir = stalkerBehaviour.go_player.transform.position - transform.position;
         Debug.DrawRay(transform.position, dir * maxDistanceToGrowlState, Color.red);
         if (Physics.Raycast(rayPoint.position, dir, out RaycastHit hit, maxDistanceToGrowlState))
         {

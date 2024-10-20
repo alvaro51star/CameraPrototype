@@ -39,7 +39,7 @@ public class WatchEnemy : MonoBehaviour
             return;
         }
 
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().tf_pointToLook.position - cameraTransform.position;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
         {
             Debug.DrawRay(cameraTransform.position, cameraTransform.forward * maxDistance, Color.red);
@@ -55,7 +55,7 @@ public class WatchEnemy : MonoBehaviour
 
     private void JumpScareStalker()
     {
-        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().pointToLook.position - cameraTransform.position;
+        Vector3 rayDirection = enemy.GetComponent<StalkerBehaviour>().tf_pointToLook.position - cameraTransform.position;
         float distance = Vector3.Distance(transform.position, enemy.transform.position);
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, maxDistance))
         {
