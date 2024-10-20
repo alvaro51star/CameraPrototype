@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class GrowlState : State
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private NavMeshAgent navMeshAgent;
+    [FormerlySerializedAs("enemy")] [SerializeField] private GameObject m_go_enemy;
+    [FormerlySerializedAs("navMeshAgent")] [SerializeField] private NavMeshAgent m_NavMAg_navMeshAgent;
     
-    [SerializeField] private AnimationClip growlAnimation;
+    [FormerlySerializedAs("growlAnimation")] [SerializeField] private AnimationClip m_AnimClp_growlAnimation;
 
-    private float animationLenght, currentTime = 0f;
+    private float m_animationLenght, m_currentTime = 0f;
 
 
     public override void Enter()
     {
         m_stalkerBehaviour.isGrowling = true;
         animtr_animator.enabled = true;
-        animationLenght = growlAnimation.length;
+        m_animationLenght = m_AnimClp_growlAnimation.length;
 
         m_stateName = "Growl";
         EventManager.OnStatusChange?.Invoke(m_stateName);
@@ -26,14 +27,14 @@ public class GrowlState : State
 
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.stalkerGrowling /*, this.transform.position */);
 
-        navMeshAgent.isStopped = true;
+        m_NavMAg_navMeshAgent.isStopped = true;
     }
 
     public override void Do()
     {
-        currentTime += Time.deltaTime;
+        m_currentTime += Time.deltaTime;
 
-        if (currentTime >= animationLenght)
+        if (m_currentTime >= m_animationLenght)
         {
             isComplete = true;
         }
@@ -41,7 +42,7 @@ public class GrowlState : State
 
     public override void Exit()
     {
-        currentTime = 0f;
+        m_currentTime = 0f;
         isComplete = false;
         m_stalkerBehaviour.isGrowling = false;
         m_stalkerBehaviour.isChasingPlayer = true;
@@ -49,8 +50,8 @@ public class GrowlState : State
 
     public void SetUp(GameObject enemy, StalkerBehaviour stalkerBehaviour, NavMeshAgent navMeshAgent)
     {
-        this.enemy = enemy;
+        this.m_go_enemy = enemy;
         this.m_stalkerBehaviour = stalkerBehaviour;
-        this.navMeshAgent = navMeshAgent;
+        this.m_NavMAg_navMeshAgent = navMeshAgent;
     }
 }
