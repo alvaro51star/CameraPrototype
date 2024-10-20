@@ -153,7 +153,7 @@ public class StalkState : State
 
     private bool TPToNextPosition()
     {
-        if (StalkPointsManager.instance.activeStalkPoints.Count <= 0)
+        if (StalkPointsManager.instance.L_activeStalkPoints.Count <= 0)
         {
             return false;
         }
@@ -162,7 +162,7 @@ public class StalkState : State
         List<Transform> stalkPointsReachable = new();
 
         //Localiza los puntos a los que hay camino para llegar
-        foreach (var stalkPoint in StalkPointsManager.instance.activeStalkPoints)
+        foreach (var stalkPoint in StalkPointsManager.instance.L_activeStalkPoints)
         {
             NavMeshPath path = new();
             if (m_NavMAg_navMeshAgent.CalculatePath(stalkPoint.transform.position, path))
@@ -186,7 +186,7 @@ public class StalkState : State
         }
         else //Si no se pilla uno random activo y fuera
         {
-            closestPosition = StalkPointsManager.instance.activeStalkPoints[Random.Range(0, StalkPointsManager.instance.activeStalkPoints.Count)].transform;
+            closestPosition = StalkPointsManager.instance.L_activeStalkPoints[Random.Range(0, StalkPointsManager.instance.L_activeStalkPoints.Count)].transform;
         }
 
         m_NavMAg_navMeshAgent.enabled = false;
