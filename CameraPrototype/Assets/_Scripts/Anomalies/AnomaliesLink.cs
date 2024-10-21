@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(AnomaliesData))]
 
 public class AnomaliesLink : AnomalyBehaviour
 {
-     [SerializeField] private List<AnomaliesData> anomaliesToReveal;//these anomalies don't need AnomalyBehaviour
+     [SerializeField] private List<AnomaliesData> m_anomaliesDataL_anomaliesToReveal;//these anomalies don't need AnomalyBehaviour
      
     public override void PhotoAction()
     {
@@ -14,7 +15,7 @@ public class AnomaliesLink : AnomalyBehaviour
     }
     private void RevealOtherAnomaly()
     {
-        foreach (AnomaliesData anomaliesData in anomaliesToReveal)
+        foreach (AnomaliesData anomaliesData in m_anomaliesDataL_anomaliesToReveal)
         {
             if(!anomaliesData)
                 Debug.LogError(gameObject + " anomaliesToReveal is null");

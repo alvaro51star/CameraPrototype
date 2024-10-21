@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class AnomalyEnemy : AnomalyBehaviour
 {
-    private StalkerBehaviour _stalkerBehaviour;
+    private StalkerBehaviour m_stalkerBehaviour;
     
     protected override void Start()
     {
-        _stalkerBehaviour = GetComponent<StalkerBehaviour>();
-        if(!_stalkerBehaviour)
+        m_stalkerBehaviour = GetComponent<StalkerBehaviour>();
+        if(!m_stalkerBehaviour)
             Debug.LogError("No hay StalkerBehaviour");
-        _stalkerBehaviour.enabled = false;
+        m_stalkerBehaviour.enabled = false;
         
         base.Start();
     }
     public override void PhotoAction()
     {
-        _stalkerBehaviour.enabled = true;
-        _stalkerBehaviour.ActivateCollision();
+        m_stalkerBehaviour.enabled = true;
+        m_stalkerBehaviour.ActivateCollision();
         EventManager.OnEnemyRevealed?.Invoke();
         
         base.PhotoAction();

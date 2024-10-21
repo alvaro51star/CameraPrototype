@@ -1,27 +1,28 @@
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AnomaliesData : MonoBehaviour
 {
-    public bool revealType;//hay 2 tipos de anomalia, las que revelas objetos y las que quitas objetos
-    public Collider anomalyCollider;
-    public bool cullingIsVisible;//for culling group
+    public bool isRevealType;//hay 2 tipos de anomalia, las que revelas objetos y las que quitas objetos
+    public Collider coll_anomalyColl;
+    public bool isCullingVisible;//for culling group
     private void Start()
     {
-        if (revealType)
+        if (isRevealType)
         {
             transform.ChangeLayersRecursively(LayerMask.NameToLayer("Anomalies"));
 
-            if (anomalyCollider)
-                anomalyCollider.enabled = false;
+            if (coll_anomalyColl)
+                coll_anomalyColl.enabled = false;
             else
             {
-                anomalyCollider = GetComponent<Collider>();
-                if(!anomalyCollider)
+                coll_anomalyColl = GetComponent<Collider>();
+                if(!coll_anomalyColl)
                     Debug.LogError("Falta ponerle el anomalyCollider en AnomaliesData a " + gameObject);
                 else
                 {
-                    anomalyCollider.enabled = false;
+                    coll_anomalyColl.enabled = false;
                 }
                     
             }

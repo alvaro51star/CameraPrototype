@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d61abdabda17524bbba73d4387d096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealType: 1
-  anomalyCollider: {fileID: 4150644310572699116}
+  isRevealType: 1
+  coll_anomalyColl: {fileID: 4150644310572699116}
+  isCullingVisible: 0
 --- !u!1 &4764367133913591836
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d253369c453e54780f5a57633b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineComponent: {fileID: 0}
   m_isNeedsButton: 1
   m_interactiveObject:
     Guid:

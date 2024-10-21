@@ -1,14 +1,15 @@
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(AnomaliesData))]
 public class AnomalyBehaviour : MonoBehaviour
 {
-    private Camera _anomalyCamera;
-    private AnomaliesData _anomaliesData;
-    [SerializeField] private Renderer anomalyRenderer;
-    [SerializeField] private AnomalyCullingGroup anomalyCullingGroup;
+    [SerializeField] private Renderer m_rdr_anomalyRdr;
+    [SerializeField] private AnomalyCullingGroup m_anomalyCullingGroup;
     [HideInInspector] public bool isInPlayersTrigger;
+    private Camera m_cam_anomalyCam;
+    private AnomaliesData m_anomaliesData;
 
     private void OnEnable()
     {
@@ -22,18 +23,18 @@ public class AnomalyBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
-        //can't find this reference on start because this camera is disabled on start (AnomalyCameraManager)
+        m_cam_anomalyCam = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
+        //can't find this reference on start because this camera is disabled on start (CameraManager)
     }
 
     protected virtual void Start()
     {
-        _anomaliesData = GetComponent<AnomaliesData>();
+        m_anomaliesData = GetComponent<AnomaliesData>();
         
-        if(anomalyRenderer)
+        if(m_rdr_anomalyRdr)
             return;
-        anomalyRenderer = GetComponent<Renderer>();
-        if(anomalyRenderer)
+        m_rdr_anomalyRdr = GetComponent<Renderer>();
+        if(m_rdr_anomalyRdr)
             return;
         Debug.LogError("Falta poner el renderer en anomalyRenderer a " + gameObject);
     }
@@ -44,24 +45,24 @@ public class AnomalyBehaviour : MonoBehaviour
            // return;
            
 
-        if (!_anomaliesData.isActiveAndEnabled)
+        if (!m_anomaliesData.isActiveAndEnabled)
             return;
 
 
-        if (!_anomalyCamera)
+        if (!m_cam_anomalyCam)
         {
-            _anomalyCamera = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
+            m_cam_anomalyCam = GameObject.FindGameObjectWithTag("AnomalyCamera").GetComponent<Camera>();
             //in case it loses the reference
         }
 
-        if (!_anomalyCamera.isActiveAndEnabled)
+        if (!m_cam_anomalyCam.isActiveAndEnabled)
             return;
           
         //if(!anomalyRenderer.isVisible)
          //   return;
 
-        Debug.Log( gameObject + " "+ IsMeshVisibleToCamera(_anomalyCamera, anomalyRenderer));
-        if (!IsMeshVisibleToCamera(_anomalyCamera, anomalyRenderer))
+        Debug.Log( gameObject + " "+ IsMeshVisibleToCamera(m_cam_anomalyCam, m_rdr_anomalyRdr));
+        if (!IsMeshVisibleToCamera(m_cam_anomalyCam, m_rdr_anomalyRdr))
             return;
           
         //if(!_anomaliesData.cullingIsVisible)
@@ -74,15 +75,15 @@ public class AnomalyBehaviour : MonoBehaviour
 
     public virtual void PhotoAction()
     {
-        RevealAnomaly(_anomaliesData);
+        RevealAnomaly(m_anomaliesData);
     }
 
     protected void RevealAnomaly(AnomaliesData anomalyToReveal)
     {
-        if (anomalyToReveal.revealType)
+        if (anomalyToReveal.isRevealType)
         {
             anomalyToReveal.transform.ChangeLayersRecursively(LayerMask.NameToLayer("Default"));
-            anomalyToReveal.anomalyCollider.enabled = true;
+            anomalyToReveal.coll_anomalyColl.enabled = true;
         }
         
         else
@@ -90,7 +91,7 @@ public class AnomalyBehaviour : MonoBehaviour
             anomalyToReveal.gameObject.SetActive(false);
         }
         
-        _anomaliesData.enabled = false;
+        m_anomaliesData.enabled = false;
         this.enabled = false;
     }
 
