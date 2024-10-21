@@ -8,13 +8,13 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     public int intensityLevel = 0;
-    private int tempValue;
+    private int m_tempValue;
 
     public float timeToEnterFirstLevel = 120f;
     public float timeToEnterSecondLevel = 300f;
     public float timeToEnterThirdLevel = 480f;
     
-    private float currentTime = 0f;
+    private float m_currentTime = 0f;
 
     private void Awake()
     {
@@ -31,30 +31,30 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        tempValue = intensityLevel;
+        m_tempValue = intensityLevel;
     }
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
+        m_currentTime += Time.deltaTime;
 
-        if (currentTime >= timeToEnterFirstLevel)
+        if (m_currentTime >= timeToEnterFirstLevel)
         {
             intensityLevel = 1;
         }
-        else if (currentTime >= timeToEnterSecondLevel)
+        else if (m_currentTime >= timeToEnterSecondLevel)
         {
             intensityLevel = 2;
         }
-        else if (currentTime >= timeToEnterThirdLevel)
+        else if (m_currentTime >= timeToEnterThirdLevel)
         {
             intensityLevel = 3;
         }
 
-        if (tempValue != intensityLevel)
+        if (m_tempValue != intensityLevel)
         {
             EventManager.OnLevelIntensityChange?.Invoke(intensityLevel);
-            tempValue = intensityLevel;
+            m_tempValue = intensityLevel;
         }
     }
 }

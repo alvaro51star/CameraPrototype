@@ -1,44 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Interaction_Door : DoubleAction
 {
     //Variables 
     [SerializeField] private Animator m_animator;
-    [SerializeField] private bool m_isLocked; 
-    [SerializeField] private bool m_isPuertaPrincipal;
+    [SerializeField] private bool m_isLocked, m_isPuertaPrincipal, m_isCatDoor, m_isNeedsDialogue;
     [SerializeField] private Collider m_collider;
-    [SerializeField] private bool m_isCatDoor;
-    [SerializeField] private bool m_needsDialogue;
-    [SerializeField] private TextForDialogue textForDialogue;
+    [SerializeField] private TextForDialogue m_textForDialogue;
+    private bool m_isDiscoveredLocked = false;
     private int m_doorInteract = 0;
-    private bool m_discoveredLocked = false;
-
-    [SerializeField] private string m_rutaEventoFMOD; 
+    
+   #region Getters and Setters
+    public bool GetDiscoveredLocked()
+    {
+        return m_isDiscoveredLocked;
+    }
+    
+    public void SetlockDoor(bool mode)
+    {
+        if (!mode)
+        {
+            if (!m_isPuertaPrincipal)
+            {
+                m_isDiscoveredLocked = false;
+            }
+            m_isLocked = false;
+        }
+        else
+        {
+            SecondActon();
+            m_isLocked = true;
+        }
+    }
+    
+    public void SetCollisionFalse()
+    {
+        m_collider.enabled = false;
+    }
+    
+    public void SetCollisionTrue()
+    {
+        m_collider.enabled = true;
+    }
+   #endregion
     
     protected override void Start()
     {
         base.Start();
         m_animator = GetComponent<Animator>();
-        if (m_needsDialogue == true)
+        if (m_isNeedsDialogue == true)
         {
-            textForDialogue = GetComponent<TextForDialogue>();
+            m_textForDialogue = GetComponent<TextForDialogue>();
         }
     }
+    
+    //Custom
     protected override void FirstAction()
     {
         if (m_isLocked)
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.instance.doorLocked /*, this.transform.position */);
 
-            if (m_needsDialogue)
+            if (m_isNeedsDialogue)
             {
-                textForDialogue.StartDialogue();//provisional
+                m_textForDialogue.StartDialogue();//provisional
             }
-            if (!m_discoveredLocked && !m_isPuertaPrincipal)
+            if (!m_isDiscoveredLocked && !m_isPuertaPrincipal)
             {
-                m_discoveredLocked = true;
+                m_isDiscoveredLocked = true;
             }
         }
 
@@ -64,38 +94,6 @@ public class Interaction_Door : DoubleAction
         //m_animator.SetTrigger("Cerrar");
         m_doorInteract = 1;
         m_animator.SetInteger("Abrir", m_doorInteract);
-    }
-
-    public void SetlockDoor(bool mode)
-    {
-        if (!mode)
-        {
-            if (!m_isPuertaPrincipal)
-            {
-                m_discoveredLocked = false;
-            }
-            m_isLocked = false;
-        }
-        else
-        {
-            SecondActon();
-            m_isLocked = true;
-        }
-    }
-
-    public bool GetDiscoveredLocked()
-    {
-        return m_discoveredLocked;
-    }
-
-    public void SetCollisionFalse()
-    {
-        m_collider.enabled = false;
-    }
-
-    public void SetCollisionTrue()
-    {
-        m_collider.enabled = true;
     }
 
     public void PlayCloseSound()

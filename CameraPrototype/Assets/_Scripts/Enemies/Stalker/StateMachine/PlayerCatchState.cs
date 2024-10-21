@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class PlayerCatchState : State
 {
-    private NavMeshAgent navMesh;
-    private GameObject player;
-    private GameObject enemy;
+    private NavMeshAgent m_NavMAg_navMeshAgent;
+    private GameObject m_Go_player;
+    private GameObject m_Go_enemy;
 
-    [SerializeField] private UIManager uiManager;
+    [FormerlySerializedAs("uiManager")] [SerializeField] private UIManager m_uiManager;
 
     public override void Enter()
     {
-        animator.enabled = true;
-        animator = stalkerBehaviour.animator;
-        navMesh.enabled = false;
-        player.GetComponent<PlayerMovement>().m_canWalk = false;
-        animator.Play("Kill");
-        enemy.transform.position = player.GetComponent<WatchEnemy>().enemyCatchTp.position;
+        animtr_animator.enabled = true;
+        animtr_animator = m_stalkerBehaviour.animtr_animator;
+        m_NavMAg_navMeshAgent.enabled = false;
+        m_Go_player.GetComponent<PlayerMovement>().m_isCanWalk = false;
+        animtr_animator.Play("Kill");
+        m_Go_enemy.transform.position = m_Go_player.GetComponent<WatchEnemy>().tf_enemyCatchTp.position;
 
         AudioManager.Instance.PlayOneShot(FMODEvents.instance.caught /*, this.transform.position */);
 
-        StartCoroutine(CatchPlayer(player));
+        StartCoroutine(CatchPlayer(m_Go_player));
     }
 
     public override void Exit()
@@ -37,12 +38,12 @@ public class PlayerCatchState : State
 
     public void SetUp(NavMeshAgent navMeshAgent, GameObject player, UIManager uiManager, Animator animator, GameObject enemy, StalkerBehaviour stalkerBehaviour)
     {
-        this.navMesh = navMeshAgent;
-        this.player = player;
-        this.uiManager = uiManager;
-        this.animator = animator;
-        this.enemy = enemy;
-        this.stalkerBehaviour = stalkerBehaviour;
+        this.m_NavMAg_navMeshAgent = navMeshAgent;
+        this.m_Go_player = player;
+        this.m_uiManager = uiManager;
+        this.animtr_animator = animator;
+        this.m_Go_enemy = enemy;
+        this.m_stalkerBehaviour = stalkerBehaviour;
     }
 
     private IEnumerator CatchPlayer(GameObject player)
@@ -50,7 +51,7 @@ public class PlayerCatchState : State
         yield return new WaitForSeconds(1.5f);
         //EndGame
         TestingManager.Instance.AddTime(GameFinalState.Lost);
-        uiManager.ActivateLoseMenu();
+        m_uiManager.ActivateLoseMenu();
     }
 
 

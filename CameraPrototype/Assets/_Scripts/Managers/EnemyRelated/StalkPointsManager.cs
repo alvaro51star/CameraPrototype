@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StalkPointsManager : MonoBehaviour
 {
     public static StalkPointsManager instance;
 
-    public List<StalkPointBehaviour> activeStalkPoints = new();
+    [FormerlySerializedAs("activeStalkPoints")] public List<StalkPointBehaviour> L_activeStalkPoints = new();
 
     private void Awake()
     {
@@ -24,11 +25,11 @@ public class StalkPointsManager : MonoBehaviour
     {
         if (modifier)
         {
-            activeStalkPoints.Add(stalkPoint);
+            L_activeStalkPoints.Add(stalkPoint);
         }
         else
         {
-            activeStalkPoints.Remove(stalkPoint);
+            L_activeStalkPoints.Remove(stalkPoint);
         }
     }
 }

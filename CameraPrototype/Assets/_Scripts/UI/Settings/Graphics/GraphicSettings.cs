@@ -1,25 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class GraphicSettings : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private TMP_Dropdown fpsDropdown;
+    [FormerlySerializedAs("resolutionDropdown")] [SerializeField] private TMP_Dropdown m_TMPDrop_resolutionDropdown;
+    [FormerlySerializedAs("fpsDropdown")] [SerializeField] private TMP_Dropdown m_TMPDrop_fpsDropdown;
     
-    [SerializeField] private int[] fpsValues = new []{30, 60, 120, 144, 165, 240};
+    [FormerlySerializedAs("fpsValues")] [SerializeField] private int[] m_intA_fpsValues = new []{30, 60, 120, 144, 165, 240};
     
 
 
-    private int currentRefreshRate;
-    private int currentResolutionIndex;
-    private int currentFPSIndex;
+    private int m_currentRefreshRate;
+    private int m_currentResolutionIndex;
+    private int m_currentFPSIndex;
 
-    private List<Resolution> filteredResolutions;
+    private List<Resolution> m_resL_filteredResolutions;
 
     // Start is called before the first frame update
     void Start()
@@ -39,47 +37,47 @@ public class GraphicSettings : MonoBehaviour
 
     private void SetOptions()
     {
-        SetResolutionOptions(resolutionDropdown);
-        SetFPSOptions(fpsDropdown);
+        SetResolutionOptions(m_TMPDrop_resolutionDropdown);
+        SetFPSOptions(m_TMPDrop_fpsDropdown);
     }
 
     public void SetResolutionOptions(TMP_Dropdown dropdown)
     {
         List<Resolution> resolutions = Screen.resolutions.ToList();
-        filteredResolutions = new List<Resolution>();
+        m_resL_filteredResolutions = new List<Resolution>();
 
-        resolutionDropdown.ClearOptions();
-        currentRefreshRate = Screen.currentResolution.refreshRate;
+        m_TMPDrop_resolutionDropdown.ClearOptions();
+        m_currentRefreshRate = Screen.currentResolution.refreshRate;
 
         List<TMP_Dropdown.OptionData> optionDatas;
 
         foreach (var resolution in resolutions)
         {
-            if (resolution.refreshRate == currentRefreshRate)
+            if (resolution.refreshRate == m_currentRefreshRate)
             {
-                filteredResolutions.Add(resolution);
+                m_resL_filteredResolutions.Add(resolution);
             }
         }
 
         List<string> options = new List<string>();
-        for (int i = 0; i < filteredResolutions.Count; i++)
+        for (int i = 0; i < m_resL_filteredResolutions.Count; i++)
         {
-            string resolutionOption = $"{filteredResolutions[i].width}x{filteredResolutions[i].height}";
+            string resolutionOption = $"{m_resL_filteredResolutions[i].width}x{m_resL_filteredResolutions[i].height}";
             options.Add(resolutionOption);
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
+            if (m_resL_filteredResolutions[i].width == Screen.width && m_resL_filteredResolutions[i].height == Screen.height)
             {
-                currentResolutionIndex = i;
+                m_currentResolutionIndex = i;
             }
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        m_TMPDrop_resolutionDropdown.AddOptions(options);
+        m_TMPDrop_resolutionDropdown.value = m_currentResolutionIndex;
+        m_TMPDrop_resolutionDropdown.RefreshShownValue();
     }
 
     public void SetResolution(int index)
     {
-        Resolution resolution = filteredResolutions[index];
+        Resolution resolution = m_resL_filteredResolutions[index];
 
         if (PlayerPrefs.HasKey("FullScreen Mode"))
         {
@@ -109,9 +107,9 @@ public class GraphicSettings : MonoBehaviour
     private void SetFPSOptions(TMP_Dropdown dropdown)
     {
         int index = -1;
-        for (int i = 0; i < fpsValues.Length; i++)
+        for (int i = 0; i < m_intA_fpsValues.Length; i++)
         {
-            if (Screen.currentResolution.refreshRate == fpsValues[i])
+            if (Screen.currentResolution.refreshRate == m_intA_fpsValues[i])
             {
                 index = i;
             }

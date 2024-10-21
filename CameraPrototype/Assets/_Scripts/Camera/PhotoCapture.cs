@@ -157,7 +157,6 @@ public class PhotoCapture : MonoBehaviour
     {
         m_isViewingPhoto = false;
         m_GO_photoFrame.SetActive(false);
-        m_GO_cameraUI.SetActive(true);
 
         EventManager.OnRemovePhoto?.Invoke();
         m_isFirstPhotoTaken = false;
