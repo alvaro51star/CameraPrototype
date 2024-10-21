@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prototipos/Prototipo_V2.0.unity
     guid: c784e8fed00a0b54491dd4c60bb7a157
+  - enabled: 1
+    path: Assets/Scenes/Pruebas/AdditiveScenes/EscenaPrincipal.unity
+    guid: 1cee9d9102c74aa49afd09f7f85118cf
+  - enabled: 1
+    path: Assets/Scenes/Pruebas/AdditiveScenes/EscenaNorte.unity
+    guid: 5ad263b2467556b4087e81ef9dc2ab1f
   m_configObjects: {}
